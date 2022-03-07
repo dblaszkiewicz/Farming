@@ -1,0 +1,20 @@
+﻿using Farming.Domain.ValueObjects.Plant;
+using Farming.Domain.ValueObjects.User;
+
+namespace Farming.Domain.Entities
+{
+    public class PlantWarehouseDelivery
+    {
+        public PlantWarehouseDeliveryId Id { get; }
+        public PlantId PlantId { get; }
+        public PlantWarehouseId PlantWarehouseId { get; }
+        public UserId UserId { get; }
+        public PlantWarehouseDeliveryQuantity Quantity { get; }
+        public PlantWarehouseDeliveryPrice Price { get; }
+        public PlantWarehouseDeliveryRealizationDate RealizationDate { get; }
+
+        public Plant Plant { get; }
+        public PlantWarehouse PlantWarehouse { get; }
+        public User User { get; }
+    }
+}
