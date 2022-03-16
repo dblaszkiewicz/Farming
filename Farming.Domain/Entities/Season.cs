@@ -9,5 +9,7 @@ namespace Farming.Domain.Entities
         public SeasonActive Active { get; }
         public SeasonStartDate StartDate { get; }
         public SeasonEndDate EndDate { get; } 
+
+        public ICollection<LandRealization> LandRealizations { get; }
     }
 }

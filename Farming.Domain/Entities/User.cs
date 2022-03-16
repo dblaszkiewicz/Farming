@@ -14,5 +14,6 @@ namespace Farming.Domain.Entities
         public UserActive Active { get; }
 
         public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
+        public ICollection<PesticideAction> PesticideActions { get; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Farming.Domain.Entities;
-using Farming.Infrastructure.EF.Config;
+using Farming.Infrastructure.EF.Config.WriteConfigurations;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Farming.Infrastructure.EF.Contexts
 {
@@ -19,13 +20,15 @@ namespace Farming.Infrastructure.EF.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var configuration = new WriteConfiguration();
-            modelBuilder.ApplyConfiguration<Fertilizer>(configuration);
-            modelBuilder.ApplyConfiguration<FertilizerWarehouse>(configuration);
-            modelBuilder.ApplyConfiguration<FertilizerWarehouseDelivery>(configuration);
-            modelBuilder.ApplyConfiguration<FertilizerWarehouseState>(configuration);
-            modelBuilder.ApplyConfiguration<FertilizerType>(configuration);
-            modelBuilder.ApplyConfiguration<Plant>(configuration);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), x => x.GetInterfaces().Contains(typeof(IWriteConfiguration)));
+
+            //var configuration = new WriteConfiguration();
+            //modelBuilder.ApplyConfiguration<Fertilizer>(configuration);
+            //modelBuilder.ApplyConfiguration<FertilizerWarehouse>(configuration);
+            //modelBuilder.ApplyConfiguration<FertilizerWarehouseDelivery>(configuration);
+            //modelBuilder.ApplyConfiguration<FertilizerWarehouseState>(configuration);
+            //modelBuilder.ApplyConfiguration<FertilizerType>(configuration);
+            //modelBuilder.ApplyConfiguration<Plant>(configuration);
         }
     }
 }

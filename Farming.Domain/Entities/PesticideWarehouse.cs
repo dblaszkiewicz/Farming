@@ -7,6 +7,6 @@ namespace Farming.Domain.Entities
     {
         public PesticideWarehouseId Id { get; }
 
-        public ICollection<FertilizerWarehouseState> States { get; }
+        public ICollection<PesticideWarehouseState> States { get; }
     }
 }

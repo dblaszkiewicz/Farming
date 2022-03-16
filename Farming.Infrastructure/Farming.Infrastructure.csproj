@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EF\Config\ReadConfiguration\" />
     <Folder Include="EF\Migrations\" />
   </ItemGroup>
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Farming.Infrastructure.EF.Config
 {
-    internal sealed class ReadConfiguration : IEntityTypeConfiguration<FertilizerReadModel>, IEntityTypeConfiguration<FertilizerWarehouseReadModel>, IEntityTypeConfiguration<FertilizerWarehouseDeliveryReadModel>, IEntityTypeConfiguration<FertilizerWarehouseStateReadModel>, IEntityTypeConfiguration<FertilizerTypeReadModel>
+    internal sealed class ReadConfiguration3 : IEntityTypeConfiguration<FertilizerReadModel>, IEntityTypeConfiguration<FertilizerWarehouseReadModel>, IEntityTypeConfiguration<FertilizerWarehouseDeliveryReadModel>, IEntityTypeConfiguration<FertilizerWarehouseStateReadModel>, IEntityTypeConfiguration<FertilizerTypeReadModel>
     {
         public void Configure(EntityTypeBuilder<PlantReadModel> builder)
         {

@@ -18,7 +18,7 @@ namespace Farming.Infrastructure.EF.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var configuration = new ReadConfiguration();
+            var configuration = new ReadConfiguration3();
             modelBuilder.ApplyConfiguration<FertilizerReadModel>(configuration);
             modelBuilder.ApplyConfiguration<FertilizerWarehouseReadModel>(configuration);
             modelBuilder.ApplyConfiguration<FertilizerWarehouseDeliveryReadModel>(configuration);
