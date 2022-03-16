@@ -12,7 +12,7 @@ namespace Farming.Infrastructure.EF.Models
         public DateTimeOffset RealizationDate { get; set; }
 
         public FertilizerReadModel Fertilizer { get; set; }
-        public FertilizerWarehouseReadModel FertilizerWarehouse { get; set; }
+        public FertilizerWarehouseStateReadModel FertilizerWarehouseState { get; set; }
         public UserReadModel User { get; set; }
     }
 }

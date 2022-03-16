@@ -1,13 +1,13 @@
-﻿
-using Farming.Domain.ValueObjects.Pesticide;
+﻿using Farming.Domain.ValueObjects.Pesticide;
+using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class PesticideType
+    public class PesticideType : AggregateRoot<PesticideTypeId>
     {
         public PesticideTypeId Id { get; }
-        public string Name { get; }
-        public string Description { get; }
+        public PesticideTypeName Name { get; }
+        public PesticideTypeDescription Description { get; }
 
         public ICollection<Pesticide> Pesticides { get; }
     }

@@ -4,7 +4,7 @@ namespace Farming.Domain.ValueObjects.Fertilizer
 {
     public record FertilizerWarehouseQuantity
     {
-        public decimal Value { get; }
+        public decimal Value { get; private set; }
 
         public FertilizerWarehouseQuantity(decimal value)
         {
@@ -14,6 +14,18 @@ namespace Farming.Domain.ValueObjects.Fertilizer
             }
 
             Value = value;
+        }
+
+        public void Append(decimal value)
+        {
+            // TODO: walidacja + exception
+            Value += value;
+        }
+
+        public void Spend(decimal value)
+        {
+            // TODO: walidacja + exception
+            Value -= value;
         }
 
         public static implicit operator decimal(FertilizerWarehouseQuantity quantity)

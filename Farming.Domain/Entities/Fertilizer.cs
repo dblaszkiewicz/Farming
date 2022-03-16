@@ -1,8 +1,9 @@
 ﻿using Farming.Domain.ValueObjects.Fertilizer;
+using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class Fertilizer
+    public class Fertilizer : AggregateRoot<FertilizerId>
     {
         public FertilizerId Id { get; }
         public FertilizerTypeId FertilizerTypeId { get; }
@@ -12,5 +13,7 @@ namespace Farming.Domain.Entities
 
         public FertilizerType FertilizerType { get; }
         public ICollection<Plant> SuitablePlants { get; }
+        public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
+        public ICollection<FertilizerWarehouseState> FertilizerWarehouseStates { get; }
     }
 }

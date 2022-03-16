@@ -5,6 +5,11 @@ namespace Farming.Domain.ValueObjects.Fertilizer
     {
         public DateTimeOffset Value { get; }
 
+        public FertilizerWarehouseDeliveryRealizationDate()
+        {
+            Value = DateTimeOffset.UtcNow;
+        }
+
         public FertilizerWarehouseDeliveryRealizationDate(DateTimeOffset value)
         {
             Value = value;

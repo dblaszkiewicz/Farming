@@ -6,7 +6,11 @@ namespace Farming.Infrastructure.EF.Contexts
 {
     internal sealed class ReadDbContext : DbContext
     {
-        public DbSet<UserReadModel> Users { get; set; }
+        public DbSet<FertilizerReadModel> Fertilizers { get; set; }
+        public DbSet<FertilizerWarehouseReadModel> FertilizerWarehouses { get; set; }
+        public DbSet<FertilizerWarehouseDeliveryReadModel> FertilizerWarehouseDeliveries { get; set; }
+        public DbSet<FertilizerWarehouseStateReadModel> FertilizerWarehouseStates { get; set; }
+        public DbSet<FertilizerTypeReadModel> FertilizerTypes { get; set; }
 
         public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
         {
@@ -15,7 +19,11 @@ namespace Farming.Infrastructure.EF.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var configuration = new ReadConfiguration();
-            modelBuilder.ApplyConfiguration<UserReadModel>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerReadModel>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerWarehouseReadModel>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerWarehouseDeliveryReadModel>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerWarehouseStateReadModel>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerTypeReadModel>(configuration);
         }
     }
 }

@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farming.Domain", "Farming.Domain\Farming.Domain.csproj", "{0C3F9C19-1C09-4314-B8AE-FFA5E867DE47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.Domain", "Farming.Domain\Farming.Domain.csproj", "{0C3F9C19-1C09-4314-B8AE-FFA5E867DE47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{3FD8C880-0F52-4FF7-99C1-8D4A88B7FCF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farming.Shared", "Farming.Shared\Farming.Shared.csproj", "{B1BB65F5-0BA1-4B5F-8ACE-C2A98CA88C83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.Shared", "Farming.Shared\Farming.Shared.csproj", "{B1BB65F5-0BA1-4B5F-8ACE-C2A98CA88C83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farming.Shared.Abstractions", "Farming.Shared.Abstractions\Farming.Shared.Abstractions.csproj", "{3AD9C936-C832-4AD8-92E6-B209FE37F4C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.Shared.Abstractions", "Farming.Shared.Abstractions\Farming.Shared.Abstractions.csproj", "{3AD9C936-C832-4AD8-92E6-B209FE37F4C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farming.Infrastructure", "Farming.Infrastructure\Farming.Infrastructure.csproj", "{F3C0AF74-739C-4C52-BDD8-2356900CBD28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.Infrastructure", "Farming.Infrastructure\Farming.Infrastructure.csproj", "{F3C0AF74-739C-4C52-BDD8-2356900CBD28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.Application", "Farming.Application\Farming.Application.csproj", "{2FB8C0F2-827F-4216-991A-CC5C294839D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.Api", "Farming.Api\Farming.Api.csproj", "{FAD084E6-AE86-449A-A16B-3D4CE78AFAFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,14 @@ Global
 		{F3C0AF74-739C-4C52-BDD8-2356900CBD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3C0AF74-739C-4C52-BDD8-2356900CBD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3C0AF74-739C-4C52-BDD8-2356900CBD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB8C0F2-827F-4216-991A-CC5C294839D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB8C0F2-827F-4216-991A-CC5C294839D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB8C0F2-827F-4216-991A-CC5C294839D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB8C0F2-827F-4216-991A-CC5C294839D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD084E6-AE86-449A-A16B-3D4CE78AFAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD084E6-AE86-449A-A16B-3D4CE78AFAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD084E6-AE86-449A-A16B-3D4CE78AFAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD084E6-AE86-449A-A16B-3D4CE78AFAFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

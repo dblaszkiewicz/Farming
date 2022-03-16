@@ -7,5 +7,7 @@ namespace Farming.Infrastructure.EF.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal RequiredAmountPerHectare { get; set; }
+
+        public ICollection<FertilizerReadModel> SuitableFertilizers { get; }
     }
 }

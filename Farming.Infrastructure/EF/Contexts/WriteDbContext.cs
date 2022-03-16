@@ -4,9 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Contexts
 {
-    internal sealed class WriteDbContext : DbContext
+    public sealed class WriteDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Fertilizer> Fertilizers { get; set; }
+        public DbSet<FertilizerWarehouse> FertilizerWarehouses { get; set; }
+        public DbSet<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; set; }
+        public DbSet<FertilizerWarehouseState> FertilizerWarehouseStates { get; set; }
+        public DbSet<FertilizerType> FertilizerTypes { get; set; }
+        public DbSet<Plant> Plants { get; set; }
 
         public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
         {
@@ -15,7 +20,12 @@ namespace Farming.Infrastructure.EF.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var configuration = new WriteConfiguration();
-            modelBuilder.ApplyConfiguration<User>(configuration);
+            modelBuilder.ApplyConfiguration<Fertilizer>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerWarehouse>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerWarehouseDelivery>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerWarehouseState>(configuration);
+            modelBuilder.ApplyConfiguration<FertilizerType>(configuration);
+            modelBuilder.ApplyConfiguration<Plant>(configuration);
         }
     }
 }

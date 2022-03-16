@@ -12,5 +12,7 @@ namespace Farming.Domain.Entities
         public UserFirstName FirstName { get; }
         public UserLastName LastName { get; }
         public UserActive Active { get; }
+
+        public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
     }
 }

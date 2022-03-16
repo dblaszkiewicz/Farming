@@ -11,5 +11,7 @@ namespace Farming.Infrastructure.EF.Models
 
         public FertilizerTypeReadModel FertilizerType { get; set; }
         public ICollection<PlantReadModel> SuitablePlants { get; set; }
+        public ICollection<FertilizerWarehouseDeliveryReadModel> FertilizerWarehouseDeliveries { get; }
+        public ICollection<FertilizerWarehouseStateReadModel> FertilizerWarehouseStates { get; }
     }
 }

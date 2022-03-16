@@ -1,10 +1,11 @@
 ﻿using Farming.Domain.ValueObjects.Land;
 using Farming.Domain.ValueObjects.Plant;
 using Farming.Domain.ValueObjects.Season;
+using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class LandRealization
+    public class LandRealization : AggregateRoot<LandRealizationId>
     {
         public LandRealizationId Id { get; }
         public LandId LandId { get; }

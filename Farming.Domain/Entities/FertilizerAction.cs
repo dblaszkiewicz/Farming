@@ -1,10 +1,11 @@
 ﻿using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Domain.ValueObjects.Land;
 using Farming.Domain.ValueObjects.User;
+using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class FertilizerAction
+    public class FertilizerAction : AggregateRoot<FertilizerActionId>
     {
         public FertilizerActionId Id { get; }
         public FertilizerId FertilizerId { get; }

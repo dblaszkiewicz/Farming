@@ -1,8 +1,9 @@
 ﻿using Farming.Domain.ValueObjects.Pesticide;
+using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class PesticideWarehouseDelivery
+    public class PesticideWarehouseDelivery : AggregateRoot<PesticideWarehouseDeliveryId>
     {
         public PesticideWarehouseDeliveryId Id { get; }
         public PesticideId PesticideId { get; }
