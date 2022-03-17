@@ -3,11 +3,6 @@ using Farming.Domain.Repositories;
 using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Infrastructure.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
@@ -20,6 +15,12 @@ namespace Farming.Infrastructure.EF.Repositories
         {
             _fertilizerWarehouse = writeDbContext.FertilizerWarehouses;
             _writeDbContext = writeDbContext;
+        }
+
+        public async Task AddAsync(FertilizerWarehouse fertilizerWarehouse)
+        {
+            await _fertilizerWarehouse.AddAsync(fertilizerWarehouse);
+            await _writeDbContext.SaveChangesAsync();
         }
 
         public Task<FertilizerWarehouse> GetAsync(FertilizerWarehouseId id)

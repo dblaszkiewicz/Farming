@@ -11,14 +11,5 @@ namespace Farming.Application.Commands
         public Guid UserId { get; }
         public decimal Price { get; }
         public decimal Quantity { get; }
-
-        public AddFertilizerWarehouseDeliveryCommand(Guid fertilizerWarehouseId, Guid fertilizerId, Guid userId, decimal price, decimal quantity)
-        {
-            FertilizerWarehouseId = fertilizerWarehouseId;
-            FertilizerId = fertilizerId;
-            UserId = userId;
-            Price = price;
-            Quantity = quantity;
-        }
     }
 }

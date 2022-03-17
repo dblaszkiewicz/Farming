@@ -10,5 +10,19 @@ namespace Farming.Domain.Entities
         public FertilizerTypeDescription Description { get; }
 
         public ICollection<Fertilizer> Fertilizers { get; }
+
+        public FertilizerType(FertilizerTypeName name, FertilizerTypeDescription description)
+        {
+            Id = new FertilizerTypeId(Guid.NewGuid());
+            Name = name;
+            Description = description;
+
+            Fertilizers = new HashSet<Fertilizer>();
+        }
+
+        public void AddFertilizer(Fertilizer fertilizer)
+        {
+            Fertilizers.Add(fertilizer);
+        }
     }
 }

@@ -8,8 +8,16 @@ namespace Farming.Domain.Entities
         public SeasonId Id { get; }
         public SeasonActive Active { get; }
         public SeasonStartDate StartDate { get; }
-        public SeasonEndDate EndDate { get; } 
 
         public ICollection<LandRealization> LandRealizations { get; }
+
+        public Season()
+        {
+            Id = Guid.NewGuid();
+            Active = new SeasonActive(true);
+            StartDate = new SeasonStartDate(DateTimeOffset.Now);
+
+            LandRealizations = new HashSet<LandRealization>();
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace Farming.Domain.Repositories
     {
         Task<FertilizerWarehouse> GetAsync(FertilizerWarehouseId id);
         Task UpdateAsync(FertilizerWarehouse fertilizerWarehouse);
+        Task AddAsync(FertilizerWarehouse fertilizerWarehouse);
     }
 }

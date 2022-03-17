@@ -8,5 +8,11 @@ namespace Farming.Domain.Entities
         public PlantWarehouseId Id { get; }
 
         public ICollection<PlantWarehouseState> States { get; }
+
+        public PlantWarehouse()
+        {
+            Id = new PlantWarehouseId(Guid.NewGuid());
+            States = new HashSet<PlantWarehouseState>();
+        }
     }
 }

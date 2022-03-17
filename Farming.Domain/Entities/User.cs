@@ -18,5 +18,15 @@ namespace Farming.Domain.Entities
         public ICollection<PesticideAction> PesticideActions { get; }
         public ICollection<FertilizerAction> FertilizerActions { get; }
         public ICollection<PlantAction> PlantActions { get; }
+
+        public User(UserId id, UserLogin login, UserPassword password, UserFirstName firstName, UserLastName lastName)
+        {
+            Id = id;
+            Login = login;
+            FirstName = firstName;
+            LastName = lastName;
+            Password = password;
+            Active = new UserActive(true);
+        }
     }
 }

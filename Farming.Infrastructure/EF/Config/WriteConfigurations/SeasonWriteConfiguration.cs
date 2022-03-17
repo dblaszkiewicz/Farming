@@ -23,10 +23,6 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .Property(x => x.StartDate)
                 .HasConversion(x => x.Value, x => new SeasonStartDate(x));
 
-            builder
-                .Property(x => x.EndDate)
-                .HasConversion(x => x.Value, x => new SeasonEndDate(x));
-
             builder.ToTable("Seasons");
         }
     }

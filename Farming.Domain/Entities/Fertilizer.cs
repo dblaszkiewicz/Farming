@@ -7,7 +7,7 @@ namespace Farming.Domain.Entities
     {
         public FertilizerId Id { get; }
         public FertilizerTypeId FertilizerTypeId { get; }
-        public FertilizerRequiredAmountPerHectare FertilizerRequiredAmountPerHectare { get; }
+        public FertilizerRequiredAmountPerHectare RequiredAmountPerHectare { get; }
         public FertilizerName Name { get; }
         public FertilizerDescription Description { get; }
 
@@ -16,5 +16,16 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
         public ICollection<FertilizerWarehouseState> FertilizerWarehouseStates { get; }
         public ICollection<FertilizerAction> FertilizerActions { get; }
+
+
+        public Fertilizer(FertilizerTypeId fertilizerTypeId, 
+            FertilizerRequiredAmountPerHectare requiredAmountPerHectare, FertilizerName name, FertilizerDescription description)
+        {
+            Id = new FertilizerId(Guid.NewGuid());
+            FertilizerTypeId = fertilizerTypeId;
+            RequiredAmountPerHectare = requiredAmountPerHectare;
+            Name = name;
+            Description = description;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Farming.Infrastructure.EF.Config
                 .HasConversion(x => x.Value, x => new FertilizerTypeId(x));
 
             builder
-                .Property(x => x.FertilizerRequiredAmountPerHectare)
+                .Property(x => x.RequiredAmountPerHectare)
                 .HasConversion(x => x.Value, x => new FertilizerRequiredAmountPerHectare(x));
 
             builder

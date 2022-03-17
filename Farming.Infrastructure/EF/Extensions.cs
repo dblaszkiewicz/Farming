@@ -14,7 +14,15 @@ namespace Farming.Infrastructure.EF
     {
         public static IServiceCollection AddSql(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IFertilizerTypeRepository, FertilizerTypeRepository>();
             services.AddScoped<IFertilizerWarehouseRepository, FertilizerWarehouseRepository>();
+            services.AddScoped<ILandRepository, LandRepository>();
+            services.AddScoped<IPesticideTypeRepository, PesticideTypeRepository>();
+            services.AddScoped<IPesticideWarehouseRepository, PesticideWarehouseRepository>();
+            services.AddScoped<IPlantRepository, PlantRepository>();
+            services.AddScoped<IPlantWarehouseRepository, PlantWarehouseRepository>();
+            services.AddScoped<ISeasonRepository, SeasonRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             var options = configuration.GetOptions<SqlOptions>("Sql");
             

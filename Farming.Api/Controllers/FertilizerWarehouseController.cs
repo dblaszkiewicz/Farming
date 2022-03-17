@@ -18,7 +18,7 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetFertilizerAdapterConfig());
         }
 
-    [HttpPost("AddFertilizerWarehouseDelivery")]
+        [HttpPost("AddFertilizerWarehouseDelivery")]
         public async Task<IActionResult> AddFertilizerWarehouseDelivery([FromBody] AddFertilizerWarehouseDeliveryDto addFertilizerWarehouseDeliveryDto)
         {
             Guid fertilizerWarehouseId = new Guid("7036CC33-4F6E-477F-B3BA-CF9B8A1498B6");

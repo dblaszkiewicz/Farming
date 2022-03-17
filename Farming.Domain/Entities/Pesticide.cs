@@ -16,5 +16,14 @@ namespace Farming.Domain.Entities
         public ICollection<PesticideAction> PesticideActions { get; }
         public ICollection<PesticideWarehouseDelivery> PesticideWarehouseDeliveries { get; }
         public ICollection<PesticideWarehouseState> PesticideWarehouseStates { get; }
+
+        public Pesticide(PesticideTypeId pesticideTypeId, PesticideRequiredAmountPerHectare requiredAmountPerHectare, PesticideName name, PesticideDescription description)
+        {
+            Id = new PesticideId(Guid.NewGuid());
+            PesticideTypeId = pesticideTypeId;
+            RequiredAmountPerHectare = requiredAmountPerHectare;
+            Name = name;
+            Description = description;
+        }
     }
 }

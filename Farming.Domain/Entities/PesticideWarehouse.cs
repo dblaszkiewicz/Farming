@@ -8,5 +8,11 @@ namespace Farming.Domain.Entities
         public PesticideWarehouseId Id { get; }
 
         public ICollection<PesticideWarehouseState> States { get; }
+
+        public PesticideWarehouse()
+        {
+            Id = new PesticideWarehouseId(Guid.NewGuid());
+            States = new HashSet<PesticideWarehouseState>();
+        }
     }
 }
