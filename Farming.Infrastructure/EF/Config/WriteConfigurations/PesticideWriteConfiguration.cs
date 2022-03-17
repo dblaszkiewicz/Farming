@@ -12,6 +12,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder.HasKey(x => x.Id);
 
             builder
+                .Property(x => x.Id)
+                .HasConversion(x => x.Value, x => new PesticideId(x));
+
+            builder
                 .Property(x => x.PesticideTypeId)
                 .HasConversion(x => x.Value, x => new PesticideTypeId(x));
 
@@ -31,6 +35,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasOne(x => x.PesticideType)
                 .WithMany(x => x.Pesticides)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasMany(x => x.SuitablePlants)
+                .WithMany(x => x.SuitablePesticides);
 
             builder.ToTable("Pesticides");
         }

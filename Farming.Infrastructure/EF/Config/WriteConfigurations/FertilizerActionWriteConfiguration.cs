@@ -42,6 +42,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .WithMany(x => x.FertilizerActions)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .HasOne(x => x.User)
+                .WithMany(x => x.FertilizerActions)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.ToTable("FertilzierActions");
         }
     }

@@ -11,5 +11,9 @@ namespace Farming.Domain.Entities
         public PlantDescription Description { get; }
 
         public ICollection<Fertilizer> SuitableFertilizers { get; }
+        public ICollection<Pesticide> SuitablePesticides { get; }
+        public ICollection<PlantAction> PlantActions { get; }
+        public ICollection<PlantWarehouseDelivery> PlantWarehouseDeliveries { get; }
+        public ICollection<PlantWarehouseState> PlantWarehouseStates { get; }
     }
 }

@@ -14,5 +14,7 @@ namespace Farming.Domain.Entities
         public PesticideType PesticideType { get; }
         public ICollection<Plant> SuitablePlants { get; }
         public ICollection<PesticideAction> PesticideActions { get; }
+        public ICollection<PesticideWarehouseDelivery> PesticideWarehouseDeliveries { get; }
+        public ICollection<PesticideWarehouseState> PesticideWarehouseStates { get; }
     }
 }

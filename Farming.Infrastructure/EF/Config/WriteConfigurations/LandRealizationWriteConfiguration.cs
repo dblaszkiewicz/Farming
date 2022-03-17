@@ -14,6 +14,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder.HasKey(x => x.Id);
 
             builder
+                .Property(x => x.Id)
+                .HasConversion(x => x.Value, x => new LandRealizationId(x));
+
+            builder
                 .Property(x => x.LandId)
                 .HasConversion(x => x.Value, x => new LandId(x));
 
@@ -38,6 +42,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder
                 .HasOne(x => x.PlantAction)
                 .WithOne(x => x.LandRealization)
+                .HasForeignKey<PlantAction>(x => x.LandRealizationId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("LandRealizations");

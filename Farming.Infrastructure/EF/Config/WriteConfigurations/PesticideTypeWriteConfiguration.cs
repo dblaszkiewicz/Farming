@@ -12,6 +12,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder.HasKey(x => x.Id);
 
             builder
+                .Property(x => x.Id)
+                .HasConversion(x => x.Value, x => new PesticideTypeId(x));
+
+            builder
                 .Property(x => x.Name)
                 .HasConversion(x => x.Value, x => new PesticideTypeName(x));
 

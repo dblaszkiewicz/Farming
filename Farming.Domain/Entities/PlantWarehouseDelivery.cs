@@ -8,14 +8,14 @@ namespace Farming.Domain.Entities
     {
         public PlantWarehouseDeliveryId Id { get; }
         public PlantId PlantId { get; }
-        public PlantWarehouseId PlantWarehouseId { get; }
+        public PlantWarehouseStateId PlantWarehouseStateId { get; }
         public UserId UserId { get; }
         public PlantWarehouseDeliveryQuantity Quantity { get; }
         public PlantWarehouseDeliveryPrice Price { get; }
         public PlantWarehouseDeliveryRealizationDate RealizationDate { get; }
 
         public Plant Plant { get; }
-        public PlantWarehouse PlantWarehouse { get; }
         public User User { get; }
+        public PlantWarehouseState PlantWarehouseState { get; }
     }
 }
