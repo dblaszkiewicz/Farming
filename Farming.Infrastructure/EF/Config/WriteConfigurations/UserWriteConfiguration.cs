@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
-    internal class UserWriteConfiguration : IEntityTypeConfiguration<User>, IWriteConfiguration
+    internal sealed class UserWriteConfiguration : IEntityTypeConfiguration<User>, IWriteConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {

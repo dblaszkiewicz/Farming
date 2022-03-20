@@ -1,5 +1,6 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.Repositories;
+using Farming.Domain.ValueObjects.User;
 using Farming.Infrastructure.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,11 @@ namespace Farming.Infrastructure.EF.Repositories
         {
             await _users.AddAsync(user);
             await _writeDbContext.SaveChangesAsync();
+        }
+
+        public Task<User> GetAsync(UserId id)
+        {
+            return _users.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

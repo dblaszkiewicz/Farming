@@ -23,6 +23,7 @@ namespace Farming.Infrastructure.EF
             services.AddScoped<IPlantWarehouseRepository, PlantWarehouseRepository>();
             services.AddScoped<ISeasonRepository, SeasonRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFertilizerRepository, FertilizerRepository>();
 
             var options = configuration.GetOptions<SqlOptions>("Sql");
             

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
-    public class FertilizerWriteConfiguration : IEntityTypeConfiguration<Fertilizer>, IWriteConfiguration
+    internal sealed class FertilizerWriteConfiguration : IEntityTypeConfiguration<Fertilizer>, IWriteConfiguration
     {
         public void Configure(EntityTypeBuilder<Fertilizer> builder)
         {

@@ -18,10 +18,9 @@ namespace Farming.Domain.Entities
         public void AddDelivery(FertilizerWarehouseDelivery delivery)
         {
             var state = GetStateByFertilizerId(delivery.FertilizerId);
-            if (state == null)
+            if (state is null)
             {
-                var stateId = new FertilizerWarehouseStateId(Guid.NewGuid());
-                state = new FertilizerWarehouseState(stateId, delivery.FertilizerId, Id);
+                state = new FertilizerWarehouseState(delivery.FertilizerId);
                 States.Add(state);
             }
 

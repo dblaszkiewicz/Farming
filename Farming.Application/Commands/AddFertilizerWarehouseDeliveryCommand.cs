@@ -6,10 +6,10 @@ namespace Farming.Application.Commands
 {
     public class AddFertilizerWarehouseDeliveryCommand : IRequest<Response<AddFertilizerWarehouseDeliveryResponse>>
     {
-        public Guid FertilizerWarehouseId { get; }
-        public Guid FertilizerId { get; }
-        public Guid UserId { get; }
-        public decimal Price { get; }
-        public decimal Quantity { get; }
+        public Guid FertilizerWarehouseId { get; set; }
+        public Guid FertilizerId { get; set; }
+        public Guid UserId { get; set; }
+        public decimal Price { get; set; }
+        public decimal Quantity { get; set; }
     }
 }

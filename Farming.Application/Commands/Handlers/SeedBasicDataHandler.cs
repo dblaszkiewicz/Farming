@@ -40,7 +40,7 @@ namespace Farming.Application.Commands.Handlers
         {
             // TODO: zrobic fabryki, dodac wpisy w tabeli suitable fertilizer/suitable pesticide
 
-            var fertilizerType1 = new FertilizerType( new FertilizerTypeName("Azot"), new FertilizerTypeDescription("Grupa nawozów azotowych"));
+            var fertilizerType1 = new FertilizerType("Azot","Grupa nawozów azotowych");
 
             fertilizerType1.AddFertilizer(new Fertilizer(fertilizerType1.Id, new FertilizerRequiredAmountPerHectare(1000), new FertilizerName("Amoniak"), new FertilizerDescription("Nawozy amoniakowe")));
 

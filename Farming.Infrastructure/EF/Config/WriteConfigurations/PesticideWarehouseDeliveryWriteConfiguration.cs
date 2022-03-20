@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
-    public class PesticideWarehouseDeliveryWriteConfiguration : IEntityTypeConfiguration<PesticideWarehouseDelivery>, IWriteConfiguration
+    internal sealed class PesticideWarehouseDeliveryWriteConfiguration : IEntityTypeConfiguration<PesticideWarehouseDelivery>, IWriteConfiguration
     {
         public void Configure(EntityTypeBuilder<PesticideWarehouseDelivery> builder)
         {

@@ -20,11 +20,10 @@ namespace Farming.Domain.Entities
 
         }
 
-        public FertilizerWarehouseState(FertilizerWarehouseStateId id, FertilizerId fertilizerId, FertilizerWarehouseId fertilizerWarehouseId)
+        public FertilizerWarehouseState(FertilizerId fertilizerId)
         {
-            Id = id;
+            Id = new FertilizerWarehouseStateId(Guid.NewGuid());
             FertilizerId = fertilizerId;
-            FertilizerWarehouseId = fertilizerWarehouseId;
             Quantity = new FertilizerWarehouseQuantity(0);
 
             FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDelivery>();

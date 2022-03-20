@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
-    internal class SeasonWriteConfiguration : IEntityTypeConfiguration<Season>, IWriteConfiguration
+    internal sealed class SeasonWriteConfiguration : IEntityTypeConfiguration<Season>, IWriteConfiguration
     {
         public void Configure(EntityTypeBuilder<Season> builder)
         {

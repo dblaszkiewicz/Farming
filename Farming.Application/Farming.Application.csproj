@@ -11,4 +11,12 @@
     <ProjectReference Include="..\Farming.Shared\Farming.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+  </ItemGroup>
+
 </Project>
