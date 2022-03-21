@@ -17,15 +17,25 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerWarehouseState> FertilizerWarehouseStates { get; }
         public ICollection<FertilizerAction> FertilizerActions { get; }
 
-
-        public Fertilizer(FertilizerTypeId fertilizerTypeId, 
-            FertilizerRequiredAmountPerHectare requiredAmountPerHectare, FertilizerName name, FertilizerDescription description)
+        public Fertilizer(FertilizerRequiredAmountPerHectare requiredAmountPerHectare, FertilizerName name, FertilizerDescription description)
         {
             Id = new FertilizerId(Guid.NewGuid());
-            FertilizerTypeId = fertilizerTypeId;
             RequiredAmountPerHectare = requiredAmountPerHectare;
             Name = name;
             Description = description;
+
+            SuitablePlants = new HashSet<Plant>();
+            FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDelivery>();
+            FertilizerWarehouseStates = new HashSet<FertilizerWarehouseState>();
+            FertilizerActions = new HashSet<FertilizerAction>();
+        }
+
+        public void AddSutiablePlants(IEnumerable<Plant> plants)
+        {
+            foreach (var plant in plants)
+            {
+                SuitablePlants.Add(plant);
+            }
         }
     }
 }

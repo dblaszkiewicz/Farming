@@ -17,13 +17,25 @@ namespace Farming.Domain.Entities
         public ICollection<PesticideWarehouseDelivery> PesticideWarehouseDeliveries { get; }
         public ICollection<PesticideWarehouseState> PesticideWarehouseStates { get; }
 
-        public Pesticide(PesticideTypeId pesticideTypeId, PesticideRequiredAmountPerHectare requiredAmountPerHectare, PesticideName name, PesticideDescription description)
+        public Pesticide(PesticideRequiredAmountPerHectare requiredAmountPerHectare, PesticideName name, PesticideDescription description)
         {
             Id = new PesticideId(Guid.NewGuid());
-            PesticideTypeId = pesticideTypeId;
             RequiredAmountPerHectare = requiredAmountPerHectare;
             Name = name;
             Description = description;
+
+            SuitablePlants = new HashSet<Plant>();
+            PesticideActions = new HashSet<PesticideAction>();
+            PesticideWarehouseDeliveries = new HashSet<PesticideWarehouseDelivery>();
+            PesticideWarehouseStates = new HashSet<PesticideWarehouseState>();
+        }
+
+        public void AddSutiablePlants(IEnumerable<Plant> plants)
+        {
+            foreach (var plant in plants)
+            {
+                SuitablePlants.Add(plant);
+            }
         }
     }
 }
