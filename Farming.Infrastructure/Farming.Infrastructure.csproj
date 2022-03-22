@@ -24,8 +24,4 @@
 	<ProjectReference Include="..\Farming.Application\Farming.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EF\Migrations\" />
-  </ItemGroup>
-
 </Project>

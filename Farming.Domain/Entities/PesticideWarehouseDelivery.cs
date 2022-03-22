@@ -17,5 +17,22 @@ namespace Farming.Domain.Entities
         public Pesticide Pesticide { get; }
         public User User { get; }
         public PesticideWarehouseState PesticideWarehouseState { get; }
+
+        public PesticideWarehouseDelivery()
+        {
+            // for EF
+        }
+
+        public PesticideWarehouseDelivery(PesticideWarehouseDeliveryId id, PesticideId pesticideId, UserId userId,
+            PesticideWarehouseDeliveryQuantity quantity, PesticideWarehouseDeliveryPrice price,
+            PesticideWarehouseDeliveryRealizationDate realizationDate)
+        {
+            Id = id;
+            PesticideId = pesticideId;
+            UserId = userId;
+            Quantity = quantity;
+            Price = price;
+            RealizationDate = realizationDate;
+        }
     }
 }

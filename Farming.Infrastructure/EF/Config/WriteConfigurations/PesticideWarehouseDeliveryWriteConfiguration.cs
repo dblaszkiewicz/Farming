@@ -17,6 +17,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new PesticideWarehouseDeliveryId(x));
 
             builder
+                .Property(x => x.PesticideId)
+                .HasConversion(x => x.Value, x => new PesticideId(x));
+
+            builder
                 .Property(x => x.PesticideWarehouseStateId)
                 .HasConversion(x => x.Value, x => new PesticideWarehouseStateId(x));
 

@@ -21,8 +21,8 @@ namespace Farming.Application.Commands.Handlers
         {
             _fertilizerWarehouseRepository = fertilizerWarehouseRepository;
             _userRepository = userRepository;
-            _fertilizerWarehouseDeliveryFactory = new FertilizerWarehouseDeliveryFactory();
             _fertilizerRepository = fertilizerRepository;
+            _fertilizerWarehouseDeliveryFactory = new FertilizerWarehouseDeliveryFactory();
         }
 
         public async Task<Response<AddFertilizerWarehouseDeliveryResponse>> Handle(AddFertilizerWarehouseDeliveryCommand command, CancellationToken cancellationToken)

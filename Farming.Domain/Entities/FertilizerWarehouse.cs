@@ -12,6 +12,7 @@ namespace Farming.Domain.Entities
         public FertilizerWarehouse()
         {
             Id = new FertilizerWarehouseId(Guid.NewGuid());
+
             States = new HashSet<FertilizerWarehouseState>();
         }
 
@@ -22,17 +23,15 @@ namespace Farming.Domain.Entities
             {
                 state = new FertilizerWarehouseState(delivery.FertilizerId);
                 States.Add(state);
+                AddEvent(new FertilizerWarehouseStateAdded(this, state));
             }
 
-            delivery.SetWarehouseStateId(state.Id);
-
             state.AddDelivery(delivery);
-            AddEvent(new FertilizerWarehouseDeliveryAdded(this, delivery));
         }
 
         private FertilizerWarehouseState GetStateByFertilizerId(FertilizerId fertilizerId)
         {
-            return States.FirstOrDefault(x => x.FertilizerId.Value == fertilizerId.Value);
+            return States.FirstOrDefault(x => x.FertilizerId == fertilizerId);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Farming.Domain.ValueObjects.Pesticide
 {
     public record PesticideWarehouseQuantity
     {
-        public decimal Value { get; }
+        public decimal Value { get; private set; }
 
         public PesticideWarehouseQuantity(decimal value)
         {
@@ -21,5 +21,11 @@ namespace Farming.Domain.ValueObjects.Pesticide
 
         public static implicit operator PesticideWarehouseQuantity(decimal quantity)
             => new(quantity);
+
+        public void Append(decimal value)
+        {
+            // TODO walidacja
+            Value += value;
+        }
     }
 }

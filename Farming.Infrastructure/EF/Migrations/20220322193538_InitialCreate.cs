@@ -40,7 +40,7 @@ namespace Farming.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Class = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LandCLass = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Area = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -111,7 +111,6 @@ namespace Farming.Infrastructure.EF.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     StartDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    EndDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -142,7 +141,7 @@ namespace Farming.Infrastructure.EF.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FertilizerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerRequiredAmountPerHectare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RequiredAmountPerHectare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
@@ -448,20 +447,20 @@ namespace Farming.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PesticideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PesticideWarehouseStateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    PesticideId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PesticideWarehouseDeliveries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PesticideWarehouseDeliveries_Pesticides_PesticideId1",
-                        column: x => x.PesticideId1,
+                        name: "FK_PesticideWarehouseDeliveries_Pesticides_PesticideId",
+                        column: x => x.PesticideId,
                         principalTable: "Pesticides",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -641,9 +640,9 @@ namespace Farming.Infrastructure.EF.Migrations
                 column: "PesticideTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PesticideWarehouseDeliveries_PesticideId1",
+                name: "IX_PesticideWarehouseDeliveries_PesticideId",
                 table: "PesticideWarehouseDeliveries",
-                column: "PesticideId1");
+                column: "PesticideId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PesticideWarehouseDeliveries_PesticideWarehouseStateId",

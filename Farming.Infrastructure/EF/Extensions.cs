@@ -24,6 +24,7 @@ namespace Farming.Infrastructure.EF
             services.AddScoped<ISeasonRepository, SeasonRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFertilizerRepository, FertilizerRepository>();
+            services.AddScoped<IPesticideRepository, PesticideRepository>();
 
             var options = configuration.GetOptions<SqlOptions>("Sql");
             

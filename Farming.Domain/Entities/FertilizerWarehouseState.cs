@@ -1,4 +1,5 @@
-﻿using Farming.Domain.ValueObjects.Fertilizer;
+﻿using Farming.Domain.Events;
+using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
@@ -14,25 +15,25 @@ namespace Farming.Domain.Entities
         public FertilizerWarehouse FertilizerWarehouse { get; }
         public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
 
-        // for EF
         public FertilizerWarehouseState()
         {
-
+            // for EF
         }
 
         public FertilizerWarehouseState(FertilizerId fertilizerId)
         {
             Id = new FertilizerWarehouseStateId(Guid.NewGuid());
-            FertilizerId = fertilizerId;
             Quantity = new FertilizerWarehouseQuantity(0);
+            FertilizerId = fertilizerId;
 
             FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDelivery>();
         }
 
-        public void AddDelivery(FertilizerWarehouseDelivery fertilizerWarehouseDelivery)
+        public void AddDelivery(FertilizerWarehouseDelivery delivery)
         {
-            FertilizerWarehouseDeliveries.Add(fertilizerWarehouseDelivery);
-            Quantity.Append(fertilizerWarehouseDelivery.Quantity.Value);
+            FertilizerWarehouseDeliveries.Add(delivery);
+            Quantity.Append(delivery.Quantity);
+            AddEvent(new FertilizerWarehouseStateDeliveryAdded(this, delivery));
         }
     }
 }

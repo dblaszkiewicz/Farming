@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Farming.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20220317205256_InitialCreate3")]
-    partial class InitialCreate3
+    [Migration("20220322193538_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -342,7 +342,7 @@ namespace Farming.Infrastructure.EF.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PesticideId1")
+                    b.Property<Guid>("PesticideId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PesticideWarehouseStateId")
@@ -365,7 +365,7 @@ namespace Farming.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PesticideId1");
+                    b.HasIndex("PesticideId");
 
                     b.HasIndex("PesticideWarehouseStateId");
 
@@ -539,9 +539,6 @@ namespace Farming.Infrastructure.EF.Migrations
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset>("EndDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset>("StartDate")
                         .HasColumnType("datetimeoffset");
@@ -767,7 +764,7 @@ namespace Farming.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Farming.Domain.Entities.Pesticide", "Pesticide")
                         .WithMany("PesticideWarehouseDeliveries")
-                        .HasForeignKey("PesticideId1")
+                        .HasForeignKey("PesticideId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

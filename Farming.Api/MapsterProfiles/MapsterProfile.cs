@@ -12,5 +12,12 @@ namespace Farming.Api.MapsterProfiles
             config.NewConfig<AddFertilizerWarehouseDeliveryDto, AddFertilizerWarehouseDeliveryCommand>();
             return config;
         }
+
+        public static TypeAdapterConfig GetPesticideAdapterConfig()
+        {
+            var config = new TypeAdapterConfig();
+            config.NewConfig<AddPesticideWarehouseDeliveryDto, AddPesticideWarehouseDeliveryCommand>();
+            return config;
+        }
     }
 }

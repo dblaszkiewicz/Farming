@@ -18,14 +18,14 @@ namespace Farming.Domain.Entities
         public FertilizerWarehouseState FertilizerWarehouseState { get; }
         public User User { get; }
 
-        // for EF
         public FertilizerWarehouseDelivery()
         {
-
+            // for EF
         }
 
         public FertilizerWarehouseDelivery(FertilizerWarehouseDeliveryId id, FertilizerId fertilizerId, UserId userId,
-            FertilizerWarehouseDeliveryQuantity quantity, FertilizerWarehouseDeliveryPrice price, FertilizerWarehouseDeliveryRealizationDate realizationDate)
+            FertilizerWarehouseDeliveryQuantity quantity, FertilizerWarehouseDeliveryPrice price, 
+            FertilizerWarehouseDeliveryRealizationDate realizationDate)
         {
             Id = id;
             FertilizerId = fertilizerId;
@@ -33,11 +33,6 @@ namespace Farming.Domain.Entities
             Quantity = quantity;
             Price = price;
             RealizationDate = realizationDate;
-        }
-
-        public void SetWarehouseStateId(FertilizerWarehouseStateId stateId)
-        {
-            FertilizerWarehouseStateId = stateId;
         }
     }
 }

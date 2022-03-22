@@ -340,7 +340,7 @@ namespace Farming.Infrastructure.EF.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PesticideId1")
+                    b.Property<Guid>("PesticideId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PesticideWarehouseStateId")
@@ -363,7 +363,7 @@ namespace Farming.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PesticideId1");
+                    b.HasIndex("PesticideId");
 
                     b.HasIndex("PesticideWarehouseStateId");
 
@@ -762,7 +762,7 @@ namespace Farming.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Farming.Domain.Entities.Pesticide", "Pesticide")
                         .WithMany("PesticideWarehouseDeliveries")
-                        .HasForeignKey("PesticideId1")
+                        .HasForeignKey("PesticideId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

@@ -5,6 +5,11 @@ namespace Farming.Domain.ValueObjects.Pesticide
     {
         public DateTimeOffset Value { get; }
 
+        public PesticideWarehouseDeliveryRealizationDate()
+        {
+            Value = DateTimeOffset.UtcNow;
+        }
+
         public PesticideWarehouseDeliveryRealizationDate(DateTimeOffset value)
         {
             Value = value;

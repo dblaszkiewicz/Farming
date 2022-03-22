@@ -16,6 +16,12 @@ namespace Farming.Domain.ValueObjects.Fertilizer
             Value = value;
         }
 
+        public static implicit operator decimal(FertilizerWarehouseQuantity quantity)
+            => quantity.Value;
+
+        public static implicit operator FertilizerWarehouseQuantity(decimal quantity)
+            => new(quantity);
+
         public void Append(decimal value)
         {
             // TODO: walidacja + exception
@@ -27,11 +33,5 @@ namespace Farming.Domain.ValueObjects.Fertilizer
             // TODO: walidacja + exception
             Value -= value;
         }
-
-        public static implicit operator decimal(FertilizerWarehouseQuantity quantity)
-            => quantity.Value;
-
-        public static implicit operator FertilizerWarehouseQuantity(decimal quantity)
-            => new(quantity);
     }
 }
