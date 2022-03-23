@@ -230,9 +230,6 @@ namespace Farming.Infrastructure.EF.Migrations
 
                     b.HasIndex("LandId");
 
-                    b.HasIndex("PlantActionId")
-                        .IsUnique();
-
                     b.HasIndex("SeasonId");
 
                     b.ToTable("LandRealizations", (string)null);
@@ -447,6 +444,8 @@ namespace Farming.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LandRealizationId");
+
                     b.HasIndex("PlantId");
 
                     b.HasIndex("UserId");
@@ -630,10 +629,10 @@ namespace Farming.Infrastructure.EF.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Farming.Domain.Entities.LandRealization", null)
+                    b.HasOne("Farming.Domain.Entities.LandRealization", "LandRealization")
                         .WithMany("FertilizerActions")
                         .HasForeignKey("LandRealizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farming.Domain.Entities.User", "User")
@@ -643,6 +642,8 @@ namespace Farming.Infrastructure.EF.Migrations
                         .IsRequired();
 
                     b.Navigation("Fertilizer");
+
+                    b.Navigation("LandRealization");
 
                     b.Navigation("User");
                 });
@@ -701,12 +702,6 @@ namespace Farming.Infrastructure.EF.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Farming.Domain.Entities.PlantAction", "PlantAction")
-                        .WithOne("LandRealization")
-                        .HasForeignKey("Farming.Domain.Entities.LandRealization", "PlantActionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Farming.Domain.Entities.Season", "Season")
                         .WithMany("LandRealizations")
                         .HasForeignKey("SeasonId")
@@ -714,8 +709,6 @@ namespace Farming.Infrastructure.EF.Migrations
                         .IsRequired();
 
                     b.Navigation("Land");
-
-                    b.Navigation("PlantAction");
 
                     b.Navigation("Season");
                 });
@@ -806,6 +799,12 @@ namespace Farming.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Farming.Domain.Entities.PlantAction", b =>
                 {
+                    b.HasOne("Farming.Domain.Entities.LandRealization", "LandRealization")
+                        .WithMany("PlantActions")
+                        .HasForeignKey("LandRealizationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Farming.Domain.Entities.Plant", "Plant")
                         .WithMany("PlantActions")
                         .HasForeignKey("PlantId")
@@ -817,6 +816,8 @@ namespace Farming.Infrastructure.EF.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("LandRealization");
 
                     b.Navigation("Plant");
 
@@ -933,6 +934,8 @@ namespace Farming.Infrastructure.EF.Migrations
                     b.Navigation("FertilizerActions");
 
                     b.Navigation("PesticideActions");
+
+                    b.Navigation("PlantActions");
                 });
 
             modelBuilder.Entity("Farming.Domain.Entities.Pesticide", b =>
@@ -966,12 +969,6 @@ namespace Farming.Infrastructure.EF.Migrations
                     b.Navigation("PlantWarehouseDeliveries");
 
                     b.Navigation("PlantWarehouseStates");
-                });
-
-            modelBuilder.Entity("Farming.Domain.Entities.PlantAction", b =>
-                {
-                    b.Navigation("LandRealization")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Farming.Domain.Entities.PlantWarehouse", b =>

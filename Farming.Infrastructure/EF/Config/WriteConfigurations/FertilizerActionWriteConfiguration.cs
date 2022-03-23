@@ -43,6 +43,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
+                .HasOne(x => x.LandRealization)
+                .WithMany(x => x.FertilizerActions)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
                 .HasOne(x => x.User)
                 .WithMany(x => x.FertilizerActions)
                 .OnDelete(DeleteBehavior.Restrict);

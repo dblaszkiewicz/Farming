@@ -13,10 +13,9 @@ namespace Farming.Domain.Entities
 
         public ICollection<LandRealization> LandRealizations { get; }
 
-        // for EF
         public Land()
         {
-
+            // for EF
         }
 
         public Land(LandClass landClass, LandStatus status, LandName name, LandArea area)

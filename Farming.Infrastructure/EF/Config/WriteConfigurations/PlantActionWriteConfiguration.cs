@@ -49,8 +49,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 
             builder
                 .HasOne(x => x.LandRealization)
-                .WithOne(x => x.PlantAction)
-                .HasForeignKey<LandRealization>(x => x.PlantActionId)
+                .WithMany(x => x.PlantActions)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("PlantActions");

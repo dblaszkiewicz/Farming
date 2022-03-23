@@ -23,7 +23,7 @@ namespace Farming.Domain.Entities
             {
                 state = new FertilizerWarehouseState(delivery.FertilizerId);
                 States.Add(state);
-                //AddEvent(new FertilizerWarehouseStateAdded(this, state));
+                AddEvent(new FertilizerWarehouseStateAdded(this, state));
             }
 
             state.AddDelivery(delivery);

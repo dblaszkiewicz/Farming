@@ -186,7 +186,7 @@ namespace Farming.Infrastructure.EF.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PlantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PlantWarehouseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantWarehouseQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -207,30 +207,28 @@ namespace Farming.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlantActions",
+                name: "LandRealizations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SeasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PlantActionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlantActions", x => x.Id);
+                    table.PrimaryKey("PK_LandRealizations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlantActions_Plants_PlantId",
-                        column: x => x.PlantId,
-                        principalTable: "Plants",
+                        name: "FK_LandRealizations_Lands_LandId",
+                        column: x => x.LandId,
+                        principalTable: "Lands",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PlantActions_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_LandRealizations_Seasons_SeasonId",
+                        column: x => x.SeasonId,
+                        principalTable: "Seasons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -374,34 +372,106 @@ namespace Farming.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LandRealizations",
+                name: "FertilzierActions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SeasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantActionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FertilizerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LandRealizations", x => x.Id);
+                    table.PrimaryKey("PK_FertilzierActions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LandRealizations_Lands_LandId",
-                        column: x => x.LandId,
-                        principalTable: "Lands",
+                        name: "FK_FertilzierActions_Fertilizers_FertilizerId",
+                        column: x => x.FertilizerId,
+                        principalTable: "Fertilizers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_LandRealizations_PlantActions_PlantActionId",
-                        column: x => x.PlantActionId,
-                        principalTable: "PlantActions",
+                        name: "FK_FertilzierActions_LandRealizations_LandRealizationId",
+                        column: x => x.LandRealizationId,
+                        principalTable: "LandRealizations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_LandRealizations_Seasons_SeasonId",
-                        column: x => x.SeasonId,
-                        principalTable: "Seasons",
+                        name: "FK_FertilzierActions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PesticideActions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PesticideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    Version = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PesticideActions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PesticideActions_LandRealizations_LandRealizationId",
+                        column: x => x.LandRealizationId,
+                        principalTable: "LandRealizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PesticideActions_Pesticides_PesticideId",
+                        column: x => x.PesticideId,
+                        principalTable: "Pesticides",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PesticideActions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlantActions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PlantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    Version = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlantActions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PlantActions_LandRealizations_LandRealizationId",
+                        column: x => x.LandRealizationId,
+                        principalTable: "LandRealizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PlantActions_Plants_PlantId",
+                        column: x => x.PlantId,
+                        principalTable: "Plants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PlantActions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -478,76 +548,6 @@ namespace Farming.Infrastructure.EF.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "FertilzierActions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FertilzierActions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_FertilzierActions_Fertilizers_FertilizerId",
-                        column: x => x.FertilizerId,
-                        principalTable: "Fertilizers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_FertilzierActions_LandRealizations_LandRealizationId",
-                        column: x => x.LandRealizationId,
-                        principalTable: "LandRealizations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FertilzierActions_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PesticideActions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PesticideActions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PesticideActions_LandRealizations_LandRealizationId",
-                        column: x => x.LandRealizationId,
-                        principalTable: "LandRealizations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PesticideActions_Pesticides_PesticideId",
-                        column: x => x.PesticideId,
-                        principalTable: "Pesticides",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PesticideActions_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_FertilizerPlant_SuitablePlantsId",
                 table: "FertilizerPlant",
@@ -604,12 +604,6 @@ namespace Farming.Infrastructure.EF.Migrations
                 column: "LandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LandRealizations_PlantActionId",
-                table: "LandRealizations",
-                column: "PlantActionId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_LandRealizations_SeasonId",
                 table: "LandRealizations",
                 column: "SeasonId");
@@ -663,6 +657,11 @@ namespace Farming.Infrastructure.EF.Migrations
                 name: "IX_PesticideWarehouseStates_PesticideWarehouseId",
                 table: "PesticideWarehouseStates",
                 column: "PesticideWarehouseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlantActions_LandRealizationId",
+                table: "PlantActions",
+                column: "LandRealizationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlantActions_PlantId",
@@ -721,19 +720,25 @@ namespace Farming.Infrastructure.EF.Migrations
                 name: "PesticideWarehouseDeliveries");
 
             migrationBuilder.DropTable(
+                name: "PlantActions");
+
+            migrationBuilder.DropTable(
                 name: "PlantWarehouseDeliveries");
 
             migrationBuilder.DropTable(
                 name: "FertilizerWarehouseStates");
 
             migrationBuilder.DropTable(
-                name: "LandRealizations");
-
-            migrationBuilder.DropTable(
                 name: "PesticideWarehouseStates");
 
             migrationBuilder.DropTable(
+                name: "LandRealizations");
+
+            migrationBuilder.DropTable(
                 name: "PlantWarehouseStates");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Fertilizers");
@@ -742,31 +747,25 @@ namespace Farming.Infrastructure.EF.Migrations
                 name: "FertilizerWarehouses");
 
             migrationBuilder.DropTable(
-                name: "Lands");
-
-            migrationBuilder.DropTable(
-                name: "PlantActions");
-
-            migrationBuilder.DropTable(
-                name: "Seasons");
-
-            migrationBuilder.DropTable(
                 name: "Pesticides");
 
             migrationBuilder.DropTable(
                 name: "PesticideWarehouses");
 
             migrationBuilder.DropTable(
-                name: "PlantWarehouses");
+                name: "Lands");
 
             migrationBuilder.DropTable(
-                name: "FertilizerTypes");
+                name: "Seasons");
 
             migrationBuilder.DropTable(
                 name: "Plants");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "PlantWarehouses");
+
+            migrationBuilder.DropTable(
+                name: "FertilizerTypes");
 
             migrationBuilder.DropTable(
                 name: "PesticideTypes");

@@ -14,7 +14,7 @@ namespace Farming.Domain.Entities
 
         public Land Land { get; }
         public Season Season { get; }
-        public PlantAction PlantAction { get; }
+        public ICollection<PlantAction> PlantActions { get; }
         public ICollection<FertilizerAction> FertilizerActions { get; }
         public ICollection<PesticideAction> PesticideActions { get; }
     }
