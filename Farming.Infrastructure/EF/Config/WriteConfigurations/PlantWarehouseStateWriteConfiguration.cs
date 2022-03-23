@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
-    internal sealed class PlantWarehouseStateConfiguration : IEntityTypeConfiguration<PlantWarehouseState>, IWriteConfiguration
+    internal sealed class PlantWarehouseStateWriteConfiguration : IEntityTypeConfiguration<PlantWarehouseState>, IWriteConfiguration
     {
         public void Configure(EntityTypeBuilder<PlantWarehouseState> builder)
         {
@@ -24,7 +24,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new PlantWarehouseId(x));
 
             builder
-                .Property(x => x.PlantWarehouseQuantity)
+                .Property(x => x.Quantity)
                 .HasConversion(x => x.Value, x => new PlantWarehouseQuantity(x));
 
             builder

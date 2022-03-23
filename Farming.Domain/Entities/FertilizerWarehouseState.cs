@@ -7,8 +7,8 @@ namespace Farming.Domain.Entities
     public class FertilizerWarehouseState : AggregateRoot<FertilizerWarehouseStateId>
     {
         public FertilizerWarehouseStateId Id { get; }
-        public FertilizerId FertilizerId { get; private set; }
-        public FertilizerWarehouseId FertilizerWarehouseId { get; private set; }
+        public FertilizerId FertilizerId { get; }
+        public FertilizerWarehouseId FertilizerWarehouseId { get; }
         public FertilizerWarehouseQuantity Quantity { get; private set; }
         
         public Fertilizer Fertilizer { get; }
@@ -31,8 +31,12 @@ namespace Farming.Domain.Entities
 
         public void AddDelivery(FertilizerWarehouseDelivery delivery)
         {
+            var newQuantity = Quantity + delivery.Quantity;
+
+            Quantity = new FertilizerWarehouseQuantity(newQuantity);
+
             FertilizerWarehouseDeliveries.Add(delivery);
-            Quantity.Append(delivery.Quantity);
+
             AddEvent(new FertilizerWarehouseStateDeliveryAdded(this, delivery));
         }
     }

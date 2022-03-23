@@ -13,8 +13,8 @@ namespace Farming.Infrastructure.EF.Repositories
 
         public FertilizerWarehouseRepository(WriteDbContext writeDbContext)
         {
-            _fertilizerWarehouse = writeDbContext.FertilizerWarehouses;
             _writeDbContext = writeDbContext;
+            _fertilizerWarehouse = writeDbContext.FertilizerWarehouses;
         }
 
         public async Task AddAsync(FertilizerWarehouse fertilizerWarehouse)

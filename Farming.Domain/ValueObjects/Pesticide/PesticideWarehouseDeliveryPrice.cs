@@ -8,7 +8,7 @@ namespace Farming.Domain.ValueObjects.Pesticide
 
         public PesticideWarehouseDeliveryPrice(decimal value)
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 throw new InvalidPesticideWarehouseDeliveryPriceException(value);
             }

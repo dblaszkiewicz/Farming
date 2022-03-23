@@ -17,5 +17,22 @@ namespace Farming.Domain.Entities
         public Plant Plant { get; }
         public User User { get; }
         public PlantWarehouseState PlantWarehouseState { get; }
+
+        public PlantWarehouseDelivery()
+        {
+            // for EF
+        }
+
+        public PlantWarehouseDelivery(PlantWarehouseDeliveryId id, PlantId plantId, UserId userId,
+            PlantWarehouseDeliveryQuantity quantity, PlantWarehouseDeliveryPrice price,
+            PlantWarehouseDeliveryRealizationDate realizationDate)
+        {
+            Id = id;
+            PlantId = plantId;
+            UserId = userId;
+            Quantity = quantity;
+            Price = price;
+            RealizationDate = realizationDate;
+        }
     }
 }

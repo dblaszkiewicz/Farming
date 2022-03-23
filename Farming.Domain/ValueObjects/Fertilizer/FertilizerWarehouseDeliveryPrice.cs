@@ -8,7 +8,7 @@ namespace Farming.Domain.ValueObjects.Fertilizer
 
         public FertilizerWarehouseDeliveryPrice(decimal value)
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 throw new InvalidFertilizerWarehouseDeliveryPriceException(value);
             }

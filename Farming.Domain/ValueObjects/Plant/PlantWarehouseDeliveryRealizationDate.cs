@@ -5,6 +5,11 @@ namespace Farming.Domain.ValueObjects.Plant
     {
         public DateTimeOffset Value { get; }
 
+        public PlantWarehouseDeliveryRealizationDate()
+        {
+            Value = DateTimeOffset.UtcNow;
+        }
+
         public PlantWarehouseDeliveryRealizationDate(DateTimeOffset value)
         {
             Value = value;

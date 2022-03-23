@@ -26,8 +26,12 @@ namespace Farming.Domain.Entities
 
         public void AddDelivery(PesticideWarehouseDelivery delivery)
         {
+            var newQuantity = Quantity + delivery.Quantity;
+
+            Quantity = new PesticideWarehouseQuantity(newQuantity);
+
             PesticideWarehouseDeliveries.Add(delivery);
-            Quantity.Append(delivery.Quantity);
+
             AddEvent(new PesticideWarehouseStateDeliveryAdded(this, delivery));
         }
     }

@@ -8,7 +8,7 @@ namespace Farming.Domain.ValueObjects.Plant
 
         public PlantWarehouseQuantity(decimal value)
         {
-            if (value <= 0)
+            if (value < 0)
             {
                 throw new InvalidPlantWarehouseQuantityException(value);
             }

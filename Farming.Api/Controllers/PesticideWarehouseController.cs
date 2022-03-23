@@ -15,7 +15,7 @@ namespace Farming.Api.Controllers
         public PesticideWarehouseController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapsterMapper = new Mapper(MapsterProfile.GetFertilizerAdapterConfig());
+            _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
         [HttpPost("addPesticideWarehouseDelivery")]

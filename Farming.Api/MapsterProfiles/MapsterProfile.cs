@@ -6,18 +6,15 @@ namespace Farming.Api.MapsterProfiles
 {
     public static class MapsterProfile
     {
-        public static TypeAdapterConfig GetFertilizerAdapterConfig()
+        public static TypeAdapterConfig GetAdapterConfig()
         {
             var config = new TypeAdapterConfig();
             config.NewConfig<AddFertilizerWarehouseDeliveryDto, AddFertilizerWarehouseDeliveryCommand>();
+            config.NewConfig<AddPesticideWarehouseDeliveryDto, AddPesticideWarehouseDeliveryCommand>();
+
             return config;
         }
 
-        public static TypeAdapterConfig GetPesticideAdapterConfig()
-        {
-            var config = new TypeAdapterConfig();
-            config.NewConfig<AddPesticideWarehouseDeliveryDto, AddPesticideWarehouseDeliveryCommand>();
-            return config;
-        }
+
     }
 }

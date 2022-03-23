@@ -1,5 +1,6 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.Repositories;
+using Farming.Domain.ValueObjects.Plant;
 using Farming.Infrastructure.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +17,9 @@ namespace Farming.Infrastructure.EF.Repositories
             _plants = _writeDbContext.Plants;
         }
 
-        public async Task AddAsync(Plant plant)
+        public Task<Plant> GetAsync(PlantId id)
         {
-            await _plants.AddAsync(plant);
-            await _writeDbContext.SaveChangesAsync();
+            return _plants.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
