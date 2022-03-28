@@ -50,6 +50,8 @@ namespace Farming.Application.Commands.Handlers
                 throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
+            var plantAction = _plantActionFactory.Create(command.PlantId, command.UserId, command.Quantity);
+
             if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
                 throw new UserDoesNotExistException(command.UserId);
@@ -78,8 +80,6 @@ namespace Farming.Application.Commands.Handlers
             {
                 throw new PlantWarehouseDoesNotExistException(command.PlantWarehouseId);
             }
-
-            var plantAction = _plantActionFactory.Create(command.PlantId, command.UserId, command.Quantity);
 
             _plantDomainService.ProcessPlantAction(currentSeason, plantWarehouseWithStates, plantAction, land, plant);
 

@@ -17,15 +17,13 @@ namespace Farming.Application.Commands.Handlers
         private readonly IPlantWarehouseDeliveryFactory _plantWarehouseDeliveryFactory;
         private readonly IUserReadService _userReadService;
         private readonly IPlantReadService _plantReadService;
-        private readonly IPlantWarehouseReadService _plantWarehouseReadService;
         private readonly IUnitOfWork _unitOfWork;
 
         public AddPlantWarehouseDeliveryHandler(IPlantWarehouseRepository plantWarehouseRepository, IUnitOfWork unitOfWork, 
-            IUserReadService userReadService, IPlantWarehouseReadService plantWarehouseReadService, IPlantReadService plantReadService)
+            IUserReadService userReadService, IPlantReadService plantReadService)
         {
             _plantWarehouseRepository = plantWarehouseRepository;
             _userReadService = userReadService;
-            _plantWarehouseReadService = plantWarehouseReadService;
             _plantReadService = plantReadService;
             _unitOfWork = unitOfWork;
             _plantWarehouseDeliveryFactory = new PlantWarehouseDeliveryFactory();
@@ -41,10 +39,8 @@ namespace Farming.Application.Commands.Handlers
                 throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            if (!await _plantWarehouseReadService.ExistsByIdAsync(command.PlantWarehouseId))
-            {
-                throw new PlantWarehouseDoesNotExistException(command.PlantWarehouseId);
-            }
+            var delivery = _plantWarehouseDeliveryFactory.Create(command.PlantId, command.UserId,
+                command.Quantity, command.Price);
 
             if (!await _plantReadService.ExistsByIdAsync(command.PlantId))
             {
@@ -56,10 +52,12 @@ namespace Farming.Application.Commands.Handlers
                 throw new UserDoesNotExistException(command.UserId);
             }
 
-            var delivery = _plantWarehouseDeliveryFactory.Create(command.PlantId, command.UserId,
-                command.Quantity, command.Price);
-
             var plantWarehouse = await _plantWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PlantWarehouseId);
+            if (plantWarehouse is null)
+            {
+                throw new PlantWarehouseDoesNotExistException(command.PlantWarehouseId);
+            }
+
             plantWarehouse.AddDelivery(delivery);
 
             await _plantWarehouseRepository.UpdateAsync(plantWarehouse);

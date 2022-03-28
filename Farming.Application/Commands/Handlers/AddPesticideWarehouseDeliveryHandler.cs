@@ -16,18 +16,16 @@ namespace Farming.Application.Commands.Handlers
         private readonly IPesticideWarehouseRepository _pesticideWarehouseRepository;
         private readonly IPesticideWarehouseDeliveryFactory _pesticideWarehouseDeliveryFactory;
         private readonly IPesticideReadService _pesticideReadService;
-        private readonly IPesticideWarehouseReadService _pesticideWarehouseReadService;
         private readonly IUserReadService _userReadService;
         private readonly IUnitOfWork _unitOfWork;
 
         public AddPesticideWarehouseDeliveryHandler(IPesticideWarehouseRepository pesticideWarehouseRepository,
-            IUnitOfWork unitOfWork, IUserReadService userReadService, IPesticideReadService pesticideReadService, IPesticideWarehouseReadService pesticideWarehouseReadService)
+            IUnitOfWork unitOfWork, IUserReadService userReadService, IPesticideReadService pesticideReadService)
         {
             _pesticideWarehouseRepository = pesticideWarehouseRepository;
             _unitOfWork = unitOfWork;
             _userReadService = userReadService;
             _pesticideReadService = pesticideReadService;
-            _pesticideWarehouseReadService = pesticideWarehouseReadService;
 
             _pesticideWarehouseDeliveryFactory = new PesticideWarehouseDeliveryFactory();
         }
@@ -42,10 +40,8 @@ namespace Farming.Application.Commands.Handlers
                 throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            if (!await _pesticideWarehouseReadService.ExistsByIdAsync(command.PesticideWarehouseId))
-            {
-                throw new PesticideWarehouseDoesNotExistException(command.PesticideWarehouseId);
-            }
+            var delivery = _pesticideWarehouseDeliveryFactory.Create(command.PesticideId, command.UserId,
+                command.Quantity, command.Price);
 
             if (!await _pesticideReadService.ExistsByIdAsync(command.PesticideId))
             {
@@ -57,10 +53,12 @@ namespace Farming.Application.Commands.Handlers
                 throw new UserDoesNotExistException(command.UserId);
             }
 
-            var delivery = _pesticideWarehouseDeliveryFactory.Create(command.PesticideId, command.UserId,
-                command.Quantity, command.Price);
-
             var pesticideWarehouse = await _pesticideWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PesticideWarehouseId);
+            if (pesticideWarehouse is null)
+            {
+                throw new PesticideWarehouseDoesNotExistException(command.PesticideWarehouseId);
+            }
+
             pesticideWarehouse.AddDelivery(delivery);
 
             await _pesticideWarehouseRepository.UpdateAsync(pesticideWarehouse);

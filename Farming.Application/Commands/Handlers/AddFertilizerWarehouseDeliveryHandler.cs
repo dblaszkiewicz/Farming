@@ -17,18 +17,16 @@ namespace Farming.Application.Commands.Handlers
         private readonly IFertilizerWarehouseDeliveryFactory _fertilizerWarehouseDeliveryFactory;
         private readonly IUserReadService _userReadService;
         private readonly IFertilizerReadService _fertilizerReadService;
-        private readonly IFertilizerWarehouseReadService _fertilizerWarehouseReadService;
         private readonly IUnitOfWork _unitOfWork;
 
 
         public AddFertilizerWarehouseDeliveryHandler(IFertilizerWarehouseRepository fertilizerWarehouseRepository,
-            IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService, IFertilizerWarehouseReadService fertilizerWarehouseReadService)
+            IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService,)
         {
             _fertilizerWarehouseRepository = fertilizerWarehouseRepository;
             _unitOfWork = unitOfWork;
             _userReadService = userReadService;
             _fertilizerReadService = fertilizerReadService;
-            _fertilizerWarehouseReadService = fertilizerWarehouseReadService;
             _fertilizerWarehouseDeliveryFactory = new FertilizerWarehouseDeliveryFactory();
         }
 
@@ -43,10 +41,8 @@ namespace Farming.Application.Commands.Handlers
                 throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            if (!await _fertilizerWarehouseReadService.ExistsByIdAsync(command.FertilizerWarehouseId))
-            {
-                throw new FertilizerWarehouseNotFoundException(command.FertilizerWarehouseId);
-            }
+            var delivery = _fertilizerWarehouseDeliveryFactory.Create(command.FertilizerId,
+                command.UserId, command.Quantity, command.Price);
 
             if (!await _fertilizerReadService.ExistsByIdAsync(command.FertilizerId))
             {
@@ -58,10 +54,12 @@ namespace Farming.Application.Commands.Handlers
                 throw new UserDoesNotExistException(command.UserId);
             }
 
-            var delivery = _fertilizerWarehouseDeliveryFactory.Create(command.FertilizerId,
-                command.UserId, command.Quantity, command.Price);
-
             var fertilizerWarehouse = await _fertilizerWarehouseRepository.GetWithStateAndDeliveriesAsync(command.FertilizerWarehouseId);
+            if (fertilizerWarehouse is null)
+            {
+                throw new FertilizerWarehouseNotFoundException(command.FertilizerWarehouseId);
+            }
+
             fertilizerWarehouse.AddDelivery(delivery);
 
             await _fertilizerWarehouseRepository.UpdateAsync(fertilizerWarehouse);
