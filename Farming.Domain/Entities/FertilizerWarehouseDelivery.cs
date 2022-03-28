@@ -23,11 +23,12 @@ namespace Farming.Domain.Entities
             // for EF
         }
 
-        public FertilizerWarehouseDelivery(FertilizerWarehouseDeliveryId id, FertilizerId fertilizerId, UserId userId,
+        public FertilizerWarehouseDelivery(FertilizerId fertilizerId, UserId userId,
             FertilizerWarehouseDeliveryQuantity quantity, FertilizerWarehouseDeliveryPrice price, 
             FertilizerWarehouseDeliveryRealizationDate realizationDate)
         {
-            Id = id;
+            Id = new FertilizerWarehouseDeliveryId(Guid.NewGuid());
+
             FertilizerId = fertilizerId;
             UserId = userId;
             Quantity = quantity;

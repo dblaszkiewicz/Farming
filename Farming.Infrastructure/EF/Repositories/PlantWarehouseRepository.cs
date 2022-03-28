@@ -6,34 +6,38 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class PlantWarehouseRepository : IPlantWarehouseRepository
+    internal sealed class PlantWarehouseRepository : IPlantWarehouseRepository
     {
-        private readonly DbSet<PlantWarehouse> _plantWarehouses;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<PlantWarehouse> _dbSet;
 
         public PlantWarehouseRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _plantWarehouses = writeDbContext.PlantWarehouses;
+            _dbSet = writeDbContext.PlantWarehouses;
         }
 
         public async Task AddAsync(PlantWarehouse plantWarehouse)
         {
-            await _plantWarehouses.AddAsync(plantWarehouse);
-            await _writeDbContext.SaveChangesAsync();
+            await _dbSet.AddAsync(plantWarehouse);
         }
 
-        public Task<PlantWarehouse> GetAsync(PlantWarehouseId id)
+        public Task<PlantWarehouse> GetWithStatesAsync(PlantWarehouseId id)
         {
-            return _plantWarehouses
+            return _dbSet
                 .Include(x => x.States)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstAsync(x => x.Id == id);
+        }
+
+        public Task<PlantWarehouse> GetWithStatesAndDeliveriesAsync(PlantWarehouseId id)
+        {
+            return _dbSet
+                .Include(x => x.States)
+                    .ThenInclude(x => x.PlantWarehouseDeliveries)
+                .FirstAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(PlantWarehouse plantWarehouse)
         {
-            _plantWarehouses.Update(plantWarehouse);
-            await _writeDbContext.SaveChangesAsync();
+            _dbSet.Update(plantWarehouse);
         }
     }
 }

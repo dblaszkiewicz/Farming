@@ -6,7 +6,7 @@ namespace Farming.Domain.Factories
 {
     public interface IPesticideWarehouseDeliveryFactory
     {
-        PesticideWarehouseDelivery Create(PesticideWarehouseDeliveryId deliveryId, PesticideId pesticideId, UserId userId,
+        PesticideWarehouseDelivery Create(PesticideId pesticideId, UserId userId,
             PesticideWarehouseDeliveryQuantity quantity, PesticideWarehouseDeliveryPrice price);
     }
 }

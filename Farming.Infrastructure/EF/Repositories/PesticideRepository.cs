@@ -6,20 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class PesticideRepository : IPesticideRepository
+    internal sealed class PesticideRepository : IPesticideRepository
     {
-        private readonly WriteDbContext _writeDbContext;
-        private readonly DbSet<Pesticide> _pesticides;
+        private readonly DbSet<Pesticide> _dbSet;
 
         public PesticideRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _pesticides = writeDbContext.Pesticides;
+            _dbSet = writeDbContext.Pesticides;
         }
 
         public Task<Pesticide> GetAsync(PesticideId id)
         {
-            return _pesticides.FirstOrDefaultAsync(p => p.Id == id);
+            return _dbSet.FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

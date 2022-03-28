@@ -6,20 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class PlantRepository : IPlantRepository
+    internal sealed class PlantRepository : IPlantRepository
     {
-        private readonly DbSet<Plant> _plants;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<Plant> _dbSet;
 
         public PlantRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _plants = _writeDbContext.Plants;
+            _dbSet = writeDbContext.Plants;
         }
 
         public Task<Plant> GetAsync(PlantId id)
         {
-            return _plants.FirstOrDefaultAsync(x => x.Id == id);
+            return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

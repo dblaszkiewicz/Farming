@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Farming.Application.Commands.Validators
+namespace Farming.Application.Commands.Validators.CommandValidators
 {
     public class AddPesticideWarehouseDeliveryCommandValidator :
         AbstractValidator<AddPesticideWarehouseDeliveryCommand>

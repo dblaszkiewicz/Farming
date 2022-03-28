@@ -5,7 +5,7 @@ namespace Farming.Domain.Repositories
 {
     public interface IFertilizerWarehouseRepository
     {
-        Task<FertilizerWarehouse> GetAsync(FertilizerWarehouseId id);
+        Task<FertilizerWarehouse> GetWithStateAndDeliveriesAsync(FertilizerWarehouseId id);
         Task UpdateAsync(FertilizerWarehouse fertilizerWarehouse);
         Task AddAsync(FertilizerWarehouse fertilizerWarehouse);
     }

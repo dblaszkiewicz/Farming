@@ -34,5 +34,24 @@ namespace Farming.Domain.Entities
 
             AddEvent(new PlantWarehouseStateDeliveryAdded(this, delivery));
         }
+
+        public bool IsEnoughPlants(PlantWarehouseQuantity quantity)
+        {
+            if (Quantity >= quantity)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        internal void SpendPlants(PlantActionQuantity quantity)
+        {
+            var newQuantity = Quantity - quantity;
+
+            Quantity = new PlantWarehouseQuantity(newQuantity);
+
+            AddEvent(new PlantWarehouseStateSpendPlants(this, quantity));
+        }
     }
 }

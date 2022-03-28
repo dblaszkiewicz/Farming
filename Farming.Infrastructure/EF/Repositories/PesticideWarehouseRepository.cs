@@ -6,34 +6,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class PesticideWarehouseRepository : IPesticideWarehouseRepository
+    internal sealed class PesticideWarehouseRepository : IPesticideWarehouseRepository
     {
-        private readonly DbSet<PesticideWarehouse> _pesticideWarehouses;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<PesticideWarehouse> _dbSet;
 
         public PesticideWarehouseRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _pesticideWarehouses = writeDbContext.PesticideWarehouses;
+            _dbSet = writeDbContext.PesticideWarehouses;
         }
 
         public async Task AddAsync(PesticideWarehouse pesticideWarehouse)
         {
-            await _pesticideWarehouses.AddAsync(pesticideWarehouse);
-            await _writeDbContext.SaveChangesAsync();
+            await _dbSet.AddAsync(pesticideWarehouse);
         }
 
-        public Task<PesticideWarehouse> GetAsync(PesticideWarehouseId id)
+        public Task<PesticideWarehouse> GetWithStatesAndDeliveriesAsync(PesticideWarehouseId id)
         {
-            return _pesticideWarehouses
+            return _dbSet
                 .Include(x => x.States)
+                    .ThenInclude(x => x.PesticideWarehouseDeliveries)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(PesticideWarehouse pesticideWarehouse)
         {
-            _pesticideWarehouses.Update(pesticideWarehouse);
-            await _writeDbContext.SaveChangesAsync();
+            _dbSet.Update(pesticideWarehouse);
         }
     }
 }

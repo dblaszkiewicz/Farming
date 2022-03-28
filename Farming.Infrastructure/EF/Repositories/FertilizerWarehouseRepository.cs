@@ -6,34 +6,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public sealed class FertilizerWarehouseRepository : IFertilizerWarehouseRepository
+    internal sealed class FertilizerWarehouseRepository : IFertilizerWarehouseRepository
     {
-        private readonly DbSet<FertilizerWarehouse> _fertilizerWarehouse;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<FertilizerWarehouse> _dbSet;
 
         public FertilizerWarehouseRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _fertilizerWarehouse = writeDbContext.FertilizerWarehouses;
+            _dbSet = writeDbContext.FertilizerWarehouses;
         }
 
         public async Task AddAsync(FertilizerWarehouse fertilizerWarehouse)
         {
-            await _fertilizerWarehouse.AddAsync(fertilizerWarehouse);
-            await _writeDbContext.SaveChangesAsync();
+            await _dbSet.AddAsync(fertilizerWarehouse);
         }
 
-        public Task<FertilizerWarehouse> GetAsync(FertilizerWarehouseId id)
+        public Task<FertilizerWarehouse> GetWithStateAndDeliveriesAsync(FertilizerWarehouseId id)
         {
-            return _fertilizerWarehouse
+            return _dbSet
                 .Include(x => x.States)
+                    .ThenInclude(x => x.FertilizerWarehouseDeliveries)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(FertilizerWarehouse fertilizerWarehouse)
         {
-            _fertilizerWarehouse.Update(fertilizerWarehouse);
-            await _writeDbContext.SaveChangesAsync();
+            _dbSet.Update(fertilizerWarehouse);
         }
     }
 }

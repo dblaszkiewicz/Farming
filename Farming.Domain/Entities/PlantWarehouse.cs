@@ -1,4 +1,5 @@
 ﻿using Farming.Domain.Events;
+using Farming.Domain.Exceptions;
 using Farming.Domain.ValueObjects.Plant;
 using Farming.Shared.Abstractions.Domain;
 
@@ -28,6 +29,22 @@ namespace Farming.Domain.Entities
             }
 
             state.AddDelivery(delivery);
+        }
+
+        internal void ProcessPlantAction(PlantId plantId, PlantActionQuantity quantity)
+        {
+            var state = GetStateByPlantId(plantId);
+            if (state is null)
+            {
+                throw new PlantWarehouseStateNotFoundException(plantId, Id);
+            }
+
+            if (!state.IsEnoughPlants(new PlantWarehouseQuantity(quantity)))
+            {
+                throw new PlantActionNotEnoughQuantityException(quantity);
+            }
+
+            state.SpendPlants(quantity);
         }
 
         private PlantWarehouseState GetStateByPlantId(PlantId plantId)

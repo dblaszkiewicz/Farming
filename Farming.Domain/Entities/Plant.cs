@@ -1,4 +1,5 @@
-﻿using Farming.Domain.ValueObjects.Plant;
+﻿using Farming.Domain.ValueObjects.Land;
+using Farming.Domain.ValueObjects.Plant;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
@@ -22,6 +23,16 @@ namespace Farming.Domain.Entities
             Name = name;
             RequiredAmountPerHectare = requiredAmountPerHectare;
             Description = description;
+        }
+
+        public bool IsEnoughPlantForWholeArea(LandArea area, PlantActionQuantity quantity)
+        {
+            if (area * RequiredAmountPerHectare >= quantity)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

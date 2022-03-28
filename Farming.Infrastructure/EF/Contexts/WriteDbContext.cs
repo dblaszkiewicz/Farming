@@ -39,7 +39,8 @@ namespace Farming.Infrastructure.EF.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), x => x.GetInterfaces().Contains(typeof(IWriteConfiguration)));
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), 
+                x => x.GetInterfaces().Contains(typeof(IWriteConfiguration)));
         }
     }
 }

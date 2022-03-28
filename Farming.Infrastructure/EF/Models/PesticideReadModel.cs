@@ -11,5 +11,8 @@ namespace Farming.Infrastructure.EF.Models
 
         public PesticideTypeReadModel PesticideType { get; set; }
         public ICollection<PlantReadModel> SuitablePlants { get; set; }
+        public ICollection<PesticideActionReadModel> PesticideActions { get; set; }
+        public ICollection<PesticideWarehouseDeliveryReadModel> PesticideWarehouseDeliveries { get; set; }
+        public ICollection<PesticideWarehouseStateReadModel> PesticideWarehouseStates { get; set; }
     }
 }

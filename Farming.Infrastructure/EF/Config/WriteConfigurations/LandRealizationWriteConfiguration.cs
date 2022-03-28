@@ -1,6 +1,5 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Land;
-using Farming.Domain.ValueObjects.Plant;
 using Farming.Domain.ValueObjects.Season;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -24,10 +23,6 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder
                 .Property(x => x.SeasonId)
                 .HasConversion(x => x.Value, x => new SeasonId(x));
-
-            builder
-                .Property(x => x.PlantActionId)
-                .HasConversion(x => x.Value, x => new PlantActionId(x));
 
             builder
                 .HasOne(x => x.Land)

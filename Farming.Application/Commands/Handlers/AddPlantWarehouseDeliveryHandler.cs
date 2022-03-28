@@ -1,6 +1,8 @@
 ﻿using Farming.Application.Commands.Responses;
 using Farming.Application.Commands.Validators;
+using Farming.Application.Commands.Validators.CommandValidators;
 using Farming.Application.Exceptions;
+using Farming.Application.Services;
 using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
@@ -12,55 +14,56 @@ namespace Farming.Application.Commands.Handlers
         Response<AddPlantWarehouseDeliveryResponse>>
     {
         private readonly IPlantWarehouseRepository _plantWarehouseRepository;
-        private readonly IPlantRepository _plantRepository;
-        private readonly IUserRepository _userRepository;
         private readonly IPlantWarehouseDeliveryFactory _plantWarehouseDeliveryFactory;
+        private readonly IUserReadService _userReadService;
+        private readonly IPlantReadService _plantReadService;
+        private readonly IPlantWarehouseReadService _plantWarehouseReadService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AddPlantWarehouseDeliveryHandler(IPlantWarehouseRepository plantWarehouseRepository, IPlantRepository plantRepository, 
-            IUserRepository userRepository)
+        public AddPlantWarehouseDeliveryHandler(IPlantWarehouseRepository plantWarehouseRepository, IUnitOfWork unitOfWork, 
+            IUserReadService userReadService, IPlantWarehouseReadService plantWarehouseReadService, IPlantReadService plantReadService)
         {
             _plantWarehouseRepository = plantWarehouseRepository;
-            _plantRepository = plantRepository;
-            _userRepository = userRepository;
+            _userReadService = userReadService;
+            _plantWarehouseReadService = plantWarehouseReadService;
+            _plantReadService = plantReadService;
+            _unitOfWork = unitOfWork;
             _plantWarehouseDeliveryFactory = new PlantWarehouseDeliveryFactory();
         }
 
         public async Task<Response<AddPlantWarehouseDeliveryResponse>> Handle(AddPlantWarehouseDeliveryCommand command, CancellationToken cancellationToken)
         {
             var validator = new AddPlantWarehouseDeliveryCommandValidator();
-            var validateResult = await validator.ValidateAsync(command);
+            var validationResult = await validator.ValidateAsync(command);
 
-            if (!validateResult.IsValid)
+            if (!validationResult.IsValid)
             {
-                throw new ValidateCommandException(validateResult.ToString(". "));
+                throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            var plantWarehouse = await _plantWarehouseRepository.GetAsync(command.PlantWarehouseId);
-            if (plantWarehouse is null)
+            if (!await _plantWarehouseReadService.ExistsByIdAsync(command.PlantWarehouseId))
             {
-                throw new PlantWarehouseNotFoundException(command.PlantWarehouseId);
+                throw new PlantWarehouseDoesNotExistException(command.PlantWarehouseId);
             }
 
-            var plant = await _plantRepository.GetAsync(command.PlantId);
-            if (plant is null)
+            if (!await _plantReadService.ExistsByIdAsync(command.PlantId))
             {
-                throw new PlantNotFoundException(command.PlantId);
+                throw new PlantDoesNotExistException(command.PlantId);
             }
 
-            var user = await _userRepository.GetAsync(command.UserId);
-            if (user is null)
+            if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserNotFoundException(command.UserId);
+                throw new UserDoesNotExistException(command.UserId);
             }
 
-            var deliveryId = Guid.NewGuid();
-
-            var delivery = _plantWarehouseDeliveryFactory.Create(deliveryId, command.PlantId, command.UserId,
+            var delivery = _plantWarehouseDeliveryFactory.Create(command.PlantId, command.UserId,
                 command.Quantity, command.Price);
 
+            var plantWarehouse = await _plantWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PlantWarehouseId);
             plantWarehouse.AddDelivery(delivery);
 
             await _plantWarehouseRepository.UpdateAsync(plantWarehouse);
+            await _unitOfWork.CommitAsync();
 
             return ResponseFactory.CreateSuccessResponse<AddPlantWarehouseDeliveryResponse>();
         }

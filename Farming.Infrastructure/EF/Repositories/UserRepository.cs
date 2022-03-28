@@ -6,26 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class UserRepository : IUserRepository
+    internal sealed class UserRepository : IUserRepository
     {
-        private readonly DbSet<User> _users;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<User> _dbSet;
 
         public UserRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _users = writeDbContext.Users;
+            _dbSet = writeDbContext.Users;
         }
 
         public async Task AddAsync(User user)
         {
-            await _users.AddAsync(user);
-            await _writeDbContext.SaveChangesAsync();
+            await _dbSet.AddAsync(user);
         }
 
         public Task<User> GetAsync(UserId id)
         {
-            return _users.FirstOrDefaultAsync(x => x.Id == id);
+            return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

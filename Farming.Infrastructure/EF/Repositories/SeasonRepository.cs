@@ -5,21 +5,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class SeasonRepository : ISeasonRepository
+    internal sealed class SeasonRepository : ISeasonRepository
     {
-        private readonly DbSet<Season> _seasons;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<Season> _dbSet;
 
         public SeasonRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _seasons = writeDbContext.Seasons;
+            _dbSet = writeDbContext.Seasons;
         }
 
         public async Task AddAsync(Season season)
         {
-            await _seasons.AddAsync(season);
-            await _writeDbContext.SaveChangesAsync();
+            await _dbSet.AddAsync(season);
+        }
+
+        public Task<Season> GetCurrentSeasonAsync()
+        {
+            return _dbSet.FirstOrDefaultAsync(x => x.Active);
+        }
+
+        public async Task UpdateAsync(Season season)
+        {
+            _dbSet.Update(season);
         }
     }
 }

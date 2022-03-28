@@ -8,7 +8,7 @@ namespace Farming.Infrastructure.EF.Models
         public Guid UserId { get; set; }
         public Guid LandRealizationId { get; set; }
         public decimal Quantity { get; set; }
-        public DateTimeOffset DateRealization { get; set; }
+        public DateTimeOffset RealizationDate { get; set; }
 
         public PlantReadModel Plant { get; set; }
         public UserReadModel User { get; set; }

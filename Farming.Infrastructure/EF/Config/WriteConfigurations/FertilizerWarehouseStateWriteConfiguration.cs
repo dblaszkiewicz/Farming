@@ -32,12 +32,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .WithMany(x => x.FertilizerWarehouseStates)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
             builder
                 .HasOne(x => x.FertilizerWarehouse)
                 .WithMany(x => x.States)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
             builder.ToTable("FertilizerWarehouseStates");
         }

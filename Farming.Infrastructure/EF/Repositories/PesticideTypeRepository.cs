@@ -5,21 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Repositories
 {
-    public class PesticideTypeRepository : IPesticideTypeRepository
+    internal sealed class PesticideTypeRepository : IPesticideTypeRepository
     {
-        private readonly DbSet<PesticideType> _pesticideTypes;
-        private readonly WriteDbContext _writeDbContext;
+        private readonly DbSet<PesticideType> _dbSet;
 
         public PesticideTypeRepository(WriteDbContext writeDbContext)
         {
-            _writeDbContext = writeDbContext;
-            _pesticideTypes = writeDbContext.PesticideTypes;
+            _dbSet = writeDbContext.PesticideTypes;
         }
 
         public async Task AddAsync(PesticideType pesticide)
         {
-            await _pesticideTypes.AddAsync(pesticide);
-            await _writeDbContext.SaveChangesAsync();
+            await _dbSet.AddAsync(pesticide);
         }
     }
 }

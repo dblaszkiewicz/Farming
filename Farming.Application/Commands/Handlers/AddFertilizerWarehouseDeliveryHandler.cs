@@ -1,6 +1,8 @@
 ﻿using Farming.Application.Commands.Responses;
 using Farming.Application.Commands.Validators;
+using Farming.Application.Commands.Validators.CommandValidators;
 using Farming.Application.Exceptions;
+using Farming.Application.Services;
 using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
@@ -8,59 +10,62 @@ using MediatR;
 
 namespace Farming.Application.Commands.Handlers
 {
-    internal sealed class AddFertilizerWarehouseDeliveryHandler : IRequestHandler<AddFertilizerWarehouseDeliveryCommand, Response<AddFertilizerWarehouseDeliveryResponse>>
+    internal sealed class AddFertilizerWarehouseDeliveryHandler : IRequestHandler<AddFertilizerWarehouseDeliveryCommand, 
+        Response<AddFertilizerWarehouseDeliveryResponse>>
     {
         private readonly IFertilizerWarehouseRepository _fertilizerWarehouseRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IFertilizerRepository _fertilizerRepository;
         private readonly IFertilizerWarehouseDeliveryFactory _fertilizerWarehouseDeliveryFactory;
+        private readonly IUserReadService _userReadService;
+        private readonly IFertilizerReadService _fertilizerReadService;
+        private readonly IFertilizerWarehouseReadService _fertilizerWarehouseReadService;
+        private readonly IUnitOfWork _unitOfWork;
 
 
-        public AddFertilizerWarehouseDeliveryHandler(IFertilizerWarehouseRepository fertilizerWarehouseRepository, IUserRepository userRepository, 
-            IFertilizerRepository fertilizerRepository)
+        public AddFertilizerWarehouseDeliveryHandler(IFertilizerWarehouseRepository fertilizerWarehouseRepository,
+            IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService, IFertilizerWarehouseReadService fertilizerWarehouseReadService)
         {
             _fertilizerWarehouseRepository = fertilizerWarehouseRepository;
-            _userRepository = userRepository;
-            _fertilizerRepository = fertilizerRepository;
+            _unitOfWork = unitOfWork;
+            _userReadService = userReadService;
+            _fertilizerReadService = fertilizerReadService;
+            _fertilizerWarehouseReadService = fertilizerWarehouseReadService;
             _fertilizerWarehouseDeliveryFactory = new FertilizerWarehouseDeliveryFactory();
         }
 
-        public async Task<Response<AddFertilizerWarehouseDeliveryResponse>> Handle(AddFertilizerWarehouseDeliveryCommand command, CancellationToken cancellationToken)
+        public async Task<Response<AddFertilizerWarehouseDeliveryResponse>> Handle(AddFertilizerWarehouseDeliveryCommand command, 
+            CancellationToken cancellationToken)
         {
             var validator = new AddFertilizerWarehouseDeliveryCommandValidator();
-            var validateResult = await validator.ValidateAsync(command);
+            var validationResult = await validator.ValidateAsync(command);
 
-            if (!validateResult.IsValid)
+            if (!validationResult.IsValid)
             {
-                throw new ValidateCommandException(validateResult.ToString(". "));
+                throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            var fertilizerWarehouse = await _fertilizerWarehouseRepository.GetAsync(command.FertilizerWarehouseId);
-            if (fertilizerWarehouse is null)
+            if (!await _fertilizerWarehouseReadService.ExistsByIdAsync(command.FertilizerWarehouseId))
             {
                 throw new FertilizerWarehouseNotFoundException(command.FertilizerWarehouseId);
             }
 
-            var fertilizer = await _fertilizerRepository.GetAsync(command.FertilizerId);
-            if (fertilizer is null)
+            if (!await _fertilizerReadService.ExistsByIdAsync(command.FertilizerId))
             {
                 throw new FertilizerNotFoundException(command.FertilizerId);
             }
 
-            var user = await _userRepository.GetAsync(command.UserId);
-            if (user is null)
+            if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserNotFoundException(command.UserId);
+                throw new UserDoesNotExistException(command.UserId);
             }
 
-            var deliveryId = Guid.NewGuid();
+            var delivery = _fertilizerWarehouseDeliveryFactory.Create(command.FertilizerId,
+                command.UserId, command.Quantity, command.Price);
 
-            var delivery = _fertilizerWarehouseDeliveryFactory.Create(deliveryId, command.FertilizerId, command.UserId,
-                command.Quantity, command.Price);
-
+            var fertilizerWarehouse = await _fertilizerWarehouseRepository.GetWithStateAndDeliveriesAsync(command.FertilizerWarehouseId);
             fertilizerWarehouse.AddDelivery(delivery);
 
             await _fertilizerWarehouseRepository.UpdateAsync(fertilizerWarehouse);
+            await _unitOfWork.CommitAsync();
 
             return ResponseFactory.CreateSuccessResponse<AddFertilizerWarehouseDeliveryResponse>();
         }

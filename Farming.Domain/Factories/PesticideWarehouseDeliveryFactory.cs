@@ -6,11 +6,11 @@ namespace Farming.Domain.Factories
 {
     public class PesticideWarehouseDeliveryFactory : IPesticideWarehouseDeliveryFactory
     {
-        public PesticideWarehouseDelivery Create(PesticideWarehouseDeliveryId deliveryId, PesticideId pesticideId, UserId userId, PesticideWarehouseDeliveryQuantity quantity, PesticideWarehouseDeliveryPrice price)
+        public PesticideWarehouseDelivery Create(PesticideId pesticideId, UserId userId, PesticideWarehouseDeliveryQuantity quantity, PesticideWarehouseDeliveryPrice price)
         {
             var realizationDate = new PesticideWarehouseDeliveryRealizationDate();
 
-            return new PesticideWarehouseDelivery(deliveryId, pesticideId, userId, quantity, price, realizationDate);
+            return new PesticideWarehouseDelivery(pesticideId, userId, quantity, price, realizationDate);
         }
     }
 }

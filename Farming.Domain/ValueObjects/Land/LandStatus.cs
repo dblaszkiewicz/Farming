@@ -1,19 +1,25 @@
-﻿
+﻿using Farming.Domain.Consts;
+
 namespace Farming.Domain.ValueObjects.Land
 {
     public record LandStatus
     {
-        public int Value { get; }
+        public LandStatusEnum Value { get; }
 
-        public LandStatus(int value)
+        public LandStatus(LandStatusEnum value)
         {
             Value = value;
         }
 
-        public static implicit operator int(LandStatus status)
+        public static implicit operator LandStatusEnum(LandStatus status)
             => status.Value;
 
-        public static implicit operator LandStatus(int status)
+        public static implicit operator LandStatus(LandStatusEnum status)
             => new(status);
+
+        public bool IsSuitableForPlantAction()
+        {
+            return Value != LandStatusEnum.Planted;
+        }
     }
 }

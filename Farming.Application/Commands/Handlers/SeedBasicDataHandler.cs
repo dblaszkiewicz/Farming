@@ -1,4 +1,5 @@
 ﻿using Farming.Application.Commands.Responses;
+using Farming.Domain.Consts;
 using Farming.Domain.Entities;
 using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
@@ -17,10 +18,11 @@ namespace Farming.Application.Commands.Handlers
         private readonly IPesticideWarehouseRepository _pesticideWarehouseRepository;
         private readonly IFertilizerWarehouseRepository _fertilizerWarehouseRepository;
         private readonly IPesticideTypeRepository _pesticideTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SeedBasicDataHandler(IFertilizerTypeRepository fertilizerTypeRepository, IUserRepository userRepository, ISeasonRepository seasonRepository, 
-            ILandRepository landRepository, IPlantWarehouseRepository plantWarehouseRepository, IPesticideWarehouseRepository pesticideWarehouseRepository, 
-            IFertilizerWarehouseRepository fertilizerWarehouseRepository, IPesticideTypeRepository pesticideTypeRepository)
+        public SeedBasicDataHandler(IFertilizerTypeRepository fertilizerTypeRepository, IUserRepository userRepository, ISeasonRepository seasonRepository,
+            ILandRepository landRepository, IPlantWarehouseRepository plantWarehouseRepository, IPesticideWarehouseRepository pesticideWarehouseRepository,
+            IFertilizerWarehouseRepository fertilizerWarehouseRepository, IPesticideTypeRepository pesticideTypeRepository, IUnitOfWork unitOfWork)
         {
             _fertilizerTypeRepository = fertilizerTypeRepository;
             _userRepository = userRepository;
@@ -30,6 +32,7 @@ namespace Farming.Application.Commands.Handlers
             _pesticideWarehouseRepository = pesticideWarehouseRepository;
             _fertilizerWarehouseRepository = fertilizerWarehouseRepository;
             _pesticideTypeRepository = pesticideTypeRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Response<SeedBasicDataResponse>> Handle(SeedBasicDataCommand request, CancellationToken cancellationToken)
@@ -195,8 +198,8 @@ namespace Farming.Application.Commands.Handlers
 
             var season = new Season();
 
-            var land1 = new Land("Klasa A", 1, "Pole pierwsze", 5);
-            var land2 = new Land("Klasa B", 1, "Pole drugie", 2);
+            var land1 = new Land("Klasa A", LandStatusEnum.Harvested, "Pole pierwsze", 5);
+            var land2 = new Land("Klasa B", LandStatusEnum.Harvested, "Pole drugie", 2);
 
             await _userRepository.AddAsync(admin);
 
@@ -215,6 +218,8 @@ namespace Farming.Application.Commands.Handlers
 
             await _pesticideTypeRepository.AddAsync(pesticideType1);
             await _pesticideTypeRepository.AddAsync(pesticideType2);
+
+            await _unitOfWork.CommitAsync();
 
             return ResponseFactory.CreateSuccessResponse<SeedBasicDataResponse>();
         }

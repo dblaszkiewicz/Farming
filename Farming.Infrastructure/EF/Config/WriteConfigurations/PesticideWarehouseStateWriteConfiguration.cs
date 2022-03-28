@@ -29,11 +29,14 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 
             builder
                 .HasOne(x => x.Pesticide)
-                .WithMany(x => x.PesticideWarehouseStates);
+                .WithMany(x => x.PesticideWarehouseStates)
+                .OnDelete(DeleteBehavior.Restrict);
+                
 
             builder
                 .HasOne(x => x.PesticideWarehouse)
-                .WithMany(x => x.States);
+                .WithMany(x => x.States)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("PesticideWarehouseStates");
         }

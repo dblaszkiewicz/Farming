@@ -1,6 +1,8 @@
 ﻿using Farming.Application.Commands.Responses;
 using Farming.Application.Commands.Validators;
+using Farming.Application.Commands.Validators.CommandValidators;
 using Farming.Application.Exceptions;
+using Farming.Application.Services;
 using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
@@ -12,55 +14,57 @@ namespace Farming.Application.Commands.Handlers
         Response<AddPesticideWarehouseDeliveryResponse>>
     {
         private readonly IPesticideWarehouseRepository _pesticideWarehouseRepository;
-        private readonly IPesticideRepository _pesticideRepository;
-        private readonly IUserRepository _userRepository;
         private readonly IPesticideWarehouseDeliveryFactory _pesticideWarehouseDeliveryFactory;
+        private readonly IPesticideReadService _pesticideReadService;
+        private readonly IPesticideWarehouseReadService _pesticideWarehouseReadService;
+        private readonly IUserReadService _userReadService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AddPesticideWarehouseDeliveryHandler(IPesticideWarehouseRepository pesticideWarehouseRepository, IPesticideRepository pesticideRepository, 
-            IUserRepository userRepository)
+        public AddPesticideWarehouseDeliveryHandler(IPesticideWarehouseRepository pesticideWarehouseRepository,
+            IUnitOfWork unitOfWork, IUserReadService userReadService, IPesticideReadService pesticideReadService, IPesticideWarehouseReadService pesticideWarehouseReadService)
         {
             _pesticideWarehouseRepository = pesticideWarehouseRepository;
-            _pesticideRepository = pesticideRepository;
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
+            _userReadService = userReadService;
+            _pesticideReadService = pesticideReadService;
+            _pesticideWarehouseReadService = pesticideWarehouseReadService;
+
             _pesticideWarehouseDeliveryFactory = new PesticideWarehouseDeliveryFactory();
         }
 
         public async Task<Response<AddPesticideWarehouseDeliveryResponse>> Handle(AddPesticideWarehouseDeliveryCommand command, CancellationToken cancellationToken)
         {
             var validator = new AddPesticideWarehouseDeliveryCommandValidator();
-            var validateResult = await validator.ValidateAsync(command);
+            var validationResult = await validator.ValidateAsync(command);
 
-            if (!validateResult.IsValid)
+            if (!validationResult.IsValid)
             {
-                throw new ValidateCommandException(validateResult.ToString(". "));
+                throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            var pesticideWarehouse = await _pesticideWarehouseRepository.GetAsync(command.PesticideWarehouseId);
-            if (pesticideWarehouse is null)
+            if (!await _pesticideWarehouseReadService.ExistsByIdAsync(command.PesticideWarehouseId))
             {
-                throw new PesticideWarehouseNotFoundException(command.PesticideWarehouseId);
+                throw new PesticideWarehouseDoesNotExistException(command.PesticideWarehouseId);
             }
 
-            var pesticide = await _pesticideRepository.GetAsync(command.PesticideId);
-            if (pesticide is null)
+            if (!await _pesticideReadService.ExistsByIdAsync(command.PesticideId))
             {
-                throw new PesticideNotFoundException(command.PesticideId);
+                throw new PesticideDoesNotExistException(command.PesticideId);
             }
 
-            var user = await _userRepository.GetAsync(command.UserId);
-            if (user is null)
+            if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserNotFoundException(command.UserId);
+                throw new UserDoesNotExistException(command.UserId);
             }
 
-            var deliveryId = Guid.NewGuid();
-
-            var delivery = _pesticideWarehouseDeliveryFactory.Create(deliveryId, command.PesticideId, command.UserId,
+            var delivery = _pesticideWarehouseDeliveryFactory.Create(command.PesticideId, command.UserId,
                 command.Quantity, command.Price);
 
+            var pesticideWarehouse = await _pesticideWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PesticideWarehouseId);
             pesticideWarehouse.AddDelivery(delivery);
 
             await _pesticideWarehouseRepository.UpdateAsync(pesticideWarehouse);
+            await _unitOfWork.CommitAsync();
 
             return ResponseFactory.CreateSuccessResponse<AddPesticideWarehouseDeliveryResponse>();
         }

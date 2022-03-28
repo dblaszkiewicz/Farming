@@ -1,24 +1,21 @@
 ﻿using FluentValidation;
 
-namespace Farming.Application.Commands.Validators
+namespace Farming.Application.Commands.Validators.CommandValidators
 {
-    public class AddFertilizerWarehouseDeliveryCommandValidator : 
-        AbstractValidator<AddFertilizerWarehouseDeliveryCommand>
+    public class AddPlantActionCommandValidator :
+        AbstractValidator<AddPlantActionCommand>
     {
-        public AddFertilizerWarehouseDeliveryCommandValidator()
+        public AddPlantActionCommandValidator()
         {
-            RuleFor(c => c.FertilizerWarehouseId)
+            RuleFor(c => c.LandId)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should be not empty");
-            RuleFor(c => c.FertilizerId)
+            RuleFor(c => c.PlantId)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should be not empty");
             RuleFor(c => c.UserId)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should be not empty");
-            RuleFor(c => c.Price)
-                .GreaterThan(0)
-                .WithMessage("{PropertyName} should be greather than 0");
             RuleFor(c => c.Quantity)
                 .GreaterThan(0)
                 .WithMessage("{PropertyName} should be greather than 0");

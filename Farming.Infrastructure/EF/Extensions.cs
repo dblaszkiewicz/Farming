@@ -1,7 +1,9 @@
-﻿using Farming.Domain.Repositories;
+﻿using Farming.Application.Services;
+using Farming.Domain.Repositories;
 using Farming.Infrastructure.EF.Contexts;
 using Farming.Infrastructure.EF.Options;
 using Farming.Infrastructure.EF.Repositories;
+using Farming.Infrastructure.EF.Services;
 using Farming.Shared.Options;
 
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +27,18 @@ namespace Farming.Infrastructure.EF
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFertilizerRepository, FertilizerRepository>();
             services.AddScoped<IPesticideRepository, PesticideRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IUserReadService, UserReadService>();
+            services.AddScoped<IFertilizerReadService, FertilizerReadService>();
+            services.AddScoped<IFertilizerWarehouseReadService, FertilizerWarehouseReadService>();
+            services.AddScoped<IPesticideReadService, PesticideReadService>();
+            services.AddScoped<IPesticideWarehouseReadService, PesticideWarehouseReadService>();
+            services.AddScoped<IPlantReadService, PlantReadService>();
+            services.AddScoped<IPlantWarehouseReadService, PlantWarehouseReadService>();
+            services.AddScoped<ILandReadService, LandReadService>();
+            services.AddScoped<ISeasonReadService, SeasonReadService>();
 
             var options = configuration.GetOptions<SqlOptions>("Sql");
             
