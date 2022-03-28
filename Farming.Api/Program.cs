@@ -1,13 +1,17 @@
-using Farming.Application.Commands;
 using MediatR;
 using Farming.Infrastructure;
+using Farming.Application.Queries;
+using Farming.Infrastructure.EF.Config.ReadConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 IConfiguration Configuration = builder.Configuration;
 
-builder.Services.AddMediatR(typeof(AddFertilizerWarehouseDeliveryCommand));
+// todo - get assembly by name?
+builder.Services.AddMediatR(typeof(IReadConfiguration));
+builder.Services.AddMediatR(typeof(GetAllPlantsQuery));
+
 builder.Services.AddInfrastructure(Configuration);
 
 builder.Services.AddControllers();

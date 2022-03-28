@@ -19,7 +19,6 @@ namespace Farming.Application.Commands.Handlers
         private readonly IFertilizerReadService _fertilizerReadService;
         private readonly IUnitOfWork _unitOfWork;
 
-
         public AddFertilizerWarehouseDeliveryHandler(IFertilizerWarehouseRepository fertilizerWarehouseRepository,
             IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService)
         {

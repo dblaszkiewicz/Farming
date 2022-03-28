@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Farming.Infrastructure.EF.Contexts
 {
-    public sealed class WriteDbContext : DbContext
+    internal sealed class WriteDbContext : DbContext
     {
         public DbSet<Fertilizer> Fertilizers { get; set; }
         public DbSet<FertilizerAction> FertilizerActions { get; set; }

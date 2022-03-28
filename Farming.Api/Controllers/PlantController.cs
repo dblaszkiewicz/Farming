@@ -1,6 +1,7 @@
 ﻿using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
 using Farming.Application.DTO;
+using Farming.Application.Queries;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,14 @@ namespace Farming.Api.Controllers
             var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<AddPlantActionCommand>();
             var result = await _mediator.Send(command);
             return Ok(result);
+        }
+
+        [HttpGet("allPlants")]
+        public async Task<IActionResult> GetAllPlants()
+        {
+            var result = await _mediator.Send(new GetAllPlantsQuery());
+
+            return result.Any() ? Ok(result) : NotFound();
         }
     }
 }
