@@ -21,7 +21,7 @@ namespace Farming.Application.Commands.Handlers
 
 
         public AddFertilizerWarehouseDeliveryHandler(IFertilizerWarehouseRepository fertilizerWarehouseRepository,
-            IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService,)
+            IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService)
         {
             _fertilizerWarehouseRepository = fertilizerWarehouseRepository;
             _unitOfWork = unitOfWork;
