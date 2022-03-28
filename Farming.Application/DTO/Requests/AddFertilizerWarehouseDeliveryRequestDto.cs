@@ -1,6 +1,6 @@
-﻿namespace Farming.Application.DTO
+﻿namespace Farming.Application.DTO.Requests
 {
-    public class AddFertilizerWarehouseDeliveryDto
+    public class AddFertilizerWarehouseDeliveryRequestDto
     {
         public Guid FertilizerWarehouseId { get; set; }
         public Guid FertilizerId { get; set; }

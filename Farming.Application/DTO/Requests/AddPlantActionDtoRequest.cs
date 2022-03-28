@@ -1,7 +1,6 @@
-﻿
-namespace Farming.Application.DTO
+﻿namespace Farming.Application.DTO.Requests
 {
-    public class AddPlantActionDto
+    public class AddPlantActionDtoRequest
     {
         public Guid LandId { get; set; }
         public Guid UserId { get; set; }
