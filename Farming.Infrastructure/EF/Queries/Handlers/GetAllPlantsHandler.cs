@@ -18,7 +18,10 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
 
         public async Task<IEnumerable<PlantDto>> Handle(GetAllPlantsQuery request, CancellationToken cancellationToken)
         {
-            return await _plants.Select(x => x.AsDto()).ToListAsync();
+            return await _plants
+                .AsNoTracking()
+                .Select(x => x.AsDto())
+                .ToListAsync();
         }
     }
 }

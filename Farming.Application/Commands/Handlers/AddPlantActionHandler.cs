@@ -33,10 +33,10 @@ namespace Farming.Application.Commands.Handlers
             _userReadService = userReadService;
             _unitOfWork = unitOfWork;
             _plantWarehouseRepository = plantWarehouseRepository;
-            _plantActionFactory = new PlantActionFactory();
-            _plantDomainService = new PlantDomainService();
             _landRepository = landRepository;
             _plantRepository = plantRepository;
+            _plantActionFactory = new PlantActionFactory();
+            _plantDomainService = new PlantDomainService();
         }
 
         public async Task<Response<AddPlantActionResponse>> Handle(AddPlantActionCommand command,
@@ -54,19 +54,19 @@ namespace Farming.Application.Commands.Handlers
 
             if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserDoesNotExistException(command.UserId);
+                throw new UserNotFoundException(command.UserId);
             }
 
             var currentSeason = await _seasonRepository.GetCurrentSeasonAsync();
             if (currentSeason is null)
             {
-                throw new ActiveSeasonDoesNotExistException();
+                throw new ActiveSeasonNotFoundException();
             }
 
             var plant = await _plantRepository.GetAsync(command.PlantId);
             if (plant is null)
             {
-                throw new PlantDoesNotExistException(command.PlantId);
+                throw new PlantNotFoundException(command.PlantId);
             }
 
             var land = await _landRepository.GetAsync(command.LandId);
@@ -78,7 +78,7 @@ namespace Farming.Application.Commands.Handlers
             var plantWarehouseWithStates = await _plantWarehouseRepository.GetWithStatesAsync(command.PlantWarehouseId);
             if (plantWarehouseWithStates is null)
             {
-                throw new PlantWarehouseDoesNotExistException(command.PlantWarehouseId);
+                throw new PlantWarehouseNotFoundException(command.PlantWarehouseId);
             }
 
             _plantDomainService.ProcessPlantAction(currentSeason, plantWarehouseWithStates, plantAction, land, plant);

@@ -2,10 +2,10 @@
 
 namespace Farming.Application.Exceptions
 {
-    public class PlantDoesNotExistException : FarmingException
+    public class PlantNotFoundException : FarmingException
     {
         public Guid PlantId { get; set; }
-        public PlantDoesNotExistException(Guid plantId) : base($"Plant with ID: '{plantId}' does not exist")
+        public PlantNotFoundException(Guid plantId) : base($"Plant with ID: '{plantId}' was not found")
         {
             PlantId = plantId;
         }

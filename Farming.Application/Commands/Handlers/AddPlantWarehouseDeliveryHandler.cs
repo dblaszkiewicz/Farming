@@ -44,18 +44,18 @@ namespace Farming.Application.Commands.Handlers
 
             if (!await _plantReadService.ExistsByIdAsync(command.PlantId))
             {
-                throw new PlantDoesNotExistException(command.PlantId);
+                throw new PlantNotFoundException(command.PlantId);
             }
 
             if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserDoesNotExistException(command.UserId);
+                throw new UserNotFoundException(command.UserId);
             }
 
             var plantWarehouse = await _plantWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PlantWarehouseId);
             if (plantWarehouse is null)
             {
-                throw new PlantWarehouseDoesNotExistException(command.PlantWarehouseId);
+                throw new PlantWarehouseNotFoundException(command.PlantWarehouseId);
             }
 
             plantWarehouse.AddDelivery(delivery);

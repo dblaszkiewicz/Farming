@@ -14,10 +14,10 @@ namespace Farming.Domain.Services
 
             if (!plant.IsEnoughPlantForWholeArea(land.Area, action.Quantity))
             {
-                throw new NotEnoughSeedsForPlantWholeLandException();
+                throw new NotEnoughSeedsForPlantWholeAreaException();
             }
 
-            season.AddPlantAction(action, land.Id);
+            season.ProcessPlantAction(action, land.Id);
 
             warehouse.ProcessPlantAction(action.PlantId, action.Quantity);
 

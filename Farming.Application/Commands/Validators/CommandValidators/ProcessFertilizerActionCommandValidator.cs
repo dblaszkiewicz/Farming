@@ -2,18 +2,18 @@
 
 namespace Farming.Application.Commands.Validators.CommandValidators
 {
-    public class AddPlantActionCommandValidator :
-        AbstractValidator<AddPlantActionCommand>
+    public class ProcessFertilizerActionCommandValidator :
+        AbstractValidator<ProcessFertilizerActionCommand>
     {
-        public AddPlantActionCommandValidator()
+        public ProcessFertilizerActionCommandValidator()
         {
             RuleFor(c => c.LandId)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should be not empty");
-            RuleFor(c => c.PlantId)
+            RuleFor(c => c.FertilizerId)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should be not empty");
-            RuleFor(c => c.PlantWarehouseId)
+            RuleFor(c => c.FertilizerWarehouseId)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should be not empty");
             RuleFor(c => c.UserId)

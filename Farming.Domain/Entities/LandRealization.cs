@@ -37,5 +37,11 @@ namespace Farming.Domain.Entities
             PlantActions.Add(plantAction);
             AddEvent(new PlantActionAdded(this, plantAction));
         }
+
+        internal void AddFertilizerAction(FertilizerAction fertilizerAction)
+        {
+            FertilizerActions.Add(fertilizerAction);
+            AddEvent(new FertilizerActionAdded(this, fertilizerAction));
+        }
     }
 }

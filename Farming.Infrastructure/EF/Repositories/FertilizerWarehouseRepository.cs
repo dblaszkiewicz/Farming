@@ -28,6 +28,13 @@ namespace Farming.Infrastructure.EF.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public Task<FertilizerWarehouse> GetWithStatesAsync(FertilizerWarehouseId id)
+        {
+            return _dbSet
+                .Include(x => x.States)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task UpdateAsync(FertilizerWarehouse fertilizerWarehouse)
         {
             _dbSet.Update(fertilizerWarehouse);

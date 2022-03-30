@@ -45,18 +45,18 @@ namespace Farming.Application.Commands.Handlers
 
             if (!await _pesticideReadService.ExistsByIdAsync(command.PesticideId))
             {
-                throw new PesticideDoesNotExistException(command.PesticideId);
+                throw new PesticideNotFoundException(command.PesticideId);
             }
 
             if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserDoesNotExistException(command.UserId);
+                throw new UserNotFoundException(command.UserId);
             }
 
             var pesticideWarehouse = await _pesticideWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PesticideWarehouseId);
             if (pesticideWarehouse is null)
             {
-                throw new PesticideWarehouseDoesNotExistException(command.PesticideWarehouseId);
+                throw new PesticideWarehouseNotFoundException(command.PesticideWarehouseId);
             }
 
             pesticideWarehouse.AddDelivery(delivery);

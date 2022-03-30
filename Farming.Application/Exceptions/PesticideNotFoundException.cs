@@ -2,10 +2,10 @@
 
 namespace Farming.Application.Exceptions
 {
-    public class PesticideDoesNotExistException : FarmingException
+    public class PesticideNotFoundException : FarmingException
     {
         public Guid PesticideId { get; set; }
-        public PesticideDoesNotExistException(Guid pesticideId) : base($"Pesticide with ID: '{pesticideId}' does not exist")
+        public PesticideNotFoundException(Guid pesticideId) : base($"Pesticide with ID: '{pesticideId}' was not found")
         {
             PesticideId = pesticideId;
         }

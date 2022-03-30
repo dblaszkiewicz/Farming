@@ -22,7 +22,7 @@ namespace Farming.Domain.Entities
             LandRealizations = new HashSet<LandRealization>();
         }
 
-        internal void AddPlantAction(PlantAction plantAction, LandId landId)
+        internal void ProcessPlantAction(PlantAction plantAction, LandId landId)
         {
             var landRealization = GetLandRealizationByLandId(landId);
             if (landRealization is null)
@@ -33,6 +33,19 @@ namespace Farming.Domain.Entities
             }
 
             landRealization.AddPlantAction(plantAction);
+        }
+
+        internal void ProcessFertilizerAction(FertilizerAction fertilzierAction, LandId landId)
+        {
+            var landRealization = GetLandRealizationByLandId(landId);
+            if (landRealization is null)
+            {
+                landRealization = new LandRealization(landId);
+                LandRealizations.Add(landRealization);
+                AddEvent(new LandRealizationAdded(this, landRealization));
+            }
+
+            landRealization.AddFertilizerAction(fertilzierAction);
         }
 
         private LandRealization GetLandRealizationByLandId(LandId landId)

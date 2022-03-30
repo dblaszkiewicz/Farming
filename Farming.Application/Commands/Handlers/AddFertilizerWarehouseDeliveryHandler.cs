@@ -14,18 +14,19 @@ namespace Farming.Application.Commands.Handlers
         Response<AddFertilizerWarehouseDeliveryResponse>>
     {
         private readonly IFertilizerWarehouseRepository _fertilizerWarehouseRepository;
-        private readonly IFertilizerWarehouseDeliveryFactory _fertilizerWarehouseDeliveryFactory;
         private readonly IUserReadService _userReadService;
         private readonly IFertilizerReadService _fertilizerReadService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFertilizerWarehouseDeliveryFactory _fertilizerWarehouseDeliveryFactory;
 
         public AddFertilizerWarehouseDeliveryHandler(IFertilizerWarehouseRepository fertilizerWarehouseRepository,
-            IUnitOfWork unitOfWork, IUserReadService userReadService, IFertilizerReadService fertilizerReadService)
+            IUserReadService userReadService, IFertilizerReadService fertilizerReadService, IUnitOfWork unitOfWork)
         {
             _fertilizerWarehouseRepository = fertilizerWarehouseRepository;
-            _unitOfWork = unitOfWork;
             _userReadService = userReadService;
             _fertilizerReadService = fertilizerReadService;
+            _unitOfWork = unitOfWork;
+
             _fertilizerWarehouseDeliveryFactory = new FertilizerWarehouseDeliveryFactory();
         }
 
@@ -50,7 +51,7 @@ namespace Farming.Application.Commands.Handlers
 
             if (!await _userReadService.ExistsByIdAsync(command.UserId))
             {
-                throw new UserDoesNotExistException(command.UserId);
+                throw new UserNotFoundException(command.UserId);
             }
 
             var fertilizerWarehouse = await _fertilizerWarehouseRepository.GetWithStateAndDeliveriesAsync(command.FertilizerWarehouseId);

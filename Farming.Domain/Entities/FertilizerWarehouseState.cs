@@ -39,5 +39,24 @@ namespace Farming.Domain.Entities
 
             AddEvent(new FertilizerWarehouseStateDeliveryAdded(this, delivery));
         }
+
+        public bool IsEnoughFertilizer(FertilizerWarehouseQuantity quantity)
+        {
+            if (Quantity >= quantity)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        internal void SpendFertilizer(FertilizerActionQuantity quantity)
+        {
+            var newQuantity = Quantity - quantity;
+
+            Quantity = new FertilizerWarehouseQuantity(newQuantity);
+
+            AddEvent(new FertilizerWarehouseStateSpendFertilizer(this, quantity));
+        }
     }
 }
