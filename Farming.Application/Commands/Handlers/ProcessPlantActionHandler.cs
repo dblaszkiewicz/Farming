@@ -12,8 +12,8 @@ using MediatR;
 
 namespace Farming.Application.Commands.Handlers
 {
-    internal sealed class AddPlantActionHandler : IRequestHandler<AddPlantActionCommand,
-        Response<AddPlantActionResponse>>
+    internal sealed class ProcessPlantActionHandler : IRequestHandler<ProcessPlantActionCommand,
+        Response<ProcessPlantActionResponse>>
     {
         private readonly ISeasonRepository _seasonRepository;
         private readonly IPlantWarehouseRepository _plantWarehouseRepository;
@@ -24,7 +24,7 @@ namespace Farming.Application.Commands.Handlers
         private readonly IPlantRepository _plantRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddPlantActionHandler(ISeasonRepository seasonRepository,
+        public ProcessPlantActionHandler(ISeasonRepository seasonRepository,
             IUserReadService userReadService, IUnitOfWork unitOfWork, 
             IPlantWarehouseRepository plantWarehouseRepository, ILandRepository landRepository, 
             IPlantRepository plantRepository)
@@ -39,10 +39,10 @@ namespace Farming.Application.Commands.Handlers
             _plantDomainService = new PlantDomainService();
         }
 
-        public async Task<Response<AddPlantActionResponse>> Handle(AddPlantActionCommand command,
+        public async Task<Response<ProcessPlantActionResponse>> Handle(ProcessPlantActionCommand command,
             CancellationToken cancellationToken)
         {
-            var validator = new AddPlantActionCommandValidator();
+            var validator = new ProcessPlantActionCommandValidator();
             var validationResult = await validator.ValidateAsync(command);
 
             if (!validationResult.IsValid)
@@ -89,7 +89,7 @@ namespace Farming.Application.Commands.Handlers
 
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<AddPlantActionResponse>();
+            return ResponseFactory.CreateSuccessResponse<ProcessPlantActionResponse>();
         }
     }
 }

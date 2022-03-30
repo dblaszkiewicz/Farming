@@ -22,7 +22,7 @@ namespace Farming.Api.Controllers
         [HttpPost("processPlantAction")]
         public async Task<IActionResult> ProcessPlantAction([FromBody] AddPlantActionDtoRequest addPlantActionDto)
         {
-            var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<AddPlantActionCommand>();
+            var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<ProcessPlantActionCommand>();
             var result = await _mediator.Send(command);
             return Ok(result);
         }

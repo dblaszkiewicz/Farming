@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Farming.Application.Commands
 {
-    public class AddPlantActionCommand : IRequest<Response<AddPlantActionResponse>>
+    public class ProcessPlantActionCommand : IRequest<Response<ProcessPlantActionResponse>>
     {
         public Guid LandId { get; set; }
         public Guid UserId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Farming.Application.Commands.Responses
 {
-    public class AddPlantActionResponse : IResponse
+    public class ProcessPlantActionResponse : IResponse
     {
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Farming.Application.Commands.Validators.CommandValidators
 {
-    public class AddPlantActionCommandValidator :
-        AbstractValidator<AddPlantActionCommand>
+    public class ProcessPlantActionCommandValidator :
+        AbstractValidator<ProcessPlantActionCommand>
     {
-        public AddPlantActionCommandValidator()
+        public ProcessPlantActionCommandValidator()
         {
             RuleFor(c => c.LandId)
                 .NotEmpty()
