@@ -1,5 +1,6 @@
 ﻿using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
+using Farming.Application.Queries;
 using Farming.Application.Requests;
 using MapsterMapper;
 using MediatR;
@@ -19,11 +20,27 @@ namespace Farming.Api.Controllers
         }
 
         [HttpPost("processFertilizerAction")]
-        public async Task<IActionResult> ProcessPlantAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)
+        public async Task<IActionResult> ProcessFertilizerAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)
         {
             var command = _mapsterMapper.From(processFertilizerActionDto).AdaptToType<ProcessFertilizerActionCommand>();
             var result = await _mediator.Send(command);
             return Ok(result);
+        }
+
+        [HttpGet("allFertilizers")]
+        public async Task<IActionResult> GetAllFertilizers()
+        {
+            var result = await _mediator.Send(new GetAllFertilizersQuery());
+
+            return result.Any() ? Ok(result) : NotFound();
+        }
+
+        [HttpGet("fertilizersByTypeId")]
+        public async Task<IActionResult> GetFertilizersByType([FromQuery] Guid fertilizerTypeId)
+        {
+            var result = await _mediator.Send(new GetFertilizersByTypeQuery(fertilizerTypeId));
+
+            return result.Any() ? Ok(result) : NotFound();
         }
     }
 }

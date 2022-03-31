@@ -15,5 +15,27 @@ namespace Farming.Infrastructure.EF.Queries
                 RequiredAmountPerHectare = readModel.RequiredAmountPerHectare
             };
         }
+
+        public static FertilizerDto AsDto(this FertilizerReadModel readModel)
+        {
+            return new FertilizerDto()
+            {
+                Id = readModel.Id,
+                Name = readModel.Name,
+                Description = readModel.Description,
+                RequiredAmountPerHectare = readModel.RequiredAmountPerHectare
+            };
+        }
+
+        public static PesticideDto AsDto(this PesticideReadModel readModel)
+        {
+            return new PesticideDto()
+            {
+                Id = readModel.Id,
+                Name = readModel.Name,
+                Description = readModel.Description,
+                RequiredAmountPerHectare = readModel.RequiredAmountPerHectare
+            };
+        }
     }
 }
