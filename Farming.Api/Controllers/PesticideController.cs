@@ -35,10 +35,18 @@ namespace Farming.Api.Controllers
             return result.Any() ? Ok(result) : NotFound();
         }
 
-        [HttpGet("pesticidesByTypeId")]
+        [HttpGet("pesticidesByType")]
         public async Task<IActionResult> GetFertilizersByType([FromQuery] Guid pesticideTypeId)
         {
             var result = await _mediator.Send(new GetPesticidesByTypeQuery(pesticideTypeId));
+
+            return result.Any() ? Ok(result) : NotFound();
+        }
+
+        [HttpGet("suitablePesticidesByPlant")]
+        public async Task<IActionResult> Get([FromQuery] Guid plantId)
+        {
+            var result = await _mediator.Send(new GetSuitablePesticidesByPlantQuery(plantId));
 
             return result.Any() ? Ok(result) : NotFound();
         }
