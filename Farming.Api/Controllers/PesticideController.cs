@@ -23,8 +23,8 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> ProcessPesticideAction([FromBody] AddPesticideActionRequest addPesticideActionDto)
         {
             var command = _mapsterMapper.From(addPesticideActionDto).AdaptToType<ProcessPesticideActionCommand>();
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpGet("allPesticides")]

@@ -1,6 +1,5 @@
 ﻿using Farming.Application.Commands.Responses;
 using Farming.Application.Exceptions;
-using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
@@ -32,7 +31,7 @@ namespace Farming.Application.Commands.Handlers
             await _seasonRepository.UpdateAsync(currentSeason);
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<EndCurrentSeasonResponse>();
+            return new Response<EndCurrentSeasonResponse>();
         }
     }
 }

@@ -23,8 +23,8 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> ProcessFertilizerAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)
         {
             var command = _mapsterMapper.From(processFertilizerActionDto).AdaptToType<ProcessFertilizerActionCommand>();
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpGet("allFertilizers")]

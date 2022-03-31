@@ -25,8 +25,8 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> EndCurrentSeason()
         {
             var command = new EndCurrentSeasonCommand();
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
     }
 }

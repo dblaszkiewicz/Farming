@@ -65,7 +65,7 @@ namespace Farming.Application.Commands.Handlers
             await _fertilizerWarehouseRepository.UpdateAsync(fertilizerWarehouse);
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<AddFertilizerWarehouseDeliveryResponse>();
+            return new Response<AddFertilizerWarehouseDeliveryResponse>();
         }
     }
 }

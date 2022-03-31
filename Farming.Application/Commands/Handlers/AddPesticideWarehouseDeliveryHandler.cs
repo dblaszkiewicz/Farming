@@ -64,7 +64,7 @@ namespace Farming.Application.Commands.Handlers
             await _pesticideWarehouseRepository.UpdateAsync(pesticideWarehouse);
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<AddPesticideWarehouseDeliveryResponse>();
+            return new Response<AddPesticideWarehouseDeliveryResponse>();
         }
     }
 }

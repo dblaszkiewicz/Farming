@@ -1,7 +1,6 @@
 ﻿using Farming.Application.Commands.Responses;
 using Farming.Domain.Consts;
 using Farming.Domain.Entities;
-using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
@@ -221,7 +220,7 @@ namespace Farming.Application.Commands.Handlers
 
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<SeedBasicDataResponse>();
+            return new Response<SeedBasicDataResponse>();
         }
     }
 }

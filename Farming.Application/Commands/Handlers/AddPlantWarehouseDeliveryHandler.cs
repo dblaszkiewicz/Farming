@@ -63,7 +63,7 @@ namespace Farming.Application.Commands.Handlers
             await _plantWarehouseRepository.UpdateAsync(plantWarehouse);
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<AddPlantWarehouseDeliveryResponse>();
+            return new Response<AddPlantWarehouseDeliveryResponse>();
         }
     }
 }

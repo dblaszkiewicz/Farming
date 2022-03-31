@@ -89,7 +89,7 @@ namespace Farming.Application.Commands.Handlers
 
             await _unitOfWork.CommitAsync();
 
-            return ResponseFactory.CreateSuccessResponse<ProcessPlantActionResponse>();
+            return new Response<ProcessPlantActionResponse>();
         }
     }
 }

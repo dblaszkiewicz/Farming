@@ -23,8 +23,8 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> ProcessPlantAction([FromBody] AddPlantActionRequest addPlantActionDto)
         {
             var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<ProcessPlantActionCommand>();
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpGet("allPlants")]
