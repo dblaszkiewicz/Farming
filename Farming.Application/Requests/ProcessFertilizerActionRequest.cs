@@ -1,7 +1,6 @@
-﻿
-namespace Farming.Application.DTO.Requests
+﻿namespace Farming.Application.Requests
 {
-    public class ProcessFertilizerActionDtoRequest
+    public class ProcessFertilizerActionRequest
     {
         public Guid LandId { get; set; }
         public Guid UserId { get; set; }

@@ -1,7 +1,6 @@
-﻿
-namespace Farming.Application.DTO.Requests
+﻿namespace Farming.Application.Requests
 {
-    public class AddPesticideActionDtoRequest
+    public class AddPesticideActionRequest
     {
         public Guid LandId { get; set; }
         public Guid UserId { get; set; }

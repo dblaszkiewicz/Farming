@@ -1,7 +1,7 @@
 ﻿using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
-using Farming.Application.DTO.Requests;
 using Farming.Application.Queries;
+using Farming.Application.Requests;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +20,7 @@ namespace Farming.Api.Controllers
         }
 
         [HttpPost("processPlantAction")]
-        public async Task<IActionResult> ProcessPlantAction([FromBody] AddPlantActionDtoRequest addPlantActionDto)
+        public async Task<IActionResult> ProcessPlantAction([FromBody] AddPlantActionRequest addPlantActionDto)
         {
             var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<ProcessPlantActionCommand>();
             var result = await _mediator.Send(command);
