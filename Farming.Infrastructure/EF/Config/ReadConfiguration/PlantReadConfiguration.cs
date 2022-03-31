@@ -9,6 +9,17 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
         public void Configure(EntityTypeBuilder<PlantReadModel> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder
+                .HasMany(x => x.SuitablePesticides)
+                .WithMany(x => x.SuitablePlants)
+                .UsingEntity(x => x.ToTable("PlantPesticides"));
+
+            builder
+                .HasMany(x => x.SuitableFertilizers)
+                .WithMany(x => x.SuitablePlants)
+                .UsingEntity(x => x.ToTable("PlantFertilizers"));
+
             builder.ToTable("Plants");
         }
     }

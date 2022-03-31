@@ -1,4 +1,5 @@
 ﻿using System;
+using Farming.Domain.Consts;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -41,7 +42,7 @@ namespace Farming.Infrastructure.EF.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LandCLass = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<LandStatusEnum>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Area = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
@@ -213,7 +214,6 @@ namespace Farming.Infrastructure.EF.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SeasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantActionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -231,30 +231,6 @@ namespace Farming.Infrastructure.EF.Migrations
                         principalTable: "Seasons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FertilizerPlant",
-                columns: table => new
-                {
-                    SuitableFertilizersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SuitablePlantsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FertilizerPlant", x => new { x.SuitableFertilizersId, x.SuitablePlantsId });
-                    table.ForeignKey(
-                        name: "FK_FertilizerPlant_Fertilizers_SuitableFertilizersId",
-                        column: x => x.SuitableFertilizersId,
-                        principalTable: "Fertilizers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FertilizerPlant_Plants_SuitablePlantsId",
-                        column: x => x.SuitablePlantsId,
-                        principalTable: "Plants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -285,23 +261,23 @@ namespace Farming.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PesticidePlant",
+                name: "PlantFertilizers",
                 columns: table => new
                 {
-                    SuitablePesticidesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SuitableFertilizersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SuitablePlantsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PesticidePlant", x => new { x.SuitablePesticidesId, x.SuitablePlantsId });
+                    table.PrimaryKey("PK_PlantFertilizers", x => new { x.SuitableFertilizersId, x.SuitablePlantsId });
                     table.ForeignKey(
-                        name: "FK_PesticidePlant_Pesticides_SuitablePesticidesId",
-                        column: x => x.SuitablePesticidesId,
-                        principalTable: "Pesticides",
+                        name: "FK_PlantFertilizers_Fertilizers_SuitableFertilizersId",
+                        column: x => x.SuitableFertilizersId,
+                        principalTable: "Fertilizers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PesticidePlant_Plants_SuitablePlantsId",
+                        name: "FK_PlantFertilizers_Plants_SuitablePlantsId",
                         column: x => x.SuitablePlantsId,
                         principalTable: "Plants",
                         principalColumn: "Id",
@@ -326,11 +302,35 @@ namespace Farming.Infrastructure.EF.Migrations
                         column: x => x.PesticideId,
                         principalTable: "Pesticides",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PesticideWarehouseStates_PesticideWarehouses_PesticideWarehouseId",
                         column: x => x.PesticideWarehouseId,
                         principalTable: "PesticideWarehouses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlantPesticides",
+                columns: table => new
+                {
+                    SuitablePesticidesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SuitablePlantsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlantPesticides", x => new { x.SuitablePesticidesId, x.SuitablePlantsId });
+                    table.ForeignKey(
+                        name: "FK_PlantPesticides_Pesticides_SuitablePesticidesId",
+                        column: x => x.SuitablePesticidesId,
+                        principalTable: "Pesticides",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PlantPesticides_Plants_SuitablePlantsId",
+                        column: x => x.SuitablePlantsId,
+                        principalTable: "Plants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -549,11 +549,6 @@ namespace Farming.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FertilizerPlant_SuitablePlantsId",
-                table: "FertilizerPlant",
-                column: "SuitablePlantsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Fertilizers_FertilizerTypeId",
                 table: "Fertilizers",
                 column: "FertilizerTypeId");
@@ -624,11 +619,6 @@ namespace Farming.Infrastructure.EF.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PesticidePlant_SuitablePlantsId",
-                table: "PesticidePlant",
-                column: "SuitablePlantsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pesticides_PesticideTypeId",
                 table: "Pesticides",
                 column: "PesticideTypeId");
@@ -674,6 +664,16 @@ namespace Farming.Infrastructure.EF.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlantFertilizers_SuitablePlantsId",
+                table: "PlantFertilizers",
+                column: "SuitablePlantsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlantPesticides_SuitablePlantsId",
+                table: "PlantPesticides",
+                column: "SuitablePlantsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlantWarehouseDeliveries_PlantId",
                 table: "PlantWarehouseDeliveries",
                 column: "PlantId");
@@ -702,9 +702,6 @@ namespace Farming.Infrastructure.EF.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FertilizerPlant");
-
-            migrationBuilder.DropTable(
                 name: "FertilizerWarehouseDeliveries");
 
             migrationBuilder.DropTable(
@@ -714,13 +711,16 @@ namespace Farming.Infrastructure.EF.Migrations
                 name: "PesticideActions");
 
             migrationBuilder.DropTable(
-                name: "PesticidePlant");
-
-            migrationBuilder.DropTable(
                 name: "PesticideWarehouseDeliveries");
 
             migrationBuilder.DropTable(
                 name: "PlantActions");
+
+            migrationBuilder.DropTable(
+                name: "PlantFertilizers");
+
+            migrationBuilder.DropTable(
+                name: "PlantPesticides");
 
             migrationBuilder.DropTable(
                 name: "PlantWarehouseDeliveries");

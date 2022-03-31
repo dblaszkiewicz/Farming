@@ -15,10 +15,6 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .WithMany(x => x.Pesticides)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder
-                .HasMany(x => x.SuitablePlants)
-                .WithMany(x => x.SuitablePesticides);
-
             builder.ToTable("Pesticides");
         }
     }

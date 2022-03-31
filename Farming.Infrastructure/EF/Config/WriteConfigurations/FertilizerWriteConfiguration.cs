@@ -32,10 +32,6 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new FertilizerDescription(x));
 
             builder
-                .HasMany(x => x.SuitablePlants)
-                .WithMany(x => x.SuitableFertilizers);
-
-            builder
                 .HasOne(x => x.FertilizerType)
                 .WithMany(x => x.Fertilizers)
                 .OnDelete(DeleteBehavior.Restrict);

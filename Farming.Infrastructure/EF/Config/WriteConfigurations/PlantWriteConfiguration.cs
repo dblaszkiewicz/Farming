@@ -3,6 +3,7 @@ using Farming.Domain.ValueObjects.Plant;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PlantWriteConfiguration : IEntityTypeConfiguration<Plant>, IWriteConfiguration
@@ -26,6 +27,16 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder
                 .Property(x => x.Description)
                 .HasConversion(x => x.Value, x => new PlantDescription(x));
+
+            builder
+                .HasMany(x => x.SuitablePesticides)
+                .WithMany(x => x.SuitablePlants)
+                .UsingEntity(x => x.ToTable("PlantPesticides"));
+
+            builder
+                .HasMany(x => x.SuitableFertilizers)
+                .WithMany(x => x.SuitablePlants)
+                .UsingEntity(x => x.ToTable("PlantFertilizers"));
 
             builder.ToTable("Plants");
         }
