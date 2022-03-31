@@ -1,4 +1,5 @@
 ﻿using Farming.Domain.Events;
+using Farming.Domain.Exceptions;
 using Farming.Domain.ValueObjects.Land;
 using Farming.Domain.ValueObjects.Season;
 using Farming.Shared.Abstractions.Domain;
@@ -8,7 +9,7 @@ namespace Farming.Domain.Entities
     public class Season : AggregateRoot<SeasonId>
     {
         public SeasonId Id { get; }
-        public SeasonActive Active { get; }
+        public SeasonActive Active { get; private set; }
         public SeasonStartDate StartDate { get; }
 
         public ICollection<LandRealization> LandRealizations { get; }
@@ -20,6 +21,16 @@ namespace Farming.Domain.Entities
             StartDate = new SeasonStartDate(DateTimeOffset.Now);
 
             LandRealizations = new HashSet<LandRealization>();
+        }
+
+        public void EndSeason()
+        {
+            if (!Active.IsActive())
+            {
+                throw new EndSeasonNotActiveException();
+            }
+
+            Active = new SeasonActive(false);
         }
 
         internal void ProcessPlantAction(PlantAction plantAction, LandId landId)

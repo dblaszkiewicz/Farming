@@ -15,5 +15,10 @@ namespace Farming.Domain.ValueObjects.Season
 
         public static implicit operator SeasonActive(bool active)
             => new(active);
+
+        public bool IsActive()
+        {
+            return Value;
+        }
     }
 }
