@@ -15,6 +15,11 @@ namespace Farming.Domain.Entities
         public PesticideWarehouse PesticideWarehouse { get; }
         public ICollection<PesticideWarehouseDelivery> PesticideWarehouseDeliveries { get; }
 
+        public PesticideWarehouseState()
+        {
+            // for EF
+        }
+
         public PesticideWarehouseState(PesticideId pesticideId)
         {
             Id = new PesticideWarehouseStateId(Guid.NewGuid());
@@ -33,6 +38,25 @@ namespace Farming.Domain.Entities
             PesticideWarehouseDeliveries.Add(delivery);
 
             AddEvent(new PesticideWarehouseStateDeliveryAdded(this, delivery));
+        }
+
+        public bool IsEnoughPesticide(PesticideWarehouseQuantity quantity)
+        {
+            if (Quantity >= quantity)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        internal void SpendPesticide(PesticideActionQuantity quantity)
+        {
+            var newQuantity = Quantity - quantity;
+
+            Quantity = new PesticideWarehouseQuantity(newQuantity);
+
+            AddEvent(new PesticideWarehouseStateSpendPesticide(this, quantity));
         }
     }
 }

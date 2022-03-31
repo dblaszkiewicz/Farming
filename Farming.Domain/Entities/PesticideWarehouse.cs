@@ -1,4 +1,5 @@
 ﻿using Farming.Domain.Events;
+using Farming.Domain.Exceptions;
 using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
 
@@ -28,6 +29,22 @@ namespace Farming.Domain.Entities
             }
 
             state.AddDelivery(delivery);
+        }
+
+        internal void ProcessPesticideAction(PesticideId pesticideId, PesticideActionQuantity quantity)
+        {
+            var state = GetStateByPesticideId(pesticideId);
+            if (state is null)
+            {
+                throw new PesticideWarehouseStateNotFoundException(pesticideId, Id);
+            }
+
+            if (!state.IsEnoughPesticide(new PesticideWarehouseQuantity(quantity)))
+            {
+                throw new PesticideActionNotEnoughQuantityException(quantity);
+            }
+
+            state.SpendPesticide(quantity);
         }
 
         private PesticideWarehouseState GetStateByPesticideId(PesticideId pesticideId)

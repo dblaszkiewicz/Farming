@@ -48,6 +48,19 @@ namespace Farming.Domain.Entities
             landRealization.AddFertilizerAction(fertilzierAction);
         }
 
+        internal void ProcessPesticideAction(PesticideAction pesticideAction, LandId landId)
+        {
+            var landRealization = GetLandRealizationByLandId(landId);
+            if (landRealization is null)
+            {
+                landRealization = new LandRealization(landId);
+                LandRealizations.Add(landRealization);
+                AddEvent(new LandRealizationAdded(this, landRealization));
+            }
+
+            landRealization.AddPesticideAction(pesticideAction);
+        }
+
         private LandRealization GetLandRealizationByLandId(LandId landId)
         {
             return LandRealizations.FirstOrDefault(x => x.LandId == landId);

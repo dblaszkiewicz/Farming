@@ -17,5 +17,21 @@ namespace Farming.Domain.Entities
         public Pesticide Pesticide { get; }
         public LandRealization LandRealization { get; }
         public User User { get; }
+
+        public PesticideAction()
+        {
+            // for EF
+        }
+
+        public PesticideAction(PesticideId pesticideId, UserId userId, PesticideActionQuantity quantity, 
+            PesticideActionRealizationDate realizationDate)
+        {
+            Id = new PesticideActionId(Guid.NewGuid());
+
+            PesticideId = pesticideId;
+            UserId = userId;
+            Quantity = quantity;
+            RealizationDate = realizationDate;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Farming.Domain.ValueObjects.Pesticide;
+﻿using Farming.Domain.ValueObjects.Land;
+using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
@@ -36,6 +37,16 @@ namespace Farming.Domain.Entities
             {
                 SuitablePlants.Add(plant);
             }
+        }
+
+        public bool IsEnoughPesticideForWholeArea(LandArea area, PesticideActionQuantity quantity)
+        {
+            if (area * RequiredAmountPerHectare >= quantity)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
