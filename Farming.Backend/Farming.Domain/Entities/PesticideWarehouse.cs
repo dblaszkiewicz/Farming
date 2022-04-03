@@ -1,5 +1,6 @@
 ﻿using Farming.Domain.Events;
 using Farming.Domain.Exceptions;
+using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
 
@@ -7,7 +8,7 @@ namespace Farming.Domain.Entities
 {
     public class PesticideWarehouse : AggregateRoot<PesticideWarehouseId>
     {
-        public PesticideWarehouseId Id { get; }
+        //public PesticideWarehouseId Id { get; }
         public PesticideWarehouseName Name { get; }
 
         public ICollection<PesticideWarehouseState> States { get; }

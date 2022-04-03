@@ -1,6 +1,6 @@
 ﻿using Farming.Domain.Entities;
+using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Plant;
-using Farming.Domain.ValueObjects.User;
 
 namespace Farming.Domain.Factories
 {

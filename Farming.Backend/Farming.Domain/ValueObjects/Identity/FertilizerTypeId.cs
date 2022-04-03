@@ -1,5 +1,4 @@
-﻿
-namespace Farming.Domain.ValueObjects.Fertilizer
+﻿namespace Farming.Domain.ValueObjects.Identity
 {
     public record FertilizerTypeId
     {

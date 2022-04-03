@@ -1,6 +1,6 @@
 ﻿using Farming.Domain.Exceptions;
 
-namespace Farming.Domain.ValueObjects.Land
+namespace Farming.Domain.ValueObjects.Identity
 {
     public record LandRealizationId
     {

@@ -1,6 +1,6 @@
 ﻿using Farming.Domain.Exceptions;
 
-namespace Farming.Domain.ValueObjects.Season
+namespace Farming.Domain.ValueObjects.Identity
 {
     public record SeasonId
     {

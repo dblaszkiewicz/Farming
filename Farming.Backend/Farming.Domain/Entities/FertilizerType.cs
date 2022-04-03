@@ -1,4 +1,5 @@
 ﻿using Farming.Domain.ValueObjects.Fertilizer;
+using Farming.Domain.ValueObjects.Identity;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities

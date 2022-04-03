@@ -1,5 +1,5 @@
 ﻿using Farming.Domain.Entities;
-using Farming.Domain.ValueObjects.Land;
+using Farming.Domain.ValueObjects.Identity;
 
 namespace Farming.Domain.Repositories
 {

@@ -1,4 +1,5 @@
 ﻿using Farming.Domain.Entities;
+using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Land;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

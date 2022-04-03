@@ -1,6 +1,6 @@
 ﻿using Farming.Domain.Exceptions;
 
-namespace Farming.Domain.ValueObjects.User
+namespace Farming.Domain.ValueObjects.Identity
 {
     public record UserId
     {

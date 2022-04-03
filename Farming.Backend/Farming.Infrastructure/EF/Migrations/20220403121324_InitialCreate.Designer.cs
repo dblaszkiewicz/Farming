@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Farming.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20220403110304_InitialCreate")]
+    [Migration("20220403121324_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

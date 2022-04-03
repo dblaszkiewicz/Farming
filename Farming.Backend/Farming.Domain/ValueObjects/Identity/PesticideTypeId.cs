@@ -1,5 +1,4 @@
-﻿
-namespace Farming.Domain.ValueObjects.Pesticide
+﻿namespace Farming.Domain.ValueObjects.Identity
 {
     public record PesticideTypeId
     {

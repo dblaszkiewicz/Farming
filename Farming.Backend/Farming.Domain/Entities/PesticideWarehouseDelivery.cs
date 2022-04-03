@@ -1,5 +1,5 @@
-﻿using Farming.Domain.ValueObjects.Pesticide;
-using Farming.Domain.ValueObjects.User;
+﻿using Farming.Domain.ValueObjects.Identity;
+using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities

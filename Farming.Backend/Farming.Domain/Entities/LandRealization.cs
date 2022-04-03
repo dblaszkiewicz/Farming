@@ -1,6 +1,5 @@
 ﻿using Farming.Domain.Events;
-using Farming.Domain.ValueObjects.Land;
-using Farming.Domain.ValueObjects.Season;
+using Farming.Domain.ValueObjects.Identity;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities

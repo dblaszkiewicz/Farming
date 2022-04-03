@@ -1,6 +1,6 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Fertilizer;
-using Farming.Domain.ValueObjects.User;
+using Farming.Domain.ValueObjects.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

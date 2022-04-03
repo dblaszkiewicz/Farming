@@ -1,5 +1,6 @@
 ﻿using Farming.Domain.Consts;
 using Farming.Domain.Exceptions;
+using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Land;
 using Farming.Shared.Abstractions.Domain;
 
