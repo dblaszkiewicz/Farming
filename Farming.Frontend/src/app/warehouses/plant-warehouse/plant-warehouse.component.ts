@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Warehouse } from 'src/app/core/models/warehouse';
 
 @Component({
   selector: 'app-plant-warehouse',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plant-warehouse.component.scss']
 })
 export class PlantWarehouseComponent implements OnInit {
+  public warehouses: Warehouse[] = [];
+  public selectedWarehouseId: string;
 
   constructor() { }
 
