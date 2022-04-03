@@ -15,6 +15,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .Property(x => x.Id)
                 .HasConversion(x => x.Value, x => new PlantWarehouseId(x));
 
+            builder
+                .Property(x => x.Name)
+                .HasConversion(x => x.Value, x => new PlantWarehouseName(x));
+
             builder.ToTable("PlantWarehouses");
         }
     }

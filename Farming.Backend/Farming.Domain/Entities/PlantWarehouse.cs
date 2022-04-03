@@ -8,12 +8,14 @@ namespace Farming.Domain.Entities
     public class PlantWarehouse : AggregateRoot<PlantWarehouseId>
     {
         public PlantWarehouseId Id { get; }
+        public PlantWarehouseName Name { get; }
 
         public ICollection<PlantWarehouseState> States { get; }
 
-        public PlantWarehouse()
+        public PlantWarehouse(PlantWarehouseName name)
         {
             Id = new PlantWarehouseId(Guid.NewGuid());
+            Name = name;
 
             States = new HashSet<PlantWarehouseState>();
         }

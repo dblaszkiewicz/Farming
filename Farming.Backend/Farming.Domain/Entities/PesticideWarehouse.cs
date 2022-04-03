@@ -8,12 +8,14 @@ namespace Farming.Domain.Entities
     public class PesticideWarehouse : AggregateRoot<PesticideWarehouseId>
     {
         public PesticideWarehouseId Id { get; }
+        public PesticideWarehouseName Name { get; }
 
         public ICollection<PesticideWarehouseState> States { get; }
 
-        public PesticideWarehouse()
+        public PesticideWarehouse(PesticideWarehouseName name)
         {
             Id = new PesticideWarehouseId(Guid.NewGuid());
+            Name = name;
 
             States = new HashSet<PesticideWarehouseState>();
         }

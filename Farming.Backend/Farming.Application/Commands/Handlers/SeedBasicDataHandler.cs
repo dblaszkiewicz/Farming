@@ -189,9 +189,9 @@ namespace Farming.Application.Commands.Handlers
             pesticideType2.AddPesticide(pesticide4);
             #endregion
 
-            var pesticideWarehouse = new PesticideWarehouse();
-            var fertilizerWarehouse = new FertilizerWarehouse();
-            var plantWarehouse = new PlantWarehouse();
+            var pesticideWarehouse = new PesticideWarehouse("Magazyn Głównyy");
+            var fertilizerWarehouse = new FertilizerWarehouse("Magazyn Główny");
+            var plantWarehouse = new PlantWarehouse("Magazyn Główny");
 
             var admin = new User(Guid.NewGuid(), "admin", "admin", "Administrator", "Administrator");
 
