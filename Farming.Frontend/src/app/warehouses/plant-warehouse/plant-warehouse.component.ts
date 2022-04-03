@@ -15,4 +15,8 @@ export class PlantWarehouseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public warehouseChange(event: any) {
+    this.selectedWarehouseId = event.id;
+  }
+
 }
