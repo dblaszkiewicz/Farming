@@ -1,23 +1,16 @@
 <mat-toolbar class="mat-elevation-z8">
-  <button
-    mat-icon-button
-    *ngIf="sidenav.mode === 'over'"
-    (click)="sidenav.toggle()"
-  >
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  Aplikacja dla rolnictwa
+  Modern Agriculture
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img
-      class="avatar mat-elevation-z8"
-      src="assets/images/logo.png"
-    />
+    <img class="avatar mat-elevation-z8" src="assets/images/logo.png" />
 
-    <h4 class="name">Farming</h4>
+    <h4 class="name">Lobart Farm</h4>
     <p class="designation">Wersja 1.0</p>
 
     <mat-divider></mat-divider>

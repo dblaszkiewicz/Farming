@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { WarehousesModule } from './warehouses/warehouses.module';
 import { GeneralModule } from './general/general.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     CoreModule,
     WarehousesModule,
-    GeneralModule
+    GeneralModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

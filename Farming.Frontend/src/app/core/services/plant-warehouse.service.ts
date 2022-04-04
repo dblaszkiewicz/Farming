@@ -11,7 +11,7 @@ export class PlantWarehouseService {
   constructor(private http: HttpClient) {}
 
   public getAll(): Observable<PlantWarehouse[]> {
-    const url = `${AppSettings.plantWarehouseEndpoint}/all`;
+    const url = `${AppSettings.plantWarehouseEndpoint}/getAll`;
     return this.http.get<PlantWarehouse[]>(url);
   }
 }

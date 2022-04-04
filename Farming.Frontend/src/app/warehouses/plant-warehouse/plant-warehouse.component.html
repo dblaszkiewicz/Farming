@@ -1,11 +1,1 @@
 <p>plant-warehouse works!</p>
-
-<mat-form-field appearance="fill">
-  <mat-label>Magazyn</mat-label>
-
-  <mat-select (selectionChange)="warehouseChange($event)" [(ngModel)]="selectedWarehouseId">
-    <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
-      {{ warehouse.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>

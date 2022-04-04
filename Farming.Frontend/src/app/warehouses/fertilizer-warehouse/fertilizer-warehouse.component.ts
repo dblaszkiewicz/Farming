@@ -1,7 +1,6 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { lastValueFrom } from 'rxjs';
 import { Fertilizer, FertilizerState } from 'src/app/core/models/fertilizer';
@@ -22,29 +21,38 @@ export class FertilizerWarehouseComponent implements OnInit {
   public fertilizers: Fertilizer[];
   public states: FertilizerState[];
   public selectedWarehouseId: string;
+  public selectedFertilizerId: string;
+  public canAddDelivery: boolean = false;
 
   public dataSource: MatTableDataSource<FertilizerState>;
 
   public displayedColumns: string[] = [
-    'fertilizerName',
     'fertilizerTypeName',
-    'requiredAmountPerHectare',
+    'fertilizerName',
     'quantity',
+    'requiredAmountPerHectare',
     'enoughForArea',
+    'details',
   ];
 
   constructor(
     private fertilizerWarehouseService: FertilizerWarehouseService,
-    private fertilizerService: FertilizerService,
-    private _liveAnnouncer: LiveAnnouncer
+    private fertilizerService: FertilizerService
   ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getInitData();
   }
 
-  public warehouseChange(event: any): void {
+  public async warehouseChange(event: any): Promise<void> {
     this.selectedWarehouseId = event.id;
+    await this.getWarehouseStates();
+    this.prepareGridData();
+  }
+
+  public async fertilizerChange(event: any): Promise<void> {
+    this.selectedFertilizerId = event.id;
+    this.canAddDelivery = true;
   }
 
   private async getInitData(): Promise<void> {
@@ -67,28 +75,14 @@ export class FertilizerWarehouseComponent implements OnInit {
       this.states = await lastValueFrom(
         this.fertilizerWarehouseService.getStatesByWarehouseId(this.selectedWarehouseId)
       );
-      console.log('states', this.states);
     }
   }
 
   private prepareGridData(): void {
-    // this.paginator._intl.itemsPerPageLabel = 'Paczek na stronie';
+    this.paginator._intl.itemsPerPageLabel = 'Rekordów na stronie';
     this.dataSource = new MatTableDataSource<FertilizerState>(this.states);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  /** Announce the change in sort state for assistive technology. */
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
   }
 
   private async getFertilizers(): Promise<void> {

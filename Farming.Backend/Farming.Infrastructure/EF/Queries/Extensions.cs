@@ -58,7 +58,7 @@ namespace Farming.Infrastructure.EF.Queries
 
         public static FertilizerStateDto AsDto(this FertilizerWarehouseStateReadModel readModel)
         {
-            var enoughForArea = readModel.Quantity * readModel.Fertilizer.RequiredAmountPerHectare;
+            var enoughForArea = readModel.Quantity / readModel.Fertilizer.RequiredAmountPerHectare;
             return new FertilizerStateDto()
             {
                 FertilizerId = readModel.FertilizerId,
