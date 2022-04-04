@@ -6,13 +6,13 @@ import { PlantWarehouseService } from 'src/app/core/services/plant-warehouse.ser
 @Component({
   selector: 'app-plant-warehouse',
   templateUrl: './plant-warehouse.component.html',
-  styleUrls: ['./plant-warehouse.component.scss']
+  styleUrls: ['./plant-warehouse.component.scss'],
 })
 export class PlantWarehouseComponent implements OnInit {
   public warehouses: Warehouse[] = [];
   public selectedWarehouseId: string;
 
-  constructor(private plantWarehouseService: PlantWarehouseService) { }
+  constructor(private plantWarehouseService: PlantWarehouseService) {}
 
   async ngOnInit(): Promise<void> {
     await this.getInitData();
@@ -23,15 +23,14 @@ export class PlantWarehouseComponent implements OnInit {
   }
 
   private async getWarehouses(): Promise<void> {
-   this.warehouses = await lastValueFrom(this.plantWarehouseService.getAll());
+    this.warehouses = await lastValueFrom(this.plantWarehouseService.getAll());
 
-   if (this.warehouses.length > 0) {
-     this.selectedWarehouseId = this.warehouses[0].id;
-   }
+    if (this.warehouses.length > 0) {
+      this.selectedWarehouseId = this.warehouses[0].id;
+    }
   }
 
   public warehouseChange(event: any): void {
     this.selectedWarehouseId = event.id;
   }
-
 }
