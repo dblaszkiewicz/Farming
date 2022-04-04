@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { Warehouse } from 'src/app/core/models/warehouse';
+import { PlantWarehouse } from 'src/app/core/models/warehouse';
 import { PlantWarehouseService } from 'src/app/core/services/plant-warehouse.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { PlantWarehouseService } from 'src/app/core/services/plant-warehouse.ser
   styleUrls: ['./plant-warehouse.component.scss'],
 })
 export class PlantWarehouseComponent implements OnInit {
-  public warehouses: Warehouse[] = [];
+  public warehouses: PlantWarehouse[] = [];
   public selectedWarehouseId: string;
 
   constructor(private plantWarehouseService: PlantWarehouseService) {}

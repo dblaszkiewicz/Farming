@@ -28,7 +28,7 @@ namespace Farming.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("all")]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetAll()
         {
             var command = new GetAllPlantWarehousesQuery();

@@ -1,5 +1,6 @@
 ﻿using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
+using Farming.Application.Queries;
 using Farming.Application.Requests;
 using MapsterMapper;
 using MediatR;
@@ -26,5 +27,24 @@ namespace Farming.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var command = new GetAllFertilizerWarehouseQuery();
+            var result = await _mediator.Send(command);
+
+            return result.Any() ? Ok(result) : NotFound();
+        }
+
+        [HttpGet("getStatesByWarehouse")]
+        public async Task<IActionResult> GetStatesByWarehouse([FromQuery] Guid warehouseId)
+        {
+            var command = new GetFertilizerStatesByWarehouseQuery(warehouseId);
+            var result = await _mediator.Send(command);
+
+            return result.Any() ? Ok(result) : NotFound();
+        }
+
     }
 }
