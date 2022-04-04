@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class PlantController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,16 +20,16 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
-        [HttpPost("processPlantAction")]
-        public async Task<IActionResult> ProcessPlantAction([FromBody] AddPlantActionRequest addPlantActionDto)
+        [HttpPost("processAction")]
+        public async Task<IActionResult> ProcessAction([FromBody] AddPlantActionRequest addPlantActionDto)
         {
             var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<ProcessPlantActionCommand>();
             await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpGet("allPlants")]
-        public async Task<IActionResult> GetAllPlants()
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllPlantsQuery());
 

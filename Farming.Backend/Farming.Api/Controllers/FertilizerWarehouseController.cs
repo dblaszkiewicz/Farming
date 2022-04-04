@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class FertilizerWarehouseController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,8 +19,8 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
-        [HttpPost("addFertilizerWarehouseDelivery")]
-        public async Task<IActionResult> AddFertilizerWarehouseDelivery([FromBody] AddFertilizerWarehouseDeliveryRequest addFertilizerWarehouseDeliveryDto)
+        [HttpPost("addDelivery")]
+        public async Task<IActionResult> AddDelivery([FromBody] AddFertilizerWarehouseDeliveryRequest addFertilizerWarehouseDeliveryDto)
         {
             var command = _mapsterMapper.From(addFertilizerWarehouseDeliveryDto).AdaptToType<AddFertilizerWarehouseDeliveryCommand>();
             await _mediator.Send(command);

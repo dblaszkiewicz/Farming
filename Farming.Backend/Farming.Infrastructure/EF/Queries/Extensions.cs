@@ -37,5 +37,14 @@ namespace Farming.Infrastructure.EF.Queries
                 RequiredAmountPerHectare = readModel.RequiredAmountPerHectare
             };
         }
+
+        public static PlantWarehouseDto AsDto(this PlantWarehouseReadModel readModel)
+        {
+            return new PlantWarehouseDto()
+            {
+                Id = readModel.Id,
+                Name = readModel.Name,
+            };
+        }
     }
 }

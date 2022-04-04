@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class FertilizerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,32 +20,32 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
-        [HttpPost("processFertilizerAction")]
-        public async Task<IActionResult> ProcessFertilizerAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)
+        [HttpPost("processAction")]
+        public async Task<IActionResult> ProcessAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)
         {
             var command = _mapsterMapper.From(processFertilizerActionDto).AdaptToType<ProcessFertilizerActionCommand>();
             await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpGet("allFertilizers")]
-        public async Task<IActionResult> GetAllFertilizers()
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllFertilizersQuery());
 
             return result.Any() ? Ok(result) : NotFound();
         }
 
-        [HttpGet("fertilizersByType")]
-        public async Task<IActionResult> GetFertilizersByType([FromQuery] Guid fertilizerTypeId)
+        [HttpGet("getByType")]
+        public async Task<IActionResult> GetByType([FromQuery] Guid fertilizerTypeId)
         {
             var result = await _mediator.Send(new GetFertilizersByTypeQuery(fertilizerTypeId));
 
             return result.Any() ? Ok(result) : NotFound();
         }
 
-        [HttpGet("suitableFertilizersByPlant")]
-        public async Task<IActionResult> Get([FromQuery] Guid plantId)
+        [HttpGet("getByPlant")]
+        public async Task<IActionResult> GetByPlant([FromQuery] Guid plantId)
         {
             var result = await _mediator.Send(new GetSuitableFertilizersByPlantQuery(plantId));
 

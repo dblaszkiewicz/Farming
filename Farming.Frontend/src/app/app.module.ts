@@ -8,6 +8,7 @@ import { SharedModule } from './shared.module';
 import { CoreModule } from './core/core.module';
 import { WarehousesModule } from './warehouses/warehouses.module';
 import { GeneralModule } from './general/general.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { GeneralModule } from './general/general.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserAnimationsModule,
+    HttpClientModule,
     SharedModule,
     CoreModule,
     WarehousesModule,

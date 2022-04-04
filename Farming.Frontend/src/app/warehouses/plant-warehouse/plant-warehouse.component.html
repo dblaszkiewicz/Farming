@@ -3,7 +3,7 @@
 <mat-form-field appearance="fill">
     <mat-label>Magazyn</mat-label>
 
-    <mat-select formControlName="warehouses" (selectionChange)="warehouseChange($event)" [(ngModel)]="selectedWarehouseId">
+    <mat-select (selectionChange)="warehouseChange($event)" [(ngModel)]="selectedWarehouseId">
       <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
         {{warehouse.name}}
       </mat-option>

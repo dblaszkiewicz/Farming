@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class SeasonController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -13,7 +14,7 @@ namespace Farming.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("startNewSeason")]
+        [HttpPost("startNew")]
         public async Task<IActionResult> StartNewSeason()
         {
             var command = new StartNewSeasonCommand();
@@ -21,7 +22,7 @@ namespace Farming.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("endCurrentSeason")]
+        [HttpPut("endCurrent")]
         public async Task<IActionResult> EndCurrentSeason()
         {
             var command = new EndCurrentSeasonCommand();

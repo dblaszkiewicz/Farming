@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class SeedController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -1,5 +1,6 @@
 ﻿using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
+using Farming.Application.Queries;
 using Farming.Application.Requests;
 using MapsterMapper;
 using MediatR;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class PlantWarehouseController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,12 +20,21 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
-        [HttpPost("addPlantWarehouseDelivery")]
-        public async Task<IActionResult> AddFertilizerWarehouseDelivery([FromBody] AddPlantWarehouseDeliveryRequest addPlantWarehouseDeliveryDto)
+        [HttpPost("addDelivery")]
+        public async Task<IActionResult> AddDelivery([FromBody] AddPlantWarehouseDeliveryRequest addPlantWarehouseDeliveryDto)
         {
             var command = _mapsterMapper.From(addPlantWarehouseDeliveryDto).AdaptToType<AddPlantWarehouseDeliveryCommand>();
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll()
+        {
+            var command = new GetAllPlantWarehousesQuery();
+            var result = await _mediator.Send(command);
+
+            return result.Any() ? Ok(result) : NotFound();
         }
     }
 }

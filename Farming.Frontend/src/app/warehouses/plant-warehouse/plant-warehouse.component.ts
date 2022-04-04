@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { Warehouse } from 'src/app/core/models/warehouse';
+import { PlantWarehouseService } from 'src/app/core/services/plant-warehouse.service';
 
 @Component({
   selector: 'app-plant-warehouse',
@@ -10,12 +12,25 @@ export class PlantWarehouseComponent implements OnInit {
   public warehouses: Warehouse[] = [];
   public selectedWarehouseId: string;
 
-  constructor() { }
+  constructor(private plantWarehouseService: PlantWarehouseService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.getInitData();
   }
 
-  public warehouseChange(event: any) {
+  private async getInitData(): Promise<void> {
+    await this.getWarehouses();
+  }
+
+  private async getWarehouses(): Promise<void> {
+   this.warehouses = await lastValueFrom(this.plantWarehouseService.getAll());
+
+   if (this.warehouses.length > 0) {
+     this.selectedWarehouseId = this.warehouses[0].id;
+   }
+  }
+
+  public warehouseChange(event: any): void {
     this.selectedWarehouseId = event.id;
   }
 

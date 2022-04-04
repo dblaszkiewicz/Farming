@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class PesticideController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,32 +20,32 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
-        [HttpPost("processPesticideAction")]
-        public async Task<IActionResult> ProcessPesticideAction([FromBody] AddPesticideActionRequest addPesticideActionDto)
+        [HttpPost("processAction")]
+        public async Task<IActionResult> ProcessAction([FromBody] AddPesticideActionRequest addPesticideActionDto)
         {
             var command = _mapsterMapper.From(addPesticideActionDto).AdaptToType<ProcessPesticideActionCommand>();
             await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpGet("allPesticides")]
-        public async Task<IActionResult> GetAllPesticides()
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllPesticidesQuery());
 
             return result.Any() ? Ok(result) : NotFound();
         }
 
-        [HttpGet("pesticidesByType")]
-        public async Task<IActionResult> GetFertilizersByType([FromQuery] Guid pesticideTypeId)
+        [HttpGet("getByType")]
+        public async Task<IActionResult> GetByType([FromQuery] Guid pesticideTypeId)
         {
             var result = await _mediator.Send(new GetPesticidesByTypeQuery(pesticideTypeId));
 
             return result.Any() ? Ok(result) : NotFound();
         }
 
-        [HttpGet("suitablePesticidesByPlant")]
-        public async Task<IActionResult> Get([FromQuery] Guid plantId)
+        [HttpGet("getByPlant")]
+        public async Task<IActionResult> GetByPlant([FromQuery] Guid plantId)
         {
             var result = await _mediator.Send(new GetSuitablePesticidesByPlantQuery(plantId));
 
