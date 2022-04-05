@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { lastValueFrom } from 'rxjs';
-import { Fertilizer, FertilizerState } from 'src/app/core/models/fertilizer';
-import { FertilizerWarehouse } from 'src/app/core/models/warehouse';
+import { FertilizerDto, FertilizerStateDto } from 'src/app/core/models/fertilizer';
+import { AddDeliveryDto, AddFertilizerDeliveryDto, FertilizerWarehouseDto } from 'src/app/core/models/warehouse';
 import { FertilizerWarehouseService } from 'src/app/core/services/fertilizer-warehouse.service';
 import { FertilizerService } from 'src/app/core/services/fertilizer.service';
+import { AddDeliveryDialogComponent } from '../common/add-delivery-dialog/add-delivery-dialog.component';
 
 @Component({
   selector: 'app-fertilizer-warehouse',
@@ -17,14 +19,14 @@ export class FertilizerWarehouseComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public warehouses: FertilizerWarehouse[];
-  public fertilizers: Fertilizer[];
-  public states: FertilizerState[];
+  public warehouses: FertilizerWarehouseDto[];
+  public fertilizers: FertilizerDto[];
+  public states: FertilizerStateDto[];
   public selectedWarehouseId: string;
-  public selectedFertilizerId: string;
+  public selectedFertilizerId: string | null;
   public canAddDelivery: boolean = false;
 
-  public dataSource: MatTableDataSource<FertilizerState>;
+  public dataSource: MatTableDataSource<FertilizerStateDto>;
 
   public displayedColumns: string[] = [
     'fertilizerTypeName',
@@ -37,22 +39,62 @@ export class FertilizerWarehouseComponent implements OnInit {
 
   constructor(
     private fertilizerWarehouseService: FertilizerWarehouseService,
-    private fertilizerService: FertilizerService
+    private fertilizerService: FertilizerService,
+    private matDialog: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getInitData();
   }
 
-  public async warehouseChange(event: any): Promise<void> {
-    this.selectedWarehouseId = event.id;
+  public async warehouseChange(): Promise<void> {
     await this.getWarehouseStates();
     this.prepareGridData();
   }
 
-  public async fertilizerChange(event: any): Promise<void> {
-    this.selectedFertilizerId = event.id;
-    this.canAddDelivery = true;
+  public fertilizerChange() {
+    if (this.selectedFertilizerId) {
+      this.canAddDelivery = true;
+    }
+  }
+
+  public async addNewDelivery(): Promise<void> {
+    const fertilizer = this.fertilizers.find(x => x.id === this.selectedFertilizerId);
+
+    if (!fertilizer) {
+      return;
+    }
+
+    await this.processAddDelivery(fertilizer.id, fertilizer.name);
+    this.canAddDelivery = false;
+    this.selectedFertilizerId = null;
+  }
+
+  public async addDelivery(fertilizerId: string, fertilizerName: string) {
+    await this.processAddDelivery(fertilizerId, fertilizerName);
+  }
+
+  private async processAddDelivery(fertilizerId: string, fertilizerName: string): Promise<void> {
+    const dialogRef = this.matDialog.open(AddDeliveryDialogComponent, {
+      data: { name: fertilizerName },
+    });
+
+    const result = (await lastValueFrom(dialogRef.afterClosed())) as AddDeliveryDto;
+
+    if (!result) {
+      return;
+    }
+
+    const addDeliveryDto: AddFertilizerDeliveryDto = {
+      price: result.price,
+      quantity: result.quantity,
+      fertilizerId: fertilizerId,
+      fertilizerWarehouseId: this.selectedWarehouseId,
+    };
+
+    await lastValueFrom(this.fertilizerWarehouseService.addDelivery(addDeliveryDto));
+    await this.getWarehouseStates();
+    this.prepareGridData();
   }
 
   private async getInitData(): Promise<void> {
@@ -80,7 +122,7 @@ export class FertilizerWarehouseComponent implements OnInit {
 
   private prepareGridData(): void {
     this.paginator._intl.itemsPerPageLabel = 'Rekordów na stronie';
-    this.dataSource = new MatTableDataSource<FertilizerState>(this.states);
+    this.dataSource = new MatTableDataSource<FertilizerStateDto>(this.states);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

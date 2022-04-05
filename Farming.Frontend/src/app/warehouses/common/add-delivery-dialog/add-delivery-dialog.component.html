@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Dostawa ({{ data.name }})</h1>
+
+<form [formGroup]="form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Ilość (kg)</mat-label>
+    <input formControlName="quantity" type="number" min="1" matInput />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width price" appearance="fill">
+    <mat-label>Cena (zł)</mat-label>
+    <input formControlName="price" type="number" min="1" matInput />
+  </mat-form-field>
+</form>
+
+<div class="actions d-flex justify-content-center" mat-dialog-actions>
+  <button mat-flat-button color="add" [disabled]="form.invalid" [mat-dialog-close]="addDelivery()" cdkFocusInitial>
+    Dodaj
+  </button>
+  <button mat-flat-button color="warn" [mat-dialog-close] cdkFocusInitial>Anuluj</button>
+</div>

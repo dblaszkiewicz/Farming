@@ -56,6 +56,15 @@ namespace Farming.Infrastructure.EF.Queries
             };
         }
 
+        public static PesticideWarehouseDto AsDto(this PesticideWarehouseReadModel readModel)
+        {
+            return new PesticideWarehouseDto()
+            {
+                Id = readModel.Id,
+                Name = readModel.Name,
+            };
+        }
+
         public static FertilizerStateDto AsDto(this FertilizerWarehouseStateReadModel readModel)
         {
             var enoughForArea = readModel.Quantity / readModel.Fertilizer.RequiredAmountPerHectare;
@@ -67,6 +76,21 @@ namespace Farming.Infrastructure.EF.Queries
                 FertilizerTypeName = readModel.Fertilizer.FertilizerType.Name,
                 Quantity = readModel.Quantity,
                 RequiredAmountPerHectare = readModel.Fertilizer.RequiredAmountPerHectare,
+                EnoughForArea = enoughForArea
+            };
+        }
+
+        public static PesticideStateDto AsDto(this PesticideWarehouseStateReadModel readModel)
+        {
+            var enoughForArea = readModel.Quantity / readModel.Pesticide.RequiredAmountPerHectare;
+            return new PesticideStateDto()
+            {
+                PesticideId = readModel.PesticideId,
+                PesticideTypeId = readModel.Pesticide.PesticideTypeId,
+                PesticideName = readModel.Pesticide.Name,
+                PesticideTypeName = readModel.Pesticide.PesticideType.Name,
+                Quantity = readModel.Quantity,
+                RequiredAmountPerHectare = readModel.Pesticide.RequiredAmountPerHectare,
                 EnoughForArea = enoughForArea
             };
         }

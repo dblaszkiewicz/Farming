@@ -1,11 +1,11 @@
-export interface Fertilizer {
+export interface FertilizerDto {
   id: string;
   name: string;
   requiredAmountPerHectare: number;
   description: string;
 }
 
-export interface FertilizerState {
+export interface FertilizerStateDto {
   fertilizerId: string;
   fertilizerTypeId: string;
   fertilizerName: string;

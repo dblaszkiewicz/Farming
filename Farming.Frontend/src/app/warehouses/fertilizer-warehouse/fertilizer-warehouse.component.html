@@ -2,7 +2,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Wybrany Magazyn</mat-label>
 
-    <mat-select (selectionChange)="warehouseChange($event)" [(ngModel)]="selectedWarehouseId">
+    <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
       <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
         {{ warehouse.name }}
       </mat-option>
@@ -13,13 +13,13 @@
     <mat-form-field appearance="fill" class="float-left">
       <mat-label>Oprysk</mat-label>
 
-      <mat-select (selectionChange)="fertilizerChange($event)" [(ngModel)]="selectedFertilizerId">
+      <mat-select (selectionChange)="fertilizerChange()" [(value)]="selectedFertilizerId">
         <mat-option *ngFor="let fertilizer of fertilizers" [value]="fertilizer.id">
           {{ fertilizer.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="pt-3 m-1" mat-flat-button color="add" [disabled]="!canAddDelivery">
+    <button class="pt-3 m-1" mat-flat-button color="add" (click)="addNewDelivery()" [disabled]="!canAddDelivery">
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </div>
@@ -39,7 +39,7 @@
 
     <ng-container matColumnDef="requiredAmountPerHectare">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Wymagane na hektar</th>
-      <td mat-cell *matCellDef="let element">{{ element.requiredAmountPerHectare }} kg</td>
+      <td mat-cell *matCellDef="let element">{{ element.requiredAmountPerHectare.toFixed(2) }} kg</td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
@@ -58,7 +58,7 @@
         <button mat-flat-button color="accent" class="m-1">
           <mat-icon>storage</mat-icon>
         </button>
-        <button mat-flat-button color="add">
+        <button mat-flat-button color="add" (click)="addDelivery(element.fertilizerId, element.fertilizerName)">
           <mat-icon>add_shopping_cart</mat-icon>
         </button>
       </td>

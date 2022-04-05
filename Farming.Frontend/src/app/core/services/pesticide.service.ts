@@ -2,16 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppSettings } from 'src/common/appsettings';
-import { FertilizerDto } from '../models/fertilizer';
+import { PesticideDto } from '../models/pesticide';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FertilizerService {
+export class PesticideService {
   constructor(private http: HttpClient) {}
 
-  public getAll(): Observable<FertilizerDto[]> {
-    const url = `${AppSettings.fertilizerEndpoint}/getAll`;
-    return this.http.get<FertilizerDto[]>(url);
+  public getAll(): Observable<PesticideDto[]> {
+    const url = `${AppSettings.pesticideEndpoint}/getAll`;
+    return this.http.get<PesticideDto[]>(url);
   }
 }
