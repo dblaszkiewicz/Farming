@@ -24,6 +24,7 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> ProcessAction([FromBody] AddPlantActionRequest addPlantActionDto)
         {
             var command = _mapsterMapper.From(addPlantActionDto).AdaptToType<ProcessPlantActionCommand>();
+            command.UserId = TemporaryUser.Id();
             await _mediator.Send(command);
             return Ok();
         }

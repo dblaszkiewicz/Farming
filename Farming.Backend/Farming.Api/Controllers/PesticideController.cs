@@ -24,6 +24,7 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> ProcessAction([FromBody] AddPesticideActionRequest addPesticideActionDto)
         {
             var command = _mapsterMapper.From(addPesticideActionDto).AdaptToType<ProcessPesticideActionCommand>();
+            command.UserId = TemporaryUser.Id();
             await _mediator.Send(command);
             return Ok();
         }

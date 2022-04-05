@@ -24,6 +24,7 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> AddDelivery([FromBody] AddPlantWarehouseDeliveryRequest addPlantWarehouseDeliveryDto)
         {
             var command = _mapsterMapper.From(addPlantWarehouseDeliveryDto).AdaptToType<AddPlantWarehouseDeliveryCommand>();
+            command.UserId = TemporaryUser.Id();
             await _mediator.Send(command);
             return Ok();
         }

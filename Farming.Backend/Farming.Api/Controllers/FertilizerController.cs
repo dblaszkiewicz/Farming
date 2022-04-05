@@ -24,6 +24,7 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> ProcessAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)
         {
             var command = _mapsterMapper.From(processFertilizerActionDto).AdaptToType<ProcessFertilizerActionCommand>();
+            command.UserId = TemporaryUser.Id();
             await _mediator.Send(command);
             return Ok();
         }
