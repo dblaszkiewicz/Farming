@@ -94,5 +94,30 @@ namespace Farming.Infrastructure.EF.Queries
                 EnoughForArea = enoughForArea
             };
         }
+
+        public static FertilizerDeliveryByWarehouseDto AsDtoByWarehouse(this FertilizerWarehouseDeliveryReadModel readModel)
+        {
+            return new FertilizerDeliveryByWarehouseDto()
+            {
+                Name = readModel.Fertilizer.Name,
+                UserName = readModel.User.FirstName,
+                Price = readModel.Price,
+                Quantity = readModel.Quantity,
+                RealizationDate = readModel.RealizationDate,
+                PricePerTon = readModel.Quantity / readModel.Price * 1000
+            };
+        }
+
+        public static FertilizerDeliveryDto AsDtoByFertilzier(this FertilizerWarehouseDeliveryReadModel readModel)
+        {
+            return new FertilizerDeliveryDto()
+            {
+                UserName = readModel.User.FirstName,
+                Price = readModel.Price,
+                Quantity = readModel.Quantity,
+                RealizationDate = readModel.RealizationDate,
+                PricePerTon = readModel.Quantity / readModel.Price * 1000
+            };
+        }
     }
 }

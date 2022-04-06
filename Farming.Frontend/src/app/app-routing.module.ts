@@ -3,17 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'warehouses',
-    loadChildren: () => import('./warehouses/warehouses.module').then(m => m.WarehousesModule)
+    path: 'warehouse',
+    loadChildren: () => import('./warehouses/warehouses.module').then(m => m.WarehousesModule),
   },
   {
     path: 'general',
-    loadChildren: () => import('./general/general.module').then(m => m.GeneralModule)
-  }
+    loadChildren: () => import('./general/general.module').then(m => m.GeneralModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

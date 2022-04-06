@@ -23,3 +23,20 @@ export interface AddPesticideDeliveryDto extends AddDeliveryDto {
   pesticideWarehouseId: string;
   pesticideId: string;
 }
+
+export interface DeliveryDto {
+  userName: string;
+  quantity: number;
+  price: number;
+  pricePerTon: number;
+  realizationDate: Date;
+}
+
+export interface DeliveriesByObjectDto {
+  deliveries: DeliveryDto[];
+  averagePricePerTon: number;
+}
+
+export interface DeliveryByWarehouseDto extends DeliveryDto {
+  name: string;
+}

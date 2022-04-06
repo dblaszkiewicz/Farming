@@ -20,7 +20,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
         {
             return await _fertilizerWarehouseStates
                 .AsNoTracking()
-                .Where(x => x.Quantity > 0)
+                .Where(x => x.FertilizerWarehouseId == request.WarehouseId && x.Quantity > 0)
                 .Include(x => x.Fertilizer)
                     .ThenInclude(x => x.FertilizerType)
                 .OrderByDescending(x => x.Quantity)

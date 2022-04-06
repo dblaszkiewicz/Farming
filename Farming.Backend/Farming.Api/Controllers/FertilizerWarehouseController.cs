@@ -20,6 +20,15 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
+        [HttpGet("getNameById")]
+        public async Task<IActionResult> GetNameById([FromQuery] Guid warehouseId)
+        {
+            var command = new GetFertilizerWarehouseNameByIdQuery(warehouseId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
         [HttpPost("addDelivery")]
         public async Task<IActionResult> AddDelivery([FromBody] AddFertilizerWarehouseDeliveryRequest addFertilizerWarehouseDeliveryDto)
         {
@@ -42,6 +51,24 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> GetStatesByWarehouse([FromQuery] Guid warehouseId)
         {
             var command = new GetFertilizerStatesByWarehouseQuery(warehouseId);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpGet("getDeliveriesByWarehouse")]
+        public async Task<IActionResult> GetDeliveriesByWarehouse([FromQuery] Guid warehouseId)
+        {
+            var command = new GetFertilizerDeliveriesByWarehouseQuery(warehouseId);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpGet("getDeliveriesByWarehouseAndFertilizer")]
+        public async Task<IActionResult> GetDeliveriesByWarehouseAndFertilizer([FromQuery] Guid warehouseId, [FromQuery] Guid fertilizerId)
+        {
+            var command = new GetFertilizerDeliveriesByWarehouseAndFertilizerQuery(warehouseId, fertilizerId);
             var result = await _mediator.Send(command);
 
             return Ok(result);
