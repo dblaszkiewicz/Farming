@@ -20,14 +20,6 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
-        [HttpGet("getNameById")]
-        public async Task<IActionResult> GetNameById([FromQuery] Guid fertilizerId)
-        {
-            var command = new GetFertilizerNameByIdQuery(fertilizerId);
-            var result = await _mediator.Send(command);
-
-            return Ok(result);
-        }
 
         [HttpPost("processAction")]
         public async Task<IActionResult> ProcessAction([FromBody] ProcessFertilizerActionRequest processFertilizerActionDto)

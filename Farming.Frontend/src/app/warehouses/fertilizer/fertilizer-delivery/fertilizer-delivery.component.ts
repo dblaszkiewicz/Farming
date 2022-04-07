@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { DeliveryDto } from 'src/app/core/models/warehouse';
 import { FertilizerWarehouseService } from 'src/app/core/services/fertilizer-warehouse.service';
-import { FertilizerService } from 'src/app/core/services/fertilizer.service';
 
 @Component({
   selector: 'app-fertilizer-delivery',
@@ -25,8 +24,7 @@ export class FertilizerDeliveryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private fertilizerWarehouseService: FertilizerWarehouseService,
-    private fertilizerService: FertilizerService
+    private fertilizerWarehouseService: FertilizerWarehouseService
   ) {
     this.warehouseId = this.route.snapshot.paramMap.get('warehouseId');
     this.fertilizerId = this.route.snapshot.paramMap.get('fertilizerId');
@@ -49,18 +47,18 @@ export class FertilizerDeliveryComponent implements OnInit {
         this.fertilizerWarehouseService.getDeliveriesByWarehouseAndFertilizer(this.warehouseId, this.fertilizerId)
       );
 
-      this.fertilizerName = await lastValueFrom(this.fertilizerService.getNameById(this.fertilizerId!));
-
-      this.cardContent = `Historia dostaw nawozu: ${this.fertilizerName}, na magazyn: ${this.warehouseName}`;
-
+      this.fertilizerName = result.name;
       this.deliveries = result.deliveries;
       this.averagePricePerTon = result.averagePricePerTon;
+
+      this.cardContent = `Historia dostaw nawozu: ${this.fertilizerName}, na magazyn: ${this.warehouseName}`;
     } else {
       this.warehouseMode = true;
-      this.cardContent = `Historia dostaw na magazyn: ${this.warehouseName}`;
       this.deliveries = await lastValueFrom(
         this.fertilizerWarehouseService.getDeliveriesByWarehouse(this.warehouseId!)
       );
+
+      this.cardContent = `Historia dostaw na magazyn: ${this.warehouseName}`;
     }
     this.canDisplay = true;
   }

@@ -9,7 +9,7 @@ import { PesticideDto, PesticideStateDto } from 'src/app/core/models/pesticide';
 import { AddDeliveryDto, AddPesticideDeliveryDto, PesticideWarehouseDto } from 'src/app/core/models/warehouse';
 import { PesticideWarehouseService } from 'src/app/core/services/pesticide-warehouse.service';
 import { PesticideService } from 'src/app/core/services/pesticide.service';
-import { AddDeliveryDialogComponent } from '../common/add-delivery-dialog/add-delivery-dialog.component';
+import { AddDeliveryDialogComponent } from '../../common/add-delivery-dialog/add-delivery-dialog.component';
 import { Location } from '@angular/common';
 
 @Component({

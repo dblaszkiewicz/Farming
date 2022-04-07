@@ -10,11 +10,6 @@ import { FertilizerDto } from '../models/fertilizer';
 export class FertilizerService {
   constructor(private http: HttpClient) {}
 
-  public getNameById(fertilizerId: string): Observable<string> {
-    const url = `${AppSettings.fertilizerEndpoint}/getNameById?fertilizerId=${fertilizerId}`;
-    return this.http.get(url, { responseType: 'text' });
-  }
-
   public getAll(): Observable<FertilizerDto[]> {
     const url = `${AppSettings.fertilizerEndpoint}/getAll`;
     return this.http.get<FertilizerDto[]>(url);

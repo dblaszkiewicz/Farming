@@ -5,6 +5,8 @@ import { AppSettings } from 'src/common/appsettings';
 import { FertilizerStateDto } from '../models/fertilizer';
 import {
   AddFertilizerDeliveryDto,
+  DeliveriesByFertilizerDto,
+  DeliveriesByFertilizerWarehouseDto,
   DeliveriesByObjectDto,
   DeliveryByWarehouseDto,
   FertilizerWarehouseDto,
@@ -36,16 +38,16 @@ export class FertilizerWarehouseService {
     return this.http.post<void>(url, addDeliveryDto);
   }
 
-  public getDeliveriesByWarehouse(warehouseId: string): Observable<DeliveryByWarehouseDto[]> {
+  public getDeliveriesByWarehouse(warehouseId: string): Observable<DeliveriesByFertilizerWarehouseDto[]> {
     const url = `${AppSettings.fertilizerWarehouseEndpoint}/getDeliveriesByWarehouse?warehouseId=${warehouseId}`;
-    return this.http.get<DeliveryByWarehouseDto[]>(url);
+    return this.http.get<DeliveriesByFertilizerWarehouseDto[]>(url);
   }
 
   public getDeliveriesByWarehouseAndFertilizer(
     warehouseId: string,
     fertilizerId: string
-  ): Observable<DeliveriesByObjectDto> {
+  ): Observable<DeliveriesByFertilizerDto> {
     const url = `${AppSettings.fertilizerWarehouseEndpoint}/getDeliveriesByWarehouseAndFertilizer?warehouseId=${warehouseId}&fertilizerId=${fertilizerId}`;
-    return this.http.get<DeliveriesByObjectDto>(url);
+    return this.http.get<DeliveriesByFertilizerDto>(url);
   }
 }

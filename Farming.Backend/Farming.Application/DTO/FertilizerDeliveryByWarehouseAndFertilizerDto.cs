@@ -4,6 +4,7 @@
     {
         public IEnumerable<FertilizerDeliveryDto> Deliveries { get; set; }
         public decimal AveragePricePerTon { get; set; }
+        public string Name { get; set; }
     }
 
     public class FertilizerDeliveryDto

@@ -11,6 +11,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
         : IRequestHandler<GetFertilizerDeliveriesByWarehouseAndFertilizerQuery,
             FertilizerDeliveryByWarehouseAndFertilizerDto>
     {
+        private readonly DbSet<FertilizerReadModel> _fertilizers;
         private readonly DbSet<FertilizerWarehouseReadModel> _fertilizerWarehouses;
         private readonly DbSet<FertilizerWarehouseDeliveryReadModel> _fertilizerDeliveries;
 
@@ -18,6 +19,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
         {
             _fertilizerWarehouses = context.FertilizerWarehouses;
             _fertilizerDeliveries = context.FertilizerWarehouseDeliveries;
+            _fertilizers = context.Fertilizers;
         }
 
         public async Task<FertilizerDeliveryByWarehouseAndFertilizerDto> Handle(GetFertilizerDeliveriesByWarehouseAndFertilizerQuery request, CancellationToken cancellationToken)
@@ -35,16 +37,17 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                 .AsNoTracking()
                 .Where(x => statesIds.Contains(x.FertilizerWarehouseStateId))
                 .Include(x => x.User)
-                .Include(x => x.Fertilizer)
                 .Select(x => x.AsDtoByFertilzier())
                 .ToListAsync();
 
             var averagePricePerTon = deliveries.Sum(x => x.PricePerTon) / deliveries.Count;
+            var fertilizerName = (await _fertilizers.FirstOrDefaultAsync(x => x.Id == request.FertilizerId)).Name;
 
             return new FertilizerDeliveryByWarehouseAndFertilizerDto()
             {
                 Deliveries = deliveries,
-                AveragePricePerTon = averagePricePerTon
+                AveragePricePerTon = averagePricePerTon,
+                Name = fertilizerName
             };
         }
     }

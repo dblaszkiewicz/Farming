@@ -28,15 +28,38 @@ export interface DeliveryDto {
   userName: string;
   quantity: number;
   price: number;
-  pricePerTon: number;
   realizationDate: Date;
-}
-
-export interface DeliveriesByObjectDto {
-  deliveries: DeliveryDto[];
-  averagePricePerTon: number;
 }
 
 export interface DeliveryByWarehouseDto extends DeliveryDto {
   name: string;
+}
+
+export interface DeliveriesByFertilizerWarehouseDto extends DeliveryByWarehouseDto {
+  pricePerTon: number;
+}
+
+export interface DeliveriesByPlantWarehouseDto extends DeliveryByWarehouseDto {
+  pricePerTon: number;
+}
+
+export interface DeliveriesByPesticideWarehouseDto extends DeliveryByWarehouseDto {
+  pricePerLiter: number;
+}
+
+export interface DeliveriesByObjectDto {
+  deliveries: DeliveryDto[];
+  name: string;
+}
+
+export interface DeliveriesByFertilizerDto extends DeliveriesByObjectDto {
+  averagePricePerTon: number;
+}
+
+export interface DeliveriesByPlantDto extends DeliveriesByObjectDto {
+  averagePricePerTon: number;
+}
+
+export interface DeliveriesByPesticideDto extends DeliveriesByObjectDto {
+  averagePricePerLiter: number;
 }
