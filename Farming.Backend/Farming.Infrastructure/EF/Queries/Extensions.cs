@@ -108,6 +108,19 @@ namespace Farming.Infrastructure.EF.Queries
             };
         }
 
+        public static PesticideDeliveryByWarehouseDto AsDtoByWarehouse(this PesticideWarehouseDeliveryReadModel readModel)
+        {
+            return new PesticideDeliveryByWarehouseDto()
+            {
+                Name = readModel.Pesticide.Name,
+                UserName = readModel.User.FirstName,
+                Price = readModel.Price,
+                Quantity = readModel.Quantity,
+                RealizationDate = readModel.RealizationDate,
+                PricePerLiter = readModel.Quantity / readModel.Price * 1000
+            };
+        }
+
         public static FertilizerDeliveryDto AsDtoByFertilzier(this FertilizerWarehouseDeliveryReadModel readModel)
         {
             return new FertilizerDeliveryDto()
@@ -117,6 +130,18 @@ namespace Farming.Infrastructure.EF.Queries
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
                 PricePerTon = readModel.Quantity / readModel.Price * 1000
+            };
+        }
+
+        public static PesticideDeliveryDto AsDtoByPesticide(this PesticideWarehouseDeliveryReadModel readModel)
+        {
+            return new PesticideDeliveryDto()
+            {
+                UserName = readModel.User.FirstName,
+                Price = readModel.Price,
+                Quantity = readModel.Quantity,
+                RealizationDate = readModel.RealizationDate,
+                PricePerLiter = readModel.Quantity / readModel.Price * 1000
             };
         }
     }

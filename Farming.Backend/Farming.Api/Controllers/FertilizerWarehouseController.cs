@@ -13,7 +13,6 @@ namespace Farming.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapsterMapper;
-
         public FertilizerWarehouseController(IMediator mediator)
         {
             _mediator = mediator;
@@ -27,7 +26,6 @@ namespace Farming.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-
 
         [HttpPost("addDelivery")]
         public async Task<IActionResult> AddDelivery([FromBody] AddFertilizerWarehouseDeliveryRequest addFertilizerWarehouseDeliveryDto)

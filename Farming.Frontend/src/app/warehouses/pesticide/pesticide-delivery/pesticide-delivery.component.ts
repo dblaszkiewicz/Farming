@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 import { DeliveryDto } from 'src/app/core/models/warehouse';
 import { PesticideWarehouseService } from 'src/app/core/services/pesticide-warehouse.service';
 import { PesticideService } from 'src/app/core/services/pesticide.service';
@@ -17,7 +18,8 @@ export class PesticideDeliveryComponent implements OnInit {
   public canDisplay: boolean = false;
   public warehouseMode: boolean = true;
   public cardContent: string;
-  public averagePricePerLiter: number;
+  public averagePricePerLiter: number = 0;
+  public objectTypeEnum = ObjectTypeEnum;
 
   private warehouseName: string;
   private pesticideName: string;

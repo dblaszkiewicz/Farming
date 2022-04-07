@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 import { DeliveryDto } from 'src/app/core/models/warehouse';
 import { FertilizerWarehouseService } from 'src/app/core/services/fertilizer-warehouse.service';
 
@@ -17,6 +18,7 @@ export class FertilizerDeliveryComponent implements OnInit {
   public warehouseMode: boolean = true;
   public averagePricePerTon: number;
   public cardContent: string;
+  public objectTypeEnum = ObjectTypeEnum;
 
   private warehouseName: string;
   private fertilizerName: string;

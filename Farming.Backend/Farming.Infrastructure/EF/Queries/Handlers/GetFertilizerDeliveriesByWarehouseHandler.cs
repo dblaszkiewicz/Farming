@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Queries.Handlers
 {
-    internal sealed class GetFertilizerDeliveriesByWarehouseHandler : IRequestHandler<GetFertilizerDeliveriesByWarehouseQuery, IEnumerable<FertilizerDeliveryByWarehouseDto>>
+    internal sealed class GetFertilizerDeliveriesByWarehouseHandler 
+        : IRequestHandler<GetFertilizerDeliveriesByWarehouseQuery, IEnumerable<FertilizerDeliveryByWarehouseDto>>
     {
         private readonly DbSet<FertilizerWarehouseReadModel> _fertilizerWarehouses;
         private readonly DbSet<FertilizerWarehouseDeliveryReadModel> _fertilizerDeliveries;

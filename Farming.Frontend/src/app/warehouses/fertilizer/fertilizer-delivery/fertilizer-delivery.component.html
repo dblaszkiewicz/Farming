@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <button class="mb-2 h-2" mat-flat-button color="primary" (click)="goBack()">
+  <button class="mb-2 h-2 margin-right-button" mat-flat-button color="primary" (click)="goBack()">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
@@ -14,4 +14,5 @@
   *ngIf="canDisplay"
   [warehouseMode]="warehouseMode"
   [deliveries]="deliveries"
+  [objectType]="objectTypeEnum.FertilizerWarehouse"
 ></app-display-deliveries>

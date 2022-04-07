@@ -1,9 +1,11 @@
 import { AfterViewInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Input, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 import { DeliveryDto } from 'src/app/core/models/warehouse';
 
 @Component({
@@ -11,20 +13,43 @@ import { DeliveryDto } from 'src/app/core/models/warehouse';
   templateUrl: './display-deliveries.component.html',
   styleUrls: ['./display-deliveries.component.scss'],
 })
-export class DisplayDeliveriesComponent implements AfterViewInit {
+export class DisplayDeliveriesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   @Input() public deliveries: DeliveryDto[];
   @Input() public warehouseMode: boolean = true;
+  @Input() public objectType: ObjectTypeEnum;
 
+  public objectTypeEnum = ObjectTypeEnum;
   public dataSource: MatTableDataSource<DeliveryDto>;
-  public displayedColumns: string[] = ['quantity', 'price', 'pricePerTon', 'realizationDate', 'userName'];
+
+  public displayedColumns: string[];
+
+  public pesticideColumns: string[] = ['quantity', 'price', 'pricePerLiter', 'realizationDate', 'userName'];
+
+  public plantColumns: string[] = ['quantity', 'price', 'pricePerTon', 'realizationDate', 'userName'];
+
+  public fertilizerColumns: string[] = ['quantity', 'price', 'pricePerTon', 'realizationDate', 'userName'];
 
   constructor() {}
 
+  ngOnInit(): void {
+    this.prepareColumns();
+  }
+
   ngAfterViewInit(): void {
     this.prepareGridData();
+  }
+
+  private prepareColumns(): void {
+    if (this.objectType === this.objectTypeEnum.FertilizerWarehouse) {
+      this.displayedColumns = this.fertilizerColumns;
+    } else if (this.objectType === this.objectTypeEnum.PesticideWarehouse) {
+      this.displayedColumns = this.pesticideColumns;
+    } else if (this.objectType === this.objectTypeEnum.PlantWarehouse) {
+      this.displayedColumns = this.plantColumns;
+    }
   }
 
   private prepareGridData(): void {

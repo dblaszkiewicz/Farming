@@ -20,6 +20,14 @@ namespace Farming.Api.Controllers
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
+        [HttpGet("getNameById")]
+        public async Task<IActionResult> GetNameById([FromQuery] Guid warehouseId)
+        {
+            var command = new GetPesticideWarehouseNameByIdQuery(warehouseId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost("addDelivery")]
         public async Task<IActionResult> AddDelivery([FromBody] AddPesticideWarehouseDeliveryRequest addPesticideWarehouseDeliveryDto)
         {
@@ -42,6 +50,24 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> GetStatesByWarehouse([FromQuery] Guid warehouseId)
         {
             var command = new GetPesticideStatesByWarehouseQuery(warehouseId);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpGet("getDeliveriesByWarehouse")]
+        public async Task<IActionResult> GetDeliveriesByWarehouse([FromQuery] Guid warehouseId)
+        {
+            var command = new GetPesticideDeliveriesByWarehouseQuery(warehouseId);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpGet("getDeliveriesByWarehouseAndPesticide")]
+        public async Task<IActionResult> GetDeliveriesByWarehouseAndFertilizer([FromQuery] Guid warehouseId, [FromQuery] Guid pesticideId)
+        {
+            var command = new GetPesticideDeliveriesByWarehouseAndPesticideQuery(warehouseId, pesticideId);
             var result = await _mediator.Send(command);
 
             return Ok(result);
