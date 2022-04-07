@@ -15,6 +15,10 @@ const routes: Routes = [
     component: PesticideWarehouseComponent,
   },
   {
+    path: 'pesticide/:id',
+    component: PesticideWarehouseComponent,
+  },
+  {
     path: 'fertilizer',
     component: FertilizerWarehouseComponent,
   },

@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
   <div>
-    <button class="pt-3 m-1" mat-flat-button color="add" (click)="goToDeliveries()">
+    <button class="main-left-button" mat-flat-button color="add" (click)="goToDeliveries()">
       <mat-icon>list</mat-icon>
     </button>
     <mat-form-field appearance="fill">
@@ -24,7 +24,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="pt-3 m-1" mat-flat-button color="add" (click)="addNewDelivery()" [disabled]="!canAddDelivery">
+    <button
+      class="main-right-button"
+      mat-flat-button
+      color="add"
+      (click)="addNewDelivery()"
+      [disabled]="!canAddDelivery"
+    >
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </div>

@@ -3,12 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { PesticideDto, PesticideStateDto } from 'src/app/core/models/pesticide';
 import { AddDeliveryDto, AddPesticideDeliveryDto, PesticideWarehouseDto } from 'src/app/core/models/warehouse';
 import { PesticideWarehouseService } from 'src/app/core/services/pesticide-warehouse.service';
 import { PesticideService } from 'src/app/core/services/pesticide.service';
 import { AddDeliveryDialogComponent } from '../common/add-delivery-dialog/add-delivery-dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pesticide-warehouse',
@@ -22,7 +24,7 @@ export class PesticideWarehouseComponent implements OnInit {
   public warehouses: PesticideWarehouseDto[];
   public pesticides: PesticideDto[];
   public states: PesticideStateDto[];
-  public selectedWarehouseId: string;
+  public selectedWarehouseId: string | null;
   public selectedPesticideId: string | null;
   public canAddDelivery: boolean = false;
 
@@ -40,16 +42,29 @@ export class PesticideWarehouseComponent implements OnInit {
   constructor(
     private pesticideService: PesticideService,
     private pesticideWarehouseService: PesticideWarehouseService,
-    private matDialog: MatDialog
-  ) {}
+    private matDialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
+  ) {
+    this.selectedWarehouseId = this.route.snapshot.paramMap.get('id');
+  }
 
   async ngOnInit(): Promise<void> {
     await this.getInitData();
   }
 
   public async warehouseChange(): Promise<void> {
+    this.replaceUrl();
     await this.getWarehouseStates();
-    this.prepareGridData();
+  }
+
+  public goToDeliveries(): void {
+    this.router.navigateByUrl(`/warehouse/pesticide/delivery/${this.selectedWarehouseId}`);
+  }
+
+  public goToDeliveriesByPesticide(pesticideId: string): void {
+    this.router.navigateByUrl(`/warehouse/pesticide/delivery/${this.selectedWarehouseId}/${pesticideId}`);
   }
 
   public pesticideChange() {
@@ -59,19 +74,19 @@ export class PesticideWarehouseComponent implements OnInit {
   }
 
   public async addNewDelivery(): Promise<void> {
-    const fertilizer = this.pesticides.find(x => x.id === this.selectedPesticideId);
+    const pesticide = this.pesticides.find(x => x.id === this.selectedPesticideId);
 
-    if (!fertilizer) {
+    if (!pesticide) {
       return;
     }
 
-    await this.processAddDelivery(fertilizer.id, fertilizer.name);
+    await this.processAddDelivery(pesticide.id, pesticide.name);
     this.canAddDelivery = false;
     this.selectedPesticideId = null;
   }
 
-  public async addDelivery(fertilizerId: string, fertilizerName: string) {
-    await this.processAddDelivery(fertilizerId, fertilizerName);
+  public async addDelivery(pesticideId: string, pesticideName: string) {
+    await this.processAddDelivery(pesticideId, pesticideName);
   }
 
   private async processAddDelivery(pesticideId: string, pesticideName: string): Promise<void> {
@@ -89,26 +104,25 @@ export class PesticideWarehouseComponent implements OnInit {
       price: result.price,
       quantity: result.quantity,
       pesticideId: pesticideId,
-      pesticideWarehouseId: this.selectedWarehouseId,
+      pesticideWarehouseId: this.selectedWarehouseId!,
     };
 
     await lastValueFrom(this.pesticideWarehouseService.addDelivery(addDeliveryDto));
     await this.getWarehouseStates();
-    this.prepareGridData();
   }
 
   private async getInitData(): Promise<void> {
     await this.getWarehouses();
-    await this.getFertilizers();
+    await this.getPesticides();
     await this.getWarehouseStates();
-    this.prepareGridData();
   }
 
   private async getWarehouses(): Promise<void> {
     this.warehouses = await lastValueFrom(this.pesticideWarehouseService.getAll());
 
-    if (this.warehouses.length > 0) {
+    if (!this.selectedWarehouseId && this.warehouses.length > 0) {
       this.selectedWarehouseId = this.warehouses[0].id;
+      this.replaceUrl();
     }
   }
 
@@ -117,6 +131,7 @@ export class PesticideWarehouseComponent implements OnInit {
       this.states = await lastValueFrom(
         this.pesticideWarehouseService.getStatesByWarehouseId(this.selectedWarehouseId)
       );
+      this.prepareGridData();
     }
   }
 
@@ -127,7 +142,11 @@ export class PesticideWarehouseComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  private async getFertilizers(): Promise<void> {
+  private async getPesticides(): Promise<void> {
     this.pesticides = await lastValueFrom(this.pesticideService.getAll());
+  }
+
+  private replaceUrl(): void {
+    this.location.replaceState(`/warehouse/pesticide/${this.selectedWarehouseId}`);
   }
 }

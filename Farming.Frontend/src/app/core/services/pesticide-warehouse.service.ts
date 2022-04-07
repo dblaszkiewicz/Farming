@@ -17,7 +17,7 @@ export class PesticideWarehouseService {
   }
 
   public getStatesByWarehouseId(warehouseId: string): Observable<PesticideStateDto[]> {
-    const url = `${AppSettings.pesticideWarehouseEndpoint}/getStatesByWarehouse?warehouse=${warehouseId}`;
+    const url = `${AppSettings.pesticideWarehouseEndpoint}/getStatesByWarehouse?warehouseId=${warehouseId}`;
     return this.http.get<PesticideStateDto[]>(url);
   }
 

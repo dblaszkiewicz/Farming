@@ -1,13 +1,18 @@
 <div class="d-flex justify-content-between">
-  <mat-form-field appearance="fill">
-    <mat-label>Wybrany Magazyn</mat-label>
+  <div>
+    <button class="main-left-button" mat-flat-button color="add" (click)="goToDeliveries()">
+      <mat-icon>list</mat-icon>
+    </button>
+    <mat-form-field appearance="fill">
+      <mat-label>Wybrany Magazyn</mat-label>
 
-    <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
-      <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
-        {{ warehouse.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
+        <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+          {{ warehouse.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <div>
     <mat-form-field appearance="fill" class="float-left">
@@ -19,7 +24,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="pt-3 m-1" mat-flat-button color="add" (click)="addNewDelivery()" [disabled]="!canAddDelivery">
+    <button
+      class="main-right-button"
+      mat-flat-button
+      color="add"
+      (click)="addNewDelivery()"
+      [disabled]="!canAddDelivery"
+    >
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </div>
@@ -55,7 +66,7 @@
     <ng-container matColumnDef="details">
       <th mat-header-cell *matHeaderCellDef>Działania</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-flat-button color="accent" class="m-1">
+        <button mat-flat-button color="accent" class="m-1" (click)="goToDeliveriesByPesticide(element.pesticideId)">
           <mat-icon>storage</mat-icon>
         </button>
         <button mat-flat-button color="add" (click)="addDelivery(element.pesticideId, element.pesticideName)">

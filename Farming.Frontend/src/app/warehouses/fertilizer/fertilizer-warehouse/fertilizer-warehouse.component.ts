@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { FertilizerDto, FertilizerStateDto } from 'src/app/core/models/fertilizer';
 import { AddDeliveryDto, AddFertilizerDeliveryDto, FertilizerWarehouseDto } from 'src/app/core/models/warehouse';
@@ -55,11 +55,11 @@ export class FertilizerWarehouseComponent implements OnInit {
   }
 
   public async warehouseChange(): Promise<void> {
-    this.replaceState();
+    this.replaceUrl();
     await this.getWarehouseStates();
   }
 
-  public fertilizerChange() {
+  public fertilizerChange(): void {
     if (this.selectedFertilizerId) {
       this.canAddDelivery = true;
     }
@@ -77,7 +77,7 @@ export class FertilizerWarehouseComponent implements OnInit {
     this.selectedFertilizerId = null;
   }
 
-  public async addDelivery(fertilizerId: string, fertilizerName: string) {
+  public async addDelivery(fertilizerId: string, fertilizerName: string): Promise<void> {
     await this.processAddDelivery(fertilizerId, fertilizerName);
   }
 
@@ -85,7 +85,7 @@ export class FertilizerWarehouseComponent implements OnInit {
     this.router.navigateByUrl(`/warehouse/fertilizer/delivery/${this.selectedWarehouseId}`);
   }
 
-  public goToDeliveriesByFertilizer(fertilizerId: string) {
+  public goToDeliveriesByFertilizer(fertilizerId: string): void {
     this.router.navigateByUrl(`/warehouse/fertilizer/delivery/${this.selectedWarehouseId}/${fertilizerId}`);
   }
 
@@ -104,7 +104,7 @@ export class FertilizerWarehouseComponent implements OnInit {
       price: result.price,
       quantity: result.quantity,
       fertilizerId: fertilizerId,
-      fertilizerWarehouseId: this.selectedWarehouseId ?? '',
+      fertilizerWarehouseId: this.selectedWarehouseId!,
     };
 
     await lastValueFrom(this.fertilizerWarehouseService.addDelivery(addDeliveryDto));
@@ -122,7 +122,7 @@ export class FertilizerWarehouseComponent implements OnInit {
 
     if (!this.selectedWarehouseId && this.warehouses.length > 0) {
       this.selectedWarehouseId = this.warehouses[0].id;
-      this.replaceState();
+      this.replaceUrl();
     }
   }
 
@@ -146,7 +146,7 @@ export class FertilizerWarehouseComponent implements OnInit {
     this.fertilizers = await lastValueFrom(this.fertilizerService.getAll());
   }
 
-  private replaceState(): void {
+  private replaceUrl(): void {
     this.location.replaceState(`/warehouse/fertilizer/${this.selectedWarehouseId}`);
   }
 }
