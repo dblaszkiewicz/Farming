@@ -11,6 +11,7 @@ import { PesticideWarehouseService } from 'src/app/core/services/pesticide-wareh
 import { PesticideService } from 'src/app/core/services/pesticide.service';
 import { AddDeliveryDialogComponent } from '../../common/add-delivery-dialog/add-delivery-dialog.component';
 import { Location } from '@angular/common';
+import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 
 @Component({
   selector: 'app-pesticide-warehouse',
@@ -91,7 +92,7 @@ export class PesticideWarehouseComponent implements OnInit {
 
   private async processAddDelivery(pesticideId: string, pesticideName: string): Promise<void> {
     const dialogRef = this.matDialog.open(AddDeliveryDialogComponent, {
-      data: { name: pesticideName },
+      data: { name: pesticideName, objectType: ObjectTypeEnum.PesticideWarehouse },
     });
 
     const result = (await lastValueFrom(dialogRef.afterClosed())) as AddDeliveryDto;

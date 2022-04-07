@@ -1,1 +1,84 @@
-<p>plant-warehouse works!</p>
+<div class="d-flex justify-content-between">
+  <div>
+    <button class="main-left-button" mat-flat-button color="add" (click)="goToDeliveries()">
+      <mat-icon>list</mat-icon>
+    </button>
+    <mat-form-field appearance="fill">
+      <mat-label>Wybrany Magazyn</mat-label>
+
+      <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
+        <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+          {{ warehouse.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" class="float-left">
+      <mat-label>Nasiono</mat-label>
+
+      <mat-select (selectionChange)="plantChange()" [(value)]="selectedPlantId">
+        <mat-option *ngFor="let plant of plants" [value]="plant.id">
+          {{ plant.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      class="main-right-button"
+      mat-flat-button
+      color="add"
+      (click)="addNewDelivery()"
+      [disabled]="!canAddDelivery"
+    >
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="w-100">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+    <ng-container matColumnDef="plantName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+      <td mat-cell *matCellDef="let element">{{ element.plantName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="requiredAmountPerHectare">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Wymagane na hektar</th>
+      <td mat-cell *matCellDef="let element">{{ element.requiredAmountPerHectare.toFixed(2) }} kg</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }} kg</td>
+    </ng-container>
+
+    <ng-container matColumnDef="enoughForArea">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Dostępne</th>
+      <td mat-cell *matCellDef="let element">{{ element.enoughForArea }} ha</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Działania</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button color="accent" class="m-1" (click)="goToDeliveriesByPlant(element.plantId)">
+          <mat-icon>storage</mat-icon>
+        </button>
+        <button mat-flat-button color="add" (click)="addDelivery(element.plantId, element.plantName)">
+          <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    class="mat-elevation-z8 w-100"
+    [pageSizeOptions]="[10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

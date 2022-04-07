@@ -11,6 +11,7 @@ import { FertilizerWarehouseService } from 'src/app/core/services/fertilizer-war
 import { FertilizerService } from 'src/app/core/services/fertilizer.service';
 import { AddDeliveryDialogComponent } from '../../common/add-delivery-dialog/add-delivery-dialog.component';
 import { Location } from '@angular/common';
+import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 
 @Component({
   selector: 'app-fertilizer-warehouse',
@@ -36,7 +37,7 @@ export class FertilizerWarehouseComponent implements OnInit {
     'quantity',
     'requiredAmountPerHectare',
     'enoughForArea',
-    'details',
+    'actions',
   ];
 
   constructor(
@@ -91,7 +92,7 @@ export class FertilizerWarehouseComponent implements OnInit {
 
   private async processAddDelivery(fertilizerId: string, fertilizerName: string): Promise<void> {
     const dialogRef = this.matDialog.open(AddDeliveryDialogComponent, {
-      data: { name: fertilizerName },
+      data: { name: fertilizerName, objectType: ObjectTypeEnum.FertilizerWarehouse },
     });
 
     const result = (await lastValueFrom(dialogRef.afterClosed())) as AddDeliveryDto;

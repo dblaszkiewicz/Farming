@@ -80,6 +80,19 @@ namespace Farming.Infrastructure.EF.Queries
             };
         }
 
+        public static PlantStateDto AsDto(this PlantWarehouseStateReadModel readModel)
+        {
+            var enoughForArea = readModel.Quantity / readModel.Plant.RequiredAmountPerHectare;
+            return new PlantStateDto()
+            {
+                PlantId = readModel.PlantId,
+                PlantName = readModel.Plant.Name,
+                Quantity = readModel.Quantity,
+                RequiredAmountPerHectare = readModel.Plant.RequiredAmountPerHectare,
+                EnoughForArea = enoughForArea
+            };
+        }
+
         public static PesticideStateDto AsDto(this PesticideWarehouseStateReadModel readModel)
         {
             var enoughForArea = readModel.Quantity / readModel.Pesticide.RequiredAmountPerHectare;

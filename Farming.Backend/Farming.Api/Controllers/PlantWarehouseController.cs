@@ -37,5 +37,14 @@ namespace Farming.Api.Controllers
 
             return result.Any() ? Ok(result) : NotFound();
         }
+
+        [HttpGet("getStatesByWarehouse")]
+        public async Task<IActionResult> GetStatesByWarehouse([FromQuery] Guid warehouseId)
+        {
+            var command = new GetPlantStatesByWarehouseQuery(warehouseId);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
     }
 }

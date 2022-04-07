@@ -24,6 +24,11 @@ export interface AddPesticideDeliveryDto extends AddDeliveryDto {
   pesticideId: string;
 }
 
+export interface AddPlantDeliveryDto extends AddDeliveryDto {
+  plantWarehouseId: string;
+  plantId: string;
+}
+
 export interface DeliveryDto {
   userName: string;
   quantity: number;

@@ -12,6 +12,10 @@ const routes: Routes = [
     component: PlantWarehouseComponent,
   },
   {
+    path: 'plant/:id',
+    component: PlantWarehouseComponent,
+  },
+  {
     path: 'pesticide',
     component: PesticideWarehouseComponent,
   },
