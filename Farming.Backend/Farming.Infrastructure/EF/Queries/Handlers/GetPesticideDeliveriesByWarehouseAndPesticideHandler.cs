@@ -42,13 +42,13 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
 
             var averagePricePerLiter = deliveries.Sum(x => x.PricePerLiter) / deliveries.Count;
 
-            var pesticideName = (await _pesticides.FirstOrDefaultAsync(x => x.Id == request.PesticideId)).Name;
+            var pesticide = await _pesticides.FirstOrDefaultAsync(x => x.Id == request.PesticideId);
 
             return new PesticideDeliveryByWarehouseAndPesticideDto()
             {
                 Deliveries = deliveries,
                 AveragePricePerLiter = averagePricePerLiter,
-                Name = pesticideName
+                Name = pesticide.Name
             };
         }
     }

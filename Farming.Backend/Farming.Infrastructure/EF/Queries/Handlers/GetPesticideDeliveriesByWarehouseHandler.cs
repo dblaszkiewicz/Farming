@@ -18,6 +18,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
             _pesticideWarehouses = context.PesticideWarehouses;
             _pesticideDeliveries = context.PesticideWarehouseDeliveries;
         }
+
         public async Task<IEnumerable<PesticideDeliveryByWarehouseDto>> Handle(GetPesticideDeliveriesByWarehouseQuery request, CancellationToken cancellationToken)
         {
             var warehouse = await _pesticideWarehouses

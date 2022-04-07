@@ -10,7 +10,7 @@ import { AddDeliveryDto, AddPlantDeliveryDto, PlantWarehouseDto } from 'src/app/
 import { PlantWarehouseService } from 'src/app/core/services/plant-warehouse.service';
 import { PlantService } from 'src/app/core/services/plant.service';
 import { Location } from '@angular/common';
-import { AddDeliveryDialogComponent } from '../common/add-delivery-dialog/add-delivery-dialog.component';
+import { AddDeliveryDialogComponent } from '../../common/add-delivery-dialog/add-delivery-dialog.component';
 import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 
 @Component({

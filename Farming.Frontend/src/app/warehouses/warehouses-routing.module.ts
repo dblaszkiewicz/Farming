@@ -4,7 +4,7 @@ import { FertilizerDeliveryComponent } from './fertilizer/fertilizer-delivery/fe
 import { FertilizerWarehouseComponent } from './fertilizer/fertilizer-warehouse/fertilizer-warehouse.component';
 import { PesticideDeliveryComponent } from './pesticide/pesticide-delivery/pesticide-delivery.component';
 import { PesticideWarehouseComponent } from './pesticide/pesticide-warehouse/pesticide-warehouse.component';
-import { PlantWarehouseComponent } from './plant-warehouse/plant-warehouse.component';
+import { PlantWarehouseComponent } from './plant/plant-warehouse/plant-warehouse.component';
 
 const routes: Routes = [
   {

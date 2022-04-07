@@ -17,7 +17,9 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
 
         public async Task<string> Handle(GetPesticideWarehouseNameByIdQuery request, CancellationToken cancellationToken)
         {
-            return (await _pesticideWarehouse.FirstOrDefaultAsync(x => x.Id == request.WarehouseId)).Name;
+            var warehouse = await _pesticideWarehouse.FirstOrDefaultAsync(x => x.Id == request.WarehouseId);
+
+            return warehouse.Name;
         }
     }
 }

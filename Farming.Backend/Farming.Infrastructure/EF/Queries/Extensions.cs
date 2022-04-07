@@ -134,6 +134,19 @@ namespace Farming.Infrastructure.EF.Queries
             };
         }
 
+        public static PlantDeliveryByWarehouseDto AsDtoByWarehouse(this PlantWarehouseDeliveryReadModel readModel)
+        {
+            return new PlantDeliveryByWarehouseDto()
+            {
+                Name = readModel.Plant.Name,
+                UserName = readModel.User.FirstName,
+                Price = readModel.Price,
+                Quantity = readModel.Quantity,
+                RealizationDate = readModel.RealizationDate,
+                PricePerTon = readModel.Quantity / readModel.Price * 1000
+            };
+        }
+
         public static FertilizerDeliveryDto AsDtoByFertilzier(this FertilizerWarehouseDeliveryReadModel readModel)
         {
             return new FertilizerDeliveryDto()
@@ -155,6 +168,18 @@ namespace Farming.Infrastructure.EF.Queries
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
                 PricePerLiter = readModel.Quantity / readModel.Price * 1000
+            };
+        }
+
+        public static PlantDeliveryDto AsDtoByPlant(this PlantWarehouseDeliveryReadModel readModel)
+        {
+            return new PlantDeliveryDto()
+            {
+                UserName = readModel.User.FirstName,
+                Price = readModel.Price,
+                Quantity = readModel.Quantity,
+                RealizationDate = readModel.RealizationDate,
+                PricePerTon = readModel.Quantity / readModel.Price * 1000
             };
         }
     }
