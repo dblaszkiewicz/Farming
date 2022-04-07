@@ -4,6 +4,7 @@ import { FertilizerDeliveryComponent } from './fertilizer/fertilizer-delivery/fe
 import { FertilizerWarehouseComponent } from './fertilizer/fertilizer-warehouse/fertilizer-warehouse.component';
 import { PesticideDeliveryComponent } from './pesticide/pesticide-delivery/pesticide-delivery.component';
 import { PesticideWarehouseComponent } from './pesticide/pesticide-warehouse/pesticide-warehouse.component';
+import { PlantDeliveryComponent } from './plant/plant-delivery/plant-delivery.component';
 import { PlantWarehouseComponent } from './plant/plant-warehouse/plant-warehouse.component';
 
 const routes: Routes = [
@@ -46,6 +47,14 @@ const routes: Routes = [
   {
     path: 'pesticide/delivery/:warehouseId/:pesticideId',
     component: PesticideDeliveryComponent,
+  },
+  {
+    path: 'plant/delivery/:warehouseId',
+    component: PlantDeliveryComponent,
+  },
+  {
+    path: 'plant/delivery/:warehouseId/:plantId',
+    component: PlantDeliveryComponent,
   },
 ];
 

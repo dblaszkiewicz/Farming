@@ -1,1 +1,18 @@
-<p>plant-delivery works!</p>
+<div class="d-flex justify-content-between">
+  <button class="mb-2 h-2 margin-right-button" mat-flat-button color="primary" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <mat-card class="w-100 mb-2"> {{ cardContent }}</mat-card>
+
+  <mat-card *ngIf="!warehouseMode" class="mb-2 w-50">
+    Średnia cena za tonę: {{ averagePricePerTon.toFixed(2) }} zł
+  </mat-card>
+</div>
+
+<app-display-deliveries
+  *ngIf="canDisplay"
+  [warehouseMode]="warehouseMode"
+  [deliveries]="deliveries"
+  [objectType]="objectTypeEnum.PlantWarehouse"
+></app-display-deliveries>

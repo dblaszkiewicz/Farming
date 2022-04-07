@@ -54,11 +54,13 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                 }
             }
 
+            var averagePricePerTon = counter > 0 ? price / counter : 0;
+
             return new PlantDeliveryByWarehouseAndPlantDto()
             {
                 Deliveries = deliveries,
                 Name = plant.Name,
-                AveragePricePerTon = price / counter
+                AveragePricePerTon = averagePricePerTon
             };
         }
     }

@@ -117,7 +117,7 @@ namespace Farming.Infrastructure.EF.Queries
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
-                PricePerTon = readModel.Quantity / readModel.Price * 1000
+                PricePerTon = readModel.Price / readModel.Quantity * 1000
             };
         }
 
@@ -130,7 +130,7 @@ namespace Farming.Infrastructure.EF.Queries
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
-                PricePerLiter = readModel.Quantity / readModel.Price * 1000
+                PricePerLiter = readModel.Price / readModel.Quantity * 1000
             };
         }
 
@@ -143,7 +143,7 @@ namespace Farming.Infrastructure.EF.Queries
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
-                PricePerTon = readModel.Quantity / readModel.Price * 1000
+                PricePerTon = readModel.Price / readModel.Quantity * 1000
             };
         }
 
@@ -155,7 +155,7 @@ namespace Farming.Infrastructure.EF.Queries
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
-                PricePerTon = readModel.Quantity / readModel.Price * 1000
+                PricePerTon = readModel.Price / readModel.Quantity * 1000
             };
         }
 
@@ -167,7 +167,7 @@ namespace Farming.Infrastructure.EF.Queries
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
-                PricePerLiter = readModel.Quantity / readModel.Price * 1000
+                PricePerLiter = readModel.Price / readModel.Quantity * 1000
             };
         }
 
@@ -179,7 +179,7 @@ namespace Farming.Infrastructure.EF.Queries
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
-                PricePerTon = readModel.Quantity / readModel.Price * 1000
+                PricePerTon = readModel.Price / readModel.Quantity * 1000
             };
         }
     }
