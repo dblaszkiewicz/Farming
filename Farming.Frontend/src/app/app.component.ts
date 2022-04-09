@@ -12,20 +12,23 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
+  @ViewChild(MatSidenav) sidenav!: MatSidenav;
+
+  public destkopMode: boolean;
 
   constructor(private observer: BreakpointObserver, private router: Router) {}
 
   ngAfterViewInit() {
     this.observer
-      .observe(['(max-width: 800px)'])
+      .observe(['(max-width: 850px)'])
       .pipe(delay(1), untilDestroyed(this))
-      .subscribe((res) => {
+      .subscribe(res => {
         if (res.matches) {
+          this.destkopMode = false;
           this.sidenav.mode = 'over';
           this.sidenav.close();
         } else {
+          this.destkopMode = true;
           this.sidenav.mode = 'side';
           this.sidenav.open();
         }
@@ -34,7 +37,7 @@ export class AppComponent {
     this.router.events
       .pipe(
         untilDestroyed(this),
-        filter((e) => e instanceof NavigationEnd)
+        filter(e => e instanceof NavigationEnd)
       )
       .subscribe(() => {
         if (this.sidenav.mode === 'over') {

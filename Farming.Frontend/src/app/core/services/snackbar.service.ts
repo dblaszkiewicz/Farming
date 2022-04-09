@@ -12,7 +12,7 @@ import {
 export class SnackbarService {
   private horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   private verticalPosition: MatSnackBarVerticalPosition = 'top';
-  private durationInMiliSeconds = 1500;
+  private durationInMiliSeconds = 2000;
 
   constructor(private snackBar: MatSnackBar) {}
 
