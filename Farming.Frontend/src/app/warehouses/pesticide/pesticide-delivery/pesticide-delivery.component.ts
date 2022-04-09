@@ -4,7 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 import { DeliveryDto } from 'src/app/core/models/warehouse';
 import { PesticideWarehouseService } from 'src/app/core/services/pesticide-warehouse.service';
-import { PesticideService } from 'src/app/core/services/pesticide.service';
+import { SpinnerStore } from 'src/app/core/stores/spinner.store';
 
 @Component({
   selector: 'app-pesticide-delivery',
@@ -28,21 +28,23 @@ export class PesticideDeliveryComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private pesticideWarehouseService: PesticideWarehouseService,
-    private pesticideService: PesticideService
+    private spinnerStore: SpinnerStore
   ) {
     this.warehouseId = this.route.snapshot.paramMap.get('warehouseId');
     this.pesticideId = this.route.snapshot.paramMap.get('pesticideId');
   }
 
   async ngOnInit(): Promise<void> {
+    this.spinnerStore.startSpinner();
     await this.getPesticideDelivery();
+    this.spinnerStore.stopSpinner();
   }
 
   public goBack(): void {
     this.router.navigateByUrl(`/warehouse/pesticide/${this.warehouseId}`);
   }
 
-  public async getPesticideDelivery(): Promise<void> {
+  private async getPesticideDelivery(): Promise<void> {
     this.warehouseName = await lastValueFrom(this.pesticideWarehouseService.getNameById(this.warehouseId!));
 
     if (this.warehouseId && this.pesticideId) {

@@ -12,6 +12,8 @@ import { FertilizerService } from 'src/app/core/services/fertilizer.service';
 import { AddDeliveryDialogComponent } from '../../common/add-delivery-dialog/add-delivery-dialog.component';
 import { Location } from '@angular/common';
 import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
+import { SpinnerStore } from 'src/app/core/stores/spinner.store';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-fertilizer-warehouse',
@@ -46,18 +48,24 @@ export class FertilizerWarehouseComponent implements OnInit {
     private matDialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinnerStore: SpinnerStore,
+    private snackbarService: SnackbarService
   ) {
     this.selectedWarehouseId = this.route.snapshot.paramMap.get('id');
   }
 
   async ngOnInit(): Promise<void> {
+    this.spinnerStore.startSpinner();
     await this.getInitData();
+    this.spinnerStore.stopSpinner();
   }
 
   public async warehouseChange(): Promise<void> {
+    this.spinnerStore.startSpinner();
     this.replaceUrl();
     await this.getWarehouseStates();
+    this.spinnerStore.stopSpinner();
   }
 
   public fertilizerChange(): void {
@@ -108,8 +116,11 @@ export class FertilizerWarehouseComponent implements OnInit {
       fertilizerWarehouseId: this.selectedWarehouseId!,
     };
 
+    this.spinnerStore.startSpinner();
     await lastValueFrom(this.fertilizerWarehouseService.addDelivery(addDeliveryDto));
     await this.getWarehouseStates();
+    this.snackbarService.showSuccess('Pomyślnie dodano dostawę');
+    this.spinnerStore.stopSpinner();
   }
 
   private async getInitData(): Promise<void> {

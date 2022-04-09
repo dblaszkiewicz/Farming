@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { ObjectTypeEnum } from 'src/app/core/models/static-types/object-type.enum';
 import { DeliveryDto } from 'src/app/core/models/warehouse';
 import { FertilizerWarehouseService } from 'src/app/core/services/fertilizer-warehouse.service';
+import { SpinnerStore } from 'src/app/core/stores/spinner.store';
 
 @Component({
   selector: 'app-fertilizer-delivery',
@@ -26,14 +27,17 @@ export class FertilizerDeliveryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private fertilizerWarehouseService: FertilizerWarehouseService
+    private fertilizerWarehouseService: FertilizerWarehouseService,
+    private spinnerStore: SpinnerStore
   ) {
     this.warehouseId = this.route.snapshot.paramMap.get('warehouseId');
     this.fertilizerId = this.route.snapshot.paramMap.get('fertilizerId');
   }
 
   async ngOnInit(): Promise<void> {
+    this.spinnerStore.startSpinner();
     await this.getFertilizerDelivery();
+    this.spinnerStore.stopSpinner();
   }
 
   public goBack(): void {
