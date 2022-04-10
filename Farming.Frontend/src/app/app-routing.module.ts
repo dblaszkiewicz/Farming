@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./warehouses/warehouses.module').then(m => m.WarehousesModule),
   },
   {
-    path: 'general',
+    path: '',
     loadChildren: () => import('./general/general.module').then(m => m.GeneralModule),
   },
 ];
