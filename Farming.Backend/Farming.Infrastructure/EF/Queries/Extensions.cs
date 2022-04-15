@@ -1,4 +1,5 @@
-﻿using Farming.Application.DTO;
+﻿using Farming.Application.Consts;
+using Farming.Application.DTO;
 using Farming.Infrastructure.EF.Models;
 
 namespace Farming.Infrastructure.EF.Queries
@@ -180,6 +181,19 @@ namespace Farming.Infrastructure.EF.Queries
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
                 PricePerTon = readModel.Price / readModel.Quantity * 1000
+            };
+        }
+
+        public static LandWithPlantedDto AsDto(this LandReadModel readModel)
+        {
+            return new LandWithPlantedDto()
+            {
+                Id = readModel.Id,
+                Area = readModel.Area,
+                LandClass = readModel.LandClass,
+                Name = readModel.Name,
+                Status = readModel.Status,
+                IsPlanted = readModel.Status == LandStatus.Planted,
             };
         }
     }

@@ -1,0 +1,36 @@
+<h1>Wybierz magazyn nawozów</h1>
+<div>
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Magazyn</mat-label>
+    <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
+      <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+        {{ warehouse.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div *ngIf="selectedWarehouse">
+  <h1>Wybierz nawóz</h1>
+  <div>
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Nawóz</mat-label>
+      <mat-select (selectionChange)="fertilizerChange()" [(value)]="selectedFertilizerId">
+        <mat-option *ngFor="let fertilizerState of fertilizerStates" [value]="fertilizerState.fertilizerId">
+          {{ fertilizerState.fertilizerName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div *ngIf="selectedFertilizer">
+  <h1>Informacje o nawozie</h1>
+  <p>Typ: {{ selectedFertilizer.fertilizerTypeName }}</p>
+  <p>Nazwa: {{ selectedFertilizer.fertilizerName }}</p>
+  <p>Wymagane na hektar: {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
+
+  <h1>Stan magazynowy</h1>
+  <p>Ilość: {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
+  <p>Dostępne na: {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha</p>
+</div>

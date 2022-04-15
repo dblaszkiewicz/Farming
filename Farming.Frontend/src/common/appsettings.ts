@@ -10,4 +10,5 @@ export const AppSettings = {
   plantWarehouseEndpoint: `${apiUrl}/PlantWarehouse`,
   seasonEndpoint: `${apiUrl}/Season`,
   seedEndpoint: `${apiUrl}/Seed`,
+  landEndpoint: `${apiUrl}/Land`,
 };

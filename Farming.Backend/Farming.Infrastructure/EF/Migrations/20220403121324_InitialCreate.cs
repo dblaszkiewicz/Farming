@@ -1,4 +1,5 @@
 ﻿using System;
+using Farming.Application.Consts;
 using Farming.Domain.Consts;
 using Microsoft.EntityFrameworkCore.Migrations;
 

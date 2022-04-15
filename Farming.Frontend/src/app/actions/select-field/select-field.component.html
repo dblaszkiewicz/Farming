@@ -1,0 +1,21 @@
+<h1>Wybierz działkę</h1>
+<div>
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Działka</mat-label>
+    <mat-select (selectionChange)="landChange()" [(value)]="selectedLandId">
+      <mat-option *ngFor="let land of lands" [value]="land.id">
+        {{ land.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div *ngIf="selectedLand">
+  <h1>Informacje o działce</h1>
+  <p>Nazwa: {{ selectedLand.name }}</p>
+  <p>Klasa ziemi: {{ selectedLand.landClass }}</p>
+  <p>Areał: {{ selectedLand.area }} ha</p>
+  <p>Status: {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
+
+  <p *ngIf="selectedLand.isPlanted">Roślina: {{ selectedLand.planted.plantName }}</p>
+</div>

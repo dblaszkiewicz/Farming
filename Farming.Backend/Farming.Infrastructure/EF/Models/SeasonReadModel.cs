@@ -5,7 +5,7 @@ namespace Farming.Infrastructure.EF.Models
     {
         public Guid Id { get; set; }
         public bool Active { get; set; }
-        public DateTimeOffset StartSeasonDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         public ICollection<LandRealizationReadModel> LandRealizations { get; set; }
     }

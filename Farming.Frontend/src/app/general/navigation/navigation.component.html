@@ -1,14 +1,22 @@
 <div class="row h-100">
-  <div class="col-6 col-sm-3 first-row"><button class="button-block plant" (click)="Test()">Sianie</button></div>
   <div class="col-6 col-sm-3 first-row">
-    <button class="button-block fertilizer" (click)="Test()">Nawożenie</button>
+    <button class="button-block plant" routerLink="/action/fertilizer">Sianie</button>
+  </div>
+  <div class="col-6 col-sm-3 first-row">
+    <button class="button-block fertilizer" routerLink="/action/fertilizer">Nawożenie</button>
   </div>
 
   <div class="col-6 col-sm-3 second-row">
-    <button class="button-block pesticide" (click)="Test()">Pryskanie</button>
+    <button class="button-block pesticide" routerLink="/action/fertilizer">Pryskanie</button>
   </div>
-  <div class="col-6 col-sm-3 second-row"><button class="button-block harvest" (click)="Test()">Zbiór</button></div>
+  <div class="col-6 col-sm-3 second-row">
+    <button class="button-block harvest" routerLink="/action/fertilizer">Zbiór</button>
+  </div>
 
-  <div class="col-6 col-sm-3 third-row"><button class="button-block season" (click)="Test()">Sezon</button></div>
-  <div class="col-6 col-sm-3 third-row"><button class="button-block weather" (click)="Test()">Pogoda</button></div>
+  <div class="col-6 col-sm-3 third-row">
+    <button class="button-block season" routerLink="/action/fertilizer">Sezon</button>
+  </div>
+  <div class="col-6 col-sm-3 third-row">
+    <button class="button-block weather" routerLink="/action/fertilizer">Pogoda</button>
+  </div>
 </div>

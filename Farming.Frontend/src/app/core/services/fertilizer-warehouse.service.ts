@@ -33,6 +33,11 @@ export class FertilizerWarehouseService {
     return this.http.get<FertilizerStateDto[]>(url);
   }
 
+  public getStatesByWarehouseAndPlantId(warehouseId: string, plantId: string): Observable<FertilizerStateDto[]> {
+    const url = `${AppSettings.fertilizerWarehouseEndpoint}/getStatesByWarehouseAndPlant?warehouseId=${warehouseId}&plantId=${plantId}`;
+    return this.http.get<FertilizerStateDto[]>(url);
+  }
+
   public addDelivery(addDeliveryDto: AddFertilizerDeliveryDto): Observable<void> {
     const url = `${AppSettings.fertilizerWarehouseEndpoint}/addDelivery`;
     return this.http.post<void>(url, addDeliveryDto);

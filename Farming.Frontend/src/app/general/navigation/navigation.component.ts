@@ -9,8 +9,4 @@ export class NavigationComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  public Test() {
-    console.log('OK');
-  }
 }

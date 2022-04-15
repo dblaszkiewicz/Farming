@@ -14,3 +14,10 @@ export interface FertilizerStateDto {
   requiredAmountPerHectare: number;
   enoughForArea: number;
 }
+
+export interface FertilizerActionDto {
+  landId: string;
+  fertilizerId: string;
+  fertilizerWarehouseId: string;
+  quantity: number;
+}
