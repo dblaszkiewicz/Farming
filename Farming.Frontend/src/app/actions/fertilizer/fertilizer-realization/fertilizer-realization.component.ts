@@ -1,4 +1,4 @@
-import { ComponentRef, OnDestroy, ViewContainerRef } from '@angular/core';
+import { ComponentRef, OnDestroy } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -49,37 +49,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     this.goToFields();
   }
 
-  goToFields() {
-    if (this.componentRef) {
-      this.componentRef.destroy();
-    }
-
-    const viewContainerRef = this.content.viewContainerRef;
-    viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectFieldComponent);
-  }
-
-  goToFertilizers() {
-    if (this.componentRef) {
-      this.componentRef.destroy();
-    }
-
-    const viewContainerRef = this.content.viewContainerRef;
-    viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectFertilizerComponent);
-  }
-
-  goToSummary() {
-    if (this.componentRef) {
-      this.componentRef.destroy();
-    }
-
-    const viewContainerRef = this.content.viewContainerRef;
-    viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(FertilizerActionSummaryComponent);
-  }
-
-  goNext() {
+  public goNext(): void {
     if (this.currentPanel === 1) {
       this.goToFertilizers();
       this.currentPanel++;
@@ -95,7 +65,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     }
   }
 
-  goBack() {
+  public goBack(): void {
     if (this.currentPanel === 1) {
       this.goToMainPanel();
     } else if (this.currentPanel === 2) {
@@ -110,14 +80,8 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     }
   }
 
-  async submitAction() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '200px',
-    });
-
-    const result = await lastValueFrom(confirmDialog.afterClosed());
-
-    if (!result) {
+  public async submitAction(): Promise<void> {
+    if (!(await this.showConfirmDialog())) {
       return;
     }
 
@@ -126,13 +90,55 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     this.router.navigateByUrl(`/`);
   }
 
-  goToMainPanel() {
+  private goToFields(): void {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
+
+    const viewContainerRef = this.content.viewContainerRef;
+    viewContainerRef.clear();
+    this.componentRef = viewContainerRef.createComponent(SelectFieldComponent);
+  }
+
+  private goToFertilizers(): void {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
+
+    const viewContainerRef = this.content.viewContainerRef;
+    viewContainerRef.clear();
+    this.componentRef = viewContainerRef.createComponent(SelectFertilizerComponent);
+  }
+
+  private goToSummary(): void {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
+
+    const viewContainerRef = this.content.viewContainerRef;
+    viewContainerRef.clear();
+    this.componentRef = viewContainerRef.createComponent(FertilizerActionSummaryComponent);
+  }
+
+  private async goToMainPanel(): Promise<void> {
+    if (!(await this.showConfirmDialog())) {
+      return;
+    }
+
     this.router.navigateByUrl(`/`);
   }
 
-  private setSubscription() {
+  private setSubscription(): void {
     this.canGoNextSubscription = this.fertilizerActionService.canGoNext().subscribe(value => {
       this.canGoNext = value;
     });
+  }
+
+  private async showConfirmDialog(): Promise<boolean> {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '200px',
+    });
+
+    return await lastValueFrom(confirmDialog.afterClosed());
   }
 }

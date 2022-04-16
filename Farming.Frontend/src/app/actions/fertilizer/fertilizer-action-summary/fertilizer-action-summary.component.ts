@@ -16,14 +16,12 @@ export class FertilizerActionSummaryComponent implements RealizationComponentInt
   public selectedLand: LandDto;
   public selectedFertilizerState: FertilizerStateDto;
   public selectedWarehouse: FertilizerWarehouseDto;
-
-  public requiredAmount: number;
+  public selectedQuantity: number;
 
   ngOnInit(): void {
     this.selectedLand = this.fertilizerActionService.getSelectedLand()!;
     this.selectedWarehouse = this.fertilizerActionService.getSelectedWarehouse()!;
     this.selectedFertilizerState = this.fertilizerActionService.getSelectedFertilizer()!;
-
-    this.requiredAmount = this.selectedLand.area * this.selectedFertilizerState.requiredAmountPerHectare;
+    this.selectedQuantity = this.fertilizerActionService.getSelectedQuantity();
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { LandStatusHelper } from 'src/app/core/helpers/land-status-helper';
 import { LandDto } from 'src/app/core/models/land';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
@@ -12,28 +11,28 @@ import { FertilizerActionService } from 'src/app/core/stores/fertilizer-action.s
 })
 export class SelectFieldComponent implements RealizationComponentInterface, OnInit {
   constructor(private fertilizerActionService: FertilizerActionService) {}
-
+  public landStatusHelper = LandStatusHelper;
   public lands: LandDto[];
+
   public selectedLandId: string;
   public selectedLand: LandDto;
-  public landStatusHelper = LandStatusHelper;
 
   async ngOnInit(): Promise<void> {
     await this.fertilizerActionService.prepareLands();
-    await this.trySetSelectedLand();
     this.lands = this.fertilizerActionService.getLands();
+    this.trySetSelectedLand();
   }
 
-  public async trySetSelectedLand() {
+  public trySetSelectedLand(): void {
     const land = this.fertilizerActionService.getSelectedLand();
     if (land) {
       this.selectedLand = land!;
       this.selectedLandId = land.id;
-      this.fertilizerActionService.setSelectedLand(this.selectedLand);
+      this.fertilizerActionService.setCanGoNext(true);
     }
   }
 
-  public landChange() {
+  public landChange(): void {
     this.selectedLand = this.lands.find(x => x.id === this.selectedLandId)!;
     this.fertilizerActionService.setSelectedLand(this.selectedLand);
   }

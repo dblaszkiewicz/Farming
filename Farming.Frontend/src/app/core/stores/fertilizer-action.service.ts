@@ -15,6 +15,7 @@ export class FertilizerActionService {
   private selectedLand: LandDto | null;
   private selectedFertilizer: FertilizerStateDto | null;
   private selectedWarehouse: FertilizerWarehouseDto | null;
+  private selectedQuantity: number;
 
   private canGoToNextPanel: BehaviorSubject<boolean>;
 
@@ -35,6 +36,7 @@ export class FertilizerActionService {
     this.selectedFertilizer = null;
     this.selectedWarehouse = null;
     this.lands = [];
+    this.warehouses = [];
     this.fertilizerStates = [];
     this.canGoToNextPanel.next(false);
   }
@@ -53,6 +55,14 @@ export class FertilizerActionService {
 
   public getSelectedWarehouse(): FertilizerWarehouseDto | null {
     return this.selectedWarehouse;
+  }
+
+  public getSelectedQuantity(): number {
+    return this.selectedQuantity;
+  }
+
+  public setSelectedQuantity(quantity: number): void {
+    this.selectedQuantity = quantity;
   }
 
   public setSelectedLand(land: LandDto | null): void {
@@ -80,6 +90,10 @@ export class FertilizerActionService {
     await this.prepareFertilziers();
   }
 
+  public setCanGoNext(canGoNext: boolean): void {
+    this.canGoToNextPanel.next(canGoNext);
+  }
+
   public getLands(): LandDto[] {
     return this.lands;
   }
@@ -88,27 +102,18 @@ export class FertilizerActionService {
     return this.fertilizerStates;
   }
 
+  public getWarehouses(): FertilizerWarehouseDto[] {
+    return this.warehouses;
+  }
+
   public async prepareLands(): Promise<void> {
     if (this.lands.length > 0) {
       return;
     }
-    this.canGoToNextPanel.next(false);
     this.lands = await lastValueFrom(this.landService.getAll());
   }
 
-  public setCanGoNext(canGoNext: boolean): void {
-    this.canGoToNextPanel.next(canGoNext);
-  }
-
   private async prepareFertilziers(): Promise<void> {
-    this.canGoToNextPanel.next(false);
-
-    if (this.fertilizerStates.length > 0) {
-      return;
-    }
-
-    this.selectedFertilizer = null;
-
     if (this.selectedLand?.isPlanted) {
       this.fertilizerStates = await lastValueFrom(
         this.fertilizerWarehouseService.getStatesByWarehouseAndPlantId(
@@ -127,11 +132,10 @@ export class FertilizerActionService {
     if (this.warehouses.length > 0) {
       return;
     }
-    this.warehouses = await lastValueFrom(this.fertilizerWarehouseService.getAll());
-  }
 
-  public getWarehouses(): FertilizerWarehouseDto[] {
-    return this.warehouses;
+    this.selectedWarehouse = null;
+
+    this.warehouses = await lastValueFrom(this.fertilizerWarehouseService.getAll());
   }
 
   public async processAction(): Promise<void> {
@@ -141,7 +145,7 @@ export class FertilizerActionService {
       fertilizerId: this.selectedFertilizer?.fertilizerId!,
       fertilizerWarehouseId: this.selectedWarehouse?.id!,
       landId: this.selectedLand?.id!,
-      quantity: requiredAmount,
+      quantity: this.selectedQuantity,
     };
 
     await lastValueFrom(this.fertilizerService.processAction(actionDto));

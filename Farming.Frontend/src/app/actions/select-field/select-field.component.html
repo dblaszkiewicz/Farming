@@ -1,4 +1,4 @@
-<h1>Wybierz działkę</h1>
+<h2><strong>Wybierz działkę</strong></h2>
 <div>
   <mat-form-field class="w-100" appearance="fill">
     <mat-label>Działka</mat-label>
@@ -11,11 +11,11 @@
 </div>
 
 <div *ngIf="selectedLand">
-  <h1>Informacje o działce</h1>
-  <p>Nazwa: {{ selectedLand.name }}</p>
-  <p>Klasa ziemi: {{ selectedLand.landClass }}</p>
-  <p>Areał: {{ selectedLand.area }} ha</p>
-  <p>Status: {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
+  <h3><strong>Informacje o działce</strong></h3>
+  <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
+  <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
+  <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
+  <p><strong>Status:</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
 
-  <p *ngIf="selectedLand.isPlanted">Roślina: {{ selectedLand.planted.plantName }}</p>
+  <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
 </div>

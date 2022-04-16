@@ -1,4 +1,4 @@
-<h1>Wybierz magazyn nawozów</h1>
+<h2><strong>Wybierz magazyn nawozów</strong></h2>
 <div>
   <mat-form-field class="w-100" appearance="fill">
     <mat-label>Magazyn</mat-label>
@@ -11,7 +11,7 @@
 </div>
 
 <div *ngIf="selectedWarehouse">
-  <h1>Wybierz nawóz</h1>
+  <h2><strong>Wybierz nawóz</strong></h2>
   <div>
     <mat-form-field class="w-100" appearance="fill">
       <mat-label>Nawóz</mat-label>
@@ -25,12 +25,30 @@
 </div>
 
 <div *ngIf="selectedFertilizer">
-  <h1>Informacje o nawozie</h1>
-  <p>Typ: {{ selectedFertilizer.fertilizerTypeName }}</p>
-  <p>Nazwa: {{ selectedFertilizer.fertilizerName }}</p>
-  <p>Wymagane na hektar: {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
+  <h3><strong>Informacje o nawozie</strong></h3>
+  <p><strong>Typ:</strong> {{ selectedFertilizer.fertilizerTypeName }}</p>
+  <p><strong>Nazwa:</strong> {{ selectedFertilizer.fertilizerName }}</p>
+  <p><strong>Wymagane na hektar:</strong> {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
 
-  <h1>Stan magazynowy</h1>
-  <p>Ilość: {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
-  <p>Dostępne na: {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha</p>
+  <h3><strong>Stan magazynowy</strong></h3>
+
+  <p><strong>Ilość:</strong> {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
+  <p><strong>Dostępne na:</strong> {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha</p>
+
+  <h3><strong>Ilość realizacji</strong></h3>
+  <td>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ilość w kg</mat-label>
+      <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
+      <mat-hint align="end">{{ quantityFormControl.value }} kg / {{ selectedFertilizer.quantity }} kg </mat-hint>
+
+      <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
+      <mat-error *ngIf="quantityFormControl.hasError('min')">
+        Wymagane minimum <strong> {{ minQuantityForArea }}</strong> kg
+      </mat-error>
+      <mat-error *ngIf="quantityFormControl.hasError('max')">
+        Brak takiej <strong>ilości</strong> na magazynie
+      </mat-error>
+    </mat-form-field>
+  </td>
 </div>
