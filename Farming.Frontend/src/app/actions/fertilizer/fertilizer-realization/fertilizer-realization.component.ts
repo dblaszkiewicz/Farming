@@ -9,7 +9,7 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { FertilizerActionService } from 'src/app/core/stores/fertilizer-action.service';
 import { DynamicPanelDirective } from 'src/app/shared/directives/dynamic-panel.directive';
 import { FertilizerActionSummaryComponent } from '../fertilizer-action-summary/fertilizer-action-summary.component';
-import { SelectFieldComponent } from '../../select-field/select-field.component';
+import { SelectLandForFertilizerComponent } from '../select-land-for-fertilizer/select-land-for-fertilizer.component';
 import { SelectFertilizerComponent } from '../select-fertilizer/select-fertilizer.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
@@ -97,7 +97,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectFieldComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectLandForFertilizerComponent);
   }
 
   private goToFertilizers(): void {

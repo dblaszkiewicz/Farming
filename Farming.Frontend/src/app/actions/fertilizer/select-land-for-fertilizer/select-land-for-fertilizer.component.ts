@@ -6,10 +6,10 @@ import { FertilizerActionService } from 'src/app/core/stores/fertilizer-action.s
 
 @Component({
   selector: 'app-select-field',
-  templateUrl: './select-field.component.html',
-  styleUrls: ['./select-field.component.scss'],
+  templateUrl: './select-land-for-fertilizer.component.html',
+  styleUrls: ['./select-land-for-fertilizer.component.scss'],
 })
-export class SelectFieldComponent implements RealizationComponentInterface, OnInit {
+export class SelectLandForFertilizerComponent implements RealizationComponentInterface, OnInit {
   constructor(private fertilizerActionService: FertilizerActionService) {}
   public landStatusHelper = LandStatusHelper;
   public lands: LandDto[];
