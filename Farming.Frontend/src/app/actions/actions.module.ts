@@ -7,6 +7,10 @@ import { SelectLandForFertilizerComponent } from './fertilizer/select-land-for-f
 import { SharedModule } from '../shared/shared.module';
 import { SelectFertilizerComponent } from './fertilizer/select-fertilizer/select-fertilizer.component';
 import { FertilizerActionSummaryComponent } from './fertilizer/fertilizer-action-summary/fertilizer-action-summary.component';
+import { PesticideRealizationComponent } from './pesticide/pesticide-realization/pesticide-realization.component';
+import { SelectPesticideComponent } from './pesticide/select-pesticide/select-pesticide.component';
+import { SelectLandForPesticideComponent } from './pesticide/select-land-for-pesticide/select-land-for-pesticide.component';
+import { PesticideActionSummaryComponent } from './pesticide/pesticide-action-summary/pesticide-action-summary.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +18,10 @@ import { FertilizerActionSummaryComponent } from './fertilizer/fertilizer-action
     SelectLandForFertilizerComponent,
     SelectFertilizerComponent,
     FertilizerActionSummaryComponent,
+    PesticideRealizationComponent,
+    SelectPesticideComponent,
+    SelectLandForPesticideComponent,
+    PesticideActionSummaryComponent,
   ],
   imports: [CommonModule, ActionsRoutingModule, SharedModule],
 })

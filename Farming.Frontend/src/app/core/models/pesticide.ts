@@ -14,3 +14,10 @@ export interface PesticideStateDto {
   requiredAmountPerHectare: number;
   enoughForArea: number;
 }
+
+export interface PesticideActionDto {
+  landId: string;
+  pesticideId: string;
+  pesticideWarehouseId: string;
+  quantity: number;
+}

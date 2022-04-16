@@ -68,7 +68,8 @@ export class SelectFertilizerComponent implements RealizationComponentInterface,
     } else if (this.warehouses.length === 1) {
       this.selectedWarehouse = this.warehouses[0];
       this.selectedWarehouseId = this.selectedWarehouse.id;
-      this.fertilizerActionService.setSelectedWarehouse(this.selectedWarehouse);
+      await this.fertilizerActionService.setSelectedWarehouse(this.selectedWarehouse);
+      this.fertilizerStates = this.fertilizerActionService.getFertilizerStates();
     } else {
       this.fertilizerActionService.setCanGoNext(false);
     }

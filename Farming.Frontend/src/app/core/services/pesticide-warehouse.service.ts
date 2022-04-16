@@ -31,6 +31,11 @@ export class PesticideWarehouseService {
     return this.http.get<PesticideStateDto[]>(url);
   }
 
+  public getStatesByWarehouseAndPlantId(warehouseId: string, plantId: string): Observable<PesticideStateDto[]> {
+    const url = `${AppSettings.pesticideWarehouseEndpoint}/getStatesByWarehouseAndPlant?warehouseId=${warehouseId}&plantId=${plantId}`;
+    return this.http.get<PesticideStateDto[]>(url);
+  }
+
   public addDelivery(addDeliveryDto: AddPesticideDeliveryDto): Observable<void> {
     const url = `${AppSettings.pesticideWarehouseEndpoint}/addDelivery`;
     return this.http.post<void>(url, addDeliveryDto);

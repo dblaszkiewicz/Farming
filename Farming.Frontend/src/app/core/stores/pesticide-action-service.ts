@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, lastValueFrom, of as observableOf } from 'rxjs';
-import { FertilizerActionDto, FertilizerDto, FertilizerStateDto } from '../models/fertilizer';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { LandDto } from '../models/land';
+import { PesticideActionDto, PesticideStateDto } from '../models/pesticide';
+import { PesticideWarehouseDto } from '../models/warehouse';
 import { LandService } from '../services/farm-field.service';
-import {} from 'rxjs';
-import { FertilizerWarehouseDto } from '../models/warehouse';
-import { FertilizerWarehouseService } from '../services/fertilizer-warehouse.service';
-import { FertilizerService } from '../services/fertilizer.service';
+import { PesticideWarehouseService } from '../services/pesticide-warehouse.service';
+import { PesticideService } from '../services/pesticide.service';
 import { SpinnerStore } from './spinner.store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FertilizerActionService {
+export class PesticideActionService {
   private selectedLand: LandDto | null;
-  private selectedFertilizer: FertilizerStateDto | null;
-  private selectedWarehouse: FertilizerWarehouseDto | null;
+  private selectedPesticide: PesticideStateDto | null;
+  private selectedWarehouse: PesticideWarehouseDto | null;
   private selectedQuantity: number;
 
   private canGoToNextPanel: BehaviorSubject<boolean>;
 
   private lands: LandDto[] = [];
-  private fertilizerStates: FertilizerStateDto[] = [];
-  private warehouses: FertilizerWarehouseDto[] = [];
+  private pesticideStates: PesticideStateDto[] = [];
+  private warehouses: PesticideWarehouseDto[] = [];
 
   constructor(
     private landService: LandService,
-    private fertilizerWarehouseService: FertilizerWarehouseService,
-    private fertilizerService: FertilizerService,
+    private pesticideWarehouseService: PesticideWarehouseService,
+    private pesticideService: PesticideService,
     private spinnerStore: SpinnerStore
   ) {
     this.canGoToNextPanel = new BehaviorSubject<boolean>(false);
@@ -35,11 +34,11 @@ export class FertilizerActionService {
 
   public resetStore(): void {
     this.selectedLand = null;
-    this.selectedFertilizer = null;
+    this.selectedPesticide = null;
     this.selectedWarehouse = null;
     this.lands = [];
     this.warehouses = [];
-    this.fertilizerStates = [];
+    this.pesticideStates = [];
     this.selectedQuantity = 0;
     this.canGoToNextPanel.next(false);
   }
@@ -52,11 +51,11 @@ export class FertilizerActionService {
     return this.selectedLand;
   }
 
-  public getSelectedFertilizer(): FertilizerStateDto | null {
-    return this.selectedFertilizer;
+  public getSelectedPesticide(): PesticideStateDto | null {
+    return this.selectedPesticide;
   }
 
-  public getSelectedWarehouse(): FertilizerWarehouseDto | null {
+  public getSelectedWarehouse(): PesticideWarehouseDto | null {
     return this.selectedWarehouse;
   }
 
@@ -76,21 +75,21 @@ export class FertilizerActionService {
     }
 
     this.selectedLand = land;
-    this.selectedFertilizer = null;
-    this.fertilizerStates = [];
+    this.selectedPesticide = null;
+    this.pesticideStates = [];
   }
 
-  public setSelectedFertilizer(fertilizer: FertilizerStateDto | null): void {
-    if (!fertilizer) {
+  public setSelectedPesticide(pesticide: PesticideStateDto | null): void {
+    if (!pesticide) {
       this.canGoToNextPanel.next(false);
     }
 
-    this.selectedFertilizer = fertilizer;
+    this.selectedPesticide = pesticide;
   }
 
-  public async setSelectedWarehouse(warehouse: FertilizerWarehouseDto | null): Promise<void> {
+  public async setSelectedWarehouse(warehouse: PesticideWarehouseDto | null): Promise<void> {
     this.selectedWarehouse = warehouse;
-    await this.prepareFertilziers();
+    await this.preparePesticides();
   }
 
   public setCanGoNext(canGoNext: boolean): void {
@@ -101,11 +100,11 @@ export class FertilizerActionService {
     return this.lands;
   }
 
-  public getFertilizerStates(): FertilizerStateDto[] {
-    return this.fertilizerStates;
+  public getPesticideStates(): PesticideStateDto[] {
+    return this.pesticideStates;
   }
 
-  public getWarehouses(): FertilizerWarehouseDto[] {
+  public getWarehouses(): PesticideWarehouseDto[] {
     return this.warehouses;
   }
 
@@ -118,18 +117,18 @@ export class FertilizerActionService {
     this.spinnerStore.stopSpinner();
   }
 
-  private async prepareFertilziers(): Promise<void> {
+  private async preparePesticides(): Promise<void> {
     this.spinnerStore.startSpinner();
     if (this.selectedLand?.isPlanted) {
-      this.fertilizerStates = await lastValueFrom(
-        this.fertilizerWarehouseService.getStatesByWarehouseAndPlantId(
+      this.pesticideStates = await lastValueFrom(
+        this.pesticideWarehouseService.getStatesByWarehouseAndPlantId(
           this.selectedWarehouse?.id!,
           this.selectedLand.planted.plantId
         )
       );
     } else {
-      this.fertilizerStates = await lastValueFrom(
-        this.fertilizerWarehouseService.getStatesByWarehouseId(this.selectedWarehouse?.id!)
+      this.pesticideStates = await lastValueFrom(
+        this.pesticideWarehouseService.getStatesByWarehouseId(this.selectedWarehouse?.id!)
       );
     }
     this.spinnerStore.stopSpinner();
@@ -143,20 +142,20 @@ export class FertilizerActionService {
     this.selectedWarehouse = null;
 
     this.spinnerStore.startSpinner();
-    this.warehouses = await lastValueFrom(this.fertilizerWarehouseService.getAll());
+    this.warehouses = await lastValueFrom(this.pesticideWarehouseService.getAll());
     this.spinnerStore.stopSpinner();
   }
 
   public async processAction(): Promise<void> {
-    const actionDto: FertilizerActionDto = {
-      fertilizerId: this.selectedFertilizer?.fertilizerId!,
-      fertilizerWarehouseId: this.selectedWarehouse?.id!,
+    const actionDto: PesticideActionDto = {
+      pesticideId: this.selectedPesticide?.pesticideId!,
+      pesticideWarehouseId: this.selectedWarehouse?.id!,
       landId: this.selectedLand?.id!,
       quantity: this.selectedQuantity,
     };
 
     this.spinnerStore.startSpinner();
-    await lastValueFrom(this.fertilizerService.processAction(actionDto));
+    await lastValueFrom(this.pesticideService.processAction(actionDto));
     this.spinnerStore.stopSpinner();
   }
 }

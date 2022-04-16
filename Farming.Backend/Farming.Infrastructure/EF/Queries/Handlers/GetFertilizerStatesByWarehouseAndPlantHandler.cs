@@ -34,7 +34,6 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                     suitableFertilizerIds.Contains(x.FertilizerId))
                 .Include(x => x.Fertilizer)
                     .ThenInclude(x => x.FertilizerType)
-                .Include(x => x.Fertilizer)
                 .OrderByDescending(x => x.Quantity)
                 .Select(x => x.AsDto())
                 .ToListAsync();
