@@ -11,6 +11,10 @@ import { PesticideRealizationComponent } from './pesticide/pesticide-realization
 import { SelectPesticideComponent } from './pesticide/select-pesticide/select-pesticide.component';
 import { SelectLandForPesticideComponent } from './pesticide/select-land-for-pesticide/select-land-for-pesticide.component';
 import { PesticideActionSummaryComponent } from './pesticide/pesticide-action-summary/pesticide-action-summary.component';
+import { PlantRealizationComponent } from './plant/plant-realization/plant-realization.component';
+import { PlantActionSummaryComponent } from './plant/plant-action-summary/plant-action-summary.component';
+import { SelectPlantComponent } from './plant/select-plant/select-plant.component';
+import { SelectLandForPlantComponent } from './plant/select-land-for-plant/select-land-for-plant.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { PesticideActionSummaryComponent } from './pesticide/pesticide-action-su
     SelectPesticideComponent,
     SelectLandForPesticideComponent,
     PesticideActionSummaryComponent,
+    PlantRealizationComponent,
+    PlantActionSummaryComponent,
+    SelectPlantComponent,
+    SelectLandForPlantComponent,
   ],
   imports: [CommonModule, ActionsRoutingModule, SharedModule],
 })

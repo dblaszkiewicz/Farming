@@ -1,0 +1,53 @@
+<h2><strong>Wybierz magazyn nasion</strong></h2>
+<div>
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Magazyn</mat-label>
+    <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
+      <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+        {{ warehouse.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div *ngIf="selectedWarehouse">
+  <h2><strong>Wybierz nasiono</strong></h2>
+  <div>
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Roślina</mat-label>
+      <mat-select (selectionChange)="plantChange()" [(value)]="selectedPlantId">
+        <mat-option *ngFor="let plantState of plantStates" [value]="plantState.plantId">
+          {{ plantState.plantName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div *ngIf="selectedPlant">
+  <h3><strong>Informacje o roślinie</strong></h3>
+  <p><strong>Nazwa:</strong> {{ selectedPlant.plantName }}</p>
+  <p><strong>Wymagane na hektar:</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }} kg</p>
+
+  <h3><strong>Stan magazynowy</strong></h3>
+
+  <p><strong>Ilość:</strong> {{ selectedPlant.quantity.toFixed(2) }} kg</p>
+  <p><strong>Dostępne na:</strong> {{ selectedPlant.enoughForArea.toFixed(2) }} ha</p>
+
+  <h3><strong>Ilość realizacji</strong></h3>
+  <td>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ilość w kg</mat-label>
+      <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
+      <mat-hint align="end">{{ quantityFormControl.value }} kg / {{ selectedPlant.quantity }} kg </mat-hint>
+
+      <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
+      <mat-error *ngIf="quantityFormControl.hasError('min')">
+        Wymagane minimum <strong> {{ minQuantityForArea }}</strong> kg
+      </mat-error>
+      <mat-error *ngIf="quantityFormControl.hasError('max')">
+        Brak takiej <strong>ilości</strong> na magazynie
+      </mat-error>
+    </mat-form-field>
+  </td>
+</div>

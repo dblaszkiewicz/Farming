@@ -28,7 +28,7 @@ namespace Farming.Domain.Entities
 
         public bool IsEnoughPlantForWholeArea(LandArea area, PlantActionQuantity quantity)
         {
-            if (area * RequiredAmountPerHectare >= quantity)
+            if (quantity >= area * RequiredAmountPerHectare)
             {
                 return true;
             }

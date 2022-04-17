@@ -12,3 +12,10 @@ export interface PlantStateDto {
   requiredAmountPerHectare: number;
   enoughForArea: number;
 }
+
+export interface PlantActionDto {
+  landId: string;
+  plantId: string;
+  plantWarehouseId: string;
+  quantity: number;
+}
