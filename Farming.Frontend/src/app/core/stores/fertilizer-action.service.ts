@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, lastValueFrom, of as observableOf } from 'rxjs';
 import { FertilizerActionDto, FertilizerDto, FertilizerStateDto } from '../models/fertilizer';
 import { LandDto } from '../models/land';
-import { LandService } from '../services/farm-field.service';
+import { LandService } from '../services/land.service';
 import {} from 'rxjs';
 import { FertilizerWarehouseDto } from '../models/warehouse';
 import { FertilizerWarehouseService } from '../services/fertilizer-warehouse.service';

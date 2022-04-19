@@ -1,0 +1,50 @@
+<div class="row h-100 w-100">
+  <div class="col-6 col-sm-3 first-row">
+    <mat-card class="text-center h3"><strong>REALIZACJA ZBIORU</strong></mat-card>
+  </div>
+
+  <div class="col-6 col-sm-3 second-row">
+    <ng-template dynamicPanel></ng-template>
+  </div>
+
+  <div class="col-6 col-sm-3 third-row">
+    <div class="d-flex">
+      <div class="w-50">
+        <mat-toolbar class="toolbarNav">
+          <button class="button-block" mat-flat-button routerLinkActive="active-link" (click)="goBack()">
+            <mat-icon>navigate_before</mat-icon>
+            <span>Wstecz</span>
+          </button>
+        </mat-toolbar>
+      </div>
+
+      <div class="w-50">
+        <mat-toolbar class="toolbarNav">
+          <button
+            *ngIf="!saveButton"
+            class="button-block"
+            mat-flat-button
+            routerLinkActive="active-link"
+            [disabled]="!canGoNext"
+            (click)="goNext()"
+          >
+            <mat-icon>navigate_next</mat-icon>
+            <span>Dalej</span>
+          </button>
+
+          <button
+            *ngIf="saveButton"
+            class="button-block"
+            mat-flat-button
+            routerLinkActive="active-link"
+            [disabled]="!canGoNext"
+            (click)="goNext()"
+          >
+            <mat-icon>save</mat-icon>
+            <span>Zapisz</span>
+          </button>
+        </mat-toolbar>
+      </div>
+    </div>
+  </div>
+</div>

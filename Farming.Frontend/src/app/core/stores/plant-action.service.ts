@@ -3,7 +3,7 @@ import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { LandDto } from '../models/land';
 import { PlantActionDto, PlantStateDto } from '../models/plant';
 import { PlantWarehouseDto } from '../models/warehouse';
-import { LandService } from '../services/farm-field.service';
+import { LandService } from '../services/land.service';
 import { PlantWarehouseService } from '../services/plant-warehouse.service';
 import { PlantService } from '../services/plant.service';
 import { SnackbarService } from '../services/snackbar.service';

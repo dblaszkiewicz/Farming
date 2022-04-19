@@ -1,0 +1,29 @@
+<h2><strong>Wybierz działkę</strong></h2>
+<div>
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>Działka</mat-label>
+    <mat-select (selectionChange)="landChange()" [(value)]="selectedLandId">
+      <mat-option *ngFor="let land of lands" [value]="land.id">
+        {{ land.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div *ngIf="selectedLand">
+  <h3><strong>Informacje o działce</strong></h3>
+  <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
+  <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
+  <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
+  <p><strong>Status:</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
+
+  <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
+
+  <h3><strong>Sposób realizacji</strong></h3>
+
+  <mat-radio-group [(ngModel)]="selectedMode" (change)="modeChange()">
+    <mat-radio-button value="{{ landStatusEnum.Harvested }}">Zbierz</mat-radio-button>
+    <p></p>
+    <mat-radio-button value="{{ landStatusEnum.Destroyed }}">Zniszcz</mat-radio-button>
+  </mat-radio-group>
+</div>

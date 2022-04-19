@@ -37,6 +37,26 @@ namespace Farming.Domain.Entities
             return Status.IsSuitableForPlantAction();
         }
 
+        public void ChangeStatusToDestroyed()
+        {
+            if (!Status.IsSuitableForDestroy())
+            {
+                throw new InvalidLandStatusToProcessDestroyException();
+            }
+
+            Status = new LandStatus(LandStatusEnum.Harvested);
+        }
+
+        public void ChangeStatusToHarvested()
+        {
+            if (!Status.IsSuitableForHarvest())
+            {
+                throw new InvalidLandStatusToProcessHarvestException();
+            }
+
+            Status = new LandStatus(LandStatusEnum.Harvested);
+        }
+
         internal void ChangeStatusAfterPlantAction()
         {
             if (!IsStatusSuitableForPlantAction())

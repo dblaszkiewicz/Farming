@@ -14,4 +14,14 @@ export class LandService {
     const url = `${AppSettings.landEndpoint}`;
     return this.http.get<LandDto[]>(url);
   }
+
+  public harvest(landId: string): Observable<void> {
+    const url = `${AppSettings.landEndpoint}/harvest?landId=${landId}`;
+    return this.http.put<void>(url, null);
+  }
+
+  public destroy(landId: string): Observable<void> {
+    const url = `${AppSettings.landEndpoint}/destroy?landId=${landId}`;
+    return this.http.put<void>(url, null);
+  }
 }

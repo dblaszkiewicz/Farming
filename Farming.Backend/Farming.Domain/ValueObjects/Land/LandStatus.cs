@@ -21,5 +21,15 @@ namespace Farming.Domain.ValueObjects.Land
         {
             return Value != LandStatusEnum.Planted;
         }
+
+        public bool IsSuitableForHarvest()
+        {
+            return Value == LandStatusEnum.Planted;
+        }
+
+        public bool IsSuitableForDestroy()
+        {
+            return Value == LandStatusEnum.Planted;
+        }
     }
 }

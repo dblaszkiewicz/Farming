@@ -3,7 +3,7 @@ import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { LandDto } from '../models/land';
 import { PesticideActionDto, PesticideStateDto } from '../models/pesticide';
 import { PesticideWarehouseDto } from '../models/warehouse';
-import { LandService } from '../services/farm-field.service';
+import { LandService } from '../services/land.service';
 import { PesticideWarehouseService } from '../services/pesticide-warehouse.service';
 import { PesticideService } from '../services/pesticide.service';
 import { SpinnerStore } from './spinner.store';
