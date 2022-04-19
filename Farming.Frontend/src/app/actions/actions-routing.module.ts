@@ -5,6 +5,7 @@ import { HarvestRealizationComponent } from './harvest/harvest-realization/harve
 import { PesticideRealizationComponent } from './pesticide/pesticide-realization/pesticide-realization.component';
 import { PlantRealizationComponent } from './plant/plant-realization/plant-realization.component';
 import { ChangeSeasonComponent } from './season/change-season/change-season.component';
+import { WeatherComponent } from './weather/weather.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'season',
     component: ChangeSeasonComponent,
+  },
+  {
+    path: 'weather',
+    component: WeatherComponent,
   },
 ];
 

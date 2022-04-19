@@ -23,14 +23,6 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
 
         public async Task<IEnumerable<LandWithPlantedDto>> Handle(GetAllLandsWithPlantQuery request, CancellationToken cancellationToken)
         {
-            
-            //var season = await _seasons.FirstOrDefaultAsync(x => x.Active);
-
-            //if (season == null)
-            //{
-            //    season = await _seasons.OrderByDescending(x => x.StartDate).FirstOrDefaultAsync();
-            //}
-
             var lands = await _lands.Include(x => x.LandRealizations).Select(x => x.AsDto()).ToListAsync();
 
             var landIdWhichArePlanted = lands.Where(x => x.IsPlanted).Select(x => x.Id).ToList();
