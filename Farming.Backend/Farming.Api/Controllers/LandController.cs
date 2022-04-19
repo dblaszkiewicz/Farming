@@ -17,12 +17,20 @@ namespace Farming.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("getAllWithPlant")]
+        public async Task<IActionResult> GetAllWithPlant()
         {
             var result = await _mediator.Send(new GetAllLandsWithPlantQuery());
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetAllLandsQuery());
+
+            return Ok(result);
         }
 
         [HttpPut("destroy")]

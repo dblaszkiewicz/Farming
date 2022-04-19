@@ -12,7 +12,6 @@ namespace Farming.Application.DTO
         public PlantedDto Planted { get; set; }
     }
 
-
     public class PlantedDto
     {
         public Guid PlantId { get; set; }

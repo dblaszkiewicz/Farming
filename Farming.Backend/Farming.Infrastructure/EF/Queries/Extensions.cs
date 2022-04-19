@@ -184,7 +184,7 @@ namespace Farming.Infrastructure.EF.Queries
             };
         }
 
-        public static LandWithPlantedDto AsDto(this LandReadModel readModel)
+        public static LandWithPlantedDto AsDtoWithPlant(this LandReadModel readModel)
         {
             return new LandWithPlantedDto()
             {
@@ -194,6 +194,17 @@ namespace Farming.Infrastructure.EF.Queries
                 Name = readModel.Name,
                 Status = readModel.Status,
                 IsPlanted = readModel.Status == LandStatus.Planted,
+            };
+        }
+
+        public static LandDto AsDto(this LandReadModel readModel)
+        {
+            return new LandDto()
+            {
+                Id = readModel.Id,
+                Area = readModel.Area,
+                LandClass = readModel.LandClass,
+                Name = readModel.Name,
             };
         }
     }

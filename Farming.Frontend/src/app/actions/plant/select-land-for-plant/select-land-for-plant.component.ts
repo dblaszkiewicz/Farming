@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LandStatusHelper } from 'src/app/core/helpers/land-status-helper';
-import { LandDto } from 'src/app/core/models/land';
+import { LandWithPlantDto } from 'src/app/core/models/land';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { PlantActionService } from 'src/app/core/stores/plant-action.service';
@@ -13,10 +13,10 @@ import { PlantActionService } from 'src/app/core/stores/plant-action.service';
 export class SelectLandForPlantComponent implements RealizationComponentInterface, OnInit {
   constructor(private plantActionService: PlantActionService, private snackbarService: SnackbarService) {}
   public landStatusHelper = LandStatusHelper;
-  public lands: LandDto[];
+  public lands: LandWithPlantDto[];
 
   public selectedLandId: string;
-  public selectedLand: LandDto;
+  public selectedLand: LandWithPlantDto;
 
   async ngOnInit(): Promise<void> {
     await this.plantActionService.prepareLands();

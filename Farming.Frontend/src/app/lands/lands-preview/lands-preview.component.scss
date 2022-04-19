@@ -1,0 +1,37 @@
+td,
+th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-add {
+  background-color: green;
+  color: #fff;
+}
+
+.custom-button {
+  font-size: 30px;
+  padding-top: 9px;
+  padding-bottom: 7.5px;
+  margin-left: 5px;
+}
+
+.mat-plant {
+  background-color: rgb(0, 255, 0);
+  color: #fff;
+}
+
+.mat-fertilizer {
+  background-color: rgb(30, 107, 179);
+  color: #fff;
+}
+
+.mat-pesticide {
+  background-color: rgb(124, 30, 179);
+  color: #fff;
+}

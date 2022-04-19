@@ -19,4 +19,9 @@ export class PlantService {
     const url = `${AppSettings.plantEndpoint}/processAction`;
     return this.http.post<void>(url, actionDto);
   }
+
+  public getAllActions(seasonId: string, landId: string): Observable<PlantActionDto[]> {
+    const url = `${AppSettings.plantEndpoint}/getAllActions?seasonId=${seasonId}&landId=${landId}`;
+    return this.http.get<PlantActionDto[]>(url);
+  }
 }

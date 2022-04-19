@@ -53,5 +53,13 @@ namespace Farming.Api.Controllers
 
             return result.Any() ? Ok(result) : NotFound();
         }
+
+        [HttpGet("getAllActions")]
+        public async Task<IActionResult> GetAllActions(Guid seasonId, Guid landId)
+        {
+            var query = new GetFertilizerActionsByLandAndSeasonQuery(seasonId, landId);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

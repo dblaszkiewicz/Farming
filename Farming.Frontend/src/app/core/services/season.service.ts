@@ -15,6 +15,11 @@ export class SeasonService {
     return this.http.get<SeasonDto>(url);
   }
 
+  public getAll(): Observable<SeasonDto[]> {
+    const url = `${AppSettings.seasonEndpoint}/getAll`;
+    return this.http.get<SeasonDto[]>(url);
+  }
+
   public startNew(): Observable<void> {
     const url = `${AppSettings.seasonEndpoint}/startNew`;
     return this.http.post<void>(url, null);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LandDto } from 'src/app/core/models/land';
+import { LandWithPlantDto } from 'src/app/core/models/land';
 import { PesticideStateDto } from 'src/app/core/models/pesticide';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { PesticideWarehouseDto } from 'src/app/core/models/warehouse';
@@ -13,7 +13,7 @@ import { PesticideActionService } from 'src/app/core/stores/pesticide-action-ser
 export class PesticideActionSummaryComponent implements RealizationComponentInterface, OnInit {
   constructor(private pesticideActionService: PesticideActionService) {}
 
-  public selectedLand: LandDto;
+  public selectedLand: LandWithPlantDto;
   public selectedPesticideState: PesticideStateDto;
   public selectedWarehouse: PesticideWarehouseDto;
   public selectedQuantity: number;

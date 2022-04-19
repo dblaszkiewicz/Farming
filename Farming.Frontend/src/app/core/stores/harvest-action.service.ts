@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { HarvestActionDto } from '../models/harvest';
-import { LandDto } from '../models/land';
+import { LandWithPlantDto } from '../models/land';
 import { LandStatusEnum } from '../models/static-types/land-status.enum';
 import { LandService } from '../services/land.service';
 import { SnackbarService } from '../services/snackbar.service';
@@ -11,12 +11,12 @@ import { SpinnerStore } from './spinner.store';
   providedIn: 'root',
 })
 export class HarvestActionService {
-  private selectedLand: LandDto | null;
+  private selectedLand: LandWithPlantDto | null;
   private selectedNewLandStatus: LandStatusEnum | null;
 
   private canGoToNextPanel: BehaviorSubject<boolean>;
 
-  private lands: LandDto[] = [];
+  private lands: LandWithPlantDto[] = [];
 
   constructor(
     private landService: LandService,
@@ -37,11 +37,11 @@ export class HarvestActionService {
     return this.canGoToNextPanel.asObservable();
   }
 
-  public getSelectedLand(): LandDto | null {
+  public getSelectedLand(): LandWithPlantDto | null {
     return this.selectedLand;
   }
 
-  public setSelectedLand(land: LandDto | null): void {
+  public setSelectedLand(land: LandWithPlantDto | null): void {
     if (!land) {
       this.canGoToNextPanel.next(false);
     }
@@ -62,7 +62,7 @@ export class HarvestActionService {
     this.canGoToNextPanel.next(canGoNext);
   }
 
-  public getLands(): LandDto[] {
+  public getLands(): LandWithPlantDto[] {
     return this.lands;
   }
 
@@ -75,7 +75,7 @@ export class HarvestActionService {
       return;
     }
     this.spinnerStore.startSpinner();
-    this.lands = await lastValueFrom(this.landService.getAll());
+    this.lands = await lastValueFrom(this.landService.getAllWitPlant());
     this.spinnerStore.stopSpinner();
   }
 

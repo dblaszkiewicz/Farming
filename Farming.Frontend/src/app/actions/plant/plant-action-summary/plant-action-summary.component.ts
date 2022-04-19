@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LandDto } from 'src/app/core/models/land';
+import { LandWithPlantDto } from 'src/app/core/models/land';
 import { PlantStateDto } from 'src/app/core/models/plant';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { PlantWarehouseDto } from 'src/app/core/models/warehouse';
@@ -13,7 +13,7 @@ import { PlantActionService } from 'src/app/core/stores/plant-action.service';
 export class PlantActionSummaryComponent implements RealizationComponentInterface, OnInit {
   constructor(private plantActionService: PlantActionService) {}
 
-  public selectedLand: LandDto;
+  public selectedLand: LandWithPlantDto;
   public selectedPlantState: PlantStateDto;
   public selectedWarehouse: PlantWarehouseDto;
   public selectedQuantity: number;

@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-between">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Wybrany Sezon</mat-label>
+
+      <mat-select (selectionChange)="seasonChange()" [(value)]="selectedSeasonId">
+        <mat-option *ngFor="let season of seasons" [value]="season.id">
+          {{ season.startDate | date: 'dd.MM.yyyy HH:mm' }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="w-100">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="landClass">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Klasa ziemi</th>
+      <td mat-cell *matCellDef="let element">{{ element.landClass }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Obszar</th>
+      <td mat-cell *matCellDef="let element">{{ element.area.toFixed(2) }} ha</td>
+    </ng-container>
+
+    <ng-container matColumnDef="plantActions">
+      <th mat-header-cell *matHeaderCellDef>Siew</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-flat-button
+          color="plant"
+          class="m-1"
+          [disabled]="!canGoToDetails"
+          (click)="getPlantActions(element.id)"
+        >
+          <mat-icon>local_florist</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pesticideActions">
+      <th mat-header-cell *matHeaderCellDef>Herbicydowanie</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-flat-button
+          color="pesticide"
+          class="m-1"
+          [disabled]="!canGoToDetails"
+          (click)="getPesticideActions(element.id)"
+        >
+          <mat-icon>local_drink</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fertilizerActions">
+      <th mat-header-cell *matHeaderCellDef>Nawożenie</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-flat-button
+          color="fertilizer"
+          class="m-1"
+          [disabled]="!canGoToDetails"
+          (click)="getFertilizerActions(element.id)"
+        >
+          <mat-icon>grain</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    class="mat-elevation-z8 w-100"
+    [pageSizeOptions]="[10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

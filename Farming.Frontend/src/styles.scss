@@ -59,10 +59,19 @@ body {
   background: rgb(139, 206, 161);
 }
 
+.info-snackbar {
+  background: rgb(240, 255, 152);
+  color: black;
+}
+
 .fail-snackbar::before {
   background-image: url('assets/images/fail.png');
 }
 
 .success-snackbar::before {
   background-image: url('assets/images/success.png');
+}
+
+.info-snackbar::before {
+  background-image: url('assets/images/info.png');
 }

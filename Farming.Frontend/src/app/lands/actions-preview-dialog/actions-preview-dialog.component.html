@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between">
+  <div class="w-100">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Użytkownik</th>
+        <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="realizationDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data realizacji</th>
+        <td mat-cell *matCellDef="let element">{{ element.realizationDate | date: 'dd.MM.yyyy HH:mm' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+        <td mat-cell *matCellDef="let element">{{ element.quantity }} kg</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      class="mat-elevation-z8 w-100"
+      [pageSizeOptions]="[10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppSettings } from 'src/common/appsettings';
-import { LandDto } from '../models/land';
+import { LandDto, LandWithPlantDto } from '../models/land';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,13 @@ import { LandDto } from '../models/land';
 export class LandService {
   constructor(private http: HttpClient) {}
 
+  public getAllWitPlant(): Observable<LandWithPlantDto[]> {
+    const url = `${AppSettings.landEndpoint}/getAllWithPlant`;
+    return this.http.get<LandWithPlantDto[]>(url);
+  }
+
   public getAll(): Observable<LandDto[]> {
-    const url = `${AppSettings.landEndpoint}`;
+    const url = `${AppSettings.landEndpoint}/getAll`;
     return this.http.get<LandDto[]>(url);
   }
 

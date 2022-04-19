@@ -19,4 +19,9 @@ export class PesticideService {
     const url = `${AppSettings.pesticideEndpoint}/processAction`;
     return this.http.post<void>(url, actionDto);
   }
+
+  public getAllActions(seasonId: string, landId: string): Observable<PesticideActionDto[]> {
+    const url = `${AppSettings.pesticideEndpoint}/getAllActions?seasonId=${seasonId}&landId=${landId}`;
+    return this.http.get<PesticideActionDto[]>(url);
+  }
 }

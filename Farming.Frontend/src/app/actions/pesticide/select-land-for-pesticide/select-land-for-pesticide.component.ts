@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LandStatusHelper } from 'src/app/core/helpers/land-status-helper';
-import { LandDto } from 'src/app/core/models/land';
+import { LandWithPlantDto } from 'src/app/core/models/land';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { PesticideActionService } from 'src/app/core/stores/pesticide-action-service';
 
@@ -12,10 +12,10 @@ import { PesticideActionService } from 'src/app/core/stores/pesticide-action-ser
 export class SelectLandForPesticideComponent implements RealizationComponentInterface, OnInit {
   constructor(private pesticideActionService: PesticideActionService) {}
   public landStatusHelper = LandStatusHelper;
-  public lands: LandDto[];
+  public lands: LandWithPlantDto[];
 
   public selectedLandId: string;
-  public selectedLand: LandDto;
+  public selectedLand: LandWithPlantDto;
 
   async ngOnInit(): Promise<void> {
     await this.pesticideActionService.prepareLands();

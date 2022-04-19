@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LandStatusHelper } from 'src/app/core/helpers/land-status-helper';
-import { LandDto } from 'src/app/core/models/land';
+import { LandWithPlantDto } from 'src/app/core/models/land';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { LandStatusEnum } from 'src/app/core/models/static-types/land-status.enum';
 import { HarvestActionService } from 'src/app/core/stores/harvest-action.service';
@@ -13,7 +13,7 @@ import { HarvestActionService } from 'src/app/core/stores/harvest-action.service
 export class HarvestActionSummaryComponent implements RealizationComponentInterface, OnInit {
   public landStatusHelper = LandStatusHelper;
   public landStatusEnum = LandStatusEnum;
-  public selectedLand: LandDto;
+  public selectedLand: LandWithPlantDto;
   public selectedNewLandStatus: LandStatusEnum;
 
   constructor(private harvestActionService: HarvestActionService) {}

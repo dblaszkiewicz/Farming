@@ -6,6 +6,9 @@ namespace Farming.Domain.Repositories
     {
         Task AddAsync(Season season);
         Task<Season> GetCurrentSeasonAsync();
+        Task<Season> GetCurrentSeasonWithPlantActionsAsync();
+        Task<Season> GetCurrentSeasonWithPesticideActionsAsync();
+        Task<Season> GetCurrentSeasonWithFertilzierActionsAsync();
         Task UpdateAsync(Season season);
     }
 }

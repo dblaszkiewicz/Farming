@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { LandDto } from '../models/land';
+import { LandWithPlantDto } from '../models/land';
 import { PesticideActionDto, PesticideStateDto } from '../models/pesticide';
 import { PesticideWarehouseDto } from '../models/warehouse';
 import { LandService } from '../services/land.service';
@@ -12,14 +12,14 @@ import { SpinnerStore } from './spinner.store';
   providedIn: 'root',
 })
 export class PesticideActionService {
-  private selectedLand: LandDto | null;
+  private selectedLand: LandWithPlantDto | null;
   private selectedPesticide: PesticideStateDto | null;
   private selectedWarehouse: PesticideWarehouseDto | null;
   private selectedQuantity: number;
 
   private canGoToNextPanel: BehaviorSubject<boolean>;
 
-  private lands: LandDto[] = [];
+  private lands: LandWithPlantDto[] = [];
   private pesticideStates: PesticideStateDto[] = [];
   private warehouses: PesticideWarehouseDto[] = [];
 
@@ -47,7 +47,7 @@ export class PesticideActionService {
     return this.canGoToNextPanel.asObservable();
   }
 
-  public getSelectedLand(): LandDto | null {
+  public getSelectedLand(): LandWithPlantDto | null {
     return this.selectedLand;
   }
 
@@ -67,7 +67,7 @@ export class PesticideActionService {
     this.selectedQuantity = quantity;
   }
 
-  public setSelectedLand(land: LandDto | null): void {
+  public setSelectedLand(land: LandWithPlantDto | null): void {
     if (!land) {
       this.canGoToNextPanel.next(false);
     } else {
@@ -96,7 +96,7 @@ export class PesticideActionService {
     this.canGoToNextPanel.next(canGoNext);
   }
 
-  public getLands(): LandDto[] {
+  public getLands(): LandWithPlantDto[] {
     return this.lands;
   }
 
@@ -113,7 +113,7 @@ export class PesticideActionService {
       return;
     }
     this.spinnerStore.startSpinner();
-    this.lands = await lastValueFrom(this.landService.getAll());
+    this.lands = await lastValueFrom(this.landService.getAllWitPlant());
     this.spinnerStore.stopSpinner();
   }
 

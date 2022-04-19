@@ -38,5 +38,13 @@ namespace Farming.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAllSeasons()
+        {
+            var query = new GetAllSeasonsQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

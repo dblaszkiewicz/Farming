@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, lastValueFrom, of as observableOf } from 'rxjs';
 import { FertilizerActionDto, FertilizerDto, FertilizerStateDto } from '../models/fertilizer';
-import { LandDto } from '../models/land';
+import { LandWithPlantDto } from '../models/land';
 import { LandService } from '../services/land.service';
 import {} from 'rxjs';
 import { FertilizerWarehouseDto } from '../models/warehouse';
@@ -13,14 +13,14 @@ import { SpinnerStore } from './spinner.store';
   providedIn: 'root',
 })
 export class FertilizerActionService {
-  private selectedLand: LandDto | null;
+  private selectedLand: LandWithPlantDto | null;
   private selectedFertilizer: FertilizerStateDto | null;
   private selectedWarehouse: FertilizerWarehouseDto | null;
   private selectedQuantity: number;
 
   private canGoToNextPanel: BehaviorSubject<boolean>;
 
-  private lands: LandDto[] = [];
+  private lands: LandWithPlantDto[] = [];
   private fertilizerStates: FertilizerStateDto[] = [];
   private warehouses: FertilizerWarehouseDto[] = [];
 
@@ -48,7 +48,7 @@ export class FertilizerActionService {
     return this.canGoToNextPanel.asObservable();
   }
 
-  public getSelectedLand(): LandDto | null {
+  public getSelectedLand(): LandWithPlantDto | null {
     return this.selectedLand;
   }
 
@@ -68,7 +68,7 @@ export class FertilizerActionService {
     this.selectedQuantity = quantity;
   }
 
-  public setSelectedLand(land: LandDto | null): void {
+  public setSelectedLand(land: LandWithPlantDto | null): void {
     if (!land) {
       this.canGoToNextPanel.next(false);
     } else {
@@ -97,7 +97,7 @@ export class FertilizerActionService {
     this.canGoToNextPanel.next(canGoNext);
   }
 
-  public getLands(): LandDto[] {
+  public getLands(): LandWithPlantDto[] {
     return this.lands;
   }
 
@@ -114,7 +114,7 @@ export class FertilizerActionService {
       return;
     }
     this.spinnerStore.startSpinner();
-    this.lands = await lastValueFrom(this.landService.getAll());
+    this.lands = await lastValueFrom(this.landService.getAllWitPlant());
     this.spinnerStore.stopSpinner();
   }
 
