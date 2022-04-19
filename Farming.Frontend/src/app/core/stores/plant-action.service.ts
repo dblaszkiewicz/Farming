@@ -74,7 +74,7 @@ export class PlantActionService {
       this.canGoToNextPanel.next(false);
     } else if (land.isPlanted) {
       this.canGoToNextPanel.next(false);
-      this.snackbarService.showFail('Działka jest już zasiana');
+      this.snackbarService.showInfo('Działka jest już zasiana');
     } else {
       this.canGoToNextPanel.next(true);
     }
