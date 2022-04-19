@@ -1,4 +1,5 @@
-﻿using Farming.Application.DTO;
+﻿using Farming.Application.Consts;
+using Farming.Application.DTO;
 using Farming.Application.Queries;
 using Farming.Infrastructure.EF.Contexts;
 using Farming.Infrastructure.EF.Models;
@@ -22,7 +23,13 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
 
         public async Task<IEnumerable<LandWithPlantedDto>> Handle(GetAllLandsWithPlantQuery request, CancellationToken cancellationToken)
         {
-            var currentActiveSeason = _seasons.FirstOrDefault(x => x.Active);
+            
+            //var season = await _seasons.FirstOrDefaultAsync(x => x.Active);
+
+            //if (season == null)
+            //{
+            //    season = await _seasons.OrderByDescending(x => x.StartDate).FirstOrDefaultAsync();
+            //}
 
             var lands = await _lands.Include(x => x.LandRealizations).Select(x => x.AsDto()).ToListAsync();
 
@@ -31,7 +38,9 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
             var plantIdsFromLands = await _landRealizations
                 .Include(x => x.PlantActions)
                     .ThenInclude(x => x.Plant)
-                .Where(x => x.SeasonId == currentActiveSeason.Id && landIdWhichArePlanted.Contains(x.LandId) && x.PlantActions.Any())
+                .Where(x => 
+                    x.PlantActions.Any() &&
+                    landIdWhichArePlanted.Contains(x.LandId))
                 .Select(x => new LandIdPlantId
                 {
                     LandId = x.LandId,
@@ -46,7 +55,12 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                     continue;
                 }
 
-                var plant = plantIdsFromLands.First(x => x.LandId == land.Id);
+                var plant = plantIdsFromLands.FirstOrDefault(x => x.LandId == land.Id);
+
+                if (plant is null)
+                {
+                    continue;
+                }
 
                 land.Planted = new PlantedDto
                 {

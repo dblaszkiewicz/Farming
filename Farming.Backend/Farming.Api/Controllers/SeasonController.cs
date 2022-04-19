@@ -1,4 +1,5 @@
 ﻿using Farming.Application.Commands;
+using Farming.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,14 @@ namespace Farming.Api.Controllers
         public SeasonController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("getCurrent")]
+        public async Task<IActionResult> GetCurrentSeason()
+        {
+            var query = new GetCurrentSeasonQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpPost("startNew")]

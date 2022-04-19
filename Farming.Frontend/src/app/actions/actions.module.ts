@@ -18,6 +18,7 @@ import { SelectLandForPlantComponent } from './plant/select-land-for-plant/selec
 import { HarvestRealizationComponent } from './harvest/harvest-realization/harvest-realization.component';
 import { SelectLandForHarvestComponent } from './harvest/select-land-for-harvest/select-land-for-harvest.component';
 import { HarvestActionSummaryComponent } from './harvest/harvest-action-summary/harvest-action-summary.component';
+import { ChangeSeasonComponent } from './season/change-season/change-season.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HarvestActionSummaryComponent } from './harvest/harvest-action-summary/
     HarvestRealizationComponent,
     SelectLandForHarvestComponent,
     HarvestActionSummaryComponent,
+    ChangeSeasonComponent,
   ],
   imports: [CommonModule, ActionsRoutingModule, SharedModule],
 })

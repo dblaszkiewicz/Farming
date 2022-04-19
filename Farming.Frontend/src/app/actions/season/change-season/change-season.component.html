@@ -1,0 +1,47 @@
+<div class="row h-100 w-100">
+  <div class="col-6 col-sm-3 first-row">
+    <mat-card class="text-center h3"><strong>SEZON</strong></mat-card>
+  </div>
+
+  <div class="col-6 col-sm-3 second-row d-flex justify-content-center">
+    <div *ngIf="currentSeason">
+      <p class="text-center"><strong>Sezon:</strong> Aktywny</p>
+      <p class="text-center">
+        <strong>Data Rozpoczęcia: </strong> {{ currentSeason.startDate | date: 'dd.MM.yyyy HH:mm' }}
+      </p>
+      <div class="text-center">
+        <button mat-fab color="end-season" (click)="endCurrentSeason()">Zakończ</button>
+      </div>
+    </div>
+
+    <div *ngIf="!currentSeason">
+      <p class="text-center"><strong>Sezon:</strong> BRAK</p>
+      <p class="text-center"><strong>Data Rozpoczęcia:</strong> BRAK</p>
+      <div class="text-center">
+        <button class="center-block" mat-fab color="start-season" (click)="startNewSeason()">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-sm-3 third-row">
+    <div class="d-flex">
+      <div class="w-50">
+        <mat-toolbar class="toolbarNav">
+          <button class="button-block" mat-flat-button routerLinkActive="active-link" (click)="goToMainPanel()">
+            <mat-icon>navigate_before</mat-icon>
+            <span>Wstecz</span>
+          </button>
+        </mat-toolbar>
+      </div>
+
+      <div class="w-50">
+        <mat-toolbar class="toolbarNav">
+          <button class="button-block" mat-flat-button routerLinkActive="active-link" [disabled]="true">
+            <mat-icon>navigate_next</mat-icon>
+            <span>Dalej</span>
+          </button>
+        </mat-toolbar>
+      </div>
+    </div>
+  </div>
+</div>
