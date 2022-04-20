@@ -7,9 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { WarehousesModule } from './warehouses/warehouses.module';
 import { GeneralModule } from './general/general.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app/app.component';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { AppComponent } from './app/app.component';
     GeneralModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ using Farming.Infrastructure;
 using Farming.Application.Queries;
 using Farming.Infrastructure.EF.Config.ReadConfiguration;
 using Microsoft.AspNetCore.Builder;
+using Farming.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -49,3 +49,15 @@
   background-color: rgb(9, 255, 0);
   color: #fff;
 }
+
+.mat-flat-button.mat-button-disabled.mat-button-disabled {
+  background-color: #899cfd;
+  color: white;
+  font-weight: bold;
+}
+
+.mat-flat-button {
+  background-color: #00147e;
+  color: white;
+  font-weight: bold;
+}
