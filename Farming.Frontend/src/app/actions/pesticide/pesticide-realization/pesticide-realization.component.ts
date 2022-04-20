@@ -1,5 +1,6 @@
 import { AfterViewInit, ComponentRef, ViewChild } from '@angular/core';
 import { OnDestroy } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -31,7 +32,8 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
     private pesticideActionService: PesticideActionService,
     private snackbarService: SnackbarService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
 
   ngAfterViewInit(): void {
     this.goToFields();
+    this.cdr.detectChanges();
   }
 
   public goNext(): void {

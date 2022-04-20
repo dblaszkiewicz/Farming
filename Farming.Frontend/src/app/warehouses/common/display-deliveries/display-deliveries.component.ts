@@ -1,4 +1,5 @@
 import { AfterViewInit } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Input, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
@@ -32,7 +33,7 @@ export class DisplayDeliveriesComponent implements OnInit, AfterViewInit {
 
   public fertilizerColumns: string[] = ['quantity', 'price', 'pricePerTon', 'realizationDate', 'userName'];
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.prepareColumns();
@@ -40,6 +41,7 @@ export class DisplayDeliveriesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.prepareGridData();
+    this.cdr.detectChanges();
   }
 
   private prepareColumns(): void {

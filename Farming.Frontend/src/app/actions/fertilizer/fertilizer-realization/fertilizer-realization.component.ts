@@ -14,6 +14,7 @@ import { SelectFertilizerComponent } from '../select-fertilizer/select-fertilize
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { lastValueFrom } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-fertilizer-realization',
@@ -33,7 +34,8 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     private fertilizerActionService: FertilizerActionService,
     private snackbarService: SnackbarService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
 
   ngAfterViewInit(): void {
     this.goToFields();
+    this.cdr.detectChanges();
   }
 
   public goNext(): void {

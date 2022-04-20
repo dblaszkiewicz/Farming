@@ -1,3 +1,5 @@
+import { ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -15,7 +17,7 @@ import { SelectLandForHarvestComponent } from '../select-land-for-harvest/select
   templateUrl: './harvest-realization.component.html',
   styleUrls: ['./harvest-realization.component.scss'],
 })
-export class HarvestRealizationComponent implements OnInit {
+export class HarvestRealizationComponent implements OnInit, AfterViewInit {
   @ViewChild(DynamicPanelDirective) content!: DynamicPanelDirective;
 
   public canGoNextSubscription: Subscription;
@@ -28,7 +30,8 @@ export class HarvestRealizationComponent implements OnInit {
     private harvestActionService: HarvestActionService,
     private snackbarService: SnackbarService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +45,7 @@ export class HarvestRealizationComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.goToFields();
+    this.cdr.detectChanges();
   }
 
   public goNext(): void {

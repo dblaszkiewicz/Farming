@@ -1,4 +1,5 @@
 import { Inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -20,10 +21,11 @@ export class ActionsPreviewDialogComponent implements AfterViewInit {
 
   public displayedColumns: string[] = ['name', 'quantity', 'realizationDate', 'userName'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: LandActionDto[]) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: LandActionDto[], private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     this.prepareGridData();
+    this.cdr.detectChanges();
   }
 
   private prepareGridData(): void {

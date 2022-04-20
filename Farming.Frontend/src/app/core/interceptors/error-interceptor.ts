@@ -17,6 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.snackbarService.showFail(error.error.message);
           return throwError(() => error.error.name);
         } else {
+          this.snackbarService.showFail('Nieoczekiwany błąd');
           return throwError(() => error.message);
         }
       })
