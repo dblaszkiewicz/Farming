@@ -70,6 +70,7 @@ export class SelectFertilizerComponent implements RealizationComponentInterface,
       this.selectedWarehouseId = this.selectedWarehouse.id;
       await this.fertilizerActionService.setSelectedWarehouse(this.selectedWarehouse);
       this.fertilizerStates = this.fertilizerActionService.getFertilizerStates();
+      this.fertilizerActionService.setCanGoNext(false);
     } else {
       this.fertilizerActionService.setCanGoNext(false);
     }
@@ -94,7 +95,8 @@ export class SelectFertilizerComponent implements RealizationComponentInterface,
     this.fertilizerActionService.setSelectedFertilizer(null);
     this.minQuantityForArea = 0;
     this.quantityFormControl.clearValidators();
-    this.quantityFormControl.setValue(0);
+    this.quantityFormControl.setValidators(Validators.required);
+    this.quantityFormControl.setValue(null);
     this.quantityFormControl.updateValueAndValidity();
   }
 

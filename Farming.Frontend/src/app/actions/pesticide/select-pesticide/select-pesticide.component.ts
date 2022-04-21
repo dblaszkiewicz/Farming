@@ -70,6 +70,7 @@ export class SelectPesticideComponent implements RealizationComponentInterface, 
       this.selectedWarehouseId = this.selectedWarehouse.id;
       await this.pesticideActionService.setSelectedWarehouse(this.selectedWarehouse);
       this.pesticideStates = this.pesticideActionService.getPesticideStates();
+      this.pesticideActionService.setCanGoNext(false);
     } else {
       this.pesticideActionService.setCanGoNext(false);
     }
@@ -94,7 +95,8 @@ export class SelectPesticideComponent implements RealizationComponentInterface, 
     this.pesticideActionService.setSelectedPesticide(null);
     this.minQuantityForArea = 0;
     this.quantityFormControl.clearValidators();
-    this.quantityFormControl.setValue(0);
+    this.quantityFormControl.setValidators(Validators.required);
+    this.quantityFormControl.setValue(null);
     this.quantityFormControl.updateValueAndValidity();
   }
 

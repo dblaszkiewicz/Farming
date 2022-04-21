@@ -70,6 +70,7 @@ export class SelectPlantComponent implements RealizationComponentInterface, OnIn
       this.selectedWarehouseId = this.selectedWarehouse.id;
       await this.plantActionService.setSelectedWarehouse(this.selectedWarehouse);
       this.plantStates = this.plantActionService.getPlantStates();
+      this.plantActionService.setCanGoNext(false);
     } else {
       this.plantActionService.setCanGoNext(false);
     }
@@ -94,7 +95,8 @@ export class SelectPlantComponent implements RealizationComponentInterface, OnIn
     this.plantActionService.setSelectedPlant(null);
     this.minQuantityForArea = 0;
     this.quantityFormControl.clearValidators();
-    this.quantityFormControl.setValue(0);
+    this.quantityFormControl.setValidators(Validators.required);
+    this.quantityFormControl.setValue(null);
     this.quantityFormControl.updateValueAndValidity();
   }
 
