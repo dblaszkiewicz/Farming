@@ -11,4 +11,5 @@ export const AppSettings = {
   seasonEndpoint: `${apiUrl}/Season`,
   seedEndpoint: `${apiUrl}/Seed`,
   landEndpoint: `${apiUrl}/Land`,
+  weatherEndpoint: `${apiUrl}/Weather`,
 };

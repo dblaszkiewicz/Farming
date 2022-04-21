@@ -40,6 +40,8 @@ namespace Farming.Infrastructure.EF
             services.AddScoped<ILandReadService, LandReadService>();
             services.AddScoped<ISeasonReadService, SeasonReadService>();
 
+            services.AddScoped<IWeatherService, WeatherService>();
+
             var options = configuration.GetOptions<SqlOptions>("Sql");
             
             services.AddDbContext<ReadDbContext>(ctx =>
