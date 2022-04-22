@@ -1,3 +1,83 @@
-<div *ngIf="canDisplay">
-  <img [src]="data.currentConditions.iconURL" />
+<div class="row h-100 w-100">
+  <div class="col-6 col-sm-3 first-row">
+    <mat-card class="text-center h3"><strong>POGODA</strong></mat-card>
+  </div>
+
+  <div class="col-6 col-sm-3 second-row">
+    <div *ngIf="canDisplay">
+      <div class="d-flex justify-content-between">
+        <div>
+          <img [src]="data.currentConditions.iconURL" />
+          {{ data.currentConditions.comment }}
+        </div>
+        <div>{{ data.currentConditions.dayHour }}</div>
+        <div>
+          <p>{{ data.region }}</p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div>
+          <p>Temperatura: {{ data.currentConditions.temp.c }} &deg;C</p>
+        </div>
+        <div>
+          <p>Wilgotność: {{ data.currentConditions.humidity }}</p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div>
+          <p>Wiatr: {{ data.currentConditions.wind.km }} km/h</p>
+        </div>
+        <div>
+          <p>Szansa opadów: {{ data.currentConditions.precip }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-sm-3 third-row">
+    <div class="row h-100">
+      <div class="col-6 col-sm-3 next-day" *ngFor="let weather of nextDays">
+        <p class="text-center">
+          {{ weather.day }}
+        </p>
+        <div class="text-center">
+          <img [src]="weather.iconURL" />
+        </div>
+
+        <p class="text-center">{{ weather.comment }}</p>
+
+        <p class="text-center">{{ weather.max_temp.c }} &deg;C / {{ weather.min_temp.c }} &deg;C</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-sm-3 fourth-row">
+    <div class="d-flex">
+      <div class="w-50">
+        <mat-toolbar class="toolbarNav">
+          <button class="button-block" mat-flat-button routerLinkActive="active-link" (click)="goBack()">
+            <mat-icon>navigate_before</mat-icon>
+            <span>Wstecz</span>
+          </button>
+        </mat-toolbar>
+      </div>
+
+      <div class="w-50">
+        <mat-toolbar class="toolbarNav">
+          <button
+            class="button-block"
+            mat-flat-button
+            routerLinkActive="active-link"
+            (click)="goNext()"
+            [disabled]="!canGoNext"
+          >
+            <mat-icon>navigate_next</mat-icon>
+            <span>Dalej</span>
+          </button>
+        </mat-toolbar>
+      </div>
+    </div>
+  </div>
 </div>

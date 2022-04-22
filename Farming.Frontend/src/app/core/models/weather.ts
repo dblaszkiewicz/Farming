@@ -7,7 +7,7 @@ export interface WeatherDto {
 
 export interface CurrentCondition {
   comment: string;
-  dayhour: string;
+  dayHour: string;
   humidity: string;
   iconURL: string;
   precip: string;
@@ -17,7 +17,7 @@ export interface CurrentCondition {
 
 export interface NextDay {
   comment: string;
-  dayhour: string;
+  day: string;
   iconURL: string;
   max_temp: Temp;
   min_temp: Temp;
