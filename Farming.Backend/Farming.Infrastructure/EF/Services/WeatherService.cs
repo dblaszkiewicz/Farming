@@ -1,6 +1,7 @@
 ﻿using Farming.Application.DTO;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 
 namespace Farming.Infrastructure.EF.Services
 {
@@ -33,6 +34,7 @@ namespace Farming.Infrastructure.EF.Services
                             var emergencyJson = await emergencyResponse.Content.ReadAsStringAsync();
                             var emergencyWeather = JsonConvert.DeserializeObject<WeatherDto>(emergencyJson);
                             emergencyWeather.IsEmergency = true;
+                            SetDayHourRegion(emergencyWeather);
                             return emergencyWeather;
                         }
                         return null;
@@ -40,11 +42,46 @@ namespace Farming.Infrastructure.EF.Services
 
                     weather.IsEmergency = false;
 
-                    // TODO: jezeli region nie jest Poland (zbieżność nazw miejscowosci) to zrobic awaryjna pogode na krakow 
+                    SetDayHourRegion(weather);
                     return weather;
                 }
 
                 return null;
+            }
+        }
+
+        private void SetDayHourRegion(WeatherDto weather)
+        {
+            var split = weather.CurrentConditions.DayHour.Split(' ');
+            if (split.Length != 3)
+            {
+                return;
+            }
+
+            var day = split[0];
+            var hour = split[1].Split(":").First();
+            var modifier = split[2];
+
+            var hourInt = Int16.Parse(hour);
+
+            if (modifier.Equals("PM") && hourInt < 12)
+            {
+                hourInt += 12;
+            }
+
+            if (modifier.Equals("AM") && hourInt == 12)
+            {
+                hourInt -= 12;
+            }
+
+            weather.CurrentConditions.Hour = hourInt < 10 ? $"0{hourInt}:00" : $"{hourInt}:00";
+            weather.CurrentConditions.Day = day;
+
+            var regionSplit = weather.Region.Split(',');
+            if (regionSplit.Length == 2)
+            {
+                weather.Location = Regex.Replace(regionSplit[0], @"\s+", "");
+                weather.Region = Regex.Replace(regionSplit[1], @"\s+", "");
             }
         }
 

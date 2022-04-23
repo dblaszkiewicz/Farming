@@ -5,8 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 import { DynamicPanelDirective } from './directives/dynamic-panel.directive';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
-const modules = [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule];
+const modules = [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, TranslateModule];
 
 const components = [ProgressSpinnerComponent, ConfirmDialogComponent];
 

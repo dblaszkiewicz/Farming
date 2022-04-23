@@ -1,36 +1,56 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
     <mat-card class="text-center h3"><strong>POGODA</strong></mat-card>
+    <div class="d-flex justify-content-between">
+      <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Lokalizacja</mat-label>
+          <input matInput [(ngModel)]="place" />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button class="custom-button" mat-flat-button color="add" [disabled]="place === ''" (click)="refreshWeather()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="col-6 col-sm-3 second-row">
     <div *ngIf="canDisplay">
-      <div class="d-flex justify-content-between">
-        <div>
+      <div class="d-flex">
+        <div class="main-left">
+          <p>
+            <strong> {{ data.currentConditions.day | translate }}, {{ data.currentConditions.hour }} </strong>
+          </p>
+        </div>
+        <div class="main-center">
           <img [src]="data.currentConditions.iconURL" />
-          {{ data.currentConditions.comment }}
         </div>
-        <div>{{ data.currentConditions.dayHour }}</div>
+        <div class="main-right">
+          <p>
+            <strong>{{ data.location }}, {{ data.region | translate }}</strong>
+          </p>
+        </div>
+      </div>
+      <p class="text-center">{{ data.currentConditions.comment | translate }}</p>
+
+      <div class="d-flex justify-content-between">
         <div>
-          <p>{{ data.region }}</p>
+          <p><strong>Temperatura: </strong> {{ data.currentConditions.temp.c }} &deg;C</p>
+        </div>
+        <div>
+          <p><strong> Wilgotność: </strong> {{ data.currentConditions.humidity }}</p>
         </div>
       </div>
 
       <div class="d-flex justify-content-between">
         <div>
-          <p>Temperatura: {{ data.currentConditions.temp.c }} &deg;C</p>
+          <p><strong>Wiatr: </strong>{{ data.currentConditions.wind.km }} km/h</p>
         </div>
         <div>
-          <p>Wilgotność: {{ data.currentConditions.humidity }}</p>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-between">
-        <div>
-          <p>Wiatr: {{ data.currentConditions.wind.km }} km/h</p>
-        </div>
-        <div>
-          <p>Szansa opadów: {{ data.currentConditions.precip }}</p>
+          <p><strong> Szansa opadów: </strong>{{ data.currentConditions.precip }}</p>
         </div>
       </div>
     </div>
@@ -40,15 +60,18 @@
     <div class="row h-100">
       <div class="col-6 col-sm-3 next-day" *ngFor="let weather of nextDays">
         <p class="text-center">
-          {{ weather.day }}
+          <strong>{{ weather.day | translate }}</strong>
         </p>
         <div class="text-center">
           <img [src]="weather.iconURL" />
         </div>
 
-        <p class="text-center">{{ weather.comment }}</p>
+        <p class="text-center">{{ weather.comment | translate }}</p>
 
-        <p class="text-center">{{ weather.max_temp.c }} &deg;C / {{ weather.min_temp.c }} &deg;C</p>
+        <p class="text-center">
+          <span class="maxTemp">&nbsp;{{ weather.max_temp.c }} &deg;C&nbsp;</span> |
+          <span class="minTemp">&nbsp;{{ weather.min_temp.c }} &deg;C&nbsp;</span>
+        </p>
       </div>
     </div>
   </div>

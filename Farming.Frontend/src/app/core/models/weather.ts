@@ -1,13 +1,15 @@
 export interface WeatherDto {
   currentConditions: CurrentCondition;
   next_days: NextDay[];
+  location: string;
   region: string;
   isEmergency: boolean;
 }
 
 export interface CurrentCondition {
   comment: string;
-  dayHour: string;
+  day: string;
+  hour: string;
   humidity: string;
   iconURL: string;
   precip: string;

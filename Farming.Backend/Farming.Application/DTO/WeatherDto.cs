@@ -6,6 +6,7 @@ namespace Farming.Application.DTO
         public CurrentConditionDto CurrentConditions { get; set; }
         public IEnumerable<NextDayDto> Next_days { get; set; }
         public string Region { get; set; }
+        public string Location { get; set; }
         public bool IsEmergency { get; set; }
     }
 
@@ -13,6 +14,8 @@ namespace Farming.Application.DTO
     {
         public string Comment { get; set; }
         public string DayHour { get; set; }
+        public string Day { get; set; }
+        public string Hour { get; set; }
         public string Humidity { get; set; }
         public string IconURL { get; set; }
         public string Precip { get; set; }
