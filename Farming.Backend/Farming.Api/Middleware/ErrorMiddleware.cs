@@ -1,5 +1,6 @@
 ﻿using Farming.Shared.Abstractions.Exceptions;
 using Newtonsoft.Json;
+using NLog;
 using System.Net;
 
 namespace Farming.Api.Middleware
@@ -29,6 +30,8 @@ namespace Farming.Api.Middleware
         {
             context.Response.ContentType = "application/json";
 
+            SaveErrorLog(context, exception);
+
             if (exception is FarmingException farmingException)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -47,6 +50,14 @@ namespace Farming.Api.Middleware
                     exception = exception.GetType().Name
                 }));
             }
+        }
+
+        private void SaveErrorLog(HttpContext context, Exception exception)
+        {
+            LogManager.GetLogger("default")
+                .WithProperty("name", exception.GetType().Name)
+                .WithProperty("createDate", DateTimeOffset.Now)
+                .Error(exception);
         }
     }
 }

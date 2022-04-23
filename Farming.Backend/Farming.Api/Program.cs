@@ -2,8 +2,8 @@ using MediatR;
 using Farming.Infrastructure;
 using Farming.Application.Queries;
 using Farming.Infrastructure.EF.Config.ReadConfiguration;
-using Microsoft.AspNetCore.Builder;
 using Farming.Api.Middleware;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +19,8 @@ builder.Services.AddInfrastructure(Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.UseNLog();
 
 var app = builder.Build();
 
