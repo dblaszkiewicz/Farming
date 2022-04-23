@@ -8,9 +8,11 @@
   "Sunday": "Niedziela",
   "Cloudy": "Pochmurno",
   "Mostly cloudy": "Przeważnie pochmurno",
-  "Showers": "Deszcz",
-  "Scattered showers": "Przelotne opady",
+  "Showers": "Przelotne opady",
+  "Rain": "Deszcz",
+  "Scattered showers": "Przejściowe opady",
   "Partly cloudy": "Częściowe zachmurzenie",
   "Mostly sunny": "Przeważnie słonecznie",
+  "Clear": "Bezchmurnie",
   "Poland": "Polska"
 }
