@@ -30,10 +30,11 @@ namespace Farming.Api.Middleware
         {
             context.Response.ContentType = "application/json";
 
-            SaveErrorLog(context, exception);
 
             if (exception is FarmingException farmingException)
             {
+                SaveErrorLog(context, exception, false);
+
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return context.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
@@ -43,6 +44,8 @@ namespace Farming.Api.Middleware
             }
             else
             {
+                SaveErrorLog(context, exception, true);
+
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 return context.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
@@ -52,11 +55,12 @@ namespace Farming.Api.Middleware
             }
         }
 
-        private void SaveErrorLog(HttpContext context, Exception exception)
+        private void SaveErrorLog(HttpContext context, Exception exception, bool isUnhandled)
         {
             LogManager.GetLogger("default")
                 .WithProperty("name", exception.GetType().Name)
                 .WithProperty("createDate", DateTimeOffset.Now)
+                .WithProperty("isUnhandled", isUnhandled)
                 .Error(exception);
         }
     }
