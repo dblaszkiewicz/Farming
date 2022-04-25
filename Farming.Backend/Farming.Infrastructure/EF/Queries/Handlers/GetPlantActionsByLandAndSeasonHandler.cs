@@ -34,7 +34,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                         Name = x.Plant.Name,
                         Quantity = x.Quantity,
                         RealizationDate = x.RealizationDate,
-                        UserName = x.User.FirstName
+                        UserName = x.User.Name
                     }).OrderBy(x => x.RealizationDate).ToList();
             }
             else

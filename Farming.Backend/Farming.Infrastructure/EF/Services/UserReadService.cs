@@ -18,5 +18,10 @@ namespace Farming.Infrastructure.EF.Services
         {
             return _dbSet.AnyAsync(x => x.Id == id);
         }
+
+        public Task<bool> IsLoginUnique(string login)
+        {
+            return _dbSet.AnyAsync(x => x.Login == login.ToLower());
+        }
     }
 }

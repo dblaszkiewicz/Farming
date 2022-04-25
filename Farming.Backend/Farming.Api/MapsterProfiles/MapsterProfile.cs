@@ -14,6 +14,8 @@ namespace Farming.Api.MapsterProfiles
             config.NewConfig<AddPlantActionRequest, ProcessPlantActionCommand>();
             config.NewConfig<ProcessFertilizerActionRequest, ProcessFertilizerActionCommand>();
 
+            config.NewConfig<AddUserRequest, AddUserCommand>().Map(x => x.Login, x => x.Login.ToLower());
+
             return config;
         }
     }

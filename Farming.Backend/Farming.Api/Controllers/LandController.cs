@@ -1,6 +1,5 @@
 ﻿using Farming.Application.Commands;
 using Farming.Application.Queries;
-using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +9,6 @@ namespace Farming.Api.Controllers
     public class LandController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapsterMapper;
 
         public LandController(IMediator mediator)
         {

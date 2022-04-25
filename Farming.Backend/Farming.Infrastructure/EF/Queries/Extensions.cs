@@ -114,7 +114,7 @@ namespace Farming.Infrastructure.EF.Queries
             return new FertilizerDeliveryByWarehouseDto()
             {
                 Name = readModel.Fertilizer.Name,
-                UserName = readModel.User.FirstName,
+                UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
@@ -127,7 +127,7 @@ namespace Farming.Infrastructure.EF.Queries
             return new PesticideDeliveryByWarehouseDto()
             {
                 Name = readModel.Pesticide.Name,
-                UserName = readModel.User.FirstName,
+                UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
@@ -140,7 +140,7 @@ namespace Farming.Infrastructure.EF.Queries
             return new PlantDeliveryByWarehouseDto()
             {
                 Name = readModel.Plant.Name,
-                UserName = readModel.User.FirstName,
+                UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
@@ -152,7 +152,7 @@ namespace Farming.Infrastructure.EF.Queries
         {
             return new FertilizerDeliveryDto()
             {
-                UserName = readModel.User.FirstName,
+                UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
@@ -164,7 +164,7 @@ namespace Farming.Infrastructure.EF.Queries
         {
             return new PesticideDeliveryDto()
             {
-                UserName = readModel.User.FirstName,
+                UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
@@ -176,7 +176,7 @@ namespace Farming.Infrastructure.EF.Queries
         {
             return new PlantDeliveryDto()
             {
-                UserName = readModel.User.FirstName,
+                UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
                 RealizationDate = readModel.RealizationDate,
@@ -205,6 +205,17 @@ namespace Farming.Infrastructure.EF.Queries
                 Area = readModel.Area,
                 LandClass = readModel.LandClass,
                 Name = readModel.Name,
+            };
+        }
+
+        public static UserDto AsDto(this UserReadModel readModel)
+        {
+            return new UserDto()
+            {
+                Id = readModel.Id,
+                Login = readModel.Login,
+                Name = readModel.Name,
+                Active = readModel.Active
             };
         }
     }

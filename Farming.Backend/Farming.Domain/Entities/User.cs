@@ -6,12 +6,11 @@ namespace Farming.Domain.Entities
 {
     public class User : AggregateRoot<UserId>
     {
-        public UserId Id { get; private set; }
         public UserLogin Login { get; }
         public UserPassword Password { get; }
-        public UserFirstName FirstName { get; }
-        public UserLastName LastName { get; }
+        public UserName Name { get; }
         public UserActive Active { get; }
+        public UserIsAdmin IsAdmin { get; set; }
 
         public ICollection<FertilizerWarehouseDelivery> FertilizerDeliveries { get; }
         public ICollection<PesticideWarehouseDelivery> PesticideDeliveries { get; }
@@ -20,14 +19,14 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerAction> FertilizerActions { get; }
         public ICollection<PlantAction> PlantActions { get; }
 
-        public User(UserId id, UserLogin login, UserPassword password, UserFirstName firstName, UserLastName lastName)
+        public User(UserLogin login, UserPassword password, UserName name, UserIsAdmin isAdmin)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Login = login;
-            FirstName = firstName;
-            LastName = lastName;
+            Name = name;
             Password = password;
-            Active = new UserActive(true);
+            IsAdmin = isAdmin;
+            Active = true;
         }
     }
 }

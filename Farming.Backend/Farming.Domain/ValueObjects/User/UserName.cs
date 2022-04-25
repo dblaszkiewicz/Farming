@@ -2,11 +2,11 @@
 
 namespace Farming.Domain.ValueObjects.User
 {
-    public record UserFirstName
+    public record UserName
     {
         public string Value { get; }
 
-        public UserFirstName(string value)
+        public UserName(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -16,10 +16,10 @@ namespace Farming.Domain.ValueObjects.User
             Value = value;
         }
 
-        public static implicit operator string(UserFirstName firstName)
-            => firstName.Value;
+        public static implicit operator string(UserName name)
+            => name.Value;
 
-        public static implicit operator UserFirstName(string firstName)
-            => new(firstName);
+        public static implicit operator UserName(string name)
+            => new(name);
     }
 }

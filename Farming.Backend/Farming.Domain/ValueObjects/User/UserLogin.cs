@@ -13,7 +13,12 @@ namespace Farming.Domain.ValueObjects.User
                 throw new EmptyUserLoginException();
             }
 
-            Value = value;
+            if (value.Length < 4)
+            {
+                throw new UserLoginTooShortException();
+            } 
+
+            Value = value.ToLower();
         }
 
         public static implicit operator string(UserLogin login)

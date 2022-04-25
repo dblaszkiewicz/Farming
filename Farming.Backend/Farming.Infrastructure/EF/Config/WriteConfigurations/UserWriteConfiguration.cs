@@ -25,16 +25,16 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new UserPassword(x));
 
             builder
-                .Property(x => x.FirstName)
-                .HasConversion(x => x.Value, x => new UserFirstName(x));
-
-            builder
-                .Property(x => x.LastName)
-                .HasConversion(x => x.Value, x => new UserLastName(x));
+                .Property(x => x.Name)
+                .HasConversion(x => x.Value, x => new UserName(x));
 
             builder
                 .Property(x => x.Active)
                 .HasConversion(x => x.Value, x => new UserActive(x));
+
+            builder
+                .Property(x => x.IsAdmin)
+                .HasConversion(x => x.Value, x => new UserIsAdmin(x));
 
             builder.ToTable("Users");
         }
