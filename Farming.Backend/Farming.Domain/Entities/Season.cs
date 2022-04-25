@@ -8,7 +8,6 @@ namespace Farming.Domain.Entities
 {
     public class Season : AggregateRoot<SeasonId>
     {
-        public SeasonId Id { get; }
         public SeasonActive Active { get; private set; }
         public SeasonStartDate StartDate { get; }
 

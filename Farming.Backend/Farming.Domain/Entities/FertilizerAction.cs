@@ -6,7 +6,6 @@ namespace Farming.Domain.Entities
 {
     public class FertilizerAction : AggregateRoot<FertilizerActionId>
     {
-        public FertilizerActionId Id { get; }
         public FertilizerId FertilizerId { get; }
         public LandRealizationId LandRealizationId { get; }
         public UserId UserId { get; }

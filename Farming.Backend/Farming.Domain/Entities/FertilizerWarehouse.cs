@@ -8,7 +8,6 @@ namespace Farming.Domain.Entities
 {
     public class FertilizerWarehouse : AggregateRoot<FertilizerWarehouseId>
     {
-        public FertilizerWarehouseId Id { get; }
         public FertilizerWarehouseName Name { get; }
 
         public ICollection<FertilizerWarehouseState> States { get; }

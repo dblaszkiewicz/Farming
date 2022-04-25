@@ -7,7 +7,6 @@ namespace Farming.Domain.Entities
 {
     public class Plant : AggregateRoot<PlantId>
     {
-        public PlantId Id { get; }
         public PlantName Name { get; }
         public PlantRequiredAmountPerHectare RequiredAmountPerHectare { get; }
         public PlantDescription Description { get; }

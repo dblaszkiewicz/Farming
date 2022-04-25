@@ -6,7 +6,6 @@ namespace Farming.Domain.Entities
 {
     public class PesticideAction : AggregateRoot<PesticideActionId>
     {
-        public PesticideActionId Id { get; }
         public PesticideId PesticideId { get; }
         public LandRealizationId LandRealizationId { get; }
         public UserId UserId { get; }

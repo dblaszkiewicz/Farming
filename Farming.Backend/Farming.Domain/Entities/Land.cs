@@ -8,7 +8,6 @@ namespace Farming.Domain.Entities
 {
     public class Land : AggregateRoot<LandId>
     {
-        public LandId Id { get; }
         public LandClass LandCLass { get; }
         public LandStatus Status { get; private set; }
         public LandName Name { get; }
