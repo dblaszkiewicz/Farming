@@ -35,5 +35,26 @@ namespace Farming.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpPut("changeActive")]
+        public async Task<IActionResult> ChangeActive([FromQuery] Guid userId)
+        {
+            var currentUserId = TemporaryUser.Id();
+
+            var command = new ChangeUserActiveCommand(userId, currentUserId);
+
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPut("changeRole")]
+        public async Task<IActionResult> ChangeRole([FromQuery] Guid userId)
+        {
+            var currentUserId = TemporaryUser.Id();
+
+            var command = new ChangeUserRoleCommand(userId, currentUserId);
+            await _mediator.Send(command);
+            return Ok();
+        }
     }
 }

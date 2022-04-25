@@ -215,7 +215,9 @@ namespace Farming.Infrastructure.EF.Queries
                 Id = readModel.Id,
                 Login = readModel.Login,
                 Name = readModel.Name,
-                Active = readModel.Active
+                Active = readModel.Active,
+                IsAdmin = readModel.IsAdmin,
+                Created = readModel.Created
             };
         }
     }

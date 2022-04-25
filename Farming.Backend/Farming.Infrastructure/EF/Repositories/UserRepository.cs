@@ -24,5 +24,10 @@ namespace Farming.Infrastructure.EF.Repositories
         {
             return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task UpdateAsync(User user)
+        {
+            _dbSet.Update(user);
+        }
     }
 }

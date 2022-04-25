@@ -9,8 +9,9 @@ namespace Farming.Domain.Entities
         public UserLogin Login { get; }
         public UserPassword Password { get; }
         public UserName Name { get; }
-        public UserActive Active { get; }
-        public UserIsAdmin IsAdmin { get; set; }
+        public UserActive Active { get; private set; }
+        public UserIsAdmin IsAdmin { get; private set; }
+        public UserCreated Created { get; private set; }
 
         public ICollection<FertilizerWarehouseDelivery> FertilizerDeliveries { get; }
         public ICollection<PesticideWarehouseDelivery> PesticideDeliveries { get; }
@@ -22,11 +23,22 @@ namespace Farming.Domain.Entities
         public User(UserLogin login, UserPassword password, UserName name, UserIsAdmin isAdmin)
         {
             Id = Guid.NewGuid();
+            Created = DateTimeOffset.Now;
             Login = login;
             Name = name;
             Password = password;
             IsAdmin = isAdmin;
             Active = true;
+        }
+
+        public void ChangeActive()
+        {
+            Active = new UserActive(!Active);
+        }
+
+        public void ChangeRole()
+        {
+            IsAdmin = new UserIsAdmin(!IsAdmin);
         }
     }
 }

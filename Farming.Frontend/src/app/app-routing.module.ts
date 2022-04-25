@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'lands',
     loadChildren: () => import('./lands/lands.module').then(m => m.LandsModule),
   },
+  {
+    path: 'users',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+  },
 ];
 
 @NgModule({

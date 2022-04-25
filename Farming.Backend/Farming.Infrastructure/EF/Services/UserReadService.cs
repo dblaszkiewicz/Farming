@@ -23,5 +23,15 @@ namespace Farming.Infrastructure.EF.Services
         {
             return _dbSet.AnyAsync(x => x.Login == login.ToLower());
         }
+
+        public Task<bool> AreMoreActiveAdministrators(Guid id)
+        {
+            return _dbSet.AnyAsync(x => x.IsAdmin && x.Active && x.Id != id);
+        }
+
+        public Task<bool> IsAdmin(Guid id)
+        {
+            return _dbSet.AnyAsync(x => x.Id == id && x.IsAdmin);
+        }
     }
 }

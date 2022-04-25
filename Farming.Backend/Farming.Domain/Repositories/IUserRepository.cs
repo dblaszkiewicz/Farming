@@ -7,5 +7,6 @@ namespace Farming.Domain.Repositories
     {
         Task AddAsync(User user);
         Task<User> GetAsync(UserId id);
+        Task UpdateAsync(User season);
     }
 }

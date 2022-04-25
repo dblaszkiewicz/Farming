@@ -36,6 +36,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .Property(x => x.IsAdmin)
                 .HasConversion(x => x.Value, x => new UserIsAdmin(x));
 
+            builder
+                .Property(x => x.Created)
+                .HasConversion(x => x.Value, x => new UserCreated(x));
+
             builder.ToTable("Users");
         }
     }
