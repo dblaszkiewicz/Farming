@@ -31,6 +31,17 @@ namespace Farming.Domain.Entities
             Active = true;
         }
 
+        public User(UserLogin login, UserPassword password, UserName name)
+        {
+            Id = Guid.NewGuid();
+            Created = DateTimeOffset.Now;
+            Login = login;
+            Name = name;
+            Password = password;
+            IsAdmin = false;
+            Active = true;
+        }
+
         public void ChangeActive()
         {
             Active = new UserActive(!Active);

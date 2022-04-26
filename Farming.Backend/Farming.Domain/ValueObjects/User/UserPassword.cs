@@ -18,7 +18,7 @@ namespace Farming.Domain.ValueObjects.User
             var hasUpperChar = new Regex(@"[A-Z]+");
             var hasMiniMaxChars = new Regex(@".{6,15}");
             var hasLowerChar = new Regex(@"[a-z]+");
-            var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+            //var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
 
             if (!hasNumber.IsMatch(value))
             {
@@ -40,10 +40,10 @@ namespace Farming.Domain.ValueObjects.User
                 throw new UserPasswordLowerCaseCharsException();
             }
 
-            if (!hasSymbols.IsMatch(value))
-            {
-                throw new UserPasswordSpecialCharsException();
-            }
+            //if (!hasSymbols.IsMatch(value))
+            //{
+            //    throw new UserPasswordSpecialCharsException();
+            //}
 
             Value = value;
         }

@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Dodaj użytkownika</h1>
+
+<form [formGroup]="addUserForm">
+  <div class="firstRow d-flex justify-content-between">
+    <div class="login">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Login </mat-label>
+        <input formControlName="login" type="text" matInput />
+        <mat-error *ngIf="addUserForm.get('login')?.hasError('required')"> Login jest wymagany </mat-error>
+        <mat-error *ngIf="addUserForm.get('login')?.hasError('minlength')"> Login za krótki (min. 4) </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="name">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Imię </mat-label>
+        <input formControlName="name" type="text" matInput />
+        <mat-error *ngIf="addUserForm.get('name')?.hasError('required')"> Imię jest wymagane </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="secondRow d-flex justify-content-between">
+    <div class="password">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Hasło </mat-label>
+        <input formControlName="password" type="password" matInput />
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('required')"> Hasło jest wymagane </mat-error>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('minlength')"> Hasło za krótkie (min. 6) </mat-error>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('tooEasy')"> Hasło za proste </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="repeatPassword">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Powtórz hasło </mat-label>
+        <input formControlName="repeatPassword" type="password" matInput />
+        <mat-error *ngIf="addUserForm.get('repeatPassword')?.hasError('required')">
+          Powtórzenie jest wymagane
+        </mat-error>
+        <mat-error *ngIf="addUserForm.get('repeatPassword')?.hasError('mustMatch')">
+          Hasła do siebie nie pasują
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+<div class="actions d-flex justify-content-center" mat-dialog-actions>
+  <button mat-flat-button color="add" [disabled]="addUserForm.invalid" (click)="addUser()" cdkFocusInitial>
+    Dodaj
+  </button>
+  <button mat-flat-button color="warn" [mat-dialog-close] cdkFocusInitial>Anuluj</button>
+</div>

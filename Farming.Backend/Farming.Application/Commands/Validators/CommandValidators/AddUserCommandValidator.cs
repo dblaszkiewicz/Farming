@@ -23,8 +23,7 @@ namespace Farming.Application.Commands.Validators.CommandValidators
                 .MaximumLength(15).WithMessage("Password too long")
                 .Matches("[A-Z]").WithMessage("Password should have upper case letter")
                 .Matches("[a-z]").WithMessage("Password should have lower case letter")
-                .Matches("[0-9]").WithMessage("Password should have number")
-                .Matches("[^a-zA-Z0-9]").WithMessage("Password should have special character");
+                .Matches("[0-9]").WithMessage("Password should have number");
             RuleFor(x => x.RepeatPassword)
                 .Equal(x => x.Password).WithMessage("Passwords do not match");
         }

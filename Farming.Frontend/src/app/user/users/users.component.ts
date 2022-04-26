@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { lastValueFrom } from 'rxjs';
-import { UserDto } from 'src/app/core/models/user';
+import { AddUserDto, UserDto } from 'src/app/core/models/user';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { SpinnerStore } from 'src/app/core/stores/spinner.store';
+import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -24,7 +26,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private spinnerStore: SpinnerStore,
     private snackbarService: SnackbarService,
-    private userService: UserService
+    private userService: UserService,
+    private matDialog: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -33,7 +36,19 @@ export class UsersComponent implements OnInit {
     this.spinnerStore.stopSpinner();
   }
 
-  public async addUser(): Promise<void> {}
+  public async addUser(): Promise<void> {
+    const dialogRef = this.matDialog.open(AddUserDialogComponent);
+
+    const result = await lastValueFrom(dialogRef.afterClosed());
+
+    if (!result) {
+      return;
+    }
+
+    this.spinnerStore.startSpinner();
+    await this.getInitdata();
+    this.spinnerStore.stopSpinner();
+  }
 
   public async changeActiveMode(userId: string) {
     this.spinnerStore.startSpinner();

@@ -33,7 +33,7 @@ namespace Farming.Application.Commands.Handlers
                 throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
-            var user = new User(command.Login, command.Password, command.Name, command.IsAdmin);
+            var user = new User(command.Login, command.Password, command.Name);
 
             await _userRepository.AddAsync(user);
 

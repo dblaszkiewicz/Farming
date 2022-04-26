@@ -12,5 +12,4 @@ export interface AddUserDto {
   name: string;
   password: string;
   repeatPassword: string;
-  isAdmin: boolean;
 }
