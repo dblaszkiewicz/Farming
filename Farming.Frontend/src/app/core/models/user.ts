@@ -13,3 +13,9 @@ export interface AddUserDto {
   password: string;
   repeatPassword: string;
 }
+
+export interface ChangePasswordDto {
+  oldPassword: string;
+  newPassword: string;
+  repeatNewPassword: string;
+}

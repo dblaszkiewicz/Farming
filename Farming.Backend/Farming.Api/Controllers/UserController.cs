@@ -56,5 +56,16 @@ namespace Farming.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpPut("changePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest changePasswordRequest)
+        {
+            var currentUserId = TemporaryUser.Id();
+
+            var command = _mapsterMapper.From(changePasswordRequest).AdaptToType<ChangePasswordCommand>();
+            command.UserId = currentUserId;
+            await _mediator.Send(command);
+            return Ok();
+        }
     }
 }

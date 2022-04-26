@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppSettings } from 'src/common/appsettings';
-import { AddUserDto, UserDto } from '../models/user';
+import { AddUserDto, ChangePasswordDto, UserDto } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +28,10 @@ export class UserService {
   public changeRole(userId: string): Observable<void> {
     const url = `${AppSettings.userEndpoint}/changeRole?userId=${userId}`;
     return this.http.put<void>(url, null);
+  }
+
+  public changePassword(changePassword: ChangePasswordDto): Observable<void> {
+    const url = `${AppSettings.userEndpoint}/changePassword`;
+    return this.http.put<void>(url, changePassword);
   }
 }

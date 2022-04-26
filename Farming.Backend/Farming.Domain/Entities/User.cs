@@ -7,7 +7,7 @@ namespace Farming.Domain.Entities
     public class User : AggregateRoot<UserId>
     {
         public UserLogin Login { get; }
-        public UserPassword Password { get; }
+        public UserPassword Password { get; private set; }
         public UserName Name { get; }
         public UserActive Active { get; private set; }
         public UserIsAdmin IsAdmin { get; private set; }
@@ -50,6 +50,11 @@ namespace Farming.Domain.Entities
         public void ChangeRole()
         {
             IsAdmin = new UserIsAdmin(!IsAdmin);
+        }
+
+        public void ChangePassword(UserPassword password)
+        {
+            Password = password;
         }
     }
 }
