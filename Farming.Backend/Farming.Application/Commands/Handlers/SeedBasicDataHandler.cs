@@ -194,7 +194,7 @@ namespace Farming.Application.Commands.Handlers
             var fertilizerWarehouse = new FertilizerWarehouse("Magazyn Główny");
             var plantWarehouse = new PlantWarehouse("Magazyn Główny");
 
-            var admin = new User("admin", "admin", "Administrator", true);
+            var admin = new User("admin", "Haslo12", "Administrator", true);
 
             var season = new Season();
 

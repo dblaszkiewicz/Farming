@@ -9,9 +9,10 @@ export default class CustomValidation {
         return null;
       }
       if (control?.value !== checkControl?.value) {
-        controls.get(checkControlName)?.setErrors({ mustMatch: true });
+        checkControl?.setErrors({ mustMatch: true });
         return { mustMatch: true };
       } else {
+        checkControl?.setErrors(null);
         return null;
       }
     };

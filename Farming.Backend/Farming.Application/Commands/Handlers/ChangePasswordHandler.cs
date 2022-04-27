@@ -36,7 +36,7 @@ namespace Farming.Application.Commands.Handlers
                 throw new UserNotFoundException(command.UserId);
             }
 
-            if (user.Password != command.OldPassword)
+            if (user.Password.Value != command.OldPassword)
             {
                 throw new OldPasswordIncorrectException();
             }
