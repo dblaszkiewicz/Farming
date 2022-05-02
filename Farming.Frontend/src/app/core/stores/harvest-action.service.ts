@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
-import { HarvestActionDto } from '../models/harvest';
 import { LandWithPlantDto } from '../models/land';
 import { LandStatusEnum } from '../models/static-types/land-status.enum';
 import { LandService } from '../services/land.service';

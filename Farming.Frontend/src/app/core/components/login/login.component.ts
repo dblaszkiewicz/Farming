@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from 'src/app/state';
@@ -14,9 +14,7 @@ import StoreConnectedComponent from '../../../modules/utilities/store-connected.
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends StoreConnectedComponent<ApplicationState> implements OnInit {
-  public loginFormControl = new FormControl('', [Validators.required]);
-  public passwordFormControl = new FormControl('', [Validators.required]);
-
+  public loginForm: FormGroup;
   public isLoggedIn = false;
 
   constructor(store$: Store<{ auth: AuthState }>, private router: Router) {
@@ -24,14 +22,15 @@ export class LoginComponent extends StoreConnectedComponent<ApplicationState> im
   }
 
   ngOnInit(): void {
+    this.setForm();
     this.subscribeToIsLoggedIn();
   }
 
   public logIn() {
     this.store$.dispatch(
       AuthActions.login({
-        login: this.loginFormControl.value,
-        password: this.passwordFormControl.value,
+        login: this.loginForm.controls['login'].value,
+        password: this.loginForm.controls['password'].value,
       })
     );
   }
@@ -43,6 +42,13 @@ export class LoginComponent extends StoreConnectedComponent<ApplicationState> im
       if (this.isLoggedIn) {
         this.router.navigateByUrl('');
       }
+    });
+  }
+
+  private setForm(): void {
+    this.loginForm = new FormGroup({
+      login: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
   }
 }
