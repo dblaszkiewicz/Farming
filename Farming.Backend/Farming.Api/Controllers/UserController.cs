@@ -1,4 +1,6 @@
-﻿using Farming.Api.MapsterProfiles;
+﻿using Farming.Api.Auth;
+using Farming.Api.Helpers;
+using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
 using Farming.Application.Queries;
 using Farming.Application.Requests;
@@ -8,15 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapsterMapper;
+        private readonly ICurrentUserHelper _currentUserHelper;
+        
 
-        public UserController(IMediator mediator)
+        public UserController(IMediator mediator, ICurrentUserHelper currentUserHelper)
         {
             _mediator = mediator;
+            _currentUserHelper = currentUserHelper;
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
         }
 
@@ -39,7 +45,7 @@ namespace Farming.Api.Controllers
         [HttpPut("changeActive")]
         public async Task<IActionResult> ChangeActive([FromQuery] Guid userId)
         {
-            var currentUserId = TemporaryUser.Id();
+            var currentUserId = _currentUserHelper.GetId();
 
             var command = new ChangeUserActiveCommand(userId, currentUserId);
 
@@ -50,7 +56,7 @@ namespace Farming.Api.Controllers
         [HttpPut("changeRole")]
         public async Task<IActionResult> ChangeRole([FromQuery] Guid userId)
         {
-            var currentUserId = TemporaryUser.Id();
+            var currentUserId = _currentUserHelper.GetId();
 
             var command = new ChangeUserRoleCommand(userId, currentUserId);
             await _mediator.Send(command);
@@ -60,10 +66,8 @@ namespace Farming.Api.Controllers
         [HttpPut("changePassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest changePasswordRequest)
         {
-            var currentUserId = TemporaryUser.Id();
-
             var command = _mapsterMapper.From(changePasswordRequest).AdaptToType<ChangePasswordCommand>();
-            command.UserId = currentUserId;
+            command.UserId = _currentUserHelper.GetId();
             await _mediator.Send(command);
             return Ok();
         }

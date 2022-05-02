@@ -1,4 +1,6 @@
-﻿using Farming.Api.MapsterProfiles;
+﻿using Farming.Api.Auth;
+using Farming.Api.Helpers;
+using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
 using Farming.Application.Queries;
 using Farming.Application.Requests;
@@ -8,23 +10,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class PesticideController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapsterMapper;
+        private readonly ICurrentUserHelper _currentUserHelper;
 
-        public PesticideController(IMediator mediator)
+        public PesticideController(IMediator mediator, ICurrentUserHelper currentUserHelper)
         {
             _mediator = mediator;
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
+            _currentUserHelper = currentUserHelper;
         }
 
         [HttpPost("processAction")]
         public async Task<IActionResult> ProcessAction([FromBody] AddPesticideActionRequest addPesticideActionDto)
         {
             var command = _mapsterMapper.From(addPesticideActionDto).AdaptToType<ProcessPesticideActionCommand>();
-            command.UserId = TemporaryUser.Id();
+            command.UserId = _currentUserHelper.GetId();
             await _mediator.Send(command);
             return Ok();
         }

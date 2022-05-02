@@ -5,6 +5,12 @@ import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
+import StoreConnectedComponent from '../utilities/store-connected.component';
+import { ApplicationState } from '../state';
+import { AuthActions } from '../state/auth/auth.actions';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../state/auth/auth.reducer';
+import { AuthorizationService } from '../state/auth/authorization-service';
 
 @UntilDestroy()
 @Component({
@@ -12,12 +18,21 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent extends StoreConnectedComponent<ApplicationState> {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   public destkopMode: boolean;
 
-  constructor(private observer: BreakpointObserver, private router: Router, translate: TranslateService) {}
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    store: Store<{ auth: AuthState }>,
+    private auth: AuthorizationService,
+    public authorizationService: AuthorizationService,
+    translate: TranslateService
+  ) {
+    super(store);
+  }
 
   ngAfterViewInit() {
     this.observer
@@ -45,5 +60,9 @@ export class AppComponent {
           this.sidenav.close();
         }
       });
+  }
+
+  public logout(): void {
+    this.store$.dispatch(AuthActions.logout());
   }
 }

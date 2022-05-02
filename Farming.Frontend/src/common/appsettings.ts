@@ -13,4 +13,5 @@ export const AppSettings = {
   landEndpoint: `${apiUrl}/Land`,
   weatherEndpoint: `${apiUrl}/Weather`,
   userEndpoint: `${apiUrl}/User`,
+  authEndpoint: `${apiUrl}/auth`,
 };

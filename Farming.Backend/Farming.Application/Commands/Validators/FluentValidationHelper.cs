@@ -6,7 +6,7 @@ namespace Farming.Application.Commands.Validators
     {
         public static string GetExceptionMessage(ValidationResult validationResult)
         {
-            return validationResult.ToString(". ");
+            return validationResult.Errors.First().ErrorMessage;
         }
     }
 }

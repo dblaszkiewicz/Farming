@@ -25,6 +25,11 @@ namespace Farming.Infrastructure.EF.Repositories
             return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public Task<User> GetByLoginAndPasswordAsync(string login, string password)
+        {
+            return _dbSet.SingleOrDefaultAsync(x => x.Login == login && x.Password == password);
+        }
+
         public async Task UpdateAsync(User user)
         {
             _dbSet.Update(user);

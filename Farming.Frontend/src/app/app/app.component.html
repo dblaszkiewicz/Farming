@@ -8,48 +8,62 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img class="avatar mat-elevation-z8" src="assets/images/logo.png" />
+    <img class="avatar mat-elevation-z8" src="assets/images/logo.png" routerLink="/" />
 
     <h4 class="name">Farm IT</h4>
     <p class="designation">Wersja 1.0</p>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="/">
-      <mat-icon>build</mat-icon>
-      <span>Działania</span>
-    </button>
-
-    <button mat-button class="menu-button" routerLink="/lands">
+    <button [disabled]="!authorizationService.isAuthorized" mat-button class="menu-button" routerLink="/lands">
       <mat-icon>dashboard</mat-icon>
       <span>Działki</span>
     </button>
 
-    <button mat-button class="menu-button" routerLink="/warehouse/plant">
+    <button [disabled]="!authorizationService.isActive()" mat-button class="menu-button" routerLink="/warehouse/plant">
       <mat-icon>local_florist</mat-icon>
       <span>Nasiona</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/warehouse/pesticide">
+    <button
+      [disabled]="!authorizationService.isActive()"
+      mat-button
+      class="menu-button"
+      routerLink="/warehouse/pesticide"
+    >
       <mat-icon>local_drink</mat-icon>
       <span>Herbicydy</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/warehouse/fertilizer">
+    <button
+      [disabled]="!authorizationService.isActive()"
+      mat-button
+      class="menu-button"
+      routerLink="/warehouse/fertilizer"
+    >
       <mat-icon>grain</mat-icon>
       <span>Nawozy</span>
     </button>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="/user/change-password">
+    <button
+      [disabled]="!authorizationService.isAuthorized"
+      mat-button
+      class="menu-button"
+      routerLink="/user/change-password"
+    >
       <mat-icon>security</mat-icon>
       <span>Zmiana hasła</span>
     </button>
 
-    <button mat-button class="menu-button" routerLink="/user">
+    <button [disabled]="!authorizationService.isAdmin()" mat-button class="menu-button" routerLink="/user">
       <mat-icon>supervised_user_circle</mat-icon>
       <span>Użytkownicy</span>
     </button>
 
+    <button [disabled]="!authorizationService.isAuthorized" mat-button class="menu-button" (click)="logout()">
+      <mat-icon>build</mat-icon>
+      <span>Wyloguj</span>
+    </button>
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" routerLink="/contact">

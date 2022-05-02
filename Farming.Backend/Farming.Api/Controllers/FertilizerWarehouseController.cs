@@ -1,4 +1,6 @@
-﻿using Farming.Api.MapsterProfiles;
+﻿using Farming.Api.Auth;
+using Farming.Api.Helpers;
+using Farming.Api.MapsterProfiles;
 using Farming.Application.Commands;
 using Farming.Application.Queries;
 using Farming.Application.Requests;
@@ -8,15 +10,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class FertilizerWarehouseController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapsterMapper;
-        public FertilizerWarehouseController(IMediator mediator)
+        private readonly ICurrentUserHelper _currentUserHelper;
+        public FertilizerWarehouseController(IMediator mediator, ICurrentUserHelper currentUserHelper)
         {
             _mediator = mediator;
             _mapsterMapper = new Mapper(MapsterProfile.GetAdapterConfig());
+            _currentUserHelper = currentUserHelper;
         }
 
         [HttpGet("getNameById")]
@@ -31,7 +36,7 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> AddDelivery([FromBody] AddFertilizerWarehouseDeliveryRequest addFertilizerWarehouseDeliveryDto)
         {
             var command = _mapsterMapper.From(addFertilizerWarehouseDeliveryDto).AdaptToType<AddFertilizerWarehouseDeliveryCommand>();
-            command.UserId = TemporaryUser.Id();
+            command.UserId = _currentUserHelper.GetId();
             await _mediator.Send(command);
             return Ok();
         }

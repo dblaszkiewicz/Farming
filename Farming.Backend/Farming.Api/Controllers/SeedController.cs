@@ -1,9 +1,11 @@
-﻿using Farming.Application.Commands;
+﻿using Farming.Api.Auth;
+using Farming.Application.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Farming.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class SeedController : ControllerBase
     {
