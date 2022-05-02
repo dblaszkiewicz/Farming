@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
 import { WarehousesModule } from './modules/warehouses/warehouses.module';
-import { GeneralModule } from './modules/general/general.module';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app/app.component';
@@ -29,7 +28,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule,
     WarehousesModule,
-    GeneralModule,
     NgbModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),

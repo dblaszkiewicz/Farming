@@ -6,7 +6,7 @@ import { ApplicationState } from 'src/app/state';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.reducer';
 import { selectIsLoggedIn } from 'src/app/state/auth/auth.selectors';
-import StoreConnectedComponent from '../../utilities/store-connected.component';
+import StoreConnectedComponent from '../../../modules/utilities/store-connected.component';
 
 @Component({
   selector: 'app-login',
