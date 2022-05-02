@@ -1,25 +1,27 @@
-import { AfterViewInit, ComponentRef, ViewChild } from '@angular/core';
-import { OnDestroy } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
+import { ComponentRef, OnDestroy } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import { PesticideActionService } from 'src/app/core/stores/pesticide-action-service';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
-import { DynamicPanelDirective } from 'src/app/shared/directives/dynamic-panel.directive';
-import { PesticideActionSummaryComponent } from '../pesticide-action-summary/pesticide-action-summary.component';
-import { SelectLandForPesticideComponent } from '../select-land-for-pesticide/select-land-for-pesticide.component';
-import { SelectPesticideComponent } from '../select-pesticide/select-pesticide.component';
+import { FertilizerActionService } from 'src/app/core/stores/fertilizer-action.service';
+import { FertilizerActionSummaryComponent } from '../fertilizer-action-summary/fertilizer-action-summary.component';
+import { SelectLandForFertilizerComponent } from '../select-land-for-fertilizer/select-land-for-fertilizer.component';
+import { SelectFertilizerComponent } from '../select-fertilizer/select-fertilizer.component';
+import { MatDialog } from '@angular/material/dialog';
+import { lastValueFrom } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
+import { DynamicPanelDirective } from 'src/app/modules/shared/directives/dynamic-panel.directive';
+import { ConfirmDialogComponent } from 'src/app/modules/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-pesticide-realization',
-  templateUrl: './pesticide-realization.component.html',
-  styleUrls: ['./pesticide-realization.component.scss'],
+  selector: 'app-fertilizer-realization',
+  templateUrl: './fertilizer-realization.component.html',
+  styleUrls: ['./fertilizer-realization.component.scss'],
 })
-export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterViewInit {
+export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DynamicPanelDirective) content!: DynamicPanelDirective;
 
   public canGoNextSubscription: Subscription;
@@ -29,7 +31,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
   private componentRef!: ComponentRef<RealizationComponentInterface>;
 
   constructor(
-    private pesticideActionService: PesticideActionService,
+    private fertilizerActionService: FertilizerActionService,
     private snackbarService: SnackbarService,
     private router: Router,
     private dialog: MatDialog,
@@ -41,7 +43,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
   }
 
   ngOnDestroy(): void {
-    this.pesticideActionService.resetStore();
+    this.fertilizerActionService.resetStore();
     this.canGoNextSubscription.unsubscribe();
   }
 
@@ -52,7 +54,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
 
   public goNext(): void {
     if (this.currentPanel === 1) {
-      this.goToPesticides();
+      this.goToFertilizers();
       this.currentPanel++;
       this.saveButton = false;
     } else if (this.currentPanel === 2) {
@@ -73,7 +75,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
       this.goToFields();
       this.currentPanel--;
     } else if (this.currentPanel === 3) {
-      this.goToPesticides();
+      this.goToFertilizers();
       this.currentPanel--;
       this.saveButton = false;
     } else {
@@ -86,7 +88,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
       return;
     }
 
-    await this.pesticideActionService.processAction();
+    await this.fertilizerActionService.processAction();
     this.snackbarService.showSuccess('Dodano pomyślnie');
     this.router.navigateByUrl(`/`);
   }
@@ -98,17 +100,17 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectLandForPesticideComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectLandForFertilizerComponent);
   }
 
-  private goToPesticides(): void {
+  private goToFertilizers(): void {
     if (this.componentRef) {
       this.componentRef.destroy();
     }
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectPesticideComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectFertilizerComponent);
   }
 
   private goToSummary(): void {
@@ -118,7 +120,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(PesticideActionSummaryComponent);
+    this.componentRef = viewContainerRef.createComponent(FertilizerActionSummaryComponent);
   }
 
   private async goToMainPanel(): Promise<void> {
@@ -130,7 +132,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.pesticideActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.fertilizerActionService.canGoNext().subscribe(value => {
       this.canGoNext = value;
     });
   }

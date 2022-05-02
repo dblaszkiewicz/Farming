@@ -1,27 +1,24 @@
-import { ComponentRef, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import { FertilizerActionService } from 'src/app/core/stores/fertilizer-action.service';
-import { DynamicPanelDirective } from 'src/app/shared/directives/dynamic-panel.directive';
-import { FertilizerActionSummaryComponent } from '../fertilizer-action-summary/fertilizer-action-summary.component';
-import { SelectLandForFertilizerComponent } from '../select-land-for-fertilizer/select-land-for-fertilizer.component';
-import { SelectFertilizerComponent } from '../select-fertilizer/select-fertilizer.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
-import { lastValueFrom } from 'rxjs';
-import { ChangeDetectorRef } from '@angular/core';
+import { PlantActionService } from 'src/app/core/stores/plant-action.service';
+import { ConfirmDialogComponent } from 'src/app/modules/shared/confirm-dialog/confirm-dialog.component';
+import { DynamicPanelDirective } from 'src/app/modules/shared/directives/dynamic-panel.directive';
+import { PlantActionSummaryComponent } from '../plant-action-summary/plant-action-summary.component';
+import { SelectLandForPlantComponent } from '../select-land-for-plant/select-land-for-plant.component';
+import { SelectPlantComponent } from '../select-plant/select-plant.component';
 
 @Component({
-  selector: 'app-fertilizer-realization',
-  templateUrl: './fertilizer-realization.component.html',
-  styleUrls: ['./fertilizer-realization.component.scss'],
+  selector: 'app-plant-realization',
+  templateUrl: './plant-realization.component.html',
+  styleUrls: ['./plant-realization.component.scss'],
 })
-export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PlantRealizationComponent implements OnInit, AfterViewInit {
   @ViewChild(DynamicPanelDirective) content!: DynamicPanelDirective;
 
   public canGoNextSubscription: Subscription;
@@ -31,7 +28,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
   private componentRef!: ComponentRef<RealizationComponentInterface>;
 
   constructor(
-    private fertilizerActionService: FertilizerActionService,
+    private plantActionService: PlantActionService,
     private snackbarService: SnackbarService,
     private router: Router,
     private dialog: MatDialog,
@@ -43,7 +40,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
   }
 
   ngOnDestroy(): void {
-    this.fertilizerActionService.resetStore();
+    this.plantActionService.resetStore();
     this.canGoNextSubscription.unsubscribe();
   }
 
@@ -54,7 +51,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
 
   public goNext(): void {
     if (this.currentPanel === 1) {
-      this.goToFertilizers();
+      this.goToPlants();
       this.currentPanel++;
       this.saveButton = false;
     } else if (this.currentPanel === 2) {
@@ -75,7 +72,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
       this.goToFields();
       this.currentPanel--;
     } else if (this.currentPanel === 3) {
-      this.goToFertilizers();
+      this.goToPlants();
       this.currentPanel--;
       this.saveButton = false;
     } else {
@@ -88,7 +85,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
       return;
     }
 
-    await this.fertilizerActionService.processAction();
+    await this.plantActionService.processAction();
     this.snackbarService.showSuccess('Dodano pomyślnie');
     this.router.navigateByUrl(`/`);
   }
@@ -100,17 +97,17 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectLandForFertilizerComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectLandForPlantComponent);
   }
 
-  private goToFertilizers(): void {
+  private goToPlants(): void {
     if (this.componentRef) {
       this.componentRef.destroy();
     }
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectFertilizerComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectPlantComponent);
   }
 
   private goToSummary(): void {
@@ -120,7 +117,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(FertilizerActionSummaryComponent);
+    this.componentRef = viewContainerRef.createComponent(PlantActionSummaryComponent);
   }
 
   private async goToMainPanel(): Promise<void> {
@@ -132,7 +129,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.fertilizerActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.plantActionService.canGoNext().subscribe(value => {
       this.canGoNext = value;
     });
   }

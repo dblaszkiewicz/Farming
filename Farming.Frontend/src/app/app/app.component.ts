@@ -5,12 +5,12 @@ import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import StoreConnectedComponent from '../utilities/store-connected.component';
 import { ApplicationState } from '../state';
 import { AuthActions } from '../state/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../state/auth/auth.reducer';
 import { AuthorizationService } from '../state/auth/authorization-service';
+import StoreConnectedComponent from '../modules/utilities/store-connected.component';
 
 @UntilDestroy()
 @Component({

@@ -6,19 +6,18 @@ import { Router } from '@angular/router';
 import { lastValueFrom, Subscription } from 'rxjs';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import { PlantActionService } from 'src/app/core/stores/plant-action.service';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
-import { DynamicPanelDirective } from 'src/app/shared/directives/dynamic-panel.directive';
-import { PlantActionSummaryComponent } from '../plant-action-summary/plant-action-summary.component';
-import { SelectLandForPlantComponent } from '../select-land-for-plant/select-land-for-plant.component';
-import { SelectPlantComponent } from '../select-plant/select-plant.component';
+import { HarvestActionService } from 'src/app/core/stores/harvest-action.service';
+import { ConfirmDialogComponent } from 'src/app/modules/shared/confirm-dialog/confirm-dialog.component';
+import { DynamicPanelDirective } from 'src/app/modules/shared/directives/dynamic-panel.directive';
+import { HarvestActionSummaryComponent } from '../harvest-action-summary/harvest-action-summary.component';
+import { SelectLandForHarvestComponent } from '../select-land-for-harvest/select-land-for-harvest.component';
 
 @Component({
-  selector: 'app-plant-realization',
-  templateUrl: './plant-realization.component.html',
-  styleUrls: ['./plant-realization.component.scss'],
+  selector: 'app-harvest-realization',
+  templateUrl: './harvest-realization.component.html',
+  styleUrls: ['./harvest-realization.component.scss'],
 })
-export class PlantRealizationComponent implements OnInit, AfterViewInit {
+export class HarvestRealizationComponent implements OnInit, AfterViewInit {
   @ViewChild(DynamicPanelDirective) content!: DynamicPanelDirective;
 
   public canGoNextSubscription: Subscription;
@@ -28,7 +27,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
   private componentRef!: ComponentRef<RealizationComponentInterface>;
 
   constructor(
-    private plantActionService: PlantActionService,
+    private harvestActionService: HarvestActionService,
     private snackbarService: SnackbarService,
     private router: Router,
     private dialog: MatDialog,
@@ -40,7 +39,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.plantActionService.resetStore();
+    this.harvestActionService.resetStore();
     this.canGoNextSubscription.unsubscribe();
   }
 
@@ -51,14 +50,10 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
 
   public goNext(): void {
     if (this.currentPanel === 1) {
-      this.goToPlants();
-      this.currentPanel++;
-      this.saveButton = false;
-    } else if (this.currentPanel === 2) {
       this.goToSummary();
       this.currentPanel++;
       this.saveButton = true;
-    } else if (this.currentPanel === 3) {
+    } else if (this.currentPanel === 2) {
       this.submitAction();
     } else {
       this.snackbarService.showFail('BŁĄD');
@@ -71,9 +66,6 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
     } else if (this.currentPanel === 2) {
       this.goToFields();
       this.currentPanel--;
-    } else if (this.currentPanel === 3) {
-      this.goToPlants();
-      this.currentPanel--;
       this.saveButton = false;
     } else {
       this.snackbarService.showFail('BŁĄD');
@@ -85,7 +77,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    await this.plantActionService.processAction();
+    await this.harvestActionService.processAction();
     this.snackbarService.showSuccess('Dodano pomyślnie');
     this.router.navigateByUrl(`/`);
   }
@@ -97,17 +89,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectLandForPlantComponent);
-  }
-
-  private goToPlants(): void {
-    if (this.componentRef) {
-      this.componentRef.destroy();
-    }
-
-    const viewContainerRef = this.content.viewContainerRef;
-    viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectPlantComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectLandForHarvestComponent);
   }
 
   private goToSummary(): void {
@@ -117,7 +99,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(PlantActionSummaryComponent);
+    this.componentRef = viewContainerRef.createComponent(HarvestActionSummaryComponent);
   }
 
   private async goToMainPanel(): Promise<void> {
@@ -129,7 +111,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.plantActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.harvestActionService.canGoNext().subscribe(value => {
       this.canGoNext = value;
     });
   }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ActiveGuard } from '../core/guards/active.guard';
-import { AdminGuard } from '../core/guards/admin.guard';
-import { AuthGuard } from '../core/guards/auth.guard';
+import { ActiveGuard } from 'src/app/core/guards/active.guard';
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UsersComponent } from './users/users.component';
 

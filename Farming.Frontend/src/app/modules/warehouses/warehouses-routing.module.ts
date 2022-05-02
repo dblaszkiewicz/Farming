@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ActiveGuard } from '../core/guards/active.guard';
-import { AuthGuard } from '../core/guards/auth.guard';
+import { ActiveGuard } from 'src/app/core/guards/active.guard';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { FertilizerDeliveryComponent } from './fertilizer/fertilizer-delivery/fertilizer-delivery.component';
 import { FertilizerWarehouseComponent } from './fertilizer/fertilizer-warehouse/fertilizer-warehouse.component';
 import { PesticideDeliveryComponent } from './pesticide/pesticide-delivery/pesticide-delivery.component';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ProgressSpinnerComponent } from 'src/app/shared/progress-spinner/progress-spinner.component';
+import { ProgressSpinnerComponent } from 'src/app/modules/shared/progress-spinner/progress-spinner.component';
 
 @Injectable({
   providedIn: 'root',

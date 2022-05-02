@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared/shared.module';
-import { WarehousesModule } from './warehouses/warehouses.module';
-import { GeneralModule } from './general/general.module';
+import { SharedModule } from './modules/shared/shared.module';
+import { WarehousesModule } from './modules/warehouses/warehouses.module';
+import { GeneralModule } from './modules/general/general.module';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app/app.component';

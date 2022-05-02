@@ -1,23 +1,25 @@
+import { AfterViewInit, ComponentRef, ViewChild } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { AfterViewInit } from '@angular/core';
-import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { lastValueFrom, Subscription } from 'rxjs';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import { HarvestActionService } from 'src/app/core/stores/harvest-action.service';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
-import { DynamicPanelDirective } from 'src/app/shared/directives/dynamic-panel.directive';
-import { HarvestActionSummaryComponent } from '../harvest-action-summary/harvest-action-summary.component';
-import { SelectLandForHarvestComponent } from '../select-land-for-harvest/select-land-for-harvest.component';
+import { PesticideActionService } from 'src/app/core/stores/pesticide-action-service';
+import { ConfirmDialogComponent } from 'src/app/modules/shared/confirm-dialog/confirm-dialog.component';
+import { DynamicPanelDirective } from 'src/app/modules/shared/directives/dynamic-panel.directive';
+import { PesticideActionSummaryComponent } from '../pesticide-action-summary/pesticide-action-summary.component';
+import { SelectLandForPesticideComponent } from '../select-land-for-pesticide/select-land-for-pesticide.component';
+import { SelectPesticideComponent } from '../select-pesticide/select-pesticide.component';
 
 @Component({
-  selector: 'app-harvest-realization',
-  templateUrl: './harvest-realization.component.html',
-  styleUrls: ['./harvest-realization.component.scss'],
+  selector: 'app-pesticide-realization',
+  templateUrl: './pesticide-realization.component.html',
+  styleUrls: ['./pesticide-realization.component.scss'],
 })
-export class HarvestRealizationComponent implements OnInit, AfterViewInit {
+export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DynamicPanelDirective) content!: DynamicPanelDirective;
 
   public canGoNextSubscription: Subscription;
@@ -27,7 +29,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
   private componentRef!: ComponentRef<RealizationComponentInterface>;
 
   constructor(
-    private harvestActionService: HarvestActionService,
+    private pesticideActionService: PesticideActionService,
     private snackbarService: SnackbarService,
     private router: Router,
     private dialog: MatDialog,
@@ -39,7 +41,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.harvestActionService.resetStore();
+    this.pesticideActionService.resetStore();
     this.canGoNextSubscription.unsubscribe();
   }
 
@@ -50,10 +52,14 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
 
   public goNext(): void {
     if (this.currentPanel === 1) {
+      this.goToPesticides();
+      this.currentPanel++;
+      this.saveButton = false;
+    } else if (this.currentPanel === 2) {
       this.goToSummary();
       this.currentPanel++;
       this.saveButton = true;
-    } else if (this.currentPanel === 2) {
+    } else if (this.currentPanel === 3) {
       this.submitAction();
     } else {
       this.snackbarService.showFail('BŁĄD');
@@ -66,6 +72,9 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
     } else if (this.currentPanel === 2) {
       this.goToFields();
       this.currentPanel--;
+    } else if (this.currentPanel === 3) {
+      this.goToPesticides();
+      this.currentPanel--;
       this.saveButton = false;
     } else {
       this.snackbarService.showFail('BŁĄD');
@@ -77,7 +86,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    await this.harvestActionService.processAction();
+    await this.pesticideActionService.processAction();
     this.snackbarService.showSuccess('Dodano pomyślnie');
     this.router.navigateByUrl(`/`);
   }
@@ -89,7 +98,17 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(SelectLandForHarvestComponent);
+    this.componentRef = viewContainerRef.createComponent(SelectLandForPesticideComponent);
+  }
+
+  private goToPesticides(): void {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
+
+    const viewContainerRef = this.content.viewContainerRef;
+    viewContainerRef.clear();
+    this.componentRef = viewContainerRef.createComponent(SelectPesticideComponent);
   }
 
   private goToSummary(): void {
@@ -99,7 +118,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
 
     const viewContainerRef = this.content.viewContainerRef;
     viewContainerRef.clear();
-    this.componentRef = viewContainerRef.createComponent(HarvestActionSummaryComponent);
+    this.componentRef = viewContainerRef.createComponent(PesticideActionSummaryComponent);
   }
 
   private async goToMainPanel(): Promise<void> {
@@ -111,7 +130,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.harvestActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.pesticideActionService.canGoNext().subscribe(value => {
       this.canGoNext = value;
     });
   }

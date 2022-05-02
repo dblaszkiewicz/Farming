@@ -5,7 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { SeasonDto } from 'src/app/core/models/season';
 import { SeasonService } from 'src/app/core/services/season.service';
 import { SpinnerStore } from 'src/app/core/stores/spinner.store';
-import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/modules/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-change-season',
