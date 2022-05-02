@@ -7,6 +7,7 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.reducer';
 import { selectIsLoggedIn } from 'src/app/state/auth/auth.selectors';
 import StoreConnectedComponent from '../../../modules/utilities/store-connected.component';
+import { SpinnerStore } from '../../stores/spinner.store';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent extends StoreConnectedComponent<ApplicationState> im
   public loginForm: FormGroup;
   public isLoggedIn = false;
 
-  constructor(store$: Store<{ auth: AuthState }>, private router: Router) {
+  constructor(store$: Store<{ auth: AuthState }>, private router: Router, private spinnerStore: SpinnerStore) {
     super(store$);
   }
 
@@ -27,6 +28,7 @@ export class LoginComponent extends StoreConnectedComponent<ApplicationState> im
   }
 
   public logIn() {
+    this.spinnerStore.startSpinner();
     this.store$.dispatch(
       AuthActions.login({
         login: this.loginForm.controls['login'].value,

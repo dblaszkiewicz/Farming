@@ -4,7 +4,7 @@
       <div>
         <mat-form-field class="example-full-width login" appearance="fill">
           <mat-label> Login </mat-label>
-          <input formControlName="login" type="password" matInput />
+          <input formControlName="login" type="text" matInput />
           <mat-error *ngIf="loginForm.get('login')?.touched && loginForm.get('login')?.hasError('required')">
             Wprowadź login
           </mat-error>

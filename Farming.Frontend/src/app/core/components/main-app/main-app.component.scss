@@ -48,11 +48,12 @@ mat-sidenav-container {
   }
 }
 
-.avatar {
+.logo {
   margin-top: 16px;
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .name {
@@ -74,10 +75,10 @@ mat-divider {
 
 .userInactive {
   font-size: 13px;
-
   color: red;
 }
 
 .userAdmin {
   font-size: 17px;
+  color: #00ff00;
 }

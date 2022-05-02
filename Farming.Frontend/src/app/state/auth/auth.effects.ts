@@ -6,13 +6,15 @@ import { AuthActions } from './auth.actions';
 
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SpinnerStore } from 'src/app/core/stores/spinner.store';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private spinnerStore: SpinnerStore
   ) {}
 
   logIn$ = createEffect(() =>
@@ -22,6 +24,7 @@ export class AuthEffects {
         this.authenticationService.logIn$(action.login, action.password).pipe(
           map(response => AuthActions.loginSuccess({ token: response.content.token })),
           tap(_ => {
+            this.spinnerStore.stopSpinner();
             this.router.navigateByUrl('');
           }),
           catchError(_ => of(AuthActions.loginFailed()))

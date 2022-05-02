@@ -37,7 +37,9 @@ export class UsersComponent implements OnInit {
   }
 
   public async addUser(): Promise<void> {
-    const dialogRef = this.matDialog.open(AddUserDialogComponent);
+    const dialogRef = this.matDialog.open(AddUserDialogComponent, {
+      disableClose: true,
+    });
 
     const result = await lastValueFrom(dialogRef.afterClosed());
 
