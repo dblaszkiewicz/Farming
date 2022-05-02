@@ -10,7 +10,7 @@ import { selectToken } from './auth.selectors';
 })
 export class AuthorizationService {
   private _rawToken: string = '';
-  private _decodedToken!: DecodedToken;
+  private _decodedToken!: DecodedToken | null;
 
   public get rawToken(): string {
     return this._rawToken;
@@ -29,6 +29,7 @@ export class AuthorizationService {
       this._rawToken = token;
 
       if (!token) {
+        this._decodedToken = null;
         return;
       }
 
