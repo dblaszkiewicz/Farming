@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppSettings } from 'src/common/appsettings';
+import { AppSettings } from 'src/app/common/appsettings';
 import { LandDto, LandWithPlantDto } from '../models/land';
 
 @Injectable({

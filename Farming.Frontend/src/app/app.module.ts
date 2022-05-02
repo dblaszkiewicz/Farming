@@ -14,6 +14,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { StateModule } from './state/state.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MainAppComponent } from './core/components/main-app/main-app.component';
+import { CoreModule } from './core/core.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StateModule,
+    CoreModule,
     TranslateModule.forRoot({
       defaultLanguage: 'pl',
       loader: {

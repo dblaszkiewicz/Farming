@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of, tap } from 'rxjs';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.reducer';
-import { AppSettings } from 'src/common/appsettings';
+import { AppSettings } from 'src/app/common/appsettings';
 import { ApiResponse, TokenResponse } from '../models/basic';
 import { LogInDto } from '../models/login';
 
