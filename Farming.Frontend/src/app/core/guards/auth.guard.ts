@@ -22,7 +22,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.authorizationService.isAuthorized) {
+    if (this.authorizationService.authorized) {
       return true;
     }
 
@@ -34,7 +34,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     route: Route,
     segments: UrlSegment[]
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authorizationService.isAuthorized) {
+    if (this.authorizationService.authorized) {
       return true;
     }
 

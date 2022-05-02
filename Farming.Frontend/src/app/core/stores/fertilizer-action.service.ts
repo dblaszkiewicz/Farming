@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, lastValueFrom, of as observableOf } from 'rxjs';
-import { FertilizerActionDto, FertilizerDto, FertilizerStateDto } from '../models/fertilizer';
+import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
+import { FertilizerActionDto, FertilizerStateDto } from '../models/fertilizer';
 import { LandWithPlantDto } from '../models/land';
 import { LandService } from '../services/land.service';
 import {} from 'rxjs';
@@ -44,7 +44,7 @@ export class FertilizerActionService {
     this.canGoToNextPanel.next(false);
   }
 
-  public canGoNext(): Observable<boolean> {
+  public canGoNext$(): Observable<boolean> {
     return this.canGoToNextPanel.asObservable();
   }
 

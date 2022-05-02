@@ -130,7 +130,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.pesticideActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.pesticideActionService.canGoNext$().subscribe(value => {
       this.canGoNext = value;
     });
   }

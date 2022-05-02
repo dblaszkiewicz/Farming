@@ -132,7 +132,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.fertilizerActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.fertilizerActionService.canGoNext$().subscribe(value => {
       this.canGoNext = value;
     });
   }

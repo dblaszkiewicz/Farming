@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { AuthState } from 'src/app/state/auth/auth.reducer';
 import { AuthorizationService } from 'src/app/state/auth/authorization-service';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @UntilDestroy()
 @Component({
@@ -18,20 +19,42 @@ import { AuthActions } from 'src/app/state/auth/auth.actions';
   templateUrl: './main-app.component.html',
   styleUrls: ['./main-app.component.scss'],
 })
-export class MainAppComponent extends StoreConnectedComponent<ApplicationState> {
+export class MainAppComponent extends StoreConnectedComponent<ApplicationState> implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
   public destkopMode: boolean;
 
+  public isAuthorized: boolean = false;
+  public isActive: boolean = false;
+  public isAdmin: boolean = false;
+  public userName: string;
+
   constructor(
+    public authorizationService: AuthorizationService,
     private observer: BreakpointObserver,
     private router: Router,
-    store: Store<{ auth: AuthState }>,
     private auth: AuthorizationService,
-    public authorizationService: AuthorizationService,
+    store: Store<{ auth: AuthState }>,
     translate: TranslateService
   ) {
     super(store);
+  }
+
+  ngOnInit(): void {
+    this.authorizationService.isAuthorized$().subscribe(authorized => {
+      this.isAuthorized = authorized;
+      if (this.isAuthorized) {
+        this.userName = this.authorizationService.currentUserName();
+      }
+    });
+
+    this.authorizationService.isActive$().subscribe(active => {
+      this.isActive = active;
+    });
+
+    this.authorizationService.isAdmin$().subscribe(admin => {
+      this.isAdmin = admin;
+    });
   }
 
   ngAfterViewInit() {

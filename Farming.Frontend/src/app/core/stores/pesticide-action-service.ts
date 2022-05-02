@@ -43,7 +43,7 @@ export class PesticideActionService {
     this.canGoToNextPanel.next(false);
   }
 
-  public canGoNext(): Observable<boolean> {
+  public canGoNext$(): Observable<boolean> {
     return this.canGoToNextPanel.asObservable();
   }
 

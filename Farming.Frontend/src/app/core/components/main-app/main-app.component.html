@@ -3,7 +3,14 @@
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  Agriculture Solutions
+
+  <div *ngIf="!isAuthorized">Agriculture Solutions</div>
+
+  <div *ngIf="isAuthorized">
+    Witaj, {{ userName }}!
+    <span><mat-icon class="userAdmin" *ngIf="isAdmin">build</mat-icon></span>
+    <span class="userInactive" *ngIf="!isActive"> (nieaktywny) </span>
+  </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -12,59 +19,50 @@
 
     <h4 class="name">Farm IT</h4>
     <p class="designation">Wersja 1.0</p>
-
     <mat-divider></mat-divider>
 
-    <button [disabled]="!authorizationService.isAuthorized" mat-button class="menu-button" routerLink="/lands">
-      <mat-icon>dashboard</mat-icon>
-      <span>Działki</span>
+    <button *ngIf="!isAuthorized" mat-button class="menu-button" routerLink="/login">
+      <mat-icon>perm_identity</mat-icon>
+      <span>Logowanie</span>
     </button>
 
-    <button [disabled]="!authorizationService.isActive()" mat-button class="menu-button" routerLink="/warehouse/plant">
-      <mat-icon>local_florist</mat-icon>
-      <span>Nasiona</span>
-    </button>
-    <button
-      [disabled]="!authorizationService.isActive()"
-      mat-button
-      class="menu-button"
-      routerLink="/warehouse/pesticide"
-    >
-      <mat-icon>local_drink</mat-icon>
-      <span>Herbicydy</span>
-    </button>
-    <button
-      [disabled]="!authorizationService.isActive()"
-      mat-button
-      class="menu-button"
-      routerLink="/warehouse/fertilizer"
-    >
-      <mat-icon>grain</mat-icon>
-      <span>Nawozy</span>
-    </button>
+    <div *ngIf="isAuthorized">
+      <button mat-button class="menu-button" routerLink="/lands">
+        <mat-icon>dashboard</mat-icon>
+        <span>Działki</span>
+      </button>
 
-    <mat-divider></mat-divider>
+      <button [disabled]="!isActive" mat-button class="menu-button" routerLink="/warehouse/plant">
+        <mat-icon>local_florist</mat-icon>
+        <span>Nasiona</span>
+      </button>
+      <button [disabled]="!isActive" mat-button class="menu-button" routerLink="/warehouse/pesticide">
+        <mat-icon>local_drink</mat-icon>
+        <span>Herbicydy</span>
+      </button>
+      <button [disabled]="!isActive" mat-button class="menu-button" routerLink="/warehouse/fertilizer">
+        <mat-icon>grain</mat-icon>
+        <span>Nawozy</span>
+      </button>
 
-    <button
-      [disabled]="!authorizationService.isAuthorized"
-      mat-button
-      class="menu-button"
-      routerLink="/user/change-password"
-    >
-      <mat-icon>security</mat-icon>
-      <span>Zmiana hasła</span>
-    </button>
+      <mat-divider></mat-divider>
 
-    <button [disabled]="!authorizationService.isAdmin()" mat-button class="menu-button" routerLink="/user">
-      <mat-icon>supervised_user_circle</mat-icon>
-      <span>Użytkownicy</span>
-    </button>
+      <button mat-button class="menu-button" routerLink="/user/change-password">
+        <mat-icon>security</mat-icon>
+        <span>Zmiana hasła</span>
+      </button>
 
-    <button [disabled]="!authorizationService.isAuthorized" mat-button class="menu-button" (click)="logout()">
-      <mat-icon>build</mat-icon>
-      <span>Wyloguj</span>
-    </button>
-    <mat-divider></mat-divider>
+      <button *ngIf="isAdmin" [disabled]="!isActive" mat-button class="menu-button" routerLink="/user">
+        <mat-icon>supervised_user_circle</mat-icon>
+        <span>Użytkownicy</span>
+      </button>
+
+      <button mat-button class="menu-button" (click)="logout()">
+        <mat-icon>build</mat-icon>
+        <span>Wyloguj</span>
+      </button>
+      <mat-divider></mat-divider>
+    </div>
 
     <button mat-button class="menu-button" routerLink="/contact">
       <mat-icon>contact_support</mat-icon>

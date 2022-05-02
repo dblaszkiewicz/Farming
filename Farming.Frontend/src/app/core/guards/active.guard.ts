@@ -13,7 +13,7 @@ export class ActiveGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this.authorizationService.isActive()) {
+    if (this.authorizationService.active) {
       return true;
     }
 

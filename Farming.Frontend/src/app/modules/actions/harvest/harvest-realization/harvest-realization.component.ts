@@ -111,7 +111,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.harvestActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.harvestActionService.canGoNext$().subscribe(value => {
       this.canGoNext = value;
     });
   }

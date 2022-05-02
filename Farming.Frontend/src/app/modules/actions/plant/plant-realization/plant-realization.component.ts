@@ -129,7 +129,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
   }
 
   private setSubscription(): void {
-    this.canGoNextSubscription = this.plantActionService.canGoNext().subscribe(value => {
+    this.canGoNextSubscription = this.plantActionService.canGoNext$().subscribe(value => {
       this.canGoNext = value;
     });
   }
