@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
   HttpStatusCode,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs';
 import { throwError } from 'rxjs';
 import { SnackbarService } from '../services/snackbar.service';
@@ -47,7 +47,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.spinnerStore.stopSpinner();
 
         if (error.status === 400) {
-          this.snackbarService.showFail(error.error.message);
+          this.snackbarService.showFailApi(error.error.message);
           return throwError(() => error.error.name);
         } else {
           if (error.status === HttpStatusCode.Unauthorized) {

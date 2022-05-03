@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyUserIdException : FarmingException
     {
-        public EmptyUserIdException() : base("User ID cannot be empty.")
+        public EmptyUserIdException() : base("User ID cannot be empty")
         {
         }
     }

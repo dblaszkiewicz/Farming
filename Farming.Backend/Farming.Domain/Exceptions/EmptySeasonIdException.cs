@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptySeasonIdException : FarmingException
     {
-        public EmptySeasonIdException() : base("Season ID cannot be empty.")
+        public EmptySeasonIdException() : base("Season ID cannot be empty")
         {
         }
     }

@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyPesticideActionIdException : FarmingException
     {
-        public EmptyPesticideActionIdException() : base("Pesticide Action ID cannot be empty.")
+        public EmptyPesticideActionIdException() : base("Pesticide Action ID cannot be empty")
         {
         }
     }

@@ -9,19 +9,19 @@ namespace Farming.Application.Commands.Validators.CommandValidators
         {
             RuleFor(c => c.LandId)
                 .NotEmpty()
-                .WithMessage("{PropertyName} should be not empty");
+                .WithMessage("LandId should be not empty");
             RuleFor(c => c.FertilizerId)
                 .NotEmpty()
-                .WithMessage("{PropertyName} should be not empty");
+                .WithMessage("FertilizerId should be not empty");
             RuleFor(c => c.FertilizerWarehouseId)
                 .NotEmpty()
-                .WithMessage("{PropertyName} should be not empty");
+                .WithMessage("FertilizerWarehouseId should be not empty");
             RuleFor(c => c.UserId)
                 .NotEmpty()
-                .WithMessage("{PropertyName} should be not empty");
+                .WithMessage("UserId should be not empty");
             RuleFor(c => c.Quantity)
                 .GreaterThan(0)
-                .WithMessage("{PropertyName} should be greather than 0");
+                .WithMessage("Quantity should be greather than 0");
         }
     }
 }

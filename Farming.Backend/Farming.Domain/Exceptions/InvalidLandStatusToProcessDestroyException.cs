@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class InvalidLandStatusToProcessDestroyException : FarmingException
     {
-        public InvalidLandStatusToProcessDestroyException() : base("Niepoprawny status działki do popsucia zbioru.")
+        public InvalidLandStatusToProcessDestroyException() : base("Invalid land status to process destroy")
         {
 
         }

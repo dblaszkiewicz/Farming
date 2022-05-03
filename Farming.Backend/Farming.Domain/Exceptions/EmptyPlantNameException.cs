@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyPlantNameException : FarmingException
     {
-        public EmptyPlantNameException() : base("Plank name cannot be empty.")
+        public EmptyPlantNameException() : base("Plant name cannot be empty")
         {
         }
     }

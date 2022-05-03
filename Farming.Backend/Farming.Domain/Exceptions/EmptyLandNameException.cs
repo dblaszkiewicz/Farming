@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyLandNameException : FarmingException
     {
-        public EmptyLandNameException() : base("Land Name cannot be empty.")
+        public EmptyLandNameException() : base("Land Name cannot be empty")
         {
         }
     }

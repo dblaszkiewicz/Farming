@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyPlantWarehouseStateIdException : FarmingException
     {
-        public EmptyPlantWarehouseStateIdException() : base("Plant Warehouse State ID cannot be empty.")
+        public EmptyPlantWarehouseStateIdException() : base("Plant Warehouse State ID cannot be empty")
         {
         }
     }

@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyLandRealizationIdException : FarmingException
     {
-        public EmptyLandRealizationIdException() : base("Land realization ID cannot be empty.")
+        public EmptyLandRealizationIdException() : base("Land realization ID cannot be empty")
         {
         }
     }

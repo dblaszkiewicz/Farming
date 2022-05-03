@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class InvalidLandStatusToProcessHarvestException : FarmingException
     {
-        public InvalidLandStatusToProcessHarvestException() : base("Niepoprawny status działki do przeprowadzenia zbioru.")
+        public InvalidLandStatusToProcessHarvestException() : base("Invalid land status to process harvest")
         {
 
         }

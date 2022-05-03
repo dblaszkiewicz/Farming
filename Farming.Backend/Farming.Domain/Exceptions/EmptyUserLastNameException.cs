@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyUserLastNameException : FarmingException
     {
-        public EmptyUserLastNameException() : base("User last name cannot be empty.")
+        public EmptyUserLastNameException() : base("User last name cannot be empty")
         {
         }
     }

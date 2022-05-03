@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyFertilizerWarehouseIdException : FarmingException
     {
-        public EmptyFertilizerWarehouseIdException() : base("Fertilizer Warehouse ID cannot be empty.")
+        public EmptyFertilizerWarehouseIdException() : base("Fertilizer Warehouse ID cannot be empty")
         {
         }
     }

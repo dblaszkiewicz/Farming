@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyPesticideNameException : FarmingException
     {
-        public EmptyPesticideNameException() : base("Pesticide name cannot be empty.")
+        public EmptyPesticideNameException() : base("Pesticide name cannot be empty")
         {
         }
     }

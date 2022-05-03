@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyUserLoginException : FarmingException
     {
-        public EmptyUserLoginException() : base("User login cannot be empty.")
+        public EmptyUserLoginException() : base("User login cannot be empty")
         {
         }
     }

@@ -4,7 +4,7 @@ namespace Farming.Domain.Exceptions
 {
     public class EmptyPlantActionIdException : FarmingException
     {
-        public EmptyPlantActionIdException() : base("Plant Action ID cannot be empty.")
+        public EmptyPlantActionIdException() : base("Plant Action ID cannot be empty")
         {
         }
     }
