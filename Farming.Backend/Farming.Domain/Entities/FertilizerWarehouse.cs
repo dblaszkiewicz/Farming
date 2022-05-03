@@ -28,6 +28,7 @@ namespace Farming.Domain.Entities
                 state = new FertilizerWarehouseState(delivery.FertilizerId);
                 States.Add(state);
                 AddEvent(new FertilizerWarehouseStateAdded(this, state));
+                IncrementVersion();
             }
 
             state.AddDelivery(delivery);

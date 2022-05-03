@@ -28,6 +28,7 @@ namespace Farming.Domain.Entities
                 state = new PesticideWarehouseState(delivery.PesticideId);
                 States.Add(state);
                 AddEvent(new PesticideWarehouseStateAdded(this, state));
+                IncrementVersion();
             }
 
             state.AddDelivery(delivery);

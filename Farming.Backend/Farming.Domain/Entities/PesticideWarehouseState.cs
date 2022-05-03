@@ -38,6 +38,7 @@ namespace Farming.Domain.Entities
             PesticideWarehouseDeliveries.Add(delivery);
 
             AddEvent(new PesticideWarehouseStateDeliveryAdded(this, delivery));
+            IncrementVersion();
         }
 
         public bool IsEnoughPesticide(PesticideWarehouseQuantity quantity)
@@ -57,6 +58,7 @@ namespace Farming.Domain.Entities
             Quantity = new PesticideWarehouseQuantity(newQuantity);
 
             AddEvent(new PesticideWarehouseStateSpendPesticide(this, quantity));
+            IncrementVersion();
         }
     }
 }

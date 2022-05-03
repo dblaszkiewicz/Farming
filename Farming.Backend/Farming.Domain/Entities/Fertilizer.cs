@@ -37,6 +37,8 @@ namespace Farming.Domain.Entities
             {
                 SuitablePlants.Add(plant);
             }
+
+            IncrementVersion();
         }
 
         public bool IsEnoughFertilizerForWholeArea(LandArea area, FertilizerActionQuantity quantity)

@@ -37,6 +37,7 @@ namespace Farming.Domain.Entities
             {
                 SuitablePlants.Add(plant);
             }
+            IncrementVersion();
         }
 
         public bool IsEnoughPesticideForWholeArea(LandArea area, PesticideActionQuantity quantity)

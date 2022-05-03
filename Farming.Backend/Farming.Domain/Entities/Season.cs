@@ -30,6 +30,8 @@ namespace Farming.Domain.Entities
             }
 
             Active = new SeasonActive(false);
+            AddEvent(new SeasonChangeActive(this, Active));
+            IncrementVersion();
         }
 
         internal void ProcessPlantAction(PlantAction plantAction, LandId landId)
@@ -40,6 +42,7 @@ namespace Farming.Domain.Entities
                 landRealization = new LandRealization(landId);
                 LandRealizations.Add(landRealization);
                 AddEvent(new LandRealizationAdded(this, landRealization));
+                IncrementVersion();
             }
 
             landRealization.AddPlantAction(plantAction);
@@ -53,6 +56,7 @@ namespace Farming.Domain.Entities
                 landRealization = new LandRealization(landId);
                 LandRealizations.Add(landRealization);
                 AddEvent(new LandRealizationAdded(this, landRealization));
+                IncrementVersion();
             }
 
             landRealization.AddFertilizerAction(fertilzierAction);
@@ -66,6 +70,7 @@ namespace Farming.Domain.Entities
                 landRealization = new LandRealization(landId);
                 LandRealizations.Add(landRealization);
                 AddEvent(new LandRealizationAdded(this, landRealization));
+                IncrementVersion();
             }
 
             landRealization.AddPesticideAction(pesticideAction);

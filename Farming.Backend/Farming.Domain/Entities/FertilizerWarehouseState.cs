@@ -38,6 +38,7 @@ namespace Farming.Domain.Entities
             FertilizerWarehouseDeliveries.Add(delivery);
 
             AddEvent(new FertilizerWarehouseStateDeliveryAdded(this, delivery));
+            IncrementVersion();
         }
 
         public bool IsEnoughFertilizer(FertilizerWarehouseQuantity quantity)
@@ -57,6 +58,7 @@ namespace Farming.Domain.Entities
             Quantity = new FertilizerWarehouseQuantity(newQuantity);
 
             AddEvent(new FertilizerWarehouseStateSpendFertilizer(this, quantity));
+            IncrementVersion();
         }
     }
 }

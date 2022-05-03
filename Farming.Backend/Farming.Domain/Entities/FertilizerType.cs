@@ -23,6 +23,7 @@ namespace Farming.Domain.Entities
         public void AddFertilizer(Fertilizer fertilizer)
         {
             Fertilizers.Add(fertilizer);
+            IncrementVersion();
         }
     }
 }

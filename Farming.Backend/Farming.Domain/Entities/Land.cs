@@ -1,4 +1,5 @@
 ﻿using Farming.Domain.Consts;
+using Farming.Domain.Events;
 using Farming.Domain.Exceptions;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Land;
@@ -44,6 +45,8 @@ namespace Farming.Domain.Entities
             }
 
             Status = new LandStatus(LandStatusEnum.Harvested);
+            AddEvent(new LandStatusChanged(this, Status));
+            IncrementVersion();
         }
 
         public void ChangeStatusToHarvested()
@@ -54,6 +57,8 @@ namespace Farming.Domain.Entities
             }
 
             Status = new LandStatus(LandStatusEnum.Harvested);
+            AddEvent(new LandStatusChanged(this, Status));
+            IncrementVersion();
         }
 
         internal void ChangeStatusAfterPlantAction()
@@ -64,6 +69,8 @@ namespace Farming.Domain.Entities
             }
 
             Status = new LandStatus(LandStatusEnum.Planted);
+            AddEvent(new LandStatusChanged(this, Status));
+            IncrementVersion();
         }
     }
 }

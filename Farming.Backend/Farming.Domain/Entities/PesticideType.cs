@@ -23,6 +23,7 @@ namespace Farming.Domain.Entities
         public void AddPesticide(Pesticide pesticide)
         {
             Pesticides.Add(pesticide);
+            IncrementVersion();
         }
     }
 }

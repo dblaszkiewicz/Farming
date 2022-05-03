@@ -33,6 +33,7 @@ namespace Farming.Domain.Entities
             PlantWarehouseDeliveries.Add(delivery);
 
             AddEvent(new PlantWarehouseStateDeliveryAdded(this, delivery));
+            IncrementVersion();
         }
 
         public bool IsEnoughPlants(PlantWarehouseQuantity quantity)
@@ -52,6 +53,7 @@ namespace Farming.Domain.Entities
             Quantity = new PlantWarehouseQuantity(newQuantity);
 
             AddEvent(new PlantWarehouseStateSpendPlants(this, quantity));
+            IncrementVersion();
         }
     }
 }
