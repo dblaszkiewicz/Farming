@@ -12,7 +12,7 @@ import { selectToken } from './auth.selectors';
 })
 export class AuthorizationService {
   private _rawToken: string = '';
-  private _decodedToken!: DecodedToken;
+  private _decodedToken!: DecodedToken | null;
 
   private isAdminSubject: BehaviorSubject<boolean>;
   private isActiveSubject: BehaviorSubject<boolean>;
@@ -30,6 +30,7 @@ export class AuthorizationService {
         this.isAdminSubject.next(false);
         this.isActiveSubject.next(false);
         this.isAuthorizedSubject.next(false);
+        this._decodedToken = null;
         return;
       }
 

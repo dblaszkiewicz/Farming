@@ -4,10 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { lastValueFrom } from 'rxjs';
-import { AddUserDto, UserDto } from 'src/app/core/models/user';
+import { UserDto } from 'src/app/core/models/user';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { SpinnerStore } from 'src/app/core/stores/spinner.store';
+import { AuthorizationService } from 'src/app/state/auth/authorization-service';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
@@ -21,13 +22,15 @@ export class UsersComponent implements OnInit {
 
   public users: UserDto[];
   public dataSource: MatTableDataSource<UserDto>;
+  public currentUserId: string;
   public displayedColumns: string[] = ['name', 'login', 'created', 'active', 'isAdmin'];
 
   constructor(
     private spinnerStore: SpinnerStore,
     private snackbarService: SnackbarService,
     private userService: UserService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private authorizationService: AuthorizationService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -82,6 +85,7 @@ export class UsersComponent implements OnInit {
 
   private async getInitdata(): Promise<void> {
     await this.getUsers();
+    this.currentUserId = this.authorizationService.currentUserId();
     this.prepareGridData();
   }
 
