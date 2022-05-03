@@ -1,4 +1,5 @@
-﻿using Farming.Shared.Abstractions.Exceptions;
+﻿using Farming.Api.Auth;
+using Farming.Shared.Abstractions.Exceptions;
 using Newtonsoft.Json;
 using NLog;
 using System.Net;
@@ -35,7 +36,15 @@ namespace Farming.Api.Middleware
             {
                 SaveErrorLog(context, exception, false);
 
-                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                if (farmingException is AuthorizationException)
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                }
+                else
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                }
+
                 return context.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
                     message = farmingException.Message,

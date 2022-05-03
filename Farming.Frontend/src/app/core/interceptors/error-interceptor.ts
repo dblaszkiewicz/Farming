@@ -51,6 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           return throwError(() => error.error.name);
         } else {
           if (error.status === HttpStatusCode.Unauthorized) {
+            this.snackbarService.showFail('Sesja wygasła');
             this.store$.dispatch(AuthActions.logout());
           }
           return throwError(() => error.message);

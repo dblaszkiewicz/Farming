@@ -1,4 +1,5 @@
-﻿using Farming.Application.Auth;
+﻿using Farming.Api.Auth;
+using Farming.Application.Auth;
 using Farming.Domain.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -35,24 +36,31 @@ namespace Farming.Api.Middleware
 
         private async Task AttachUserToContext(HttpContext context, IUserRepository userRepository, string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration.JwtSecret());
-
-            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            try
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration.JwtSecret());
 
-            var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
-            var user = await userRepository.GetAsync(userId);
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
 
-            context.Items["User"] = user;
-            context.Items["UserId"] = user.Id.Value;
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+                var user = await userRepository.GetAsync(userId);
+
+                context.Items["User"] = user;
+                context.Items["UserId"] = user.Id.Value;
+            }
+            catch (Exception ex)
+            {
+                throw new AuthorizationException(ex.Message);
+            }
         }
     }
 }
