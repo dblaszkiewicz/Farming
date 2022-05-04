@@ -21,7 +21,7 @@ import { SpinnerStore } from '../../stores/spinner.store';
 export class LoginComponent extends StoreConnectedComponent<ApplicationState> implements OnInit, AfterViewInit {
   public loginForm: FormGroup;
   public isLoggedIn: boolean = false;
-  public destkopMode: boolean = false;
+  public destkopMode: boolean = true;
 
   constructor(
     store$: Store<{ auth: AuthState }>,

@@ -19,7 +19,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
   public changePasswordForm: FormGroup;
-  public destkopMode: boolean = false;
+  public destkopMode: boolean = true;
 
   constructor(
     private spinnerStore: SpinnerStore,
