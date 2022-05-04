@@ -37,7 +37,7 @@ namespace Farming.Application.Auth
                     new Claim("isActive", user.Active.Value.ToString())
                 }),
 
-                Expires = DateTime.UtcNow.AddMinutes(5),
+                Expires = new DateTimeOffset(DateTimeOffset.UtcNow.Date).AddDays(1).AddHours(3).UtcDateTime,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };

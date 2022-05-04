@@ -18,11 +18,10 @@ export class FertilizerDeliveryComponent implements OnInit {
   public canDisplay: boolean = false;
   public warehouseMode: boolean = true;
   public averagePricePerTon: number;
-  public cardContent: string;
   public objectTypeEnum = ObjectTypeEnum;
 
-  private warehouseName: string;
-  private fertilizerName: string;
+  public warehouseName: string;
+  public fertilizerName: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,15 +55,11 @@ export class FertilizerDeliveryComponent implements OnInit {
       this.fertilizerName = result.name;
       this.deliveries = result.deliveries;
       this.averagePricePerTon = result.averagePricePerTon;
-
-      this.cardContent = `Historia dostaw nawozu: ${this.fertilizerName}, na magazyn: ${this.warehouseName}`;
     } else {
       this.warehouseMode = true;
       this.deliveries = await lastValueFrom(
         this.fertilizerWarehouseService.getDeliveriesByWarehouse(this.warehouseId!)
       );
-
-      this.cardContent = `Historia dostaw na magazyn: ${this.warehouseName}`;
     }
     this.canDisplay = true;
   }

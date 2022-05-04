@@ -1,12 +1,20 @@
 <div class="d-flex justify-content-between">
-  <button class="mb-2 h-2 margin-right-button" mat-flat-button color="primary" (click)="goBack()">
+  <button class="mb-2 h-2 margin-right-button" mat-flat-button color="back" (click)="goBack()">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
-  <mat-card class="w-100 mb-2"> {{ cardContent }}</mat-card>
+  <mat-card *ngIf="warehouseId && pesticideId; else onlyWarehouse" class="w-100 mb-2">
+    Historia dostaw pestycydu: <strong>{{ pesticideName }} </strong> na magazyn: <strong> {{ warehouseName }} </strong>
+  </mat-card>
+
+  <ng-template #onlyWarehouse>
+    <mat-card class="w-100 mb-2">
+      Historia dostaw na magazyn: <strong> {{ warehouseName }}</strong>
+    </mat-card>
+  </ng-template>
 
   <mat-card *ngIf="!warehouseMode" class="mb-2 w-50">
-    Średnia cena za litr: {{ averagePricePerLiter.toFixed(2) }} zł
+    Średnia cena za litr: <strong>{{ averagePricePerLiter.toFixed(2) }} zł</strong>
   </mat-card>
 </div>
 

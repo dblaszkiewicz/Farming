@@ -18,11 +18,10 @@ export class PlantDeliveryComponent implements OnInit {
   public canDisplay: boolean = false;
   public warehouseMode: boolean = true;
   public averagePricePerTon: number = 0;
-  public cardContent: string;
   public objectTypeEnum = ObjectTypeEnum;
 
-  private warehouseName: string;
-  private plantName: string;
+  public warehouseName: string;
+  public plantName: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,13 +55,9 @@ export class PlantDeliveryComponent implements OnInit {
       this.plantName = result.name;
       this.deliveries = result.deliveries;
       this.averagePricePerTon = result.averagePricePerTon;
-
-      this.cardContent = `Historia dostaw nasiona: ${this.plantName}, na magazyn: ${this.warehouseName}`;
     } else {
       this.warehouseMode = true;
       this.deliveries = await lastValueFrom(this.plantWarehouseService.getDeliveriesByWarehouse(this.warehouseId!));
-
-      this.cardContent = `Historia dostaw na magazyn: ${this.warehouseName}`;
     }
     this.canDisplay = true;
   }

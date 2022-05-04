@@ -21,8 +21,8 @@ export class PesticideDeliveryComponent implements OnInit {
   public averagePricePerLiter: number = 0;
   public objectTypeEnum = ObjectTypeEnum;
 
-  private warehouseName: string;
-  private pesticideName: string;
+  public warehouseName: string;
+  public pesticideName: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,13 +55,10 @@ export class PesticideDeliveryComponent implements OnInit {
 
       this.pesticideName = result.name;
 
-      this.cardContent = `Historia dostaw oprysku: ${this.pesticideName}, na magazyn: ${this.warehouseName}`;
-
       this.deliveries = result.deliveries;
       this.averagePricePerLiter = result.averagePricePerLiter;
     } else {
       this.warehouseMode = true;
-      this.cardContent = `Historia dostaw na magazyn: ${this.warehouseName}`;
       this.deliveries = await lastValueFrom(this.pesticideWarehouseService.getDeliveriesByWarehouse(this.warehouseId!));
     }
     this.canDisplay = true;

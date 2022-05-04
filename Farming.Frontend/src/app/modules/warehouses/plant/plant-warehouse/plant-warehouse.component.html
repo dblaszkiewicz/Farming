@@ -9,7 +9,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="custom-button" mat-flat-button color="add" (click)="goToDeliveries()">
+    <button class="custom-button" mat-flat-button color="deliveries" (click)="goToDeliveries()">
       <mat-icon>list</mat-icon>
     </button>
   </div>
@@ -53,9 +53,9 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Działania</th>
+      <th class="table-actions" mat-header-cell *matHeaderCellDef>Działania</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-flat-button color="accent" class="m-1" (click)="goToDeliveriesByPlant(element.plantId)">
+        <button mat-flat-button color="deliveries" class="m-1" (click)="goToDeliveriesByPlant(element.plantId)">
           <mat-icon>storage</mat-icon>
         </button>
         <button mat-flat-button color="add" (click)="addDelivery(element.plantId, element.plantName)">
