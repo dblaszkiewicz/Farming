@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Dodaj użytkownika</h1>
+<h2 mat-dialog-title>Dodaj użytkownika</h2>
 
 <form [formGroup]="addUserForm">
   <div class="firstRow d-flex justify-content-between">
@@ -50,5 +50,5 @@
   <button mat-flat-button color="add" [disabled]="addUserForm.invalid" (click)="addUser()" cdkFocusInitial>
     Dodaj
   </button>
-  <button mat-flat-button color="warn" [mat-dialog-close] cdkFocusInitial>Anuluj</button>
+  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>Anuluj</button>
 </div>
