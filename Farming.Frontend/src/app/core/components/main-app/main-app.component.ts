@@ -11,7 +11,6 @@ import { Store } from '@ngrx/store';
 import { AuthState } from 'src/app/state/auth/auth.reducer';
 import { AuthorizationService } from 'src/app/state/auth/authorization-service';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @UntilDestroy()
 @Component({

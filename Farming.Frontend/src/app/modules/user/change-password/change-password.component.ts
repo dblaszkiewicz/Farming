@@ -1,27 +1,45 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { lastValueFrom } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { delay, lastValueFrom } from 'rxjs';
 import CustomValidation from 'src/app/core/helpers/validators';
 import { ChangePasswordDto } from 'src/app/core/models/user';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { SpinnerStore } from 'src/app/core/stores/spinner.store';
 
+@UntilDestroy()
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit, AfterViewInit {
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
   public changePasswordForm: FormGroup;
+  public destkopMode: boolean = false;
 
   constructor(
     private spinnerStore: SpinnerStore,
     private snackbarService: SnackbarService,
-    private userService: UserService
+    private userService: UserService,
+    private observer: BreakpointObserver
   ) {}
+
+  ngAfterViewInit(): void {
+    this.observer
+      .observe(['(max-width: 850px)'])
+      .pipe(delay(1), untilDestroyed(this))
+      .subscribe(res => {
+        if (res.matches) {
+          this.destkopMode = false;
+        } else {
+          this.destkopMode = true;
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.setForm();
