@@ -61,9 +61,7 @@ export class ChangeSeasonComponent implements OnInit {
   }
 
   private async showConfirmDialog(): Promise<boolean> {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '200px',
-    });
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent);
 
     return await lastValueFrom(confirmDialog.afterClosed());
   }
