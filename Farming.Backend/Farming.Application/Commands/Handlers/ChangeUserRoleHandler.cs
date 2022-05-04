@@ -22,7 +22,12 @@ namespace Farming.Application.Commands.Handlers
 
         public async Task<Response<ChangeUserRoleResponse>> Handle(ChangeUserRoleCommand request, CancellationToken cancellationToken)
         {
-            if (!await _userReadService.IsAdmin(request.CurrentUserId))
+            if (!await _userReadService.IsUserActiveByIdAsync(request.CurrentUserId))
+            {
+                throw new UserNotActiveException();
+            }
+
+            if (!await _userReadService.IsAdminByIdAsync(request.CurrentUserId))
             {
                 throw new ChangeUserActiveNoPermissionException();
             }
@@ -39,7 +44,7 @@ namespace Farming.Application.Commands.Handlers
                 throw new ChangeUserRolSelfDegradationException();
             }
 
-            if (!await _userReadService.AreMoreActiveAdministrators(request.UserId))
+            if (!await _userReadService.AreMoreActiveAdministratorsAsync(request.UserId))
             {
                 throw new NoMoreActiveAdministratorException();
             }

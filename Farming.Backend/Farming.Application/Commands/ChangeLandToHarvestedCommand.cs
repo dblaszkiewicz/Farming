@@ -6,6 +6,7 @@ namespace Farming.Application.Commands
 {
     public class ChangeLandToHarvestedCommand : IRequest<Response<ChangeLandToHarvestedResponse>>
     {
+        public Guid CurrentUserId { get; set; }
         public Guid LandId { get; set; }
         public ChangeLandToHarvestedCommand(Guid landId)
         {

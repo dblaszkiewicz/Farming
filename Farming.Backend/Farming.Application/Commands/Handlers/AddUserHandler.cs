@@ -33,6 +33,21 @@ namespace Farming.Application.Commands.Handlers
                 throw new ValidateCommandException(FluentValidationHelper.GetExceptionMessage(validationResult));
             }
 
+            if (!await _userReadService.ExistsByIdAsync(command.CurrentUserId))
+            {
+                throw new UserNotFoundException(command.CurrentUserId);
+            }
+
+            if (!await _userReadService.IsUserActiveByIdAsync(command.CurrentUserId))
+            {
+                throw new UserNotActiveException();
+            }
+
+            if (!await _userReadService.IsAdminByIdAsync(command.CurrentUserId))
+            {
+                throw new AddUserNoPermissionException();
+            }
+
             var user = new User(command.Login, command.Password, command.Name);
 
             await _userRepository.AddAsync(user);

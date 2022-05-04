@@ -90,5 +90,7 @@
   "Password should not be less than 6 or greater than 12 characters": "Hasło nie może być krótsze niż 6 znaków i dłuższe niż 12",
   "Password should contain At least one numeric value": "Hasło powinno zawierać minimum jedną liczbę",
   "Password should contain At least one special character": "Hasło powinno zawierać minimum jeden znak specjalny",
-  "Password should contain At least one upper case letter": "Hasło powinno zawierac minimum jeden duży znak"
+  "Password should contain At least one upper case letter": "Hasło powinno zawierac minimum jeden duży znak",
+  "Your account is not active": "Twoje konto jest nieaktywne",
+  "You dont have permission to add new user": "Nie masz uprawnień na dodanie użytkownika"
 }

@@ -1,5 +1,6 @@
 ﻿using Farming.Application.Commands.Responses;
 using Farming.Application.Exceptions;
+using Farming.Application.Services;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
@@ -9,11 +10,13 @@ namespace Farming.Application.Commands.Handlers
     internal sealed class ChangeLandToHarvestedHandler : IRequestHandler<ChangeLandToHarvestedCommand, Response<ChangeLandToHarvestedResponse>>
     {
         private readonly ILandRepository _landRepository;
+        private readonly IUserReadService _userReadService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ChangeLandToHarvestedHandler(ILandRepository landRepository, IUnitOfWork unitOfWork)
+        public ChangeLandToHarvestedHandler(ILandRepository landRepository, IUserReadService userReadService, IUnitOfWork unitOfWork)
         {
             _landRepository = landRepository;
+            _userReadService = userReadService;
             _unitOfWork = unitOfWork;
         }
 
@@ -24,6 +27,11 @@ namespace Farming.Application.Commands.Handlers
             if (land is null)
             {
                 throw new LandNotFoundException(request.LandId);
+            }
+
+            if (!await _userReadService.IsUserActiveByIdAsync(request.CurrentUserId))
+            {
+                throw new UserNotActiveException();
             }
 
             land.ChangeStatusToHarvested();

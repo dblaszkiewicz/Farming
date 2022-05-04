@@ -1,4 +1,5 @@
 ﻿using Farming.Api.Auth;
+using Farming.Api.Helpers;
 using Farming.Application.Commands;
 using Farming.Application.Queries;
 using MediatR;
@@ -11,10 +12,12 @@ namespace Farming.Api.Controllers
     public class SeasonController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ICurrentUserHelper _currentUserHelper;
 
-        public SeasonController(IMediator mediator)
+        public SeasonController(IMediator mediator, ICurrentUserHelper currentUserHelper)
         {
             _mediator = mediator;
+            _currentUserHelper = currentUserHelper;
         }
 
         [HttpGet("getCurrent")]
@@ -28,7 +31,7 @@ namespace Farming.Api.Controllers
         [HttpPost("startNew")]
         public async Task<IActionResult> StartNewSeason()
         {
-            var command = new StartNewSeasonCommand();
+            var command = new StartNewSeasonCommand(_currentUserHelper.GetId());
             var result = await _mediator.Send(command);
             return Ok(result);
         }
@@ -36,7 +39,7 @@ namespace Farming.Api.Controllers
         [HttpPut("endCurrent")]
         public async Task<IActionResult> EndCurrentSeason()
         {
-            var command = new EndCurrentSeasonCommand();
+            var command = new EndCurrentSeasonCommand(_currentUserHelper.GetId());
             await _mediator.Send(command);
             return Ok();
         }

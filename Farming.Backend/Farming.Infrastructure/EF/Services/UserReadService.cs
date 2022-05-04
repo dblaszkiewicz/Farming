@@ -19,17 +19,22 @@ namespace Farming.Infrastructure.EF.Services
             return _dbSet.AnyAsync(x => x.Id == id);
         }
 
-        public Task<bool> IsLoginUnique(string login)
+        public Task<bool> IsUserActiveByIdAsync(Guid id)
+        {
+            return _dbSet.AnyAsync(x => x.Id == id && x.Active);
+        }
+
+        public Task<bool> IsLoginUniqueAsync(string login)
         {
             return _dbSet.AnyAsync(x => x.Login == login.ToLower());
         }
 
-        public Task<bool> AreMoreActiveAdministrators(Guid id)
+        public Task<bool> AreMoreActiveAdministratorsAsync(Guid id)
         {
             return _dbSet.AnyAsync(x => x.IsAdmin && x.Active && x.Id != id);
         }
 
-        public Task<bool> IsAdmin(Guid id)
+        public Task<bool> IsAdminByIdAsync(Guid id)
         {
             return _dbSet.AnyAsync(x => x.Id == id && x.IsAdmin);
         }

@@ -14,7 +14,7 @@ namespace Farming.Application.Commands.Validators.CommandValidators
                 .MinimumLength(4).WithMessage("Login too short")
                 .MustAsync(async (login, cancellation) =>
                 {
-                    var res = await userReadService.IsLoginUnique(login);
+                    var res = await userReadService.IsLoginUniqueAsync(login);
                     return !res;
                 }).WithMessage("Login already taken");
             RuleFor(x => x.Password)

@@ -6,6 +6,7 @@ namespace Farming.Application.Commands
 {
     public class ChangeLandToDestroyedCommand : IRequest<Response<ChangeLandToDestroyedResponse>>
     {
+        public Guid CurrentUserId { get; set; }
         public Guid LandId { get; set; }
         public ChangeLandToDestroyedCommand(Guid landId)
         {

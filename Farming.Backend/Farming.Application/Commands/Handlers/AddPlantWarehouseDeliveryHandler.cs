@@ -52,6 +52,11 @@ namespace Farming.Application.Commands.Handlers
                 throw new UserNotFoundException(command.UserId);
             }
 
+            if (!await _userReadService.IsUserActiveByIdAsync(command.UserId))
+            {
+                throw new UserNotActiveException();
+            }
+
             var plantWarehouse = await _plantWarehouseRepository.GetWithStatesAndDeliveriesAsync(command.PlantWarehouseId);
             if (plantWarehouse is null)
             {

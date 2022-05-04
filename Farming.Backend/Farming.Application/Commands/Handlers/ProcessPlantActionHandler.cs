@@ -57,6 +57,11 @@ namespace Farming.Application.Commands.Handlers
                 throw new UserNotFoundException(command.UserId);
             }
 
+            if (!await _userReadService.IsUserActiveByIdAsync(command.UserId))
+            {
+                throw new UserNotActiveException();
+            }
+
             var currentSeason = await _seasonRepository.GetCurrentSeasonWithPlantActionsAsync();
             if (currentSeason is null)
             {

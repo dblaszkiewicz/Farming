@@ -38,6 +38,7 @@ namespace Farming.Api.Controllers
         public async Task<IActionResult> AddDelivery([FromBody] AddUserRequest addUserRequest)
         {
             var command = _mapsterMapper.From(addUserRequest).AdaptToType<AddUserCommand>();
+            command.CurrentUserId = _currentUserHelper.GetId();
             await _mediator.Send(command);
             return Ok();
         }
