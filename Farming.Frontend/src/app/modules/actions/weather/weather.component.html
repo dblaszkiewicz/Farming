@@ -1,6 +1,6 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
-    <mat-card class="text-center h3"><strong>POGODA</strong></mat-card>
+    <mat-card class="text-center h3 action-header"><strong>POGODA</strong></mat-card>
     <div class="d-flex justify-content-between">
       <div>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -11,7 +11,7 @@
 
       <div>
         <button class="custom-button" mat-flat-button color="add" [disabled]="place === ''" (click)="refreshWeather()">
-          <mat-icon>refresh</mat-icon>
+          <mat-icon>search</mat-icon>
         </button>
       </div>
     </div>
@@ -65,13 +65,12 @@
         <div class="text-center">
           <img [src]="weather.iconURL" />
         </div>
-
-        <p class="text-center">{{ weather.comment | translate }}</p>
-
         <p class="text-center">
           <span class="maxTemp">&nbsp;{{ weather.max_temp.c }} &deg;C&nbsp;</span> &nbsp; &nbsp;
           <span class="minTemp">&nbsp;{{ weather.min_temp.c }} &deg;C&nbsp;</span>
         </p>
+
+        <p class="text-center">{{ weather.comment | translate }}</p>
       </div>
     </div>
   </div>
