@@ -10,19 +10,28 @@
 </div>
 
 <div *ngIf="selectedLand">
-  <h3><strong>Informacje o działce</strong></h3>
-  <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
-  <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
-  <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
-  <p><strong>Status:</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
-
-  <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
-
-  <h3><strong>Sposób realizacji</strong></h3>
-
-  <mat-radio-group [(ngModel)]="selectedMode" (change)="modeChange()">
-    <mat-radio-button value="{{ landStatusEnum.Harvested }}">Zbierz</mat-radio-button>
-    <p></p>
-    <mat-radio-button value="{{ landStatusEnum.Destroyed }}">Zniszcz</mat-radio-button>
-  </mat-radio-group>
+  <div class="section-information">
+    <h3><strong>Informacje o działce</strong></h3>
+    <div class="section-details">
+      <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
+      <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
+      <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
+      <p [ngClass]="{ isNotPlanted: !selectedLand.isPlanted }">
+        <strong>Status:</strong>
+        {{ landStatusHelper.getStatusName(selectedLand.status) }}
+      </p>
+      <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
+    </div>
+  </div>
+  <br />
+  <div class="section-information">
+    <h3><strong>Sposób realizacji</strong></h3>
+    <div class="section-details">
+      <mat-radio-group [(ngModel)]="selectedMode" (change)="modeChange()">
+        <mat-radio-button value="{{ landStatusEnum.Harvested }}">Zbierz</mat-radio-button>
+        <p></p>
+        <mat-radio-button value="{{ landStatusEnum.Destroyed }}">Zniszcz</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
 </div>

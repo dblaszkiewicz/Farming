@@ -23,30 +23,41 @@
 </div>
 
 <div *ngIf="selectedPesticide">
-  <h3><strong>Informacje o oprysku</strong></h3>
-  <p><strong>Typ:</strong> {{ selectedPesticide.pesticideTypeName }}</p>
-  <p><strong>Nazwa:</strong> {{ selectedPesticide.pesticideName }}</p>
-  <p><strong>Wymagane na hektar:</strong> {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml</p>
+  <div class="section-information">
+    <h3><strong>Informacje o oprysku</strong></h3>
+    <div class="section-details">
+      <p><strong>Typ:</strong> {{ selectedPesticide.pesticideTypeName }}</p>
+      <p><strong>Nazwa:</strong> {{ selectedPesticide.pesticideName }}</p>
+      <p><strong>Wymagane na hektar:</strong> {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml</p>
+    </div>
+  </div>
+  <br />
+  <div class="section-information">
+    <h3><strong>Stan magazynowy</strong></h3>
+    <div class="section-details">
+      <p><strong>Ilość:</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml</p>
+      <p><strong>Dostępne na:</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha</p>
+    </div>
+  </div>
+  <br />
+  <div class="section-information">
+    <h3><strong>Ilość realizacji</strong></h3>
+    <div class="section-details">
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ilość w ml</mat-label>
+          <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
+          <mat-hint align="end">{{ quantityFormControl.value }} ml / {{ selectedPesticide.quantity }} ml </mat-hint>
 
-  <h3><strong>Stan magazynowy</strong></h3>
-
-  <p><strong>Ilość:</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml</p>
-  <p><strong>Dostępne na:</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha</p>
-
-  <h3><strong>Ilość realizacji</strong></h3>
-  <td>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Ilość w ml</mat-label>
-      <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
-      <mat-hint align="end">{{ quantityFormControl.value }} ml / {{ selectedPesticide.quantity }} ml </mat-hint>
-
-      <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
-      <mat-error *ngIf="quantityFormControl.hasError('min')">
-        Wymagane minimum <strong> {{ minQuantityForArea }}</strong> ml
-      </mat-error>
-      <mat-error *ngIf="quantityFormControl.hasError('max')">
-        Brak takiej <strong>ilości</strong> na magazynie
-      </mat-error>
-    </mat-form-field>
-  </td>
+          <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('min')">
+            Wymagane minimum <strong> {{ minQuantityForArea }}</strong> ml
+          </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('max')">
+            Brak takiej <strong>ilości</strong> na magazynie
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </div>
+  </div>
 </div>

@@ -9,12 +9,13 @@
   </mat-form-field>
 </div>
 
-<div *ngIf="selectedLand">
+<div class="section-information" *ngIf="selectedLand">
   <h3><strong>Informacje o działce</strong></h3>
-  <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
-  <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
-  <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
-  <p><strong>Status:</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
-
-  <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
+  <div class="section-details">
+    <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
+    <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
+    <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
+    <p><strong>Status:</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
+    <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
+  </div>
 </div>
