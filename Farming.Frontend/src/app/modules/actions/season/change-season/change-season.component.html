@@ -27,7 +27,12 @@
     <div class="d-flex">
       <div class="w-50">
         <mat-toolbar class="toolbarNav">
-          <button class="button-block" mat-flat-button routerLinkActive="active-link" (click)="goToMainPanel()">
+          <button
+            class="button-block btn-margin-right"
+            mat-flat-button
+            routerLinkActive="active-link"
+            (click)="goToMainPanel()"
+          >
             <mat-icon>navigate_before</mat-icon>
             <span>Wstecz</span>
           </button>
@@ -36,7 +41,7 @@
 
       <div class="w-50">
         <mat-toolbar class="toolbarNav">
-          <button class="button-block" mat-flat-button routerLinkActive="active-link" [disabled]="true">
+          <button class="button-block btn-margin-left" mat-flat-button routerLinkActive="active-link" [disabled]="true">
             <mat-icon>navigate_next</mat-icon>
             <span>Dalej</span>
           </button>

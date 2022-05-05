@@ -1,7 +1,57 @@
-<h1>Podsumowanie</h1>
+<div class="ml-0 mr-0 mx-auto pesticide d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Oprysk</p>
+    <p class="value">{{ selectedPesticideState.pesticideName }}</p>
+  </div>
 
-<p><strong>Wybrana działka:</strong> {{ selectedLand.name }}</p>
-<p><strong>Wybrany magazyn:</strong> {{ selectedWarehouse.name }}</p>
-<p><strong>Wybrany oprysk:</strong> {{ selectedPesticideState.pesticideName }}</p>
-<p><strong>Typ oprysku:</strong> {{ selectedPesticideState.pesticideName }}</p>
-<p><strong>Ilość realizacji:</strong> {{ selectedQuantity }} ml</p>
+  <div class="w-50 icondiv">
+    <mat-icon class="icon pesticide-icon">local_drink</mat-icon>
+  </div>
+</div>
+
+<div
+  class="ml-0 mr-0 mx-auto pesticide-type d-flex justify-content-between"
+  [ngClass]="{ 'width-mobile': !destkopMode }"
+>
+  <div class="w-50">
+    <p class="header">Typ oprysku</p>
+    <p class="value">{{ selectedPesticideState.pesticideTypeName }}</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon pesticide-type-icon">settings</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto field d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Działka</p>
+    <p class="value">{{ selectedLand.name }}</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon field-icon">dashboard</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto warehouse d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Magazyn</p>
+    <p class="value">{{ selectedWarehouse.name }}</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon warehouse-icon">home</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto quantity d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Ilość</p>
+    <p class="value">{{ selectedQuantity }} ml</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon quantity-icon">casino</mat-icon>
+  </div>
+</div>

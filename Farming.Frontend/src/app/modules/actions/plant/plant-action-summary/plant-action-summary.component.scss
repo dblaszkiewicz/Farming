@@ -1,0 +1,69 @@
+.plant {
+  height: 24%;
+  width: 60% !important;
+  margin-top: 3px;
+  box-shadow: 0 0 1em rgb(107, 255, 109);
+}
+
+.field {
+  height: 24%;
+  width: 60% !important;
+  border-top: solid;
+  border-top-color: #00ff50;
+  box-shadow: 0 0 1em rgb(107, 255, 109);
+}
+
+.warehouse {
+  height: 24%;
+  width: 60% !important;
+  border-top: solid;
+  border-top-color: #00ff50;
+  box-shadow: 0 0 1em rgb(107, 255, 109);
+}
+
+.quantity {
+  height: 24%;
+  width: 60% !important;
+  border-top: solid;
+  border-top-color: #00ff50;
+  box-shadow: 0 0 1em rgb(107, 255, 109);
+}
+
+.header {
+  font-size: 26px;
+  font-family: cursive;
+  padding-top: 20px;
+  padding-left: 40px;
+}
+
+.value {
+  font-size: 17px;
+  font-family: unset;
+  padding-left: 40px;
+}
+
+.width-mobile {
+  width: 95% !important;
+}
+
+.icon {
+  font-size: 100px;
+  margin-right: 80px;
+  float: right;
+}
+
+.floor-icon {
+  color: red;
+}
+
+.field-icon {
+  color: brown;
+}
+
+.warehouse-icon {
+  color: black;
+}
+
+.quantity-icon {
+  color: blue;
+}

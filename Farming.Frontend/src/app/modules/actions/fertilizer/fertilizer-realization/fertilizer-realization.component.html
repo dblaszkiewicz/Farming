@@ -11,7 +11,12 @@
     <div class="d-flex">
       <div class="w-50">
         <mat-toolbar class="toolbarNav">
-          <button class="button-block" mat-flat-button routerLinkActive="active-link" (click)="goBack()">
+          <button
+            class="button-block btn-margin-right"
+            mat-flat-button
+            routerLinkActive="active-link"
+            (click)="goBack()"
+          >
             <mat-icon>navigate_before</mat-icon>
             <span>Wstecz</span>
           </button>
@@ -22,7 +27,7 @@
         <mat-toolbar class="toolbarNav">
           <button
             *ngIf="!saveButton"
-            class="button-block"
+            class="button-block btn-margin-left"
             mat-flat-button
             routerLinkActive="active-link"
             [disabled]="!canGoNext"
@@ -34,7 +39,7 @@
 
           <button
             *ngIf="saveButton"
-            class="button-block"
+            class="button-block btn-margin-left"
             mat-flat-button
             routerLinkActive="active-link"
             [disabled]="!canGoNext"

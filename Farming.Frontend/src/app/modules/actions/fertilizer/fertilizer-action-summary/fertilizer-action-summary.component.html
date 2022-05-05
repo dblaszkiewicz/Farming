@@ -1,7 +1,57 @@
-<h1>Podsumowanie</h1>
+<div class="ml-0 mr-0 mx-auto fertilizer d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Nawóz</p>
+    <p class="value">{{ selectedFertilizerState.fertilizerName }}</p>
+  </div>
 
-<p><strong>Wybrana działka:</strong> {{ selectedLand.name }}</p>
-<p><strong>Wybrany magazyn:</strong> {{ selectedWarehouse.name }}</p>
-<p><strong>Wybrany nawóz:</strong> {{ selectedFertilizerState.fertilizerName }}</p>
-<p><strong>Typ nawozu:</strong> {{ selectedFertilizerState.fertilizerTypeName }}</p>
-<p><strong>Ilość realizacji:</strong> {{ selectedQuantity }} kg</p>
+  <div class="w-50 icondiv">
+    <mat-icon class="icon fertilizer-icon">grain</mat-icon>
+  </div>
+</div>
+
+<div
+  class="ml-0 mr-0 mx-auto fertilizer-type d-flex justify-content-between"
+  [ngClass]="{ 'width-mobile': !destkopMode }"
+>
+  <div class="w-50">
+    <p class="header">Typ nawozu</p>
+    <p class="value">{{ selectedFertilizerState.fertilizerTypeName }}</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon fertilizer-type-icon">settings</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto field d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Działka</p>
+    <p class="value">{{ selectedLand.name }}</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon field-icon">dashboard</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto warehouse d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Magazyn</p>
+    <p class="value">{{ selectedWarehouse.name }}</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon warehouse-icon">home</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto quantity d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Ilość</p>
+    <p class="value">{{ selectedQuantity }} kg</p>
+  </div>
+
+  <div class="w-50 icondiv">
+    <mat-icon class="icon quantity-icon">casino</mat-icon>
+  </div>
+</div>
