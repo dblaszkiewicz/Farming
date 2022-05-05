@@ -1,5 +1,21 @@
-<h1>Podsumowanie</h1>
+<div class="ml-0 mr-0 mx-auto field d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Działka</p>
+    <p class="value">{{ selectedLand.name }}</p>
+  </div>
 
-<p><strong>Wybrana działka:</strong> {{ selectedLand.name }}</p>
-<p *ngIf="selectedNewLandStatus == landStatusEnum.Harvested"><strong>Wybrany tryb zbioru:</strong> Zebranie plonu</p>
-<p *ngIf="selectedNewLandStatus == landStatusEnum.Destroyed"><strong>Wybrany tryb zbioru:</strong> Zniszczenie plonu</p>
+  <div class="w-50 icondiv">
+    <mat-icon class="icon field-icon">dashboard</mat-icon>
+  </div>
+</div>
+
+<div class="ml-0 mr-0 mx-auto action d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
+  <div class="w-50">
+    <p class="header">Akcja</p>
+    <p class="value" *ngIf="selectedNewLandStatus == landStatusEnum.Harvested">Zbiór</p>
+    <p class="value" *ngIf="selectedNewLandStatus == landStatusEnum.Destroyed">Zniszczenie</p>
+  </div>
+  <div class="w-50 icondiv">
+    <mat-icon class="icon action-icon">dashboard</mat-icon>
+  </div>
+</div>

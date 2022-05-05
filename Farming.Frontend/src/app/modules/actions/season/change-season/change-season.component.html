@@ -10,7 +10,9 @@
         <strong>Data Rozpoczęcia: </strong> {{ currentSeason.startDate | date: 'dd.MM.yyyy HH:mm' }}
       </p>
       <div class="text-center">
-        <button mat-fab color="end-season" (click)="endCurrentSeason()">Zakończ</button>
+        <button class="center-block change-season-btn" mat-fab color="end-season" (click)="endCurrentSeason()">
+          Zakończ
+        </button>
       </div>
     </div>
 
@@ -18,7 +20,9 @@
       <p class="text-center"><strong>Sezon:</strong> BRAK</p>
       <p class="text-center"><strong>Data Rozpoczęcia:</strong> BRAK</p>
       <div class="text-center">
-        <button class="center-block" mat-fab color="start-season" (click)="startNewSeason()">Start</button>
+        <button class="center-block change-season-btn" mat-fab color="start-season" (click)="startNewSeason()">
+          Start
+        </button>
       </div>
     </div>
   </div>
