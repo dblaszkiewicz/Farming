@@ -1,7 +1,6 @@
-<h2><strong>Wybierz działkę</strong></h2>
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Działka</mat-label>
+    <mat-label>Wybierz działkę</mat-label>
     <mat-select (selectionChange)="landChange()" [(value)]="selectedLandId">
       <mat-option *ngFor="let land of lands" [value]="land.id">
         {{ land.name }}

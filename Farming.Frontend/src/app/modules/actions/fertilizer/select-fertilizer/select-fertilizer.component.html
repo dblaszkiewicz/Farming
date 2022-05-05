@@ -1,7 +1,6 @@
-<h2><strong>Wybierz magazyn nawozów</strong></h2>
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Magazyn</mat-label>
+    <mat-label>Wybierz magazyn nawozów</mat-label>
     <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
       <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
         {{ warehouse.name }}
@@ -11,10 +10,9 @@
 </div>
 
 <div *ngIf="selectedWarehouse">
-  <h2><strong>Wybierz nawóz</strong></h2>
   <div>
     <mat-form-field class="w-100" appearance="fill">
-      <mat-label>Nawóz</mat-label>
+      <mat-label>Wybierz nawóz</mat-label>
       <mat-select (selectionChange)="fertilizerChange()" [(value)]="selectedFertilizerId">
         <mat-option *ngFor="let fertilizerState of fertilizerStates" [value]="fertilizerState.fertilizerId">
           {{ fertilizerState.fertilizerName }}
