@@ -5,7 +5,7 @@ using Farming.Infrastructure.EF.Options;
 using Farming.Infrastructure.EF.Repositories;
 using Farming.Infrastructure.EF.Services;
 using Farming.Shared.Options;
-
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +50,19 @@ namespace Farming.Infrastructure.EF
                 ctx.UseSqlServer(options.ConnectionString));
 
             return services;
+        }
+
+        public static IApplicationBuilder AddDb(this IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<ReadDbContext>();
+
+                DbInitializer.CreateAndSeedDatabase(context);
+            }
+
+            return app;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class FertilizerReadModel
+    internal class FertilizerReadModel : BaseReadModel
     {
         public Guid Id { get; set; }
         public Guid FertilizerTypeId { get; set; }
@@ -15,5 +15,23 @@ namespace Farming.Infrastructure.EF.Models
         public ICollection<FertilizerWarehouseDeliveryReadModel> FertilizerWarehouseDeliveries { get; set; }
         public ICollection<FertilizerWarehouseStateReadModel> FertilizerWarehouseStates { get; set; }
         public ICollection<FertilizerActionReadModel> FertilizerActions { get; set; }
+
+        public FertilizerReadModel()
+        {
+
+        }
+
+        internal FertilizerReadModel(string name, string description, decimal requiredAmountPerHectare, List<PlantReadModel> suitablePlants)
+        {
+            Id = Guid.NewGuid();
+            SuitablePlants = suitablePlants;
+            Name = name;
+            Description = description;
+            RequiredAmountPerHectare = requiredAmountPerHectare;
+
+            FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDeliveryReadModel>();
+            FertilizerWarehouseStates = new HashSet<FertilizerWarehouseStateReadModel>();
+            FertilizerActions = new HashSet<FertilizerActionReadModel>();
+        }
     }
 }

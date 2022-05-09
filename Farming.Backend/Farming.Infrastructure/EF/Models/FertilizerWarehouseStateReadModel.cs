@@ -1,7 +1,7 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class FertilizerWarehouseStateReadModel
+    internal class FertilizerWarehouseStateReadModel : BaseReadModel
     {
         public Guid Id { get; }
         public Guid FertilizerId { get; private set; }

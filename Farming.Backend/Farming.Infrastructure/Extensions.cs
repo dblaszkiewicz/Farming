@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Farming.Infrastructure.EF;
+using Microsoft.AspNetCore.Builder;
 
 namespace Farming.Infrastructure
 {
@@ -11,6 +12,13 @@ namespace Farming.Infrastructure
             services.AddSql(configuration);
 
             return services;
+        }
+
+        public static IApplicationBuilder CreateDatabase(this IApplicationBuilder app)
+        {
+            app.AddDb();
+
+            return app;
         }
     }
 }

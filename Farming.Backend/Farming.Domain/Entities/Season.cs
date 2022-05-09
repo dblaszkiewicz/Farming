@@ -17,7 +17,7 @@ namespace Farming.Domain.Entities
         {
             Id = Guid.NewGuid();
             Active = new SeasonActive(true);
-            StartDate = new SeasonStartDate(DateTimeOffset.Now);
+            StartDate = new SeasonStartDate(DateTimeOffset.UtcNow);
 
             LandRealizations = new HashSet<LandRealization>();
         }

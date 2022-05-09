@@ -30,6 +30,10 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new PlantDescription(x));
 
             builder
+                .Property(x => x.Unit)
+                .HasConversion(x => x.Value, x => new PlantUnit(x));
+
+            builder
                 .HasMany(x => x.SuitablePesticides)
                 .WithMany(x => x.SuitablePlants)
                 .UsingEntity(x => x.ToTable("PlantPesticides"));

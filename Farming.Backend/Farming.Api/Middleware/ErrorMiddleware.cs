@@ -68,7 +68,7 @@ namespace Farming.Api.Middleware
         {
             LogManager.GetLogger("default")
                 .WithProperty("name", exception.GetType().Name)
-                .WithProperty("createDate", DateTimeOffset.Now)
+                .WithProperty("createDate", DateTimeOffset.UtcNow)
                 .WithProperty("isUnhandled", isUnhandled)
                 .Error(exception);
         }

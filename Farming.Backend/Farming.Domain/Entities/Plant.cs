@@ -10,6 +10,7 @@ namespace Farming.Domain.Entities
         public PlantName Name { get; }
         public PlantRequiredAmountPerHectare RequiredAmountPerHectare { get; }
         public PlantDescription Description { get; }
+        public PlantUnit Unit { get; }
 
         public ICollection<Fertilizer> SuitableFertilizers { get; }
         public ICollection<Pesticide> SuitablePesticides { get; }

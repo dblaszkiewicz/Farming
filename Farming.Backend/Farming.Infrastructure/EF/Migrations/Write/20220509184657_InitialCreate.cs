@@ -1,11 +1,10 @@
 ﻿using System;
-using Farming.Application.Consts;
 using Farming.Domain.Consts;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Farming.Infrastructure.EF.Migrations
+namespace Farming.Infrastructure.EF.Migrations.Write
 {
     public partial class InitialCreate : Migration
     {
@@ -89,6 +88,7 @@ namespace Farming.Infrastructure.EF.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RequiredAmountPerHectare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -130,9 +130,10 @@ namespace Farming.Infrastructure.EF.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Version = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

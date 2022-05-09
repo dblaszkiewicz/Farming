@@ -5,18 +5,16 @@ using Farming.Infrastructure.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Farming.Infrastructure.EF.Migrations
+namespace Farming.Infrastructure.EF.Migrations.Write
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20220425173249_addUserCreated")]
-    partial class addUserCreated
+    partial class WriteDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -418,6 +416,10 @@ namespace Farming.Infrastructure.EF.Migrations
 
                     b.Property<decimal>("RequiredAmountPerHectare")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Version")
                         .HasColumnType("int");

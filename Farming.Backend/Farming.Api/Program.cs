@@ -62,8 +62,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ErrorMiddleware>();
 
-
-
 app.UseHttpsRedirection();
 
 app.UseRouting();
@@ -77,5 +75,7 @@ app.UseAuthentication();
 app.UseMiddleware<JwtMiddleware>();
 
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+app.CreateDatabase();
 
 app.Run();

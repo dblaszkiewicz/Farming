@@ -1,7 +1,7 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class UserReadModel
+    internal class UserReadModel : BaseReadModel
     {
         public Guid Id { get; set; }
         public string Login { get; set; }
@@ -17,5 +17,24 @@ namespace Farming.Infrastructure.EF.Models
         public ICollection<PesticideActionReadModel> PesticideActions { get; set; }
         public ICollection<FertilizerActionReadModel> FertilizerActions { get; set; }
         public ICollection<PlantActionReadModel> PlantActions { get; set; }
+
+        internal UserReadModel(string login, string password, string name)
+        {
+            Id = Guid.NewGuid();
+            Active = true;
+            IsAdmin = true;
+            Login = login;
+            Password = password;
+            Name = name;
+
+            Created = DateTimeOffset.UtcNow;
+
+            FertilizerDeliveries = new HashSet<FertilizerWarehouseDeliveryReadModel>();
+            PesticideDeliveries = new HashSet<PesticideWarehouseDeliveryReadModel>();
+            PlantDeliveries = new HashSet<PlantWarehouseDeliveryReadModel>();
+            PesticideActions = new HashSet<PesticideActionReadModel>();
+            FertilizerActions = new HashSet<FertilizerActionReadModel>();
+            PlantActions = new HashSet<PlantActionReadModel>();
+        }
     }
 }

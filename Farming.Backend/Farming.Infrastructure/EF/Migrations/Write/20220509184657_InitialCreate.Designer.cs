@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Farming.Infrastructure.EF.Migrations
+namespace Farming.Infrastructure.EF.Migrations.Write
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20220425145155_removeUserLastName")]
-    partial class removeUserLastName
+    [Migration("20220509184657_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -419,6 +419,10 @@ namespace Farming.Infrastructure.EF.Migrations
                     b.Property<decimal>("RequiredAmountPerHectare")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Version")
                         .HasColumnType("int");
 
@@ -566,6 +570,12 @@ namespace Farming.Infrastructure.EF.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
                     b.Property<string>("Login")

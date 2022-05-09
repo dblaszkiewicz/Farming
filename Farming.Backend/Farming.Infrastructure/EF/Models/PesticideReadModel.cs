@@ -1,7 +1,7 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class PesticideReadModel
+    internal class PesticideReadModel : BaseReadModel
     {
         public Guid Id { get; set; }
         public Guid PesticideTypeId { get; set; }
@@ -14,5 +14,23 @@ namespace Farming.Infrastructure.EF.Models
         public ICollection<PesticideActionReadModel> PesticideActions { get; set; }
         public ICollection<PesticideWarehouseDeliveryReadModel> PesticideWarehouseDeliveries { get; set; }
         public ICollection<PesticideWarehouseStateReadModel> PesticideWarehouseStates { get; set; }
+
+        public PesticideReadModel()
+        {
+
+        }
+
+        internal PesticideReadModel(string name, string description, decimal requiredAmountPerHectare, List<PlantReadModel> suitablePlants)
+        {
+            Id = Guid.NewGuid();
+            SuitablePlants = suitablePlants;
+            Name = name;
+            Description = description;
+            RequiredAmountPerHectare = requiredAmountPerHectare;
+
+            PesticideActions = new HashSet<PesticideActionReadModel>();
+            PesticideWarehouseDeliveries = new HashSet<PesticideWarehouseDeliveryReadModel>();
+            PesticideWarehouseStates = new HashSet<PesticideWarehouseStateReadModel>();
+        }
     }
 }

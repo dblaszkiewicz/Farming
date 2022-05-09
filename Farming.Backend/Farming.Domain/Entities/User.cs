@@ -24,7 +24,7 @@ namespace Farming.Domain.Entities
         public User(UserLogin login, UserPassword password, UserName name, UserIsAdmin isAdmin)
         {
             Id = Guid.NewGuid();
-            Created = DateTimeOffset.Now;
+            Created = DateTimeOffset.UtcNow;
             Login = login;
             Name = name;
             Password = password;
@@ -35,7 +35,7 @@ namespace Farming.Domain.Entities
         public User(UserLogin login, UserPassword password, UserName name)
         {
             Id = Guid.NewGuid();
-            Created = DateTimeOffset.Now;
+            Created = DateTimeOffset.UtcNow;
             Login = login;
             Name = name;
             Password = password;

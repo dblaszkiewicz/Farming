@@ -1,7 +1,7 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class PesticideActionReadModel
+    internal class PesticideActionReadModel : BaseReadModel
     {
         public Guid Id { get; set; }
         public Guid PesticideId { get; set; }
