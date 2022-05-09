@@ -36,7 +36,9 @@
     <h3><strong>Stan magazynowy</strong></h3>
     <div class="section-details">
       <p><strong>Ilość:</strong> {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
-      <p><strong>Dostępne na:</strong> {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha</p>
+      <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
+        <strong>Dostępne na:</strong> {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha
+      </p>
     </div>
   </div>
   <br />

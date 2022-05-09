@@ -4,6 +4,7 @@ import { CustomErrorStateMatcher } from 'src/app/core/helpers/custom-error-state
 import { PesticideStateDto } from 'src/app/core/models/pesticide';
 import { RealizationComponentInterface } from 'src/app/core/models/realization';
 import { PesticideWarehouseDto } from 'src/app/core/models/warehouse';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { PesticideActionService } from 'src/app/core/stores/pesticide-action-service';
 
 @Component({
@@ -12,7 +13,7 @@ import { PesticideActionService } from 'src/app/core/stores/pesticide-action-ser
   styleUrls: ['./select-pesticide.component.scss'],
 })
 export class SelectPesticideComponent implements RealizationComponentInterface, OnInit {
-  constructor(private pesticideActionService: PesticideActionService) {}
+  constructor(private pesticideActionService: PesticideActionService, private snackbarService: SnackbarService) {}
 
   public matcher = new CustomErrorStateMatcher();
 
@@ -24,6 +25,7 @@ export class SelectPesticideComponent implements RealizationComponentInterface, 
   public warehouses: PesticideWarehouseDto[];
   public pesticideStates: PesticideStateDto[];
   public minQuantityForArea: number;
+  public isEnoughQuantity: boolean = false;
 
   private landArea: number;
 
@@ -106,6 +108,10 @@ export class SelectPesticideComponent implements RealizationComponentInterface, 
     let currentValue = 0;
     if (maxQuantity >= this.minQuantityForArea) {
       currentValue = this.minQuantityForArea;
+      this.isEnoughQuantity = true;
+    } else {
+      this.isEnoughQuantity = false;
+      this.snackbarService.showInfo('Brak wystarczającej ilości');
     }
 
     this.quantityFormControl.clearValidators();

@@ -36,7 +36,9 @@
     <h3><strong>Stan magazynowy</strong></h3>
     <div class="section-details">
       <p><strong>Ilość:</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml</p>
-      <p><strong>Dostępne na:</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha</p>
+      <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
+        <strong>Dostępne na:</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha
+      </p>
     </div>
   </div>
   <br />

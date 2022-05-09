@@ -44,7 +44,7 @@ namespace Farming.Domain.Entities
                 throw new InvalidLandStatusToProcessDestroyException();
             }
 
-            Status = new LandStatus(LandStatusEnum.Harvested);
+            Status = new LandStatus(LandStatusEnum.Destroeyd);
             AddEvent(new LandStatusChanged(this, Status));
             IncrementVersion();
         }
