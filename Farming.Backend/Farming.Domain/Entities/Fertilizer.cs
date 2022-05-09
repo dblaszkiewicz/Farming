@@ -18,29 +18,6 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerWarehouseState> FertilizerWarehouseStates { get; }
         public ICollection<FertilizerAction> FertilizerActions { get; }
 
-        public Fertilizer(FertilizerRequiredAmountPerHectare requiredAmountPerHectare, FertilizerName name, FertilizerDescription description)
-        {
-            Id = new FertilizerId(Guid.NewGuid());
-            RequiredAmountPerHectare = requiredAmountPerHectare;
-            Name = name;
-            Description = description;
-
-            SuitablePlants = new HashSet<Plant>();
-            FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDelivery>();
-            FertilizerWarehouseStates = new HashSet<FertilizerWarehouseState>();
-            FertilizerActions = new HashSet<FertilizerAction>();
-        }
-
-        public void AddSutiablePlants(IEnumerable<Plant> plants)
-        {
-            foreach (var plant in plants)
-            {
-                SuitablePlants.Add(plant);
-            }
-
-            IncrementVersion();
-        }
-
         public bool IsEnoughFertilizerForWholeArea(LandArea area, FertilizerActionQuantity quantity)
         {
             if (area * RequiredAmountPerHectare >= quantity)

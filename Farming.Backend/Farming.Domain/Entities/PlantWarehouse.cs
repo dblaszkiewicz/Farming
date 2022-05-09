@@ -12,14 +12,7 @@ namespace Farming.Domain.Entities
 
         public ICollection<PlantWarehouseState> States { get; }
 
-        public PlantWarehouse(PlantWarehouseName name)
-        {
-            Id = new PlantWarehouseId(Guid.NewGuid());
-            Name = name;
-
-            States = new HashSet<PlantWarehouseState>();
-        }
-
+        
         public void AddDelivery(PlantWarehouseDelivery delivery)
         {
             var state = GetStateByPlantId(delivery.PlantId);

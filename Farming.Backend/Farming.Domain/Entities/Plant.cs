@@ -18,14 +18,6 @@ namespace Farming.Domain.Entities
         public ICollection<PlantWarehouseDelivery> PlantWarehouseDeliveries { get; }
         public ICollection<PlantWarehouseState> PlantWarehouseStates { get; }
 
-        public Plant(PlantName name, PlantRequiredAmountPerHectare requiredAmountPerHectare, PlantDescription description)
-        {
-            Id = new PlantId(Guid.NewGuid());
-            Name = name;
-            RequiredAmountPerHectare = requiredAmountPerHectare;
-            Description = description;
-        }
-
         public bool IsEnoughPlantForWholeArea(LandArea area, PlantActionQuantity quantity)
         {
             if (quantity >= area * RequiredAmountPerHectare)

@@ -1,5 +1,4 @@
-﻿using Farming.Application.Consts;
-using Farming.Infrastructure.EF.Contexts;
+﻿using Farming.Infrastructure.EF.Contexts;
 using Farming.Infrastructure.EF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;

@@ -16,22 +16,6 @@ namespace Farming.Domain.Entities
 
         public ICollection<LandRealization> LandRealizations { get; }
 
-        public Land()
-        {
-            // for EF
-        }
-
-        public Land(LandClass landClass, LandStatus status, LandName name, LandArea area)
-        {
-            Id = new LandId(Guid.NewGuid());
-            LandCLass = landClass;
-            Status = status;
-            Name = name;
-            Area = area;
-
-            LandRealizations = new HashSet<LandRealization>();
-        }
-
         public bool IsStatusSuitableForPlantAction()
         {
             return Status.IsSuitableForPlantAction();

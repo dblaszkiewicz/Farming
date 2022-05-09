@@ -12,14 +12,6 @@ namespace Farming.Domain.Entities
 
         public ICollection<PesticideWarehouseState> States { get; }
 
-        public PesticideWarehouse(PesticideWarehouseName name)
-        {
-            Id = new PesticideWarehouseId(Guid.NewGuid());
-            Name = name;
-
-            States = new HashSet<PesticideWarehouseState>();
-        }
-
         public void AddDelivery(PesticideWarehouseDelivery delivery)
         {
             var state = GetStateByPesticideId(delivery.PesticideId);

@@ -21,16 +21,6 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerAction> FertilizerActions { get; }
         public ICollection<PlantAction> PlantActions { get; }
 
-        public User(UserLogin login, UserPassword password, UserName name, UserIsAdmin isAdmin)
-        {
-            Id = Guid.NewGuid();
-            Created = DateTimeOffset.UtcNow;
-            Login = login;
-            Name = name;
-            Password = password;
-            IsAdmin = isAdmin;
-            Active = true;
-        }
 
         public User(UserLogin login, UserPassword password, UserName name)
         {

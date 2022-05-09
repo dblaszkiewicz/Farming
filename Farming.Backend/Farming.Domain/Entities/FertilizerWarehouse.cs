@@ -12,14 +12,6 @@ namespace Farming.Domain.Entities
 
         public ICollection<FertilizerWarehouseState> States { get; }
 
-        public FertilizerWarehouse(FertilizerWarehouseName name)
-        {
-            Id = new FertilizerWarehouseId(Guid.NewGuid());
-            Name = name;
-
-            States = new HashSet<FertilizerWarehouseState>();
-        }
-
         public void AddDelivery(FertilizerWarehouseDelivery delivery)
         {
             var state = GetStateByFertilizerId(delivery.FertilizerId);
