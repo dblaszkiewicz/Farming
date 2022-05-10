@@ -6,7 +6,8 @@
 
 <form [formGroup]="form">
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label *ngIf="data.objectType !== objectTypeEnum.PesticideWarehouse">Ilość (kg)</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.PlantWarehouse">Ilość ({{ data.unitName }})</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.FertilizerWarehouse">Ilość (kg)</mat-label>
     <mat-label *ngIf="data.objectType === objectTypeEnum.PesticideWarehouse">Ilość (ml)</mat-label>
     <input formControlName="quantity" type="number" min="1" matInput />
   </mat-form-field>

@@ -43,12 +43,12 @@ namespace Farming.Infrastructure.EF
         {
             var lands = new List<LandReadModel>()
             {
-                 new LandReadModel("Klasa IIIa", "Pole pierwsze", 0.75m),
-                 new LandReadModel("Klasa I", "Pole drugie", 0.51m),
-                 new LandReadModel("Klasa IVb", "Pole trzecie", 2.21m),
-                 new LandReadModel("Klasa II", "Pole czwarte", 1.5m),
-                 new LandReadModel("Klasa V", "Pole piąte", 3.75m),
-                 new LandReadModel("Klasa I", "Pole szóste", 6.24m)
+                 new LandReadModel("Klasa IIIa", "Działka pierwsza", 0.75m),
+                 new LandReadModel("Klasa I", "Działka druga", 0.51m),
+                 new LandReadModel("Klasa IVb", "Działka trzecia", 2.21m),
+                 new LandReadModel("Klasa II", "Działka czwarta", 1.5m),
+                 new LandReadModel("Klasa V", "Działka piąta", 3.75m),
+                 new LandReadModel("Klasa I", "Działka szósta", 6.24m)
             };
 
             context.Lands.AddRange(lands);
@@ -58,24 +58,21 @@ namespace Farming.Infrastructure.EF
         {
             var plantWarehouses = new List<PlantWarehouseReadModel>()
             {
-                new PlantWarehouseReadModel("Garaż 1"),
-                new PlantWarehouseReadModel("Garaż 2"),
+                new PlantWarehouseReadModel("Garaż"),
                 new PlantWarehouseReadModel("Przechowalnia"),
                 new PlantWarehouseReadModel("Wiata")
             };
 
             var pesticideWarehouses = new List<PesticideWarehouseReadModel>()
             {
-                new PesticideWarehouseReadModel("Garaż 1"),
-                new PesticideWarehouseReadModel("Garaż 2"),
+                new PesticideWarehouseReadModel("Garaż"),
                 new PesticideWarehouseReadModel("Przechowalnia"),
                 new PesticideWarehouseReadModel("Wiata")
             };
 
             var fertilizerWarehouses = new List<FertilizerWarehouseReadModel>()
             {
-                new FertilizerWarehouseReadModel("Garaż 1"),
-                new FertilizerWarehouseReadModel("Garaż 2"),
+                new FertilizerWarehouseReadModel("Garaż"),
                 new FertilizerWarehouseReadModel("Przechowalnia"),
                 new FertilizerWarehouseReadModel("Wiata")
             };

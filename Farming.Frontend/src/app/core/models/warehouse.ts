@@ -44,9 +44,7 @@ export interface DeliveriesByFertilizerWarehouseDto extends DeliveryByWarehouseD
   pricePerTon: number;
 }
 
-export interface DeliveriesByPlantWarehouseDto extends DeliveryByWarehouseDto {
-  pricePerTon: number;
-}
+export interface DeliveriesByPlantWarehouseDto extends DeliveryByWarehouseDto {}
 
 export interface DeliveriesByPesticideWarehouseDto extends DeliveryByWarehouseDto {
   pricePerLiter: number;
@@ -61,9 +59,7 @@ export interface DeliveriesByFertilizerDto extends DeliveriesByObjectDto {
   averagePricePerTon: number;
 }
 
-export interface DeliveriesByPlantDto extends DeliveriesByObjectDto {
-  averagePricePerTon: number;
-}
+export interface DeliveriesByPlantDto extends DeliveriesByObjectDto {}
 
 export interface DeliveriesByPesticideDto extends DeliveriesByObjectDto {
   averagePricePerLiter: number;

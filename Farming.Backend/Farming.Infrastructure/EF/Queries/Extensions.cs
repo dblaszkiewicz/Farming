@@ -13,7 +13,8 @@ namespace Farming.Infrastructure.EF.Queries
                 Id = readModel.Id,
                 Name = readModel.Name,
                 Description = readModel.Description,
-                RequiredAmountPerHectare = readModel.RequiredAmountPerHectare
+                RequiredAmountPerHectare = readModel.RequiredAmountPerHectare,
+                Unit = readModel.Unit
             };
         }
 
@@ -89,6 +90,7 @@ namespace Farming.Infrastructure.EF.Queries
                 PlantId = readModel.PlantId,
                 PlantName = readModel.Plant.Name,
                 Quantity = readModel.Quantity,
+                Unit = readModel.Plant.Unit,
                 RequiredAmountPerHectare = readModel.Plant.RequiredAmountPerHectare,
                 EnoughForArea = enoughForArea
             };
@@ -143,8 +145,8 @@ namespace Farming.Infrastructure.EF.Queries
                 UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
+                Unit = readModel.Plant.Unit,
                 RealizationDate = readModel.RealizationDate,
-                PricePerTon = readModel.Price / readModel.Quantity * 1000
             };
         }
 
@@ -179,8 +181,8 @@ namespace Farming.Infrastructure.EF.Queries
                 UserName = readModel.User.Name,
                 Price = readModel.Price,
                 Quantity = readModel.Quantity,
+                Unit = readModel.Plant.Unit,
                 RealizationDate = readModel.RealizationDate,
-                PricePerTon = readModel.Price / readModel.Quantity * 1000
             };
         }
 

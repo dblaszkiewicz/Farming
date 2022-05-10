@@ -6,6 +6,7 @@ import { PesticideWarehouseDto } from '../models/warehouse';
 import { LandService } from '../services/land.service';
 import { PesticideWarehouseService } from '../services/pesticide-warehouse.service';
 import { PesticideService } from '../services/pesticide.service';
+import { SnackbarService } from '../services/snackbar.service';
 import { SpinnerStore } from './spinner.store';
 
 @Injectable({
@@ -27,7 +28,8 @@ export class PesticideActionService {
     private landService: LandService,
     private pesticideWarehouseService: PesticideWarehouseService,
     private pesticideService: PesticideService,
-    private spinnerStore: SpinnerStore
+    private spinnerStore: SpinnerStore,
+    private snackbarService: SnackbarService
   ) {
     this.canGoToNextPanel = new BehaviorSubject<boolean>(false);
   }
@@ -131,6 +133,11 @@ export class PesticideActionService {
         this.pesticideWarehouseService.getStatesByWarehouseId(this.selectedWarehouse?.id!)
       );
     }
+
+    if (this.pesticideStates.length === 0) {
+      this.snackbarService.showInfo('Brak oprysków');
+    }
+
     this.spinnerStore.stopSpinner();
   }
 

@@ -33,7 +33,14 @@ export class PlantWarehouseComponent implements OnInit {
 
   public dataSource: MatTableDataSource<PlantStateDto>;
 
-  public displayedColumns: string[] = ['plantName', 'quantity', 'requiredAmountPerHectare', 'enoughForArea', 'actions'];
+  public displayedColumns: string[] = [
+    'plantName',
+    'quantity',
+    'unit',
+    'requiredAmountPerHectare',
+    'enoughForArea',
+    'actions',
+  ];
 
   constructor(
     private plantWarehouseService: PlantWarehouseService,
@@ -74,13 +81,13 @@ export class PlantWarehouseComponent implements OnInit {
       return;
     }
 
-    await this.processAddDelivery(plant.id, plant.name);
+    await this.processAddDelivery(plant.id, plant.name, plant.unit);
     this.canAddDelivery = false;
     this.selectedPlantId = null;
   }
 
-  public async addDelivery(plantId: string, plantName: string): Promise<void> {
-    await this.processAddDelivery(plantId, plantName);
+  public async addDelivery(plantId: string, plantName: string, plantUnit: string): Promise<void> {
+    await this.processAddDelivery(plantId, plantName, plantUnit);
   }
 
   public goToDeliveries() {
@@ -97,9 +104,9 @@ export class PlantWarehouseComponent implements OnInit {
     await this.getWarehouseStates();
   }
 
-  private async processAddDelivery(plantId: string, plantName: string): Promise<void> {
+  private async processAddDelivery(plantId: string, plantName: string, plantUnit: string): Promise<void> {
     const dialogRef = this.matDialog.open(AddDeliveryDialogComponent, {
-      data: { name: plantName, objectType: ObjectTypeEnum.PlantWarehouse },
+      data: { name: plantName, objectType: ObjectTypeEnum.PlantWarehouse, unitName: plantUnit },
     });
 
     const result = (await lastValueFrom(dialogRef.afterClosed())) as AddDeliveryDto;

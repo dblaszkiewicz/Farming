@@ -8,6 +8,7 @@ import { FertilizerWarehouseDto } from '../models/warehouse';
 import { FertilizerWarehouseService } from '../services/fertilizer-warehouse.service';
 import { FertilizerService } from '../services/fertilizer.service';
 import { SpinnerStore } from './spinner.store';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,8 @@ export class FertilizerActionService {
     private landService: LandService,
     private fertilizerWarehouseService: FertilizerWarehouseService,
     private fertilizerService: FertilizerService,
-    private spinnerStore: SpinnerStore
+    private spinnerStore: SpinnerStore,
+    private snackbarService: SnackbarService
   ) {
     this.canGoToNextPanel = new BehaviorSubject<boolean>(false);
   }
@@ -132,6 +134,11 @@ export class FertilizerActionService {
         this.fertilizerWarehouseService.getStatesByWarehouseId(this.selectedWarehouse?.id!)
       );
     }
+
+    if (this.fertilizerStates.length === 0) {
+      this.snackbarService.showInfo('Brak nawozów');
+    }
+
     this.spinnerStore.stopSpinner();
   }
 

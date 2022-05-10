@@ -10,12 +10,19 @@
       <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
     </ng-container>
 
-    <ng-container
-      *ngIf="objectType === objectTypeEnum.FertilizerWarehouse || objectType === objectTypeEnum.PlantWarehouse"
-      matColumnDef="quantity"
-    >
+    <ng-container *ngIf="objectType === objectTypeEnum.FertilizerWarehouse" matColumnDef="quantity">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
       <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }} kg</td>
+    </ng-container>
+
+    <ng-container *ngIf="objectType === objectTypeEnum.PlantWarehouse" matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }}</td>
+    </ng-container>
+
+    <ng-container *ngIf="objectType === objectTypeEnum.PlantWarehouse" matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Jednostka</th>
+      <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.PesticideWarehouse" matColumnDef="quantity">
@@ -28,10 +35,7 @@
       <td mat-cell *matCellDef="let element">{{ element.price.toFixed(2) }} zł</td>
     </ng-container>
 
-    <ng-container
-      *ngIf="objectType === objectTypeEnum.FertilizerWarehouse || objectType === objectTypeEnum.PlantWarehouse"
-      matColumnDef="pricePerTon"
-    >
+    <ng-container *ngIf="objectType === objectTypeEnum.FertilizerWarehouse" matColumnDef="pricePerTon">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena za tonę</th>
       <td mat-cell *matCellDef="let element">{{ element.pricePerTon.toFixed(2) }} zł</td>
     </ng-container>

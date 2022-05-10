@@ -4,7 +4,6 @@ namespace Farming.Application.DTO
     public class PlantDeliveryByWarehouseAndPlantDto
     {
         public IEnumerable<PlantDeliveryDto> Deliveries { get; set; }
-        public decimal AveragePricePerTon { get; set; }
         public string Name { get; set; }
     }
 
@@ -12,8 +11,8 @@ namespace Farming.Application.DTO
     {
         public string UserName { get; set; }
         public decimal Quantity { get; set; }
+        public string Unit { get; set; }
         public decimal Price { get; set; }
-        public decimal PricePerTon { get; set; }
         public DateTimeOffset RealizationDate { get; set; }
     }
 }

@@ -127,6 +127,11 @@ export class PlantActionService {
     this.plantStates = await lastValueFrom(
       this.plantWarehouseService.getStatesByWarehouseId(this.selectedWarehouse?.id!)
     );
+
+    if (this.plantStates.length === 0) {
+      this.snackbarService.showInfo('Brak nasion');
+    }
+
     this.spinnerStore.stopSpinner();
   }
 

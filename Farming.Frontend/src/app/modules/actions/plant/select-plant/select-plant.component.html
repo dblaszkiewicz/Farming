@@ -27,14 +27,17 @@
     <h3><strong>Informacje o roślinie</strong></h3>
     <div class="section-details">
       <p><strong>Nazwa:</strong> {{ selectedPlant.plantName }}</p>
-      <p><strong>Wymagane na hektar:</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }} kg</p>
+      <p>
+        <strong>Wymagane na hektar:</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }}
+        {{ selectedPlant.unit }}
+      </p>
     </div>
   </div>
   <br />
   <div class="section-information">
     <h3><strong>Stan magazynowy</strong></h3>
     <div class="section-details">
-      <p><strong>Ilość:</strong> {{ selectedPlant.quantity.toFixed(2) }} kg</p>
+      <p><strong>Ilość:</strong> {{ selectedPlant.quantity.toFixed(2) }} {{ selectedPlant.unit }}</p>
       <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
         <strong>Dostępne na:</strong> {{ selectedPlant.enoughForArea.toFixed(2) }} ha
       </p>
@@ -46,13 +49,16 @@
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Ilość w kg</mat-label>
+          <mat-label>Ilość ({{ selectedPlant.unit }})</mat-label>
           <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
-          <mat-hint align="end">{{ quantityFormControl.value }} kg / {{ selectedPlant.quantity }} kg </mat-hint>
+          <mat-hint align="end"
+            >{{ quantityFormControl.value }} / {{ selectedPlant.quantity }}
+            {{ selectedPlant.unit }}
+          </mat-hint>
 
           <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
-            Wymagane minimum <strong> {{ minQuantityForArea }}</strong> kg
+            Wymagane minimum <strong> {{ minQuantityForArea }}</strong> {{ selectedPlant.unit }}
           </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('max')">
             Brak takiej <strong>ilości</strong> na magazynie

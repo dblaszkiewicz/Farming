@@ -17,7 +17,6 @@ export class PlantDeliveryComponent implements OnInit {
   public deliveries: DeliveryDto[];
   public canDisplay: boolean = false;
   public warehouseMode: boolean = true;
-  public averagePricePerTon: number = 0;
   public objectTypeEnum = ObjectTypeEnum;
 
   public warehouseName: string;
@@ -54,7 +53,6 @@ export class PlantDeliveryComponent implements OnInit {
 
       this.plantName = result.name;
       this.deliveries = result.deliveries;
-      this.averagePricePerTon = result.averagePricePerTon;
     } else {
       this.warehouseMode = true;
       this.deliveries = await lastValueFrom(this.plantWarehouseService.getDeliveriesByWarehouse(this.warehouseId!));

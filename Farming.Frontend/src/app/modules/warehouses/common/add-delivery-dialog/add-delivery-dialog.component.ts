@@ -14,7 +14,7 @@ export class AddDeliveryDialogComponent implements OnInit {
 
   public objectTypeEnum = ObjectTypeEnum;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string; objectType: ObjectTypeEnum }) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string; objectType: ObjectTypeEnum; unitName: string }) {
     this.setForm();
   }
 

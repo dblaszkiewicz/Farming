@@ -29,7 +29,7 @@ export class DisplayDeliveriesComponent implements OnInit, AfterViewInit {
 
   public pesticideColumns: string[] = ['quantity', 'price', 'pricePerLiter', 'realizationDate', 'userName'];
 
-  public plantColumns: string[] = ['quantity', 'price', 'pricePerTon', 'realizationDate', 'userName'];
+  public plantColumns: string[] = ['quantity', 'unit', 'price', 'realizationDate', 'userName'];
 
   public fertilizerColumns: string[] = ['quantity', 'price', 'pricePerTon', 'realizationDate', 'userName'];
 

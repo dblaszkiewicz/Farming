@@ -37,30 +37,16 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                 .AsNoTracking()
                 .Where(x => statesIds.Contains(x.PlantWarehouseStateId))
                 .Include(x => x.User)
+                .Include(x => x.Plant)
                 .Select(x => x.AsDtoByPlant())
                 .ToListAsync();
 
             var plant = await _plants.FirstOrDefaultAsync(x => x.Id == request.PlantId);
 
-            decimal price = 0;
-            var counter = 0;
-
-            foreach (var delivery in deliveries)
-            {
-                if (delivery.PricePerTon > 0)
-                {
-                    price += delivery.PricePerTon;
-                    counter++;
-                }
-            }
-
-            var averagePricePerTon = counter > 0 ? price / counter : 0;
-
             return new PlantDeliveryByWarehouseAndPlantDto()
             {
                 Deliveries = deliveries,
                 Name = plant.Name,
-                AveragePricePerTon = averagePricePerTon
             };
         }
     }

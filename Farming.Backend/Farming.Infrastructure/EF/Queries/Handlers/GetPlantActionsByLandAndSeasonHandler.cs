@@ -33,6 +33,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                     {
                         Name = x.Plant.Name,
                         Quantity = x.Quantity,
+                        Unit = x.Plant.Unit,
                         RealizationDate = x.RealizationDate,
                         UserName = x.User.Name
                     }).OrderBy(x => x.RealizationDate).ToList();
