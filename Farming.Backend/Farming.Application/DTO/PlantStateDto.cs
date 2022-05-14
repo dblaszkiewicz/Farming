@@ -5,6 +5,7 @@ namespace Farming.Application.DTO
     {
         public Guid PlantId { get; set; }
         public string PlantName { get; set; }
+        public string PlantDescription { get; set; }
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
         public decimal RequiredAmountPerHectare { get; set; }

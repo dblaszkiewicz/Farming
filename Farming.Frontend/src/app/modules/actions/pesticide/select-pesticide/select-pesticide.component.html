@@ -26,8 +26,14 @@
   <div class="section-information">
     <h3><strong>Informacje o oprysku</strong></h3>
     <div class="section-details">
-      <p><strong>Typ:</strong> {{ selectedPesticide.pesticideTypeName }}</p>
-      <p><strong>Nazwa:</strong> {{ selectedPesticide.pesticideName }}</p>
+      <p>
+        <strong>Typ:</strong> {{ selectedPesticide.pesticideTypeName }}
+        <mat-icon class="description-icon" matTooltip="{{ selectedPesticide.pesticideTypeDescription }}">info</mat-icon>
+      </p>
+      <p>
+        <strong>Nazwa:</strong> {{ selectedPesticide.pesticideName }}
+        <mat-icon class="description-icon" matTooltip="{{ selectedPesticide.pesticideDescription }}">info</mat-icon>
+      </p>
       <p><strong>Wymagane na hektar:</strong> {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml</p>
     </div>
   </div>

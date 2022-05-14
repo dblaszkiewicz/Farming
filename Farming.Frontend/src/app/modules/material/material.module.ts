@@ -22,6 +22,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const materialModules = [
   MatToolbarModule,
@@ -47,6 +48,7 @@ const materialModules = [
   MatProgressSpinnerModule,
   MatRadioModule,
   MatSlideToggleModule,
+  MatTooltipModule,
 ];
 
 @NgModule({

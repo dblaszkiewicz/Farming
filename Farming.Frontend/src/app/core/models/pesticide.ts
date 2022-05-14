@@ -9,7 +9,9 @@ export interface PesticideStateDto {
   pesticideId: string;
   pesticideTypeId: string;
   pesticideName: string;
+  pesticideDescription: string;
   pesticideTypeName: string;
+  pesticideTypeDescription: string;
   quantity: number;
   requiredAmountPerHectare: number;
   enoughForArea: number;

@@ -27,7 +27,6 @@ namespace Farming.Infrastructure.EF
             AddUsers(context);
             AddLands(context);
             AddWarehouses(context);
-
             AddPlants(context);
 
             context.SaveChanges();
@@ -47,8 +46,7 @@ namespace Farming.Infrastructure.EF
                  new LandReadModel("Klasa I", "Działka druga", 0.51m),
                  new LandReadModel("Klasa IVb", "Działka trzecia", 2.21m),
                  new LandReadModel("Klasa II", "Działka czwarta", 1.5m),
-                 new LandReadModel("Klasa V", "Działka piąta", 3.75m),
-                 new LandReadModel("Klasa I", "Działka szósta", 6.24m)
+                 new LandReadModel("Klasa V", "Działka piąta", 6.75m),
             };
 
             context.Lands.AddRange(lands);
@@ -59,22 +57,19 @@ namespace Farming.Infrastructure.EF
             var plantWarehouses = new List<PlantWarehouseReadModel>()
             {
                 new PlantWarehouseReadModel("Garaż"),
-                new PlantWarehouseReadModel("Przechowalnia"),
-                new PlantWarehouseReadModel("Wiata")
+                new PlantWarehouseReadModel("Przechowalnia")
             };
 
             var pesticideWarehouses = new List<PesticideWarehouseReadModel>()
             {
                 new PesticideWarehouseReadModel("Garaż"),
-                new PesticideWarehouseReadModel("Przechowalnia"),
-                new PesticideWarehouseReadModel("Wiata")
+                new PesticideWarehouseReadModel("Przechowalnia")
             };
 
             var fertilizerWarehouses = new List<FertilizerWarehouseReadModel>()
             {
                 new FertilizerWarehouseReadModel("Garaż"),
-                new FertilizerWarehouseReadModel("Przechowalnia"),
-                new FertilizerWarehouseReadModel("Wiata")
+                new FertilizerWarehouseReadModel("Przechowalnia")
             };
 
             context.PlantWarehouses.AddRange(plantWarehouses);
@@ -84,32 +79,32 @@ namespace Farming.Infrastructure.EF
 
         private static void AddPlants(ReadDbContext context)
         {
-            var wheat = new PlantReadModel("Pszenica", 150, "kg", "Zboże typu pszenica");
-            var barley = new PlantReadModel("Jęczmień", 160, "kg", "Zboże typu jęczmień");
-            var rye = new PlantReadModel("Żyto", 210, "kg", "Zboże typu żyto");
-            var oat = new PlantReadModel("Owies", 220, "kg", "Zboże typu owies");
-            var potato = new PlantReadModel("Ziemniaki", 6000, "kg", "Warzywo typu ziemniak");
-            var redBeets = new PlantReadModel("Buraczki czerwone", 800, "tys. szt.", "Warzywo typu burak");
-            var onion = new PlantReadModel("Cebula", 650, "tys. szt.", "Warzywo typu cebula");
+            var pszenica = new PlantReadModel("Pszenica", 150, "kg", "Rodzaj zbóż z rodziny wiechlinowatych");
+            var jeczmien = new PlantReadModel("Jęczmień", 160, "kg", "Rodzaj zbóż z rodziny wiechlinowatych");
+            var zyto = new PlantReadModel("Żyto", 210, "kg", "Rodzaj zbóż z rodziny wiechlinowatych");
+            var owies = new PlantReadModel("Owies", 220, "kg", "Rodzaj zbóż z rodziny wiechlinowatych");
+            var ziemniak = new PlantReadModel("Ziemniaki", 6000, "kg", "Gatunek rośliny należący do rodziny psiankowatych");
+            var czerwony_burak = new PlantReadModel("Czerwony burak", 800, "tys. szt.", "Grupa kultywarów podgatunku buraka zwyczajnego");
+            var cebula = new PlantReadModel("Cebula", 650, "tys. szt.", "Warzywo należące do rodziny amarylkowatych");
 
             var nawozyAzotowe = new FertilizerTypeReadModel("Azot", "Grupa nawozów azotowych", 
                 new List<FertilizerReadModel>()
                 {
                     new FertilizerReadModel("Amoniak", "Nawozy amoniakowe", 150, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Saletrzak", "Nawozy saletrzane", 90, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Saletrzak-Amoniak", "Nawozy saletrzano-amonowe", 160, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Mocznik", "Nawozy amidowe", 130, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     })
                 }
             );
@@ -120,27 +115,27 @@ namespace Farming.Infrastructure.EF
                     new FertilizerReadModel("Precypitat", "Nawóz fosforowy zawierający rozpuszczalny w wodzie diwodorofosforan wapnia",
                         110, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Supertomasyna", "Mineralny nawóz fosforowy", 200, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Fosforan amonu", "Nawóz typu fosforan amonu", 90, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Mączka fosforytowa", "Mączki fosforytowe i kostne", 170, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Polifosforan", "Polimery zbudowane z merów fosforanowych", 170, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Metafosforan", "Sole lub estry kwasu metafosforowego", 170, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     })
                 }
             );
@@ -151,45 +146,112 @@ namespace Farming.Infrastructure.EF
                     new FertilizerReadModel("Chlorek", "Nawozy stosowane dla roślin niewrażliwych na nadmiar chloru, gdzie potas występuje w postaci chlorku potasu",
                         70, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                     new FertilizerReadModel("Siarczan", "Potas występuje w postaci siarczanu potasu, może je stosować dla wszystkich roślin",
                         160, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                 }
             );
 
-            var typOprysku1 = new PesticideTypeReadModel("Nazwa typu 1", "Opis typu 1",
+            var herbicydy = new PesticideTypeReadModel("Herbicydy", "Środki do zwalczania niepożądanych roślin, głównie chwastów i gatunków inwazyjnych",
                 new List<PesticideReadModel>()
                 {
-                    new PesticideReadModel("Oprysk1", "Opis oprysk1",
-                        70, new List<PlantReadModel>()
+                    new PesticideReadModel("Huzar Activ Plus", "Herbicyd selektywny o działaniu układowym stosowany nalistnie, koncentrat w formie zawiesiny olejowej do rozcieńczania wodą (OD).",
+                        1000, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
-                    new PesticideReadModel("Oprysk2", "Opis oprysk2",
-                        160, new List<PlantReadModel>()
+                    new PesticideReadModel("Chwastox Trio", "Herbicyd selektywny o działaniu układowym, stosowanym nalistnie, w formie płynu do sporządzania roztworu wodnego.",
+                        1500, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies
+                    }),
+                    new PesticideReadModel("Arcade 880 EC", "Herbicyd selektywny o działaniu zwalczania jednorocznych chwastów jednoliściennych oraz dwuliściennych w ziemniaku",
+                        900, new List<PlantReadModel>()
+                    {
+                        ziemniak
+                    }),
+                    new PesticideReadModel("Syngenta Boxer 800 EC", "Herbicyd selektywny stosowany doglebowo i nalistnie, przeznaczony do selektywnego zwalczania niektórych rocznych chwastów jednoliściennych i dwuliściennych",
+                        900, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
                     }),
                 }
             );
 
-            var typOprysku2 = new PesticideTypeReadModel("Nazwa typu 2", "Opis typu 2",
+            var zoocydy = new PesticideTypeReadModel("Zoocydy", "Środki do zwalczania szkodników",
                 new List<PesticideReadModel>()
                 {
-                    new PesticideReadModel("Oprysk3", "Opis oprysk3",
-                        70, new List<PlantReadModel>()
+                    new PesticideReadModel("Karate zeon", "Preparat na stonkę na ziemniaki",
+                        700, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        ziemniak
                     }),
-                    new PesticideReadModel("Oprysk4", "Opis oprysk4",
-                        160, new List<PlantReadModel>()
+                    new PesticideReadModel("Sherpa 100 EC", "Środek owadobójczy w formie koncentratu do sporządzania emulsji wodnej, przeznaczony do zwalczania szkodników gryzących i ssących",
+                        300, new List<PlantReadModel>()
                     {
-                        wheat, barley, rye, oat, potato, redBeets, onion
+                        pszenica, jeczmien, zyto, owies
                     }),
+                    new PesticideReadModel("Cyperkill Max 500EC", "Środek owadobójczy w formie koncentratu do sporządzania emulsji wodnej, o działaniu kontaktowym i żołądkowym",
+                        50, new List<PlantReadModel>()
+                    {
+                        ziemniak, czerwony_burak, cebula
+                    }),
+                    new PesticideReadModel("Deltaro owadobójczy", "Środek owadobójczy o działaniu kontaktowym i żołądkowym, przeznaczonym do zwalczania szkodników gryzących i kłująco – ssących",
+                        140, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
+                    })
+                }
+            );
+
+            var fungicydy = new PesticideTypeReadModel("Fungicydy ", "Środki do zwalczania chorób",
+                new List<PesticideReadModel>()
+                {
+                    new PesticideReadModel("Tarcza Łan 250 EW", "Fungicyd w formie płynu do sporządzania emulsji wodnej o działaniu układowym do stosowania zapobiegawczego lub z chwilą pojawienia się pierwszych objawów choroby",
+                        600, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
+                    }),
+                    new PesticideReadModel("Tern 750 EC", "Koncentrat do sporządzania emulsji wodnej (EC) o działaniu układowym, do stosowania zapobiegawczego i interwencyjnego do ochrony przed chorobami grzybowymi.",
+                        750, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies
+                    }),
+                    new PesticideReadModel("Plexeo 60 EC", "Fungicyd w formie rozpuszczalnego koncentratu (EC) do sporządzania roztworu wodnego o działaniu systemicznym do stosowania zapobiegawczego, interwencyjnego oraz wyniszczającego.",
+                        1500, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies
+                    }),
+                    new PesticideReadModel("Soligor 425EC", "Fungicyd w formie koncentratu do sporządzania emulsji wodnej o działaniu układowym do stosowania zapobiegawczego,interwencyjnego oraz wyniszczającego.",
+                        900, new List<PlantReadModel>()
+                    {
+                        ziemniak, czerwony_burak, cebula
+                    })
+                }
+            );
+
+            var regulator_wzrostu = new PesticideTypeReadModel("Regulator wzrostu", "Stymulują lub hamują różne procesy u roślin",
+                new List<PesticideReadModel>()
+                {
+                    new PesticideReadModel("Stabilan 750 SL", "Hamuje wzrost, skraca i usztywnia źdźbło zbóż, w rezultacie zapobiegając ich wyleganiu",
+                        600, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies
+                    }),
+                    new PesticideReadModel("Medax Max", "Regulator wzrostu roślin w postaci granul do sporządzenia zawiesiny wodnej o działaniu systemicznym. Środek stosuje się w celu redukcji wzrostu roślin",
+                        1200, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
+                    }),
+                    new PesticideReadModel("MODDUS 250EC", "Środek z grupy regulatorów wzrostu roślin, w formie koncentratu do sporządzania emulsji wodnej",
+                        1600, new List<PlantReadModel>()
+                    {
+                        pszenica, jeczmien, zyto, owies, ziemniak, czerwony_burak, cebula
+                    })
                 }
             );
 
@@ -197,8 +259,10 @@ namespace Farming.Infrastructure.EF
             context.FertilizerTypes.Add(nawozyFosforowe);
             context.FertilizerTypes.Add(nawozyPotasowe);
 
-            context.PesticideTypes.Add(typOprysku1);
-            context.PesticideTypes.AddRange(typOprysku2);
+            context.PesticideTypes.Add(herbicydy);
+            context.PesticideTypes.AddRange(zoocydy);
+            context.PesticideTypes.AddRange(fungicydy);
+            context.PesticideTypes.AddRange(regulator_wzrostu);
         }
     }
 }

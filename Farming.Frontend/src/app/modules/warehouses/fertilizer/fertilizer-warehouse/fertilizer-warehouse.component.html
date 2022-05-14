@@ -34,12 +34,26 @@
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="fertilizerName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
-      <td mat-cell *matCellDef="let element">{{ element.fertilizerName }}</td>
+      <td
+        mat-cell
+        matTooltip="{{ element.fertilizerDescription }}"
+        [matTooltipPosition]="'right'"
+        *matCellDef="let element"
+      >
+        {{ element.fertilizerName }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="fertilizerTypeName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ</th>
-      <td mat-cell *matCellDef="let element">{{ element.fertilizerTypeName }}</td>
+      <td
+        mat-cell
+        matTooltip="{{ element.fertilizerTypeDescription }}"
+        [matTooltipPosition]="'right'"
+        *matCellDef="let element"
+      >
+        {{ element.fertilizerTypeName }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="requiredAmountPerHectare">

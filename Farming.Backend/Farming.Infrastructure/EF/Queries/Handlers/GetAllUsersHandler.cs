@@ -18,7 +18,12 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
 
         public async Task<IEnumerable<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            return await _users.Select(x => x.AsDto()).ToListAsync();
+            return await _users
+                .OrderByDescending(x => x.Active)
+                .ThenByDescending(x => x.IsAdmin)
+                .ThenBy(x => x.Created)
+                .Select(x => x.AsDto())
+                .ToListAsync();
         }
     }
 }

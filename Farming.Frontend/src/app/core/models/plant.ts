@@ -9,6 +9,7 @@ export interface PlantDto {
 export interface PlantStateDto {
   plantId: string;
   plantName: string;
+  plantDescription: string;
   quantity: number;
   unit: string;
   requiredAmountPerHectare: number;

@@ -10,6 +10,8 @@ export interface FertilizerStateDto {
   fertilizerTypeId: string;
   fertilizerName: string;
   fertilizerTypeName: string;
+  fertilizerDescription: string;
+  fertilizerTypeDescription: string;
   quantity: number;
   requiredAmountPerHectare: number;
   enoughForArea: number;

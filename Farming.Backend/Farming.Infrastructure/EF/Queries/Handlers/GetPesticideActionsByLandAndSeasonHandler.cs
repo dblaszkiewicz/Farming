@@ -32,6 +32,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                     .Select(x => new PesticideActionDto
                     {
                         Name = x.Pesticide.Name,
+                        Description = x.Pesticide.Description,
                         Quantity = x.Quantity,
                         RealizationDate = x.RealizationDate,
                         UserName = x.User.Name

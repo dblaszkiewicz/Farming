@@ -7,6 +7,8 @@ namespace Farming.Application.DTO
         public Guid FertilizerTypeId { get; set; }
         public string FertilizerName { get; set; }
         public string FertilizerTypeName { get; set; }
+        public string FertilizerTypeDescription { get; set; }
+        public string FertilizerDescription { get; set; }
         public decimal Quantity { get; set; }
         public decimal RequiredAmountPerHectare { get; set; }
         public decimal EnoughForArea { get; set; }

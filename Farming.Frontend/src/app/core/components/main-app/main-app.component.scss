@@ -56,6 +56,10 @@ mat-sidenav-container {
   cursor: pointer;
 }
 
+.mini-logo {
+  height: 50px;
+}
+
 .name {
   margin-top: 8px;
   font-weight: normal;
@@ -81,4 +85,8 @@ mat-divider {
 .userAdmin {
   font-size: 17px;
   color: #00ff00;
+}
+
+.appHeader {
+  padding-top: 10px;
 }

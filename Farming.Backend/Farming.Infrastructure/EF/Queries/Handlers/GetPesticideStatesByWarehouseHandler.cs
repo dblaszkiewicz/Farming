@@ -23,7 +23,8 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                 .Where(x => x.PesticideWarehouseId == request.WarehouseId && x.Quantity > 0)
                 .Include(x => x.Pesticide)
                     .ThenInclude(x => x.PesticideType)
-                .OrderByDescending(x => x.Quantity)
+                .OrderBy(x => x.Pesticide.PesticideTypeId)
+                .ThenByDescending(x => x.Quantity)
                 .Select(x => x.AsDto())
                 .ToListAsync();
         }

@@ -4,12 +4,17 @@
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
 
-  <div *ngIf="!isAuthorized">Agriculture Solutions</div>
+  <div class="w-100 d-flex justify-content-between">
+    <div class="appHeader" *ngIf="!isAuthorized">Agriculture Solutions</div>
 
-  <div *ngIf="isAuthorized">
-    Witaj, {{ userName }}!
-    <span><mat-icon class="userAdmin" *ngIf="isAdmin">build</mat-icon></span>
-    <span class="userInactive" *ngIf="!isActive"> (nieaktywny) </span>
+    <div class="appHeader" *ngIf="isAuthorized">
+      Witaj, {{ userName }}!
+      <span><mat-icon class="userAdmin" *ngIf="isAdmin">build</mat-icon></span>
+      <span class="userInactive" *ngIf="!isActive"> (nieaktywny) </span>
+    </div>
+    <div>
+      <img class="mini-logo mat-elevation-z8" src="assets/images/logo.png" routerLink="/" />
+    </div>
   </div>
 </mat-toolbar>
 

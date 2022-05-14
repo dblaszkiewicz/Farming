@@ -75,7 +75,9 @@ namespace Farming.Infrastructure.EF.Queries
                 FertilizerId = readModel.FertilizerId,
                 FertilizerTypeId = readModel.Fertilizer.FertilizerTypeId,
                 FertilizerName = readModel.Fertilizer.Name,
+                FertilizerDescription = readModel.Fertilizer.Description,
                 FertilizerTypeName = readModel.Fertilizer.FertilizerType.Name,
+                FertilizerTypeDescription = readModel.Fertilizer.FertilizerType.Description,
                 Quantity = readModel.Quantity,
                 RequiredAmountPerHectare = readModel.Fertilizer.RequiredAmountPerHectare,
                 EnoughForArea = enoughForArea
@@ -89,6 +91,7 @@ namespace Farming.Infrastructure.EF.Queries
             {
                 PlantId = readModel.PlantId,
                 PlantName = readModel.Plant.Name,
+                PlantDescription = readModel.Plant.Description,
                 Quantity = readModel.Quantity,
                 Unit = readModel.Plant.Unit,
                 RequiredAmountPerHectare = readModel.Plant.RequiredAmountPerHectare,
@@ -104,7 +107,9 @@ namespace Farming.Infrastructure.EF.Queries
                 PesticideId = readModel.PesticideId,
                 PesticideTypeId = readModel.Pesticide.PesticideTypeId,
                 PesticideName = readModel.Pesticide.Name,
+                PesticideDescription = readModel.Pesticide.Description,
                 PesticideTypeName = readModel.Pesticide.PesticideType.Name,
+                PesticideTypeDescription = readModel.Pesticide.PesticideType.Description,
                 Quantity = readModel.Quantity,
                 RequiredAmountPerHectare = readModel.Pesticide.RequiredAmountPerHectare,
                 EnoughForArea = enoughForArea

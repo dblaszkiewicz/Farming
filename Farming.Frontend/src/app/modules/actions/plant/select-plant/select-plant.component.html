@@ -26,7 +26,10 @@
   <div class="section-information">
     <h3><strong>Informacje o roślinie</strong></h3>
     <div class="section-details">
-      <p><strong>Nazwa:</strong> {{ selectedPlant.plantName }}</p>
+      <p>
+        <strong>Nazwa:</strong> {{ selectedPlant.plantName }}
+        <mat-icon class="description-icon" matTooltip="{{ selectedPlant.plantDescription }}">info</mat-icon>
+      </p>
       <p>
         <strong>Wymagane na hektar:</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }}
         {{ selectedPlant.unit }}

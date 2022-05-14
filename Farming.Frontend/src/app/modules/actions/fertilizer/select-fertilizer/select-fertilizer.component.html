@@ -26,8 +26,17 @@
   <div class="section-information">
     <h3><strong>Informacje o nawozie</strong></h3>
     <div class="section-details">
-      <p><strong>Typ:</strong> {{ selectedFertilizer.fertilizerTypeName }}</p>
-      <p><strong>Nazwa:</strong> {{ selectedFertilizer.fertilizerName }}</p>
+      <p>
+        <strong>Typ:</strong> {{ selectedFertilizer.fertilizerTypeName }}
+        <mat-icon class="description-icon" matTooltip="{{ selectedFertilizer.fertilizerTypeDescription }}"
+          >info</mat-icon
+        >
+      </p>
+      <p>
+        <strong>Nazwa:</strong> {{ selectedFertilizer.fertilizerName }}
+        <mat-icon class="description-icon" matTooltip="{{ selectedFertilizer.fertilizerDescription }}">info</mat-icon>
+      </p>
+
       <p><strong>Wymagane na hektar:</strong> {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
     </div>
   </div>

@@ -32,6 +32,7 @@ namespace Farming.Infrastructure.EF.Queries.Handlers
                     .Select(x => new PlantActionDto
                     {
                         Name = x.Plant.Name,
+                        Description = x.Plant.Description,
                         Quantity = x.Quantity,
                         Unit = x.Plant.Unit,
                         RealizationDate = x.RealizationDate,

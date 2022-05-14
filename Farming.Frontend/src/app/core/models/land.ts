@@ -18,6 +18,7 @@ export interface PlantedOnLandDto {
 
 export interface LandActionDto {
   name: string;
+  description: string;
   userName: string;
   quantity: number;
   realizationDate: Date;
