@@ -11,5 +11,14 @@ namespace Farming.Application.Commands
         public string Password { get; set; }
         public string RepeatPassword { get; set; }
         public Guid CurrentUserId { get; set; }
+
+        public AddUserCommand(string login, string name, string password, string repeatPassword, Guid currentUserId)
+        {
+            Login = login;
+            Name = name;
+            Password = password;
+            RepeatPassword = repeatPassword;
+            CurrentUserId = currentUserId;
+        }
     }
 }

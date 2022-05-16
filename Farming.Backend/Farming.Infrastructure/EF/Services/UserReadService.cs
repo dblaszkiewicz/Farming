@@ -24,7 +24,7 @@ namespace Farming.Infrastructure.EF.Services
             return _dbSet.AnyAsync(x => x.Id == id && x.Active);
         }
 
-        public Task<bool> IsLoginUniqueAsync(string login)
+        public Task<bool> IsLoginAlreadyTakenAsync(string login)
         {
             return _dbSet.AnyAsync(x => x.Login == login.ToLower());
         }

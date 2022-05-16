@@ -46,7 +46,7 @@ namespace Farming.Domain.Entities
             return false;
         }
 
-        internal void SpendPlants(PlantActionQuantity quantity)
+        public void SpendPlants(PlantActionQuantity quantity)
         {
             var newQuantity = Quantity - quantity;
 

@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Farming.Application.Commands.Handlers
 {
-    internal sealed class AddUserHandler : IRequestHandler<AddUserCommand, Response<AddUserResponse>>
+    public sealed class AddUserHandler : IRequestHandler<AddUserCommand, Response<AddUserResponse>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserReadService _userReadService;

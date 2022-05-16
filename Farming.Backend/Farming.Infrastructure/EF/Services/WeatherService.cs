@@ -11,42 +11,50 @@ namespace Farming.Infrastructure.EF.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://weatherdbi.herokuapp.com/data/weather/");
+                client.BaseAddress = new Uri("https://weatherdbi.herokuapp.com/data/weather2/");
 
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 place = RemovePolishChars(place.ToLower());
 
-                var response = await client.GetAsync(place);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    var json = await response.Content.ReadAsStringAsync();
-                    var weather = JsonConvert.DeserializeObject<WeatherDto>(json);
+                    var response = await client.GetAsync(place);
 
-                    if (weather.Region is null)
+                    if (response.IsSuccessStatusCode)
                     {
-                        var emergencyResponse = await client.GetAsync("krakow");
+                        var json = await response.Content.ReadAsStringAsync();
+                        var weather = JsonConvert.DeserializeObject<WeatherDto>(json);
 
-                        if (emergencyResponse.IsSuccessStatusCode)
+                        if (weather.Region is null)
                         {
-                            var emergencyJson = await emergencyResponse.Content.ReadAsStringAsync();
-                            var emergencyWeather = JsonConvert.DeserializeObject<WeatherDto>(emergencyJson);
-                            emergencyWeather.IsEmergency = true;
-                            SetDayHourRegion(emergencyWeather);
-                            return emergencyWeather;
+                            var emergencyResponse = await client.GetAsync("krakow");
+
+                            if (emergencyResponse.IsSuccessStatusCode)
+                            {
+                                var emergencyJson = await emergencyResponse.Content.ReadAsStringAsync();
+                                var emergencyWeather = JsonConvert.DeserializeObject<WeatherDto>(emergencyJson);
+                                emergencyWeather.IsEmergency = true;
+                                SetDayHourRegion(emergencyWeather);
+                                return emergencyWeather;
+                            }
+
+                            return JsonConvert.DeserializeObject<WeatherDto>(ExampleData());
                         }
-                        return null;
+
+                        weather.IsEmergency = false;
+
+                        SetDayHourRegion(weather);
+                        return weather;
                     }
+                } 
+                catch (Exception ex)
+                {
 
-                    weather.IsEmergency = false;
-
-                    SetDayHourRegion(weather);
-                    return weather;
                 }
 
-                return null;
+                return JsonConvert.DeserializeObject<WeatherDto>(ExampleData());
             }
         }
 
@@ -97,6 +105,22 @@ namespace Farming.Infrastructure.EF.Services
                 .Replace("ś", "s")
                 .Replace("ż", "z")
                 .Replace("ź", "z");
+        }
+
+        private string ExampleData()
+        {
+            return "{\"region\":\"Kraków, Poland\",\"currentConditions\":{\"dayhour\":\"Monday 3:00 PM\",\"temp\":{\"c\":24,\"f\":75}," +
+                "\"precip\":\"0%\",\"humidity\":\"30%\",\"wind\":{\"km\":8,\"mile\":5},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png\",\"comment\":\"Partly cloudy\"},\"next_days\":[" +
+                "{\"day\":\"Monday\",\"comment\":\"Scattered showers\",\"max_temp\":{\"c\":24,\"f\":75},\"min_temp\":{\"c\":11,\"f\":51},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png\"}," +
+                "{\"day\":\"Tuesday\",\"comment\":\"Scattered showers\",\"max_temp\":{\"c\":20,\"f\":68},\"min_temp\":{\"c\":5,\"f\":41},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png\"}," +
+                "{\"day\":\"Wednesday\",\"comment\":\"Sunny\",\"max_temp\":{\"c\":18,\"f\":65},\"min_temp\":{\"c\":4,\"f\":40},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/sunny.png\"}," +
+                "{\"day\":\"Thursday\",\"comment\":\"Mostly sunny\",\"max_temp\":{\"c\":25,\"f\":77},\"min_temp\":{\"c\":9,\"f\":49},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png\"}," +
+                "{\"day\":\"Friday\",\"comment\":\"Scattered thunderstorms\",\"max_temp\":{\"c\":26,\"f\":79},\"min_temp\":{\"c\":14,\"f\":58},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png\"}," +
+                "{\"day\":\"Saturday\",\"comment\":\"Thunderstorm\",\"max_temp\":{\"c\":24,\"f\":76},\"min_temp\":{\"c\":13,\"f\":55},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png\"}," +
+                "{\"day\":\"Sunday\",\"comment\":\"Showers\",\"max_temp\":{\"c\":21,\"f\":69},\"min_temp\":{\"c\":11,\"f\":51},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/rain_light.png\"}," +
+                "{\"day\":\"Monday\",\"comment\":\"Showers\",\"max_temp\":{\"c\":21,\"f\":70},\"min_temp\":{\"c\":11,\"f\":51},\"iconURL\":\"https://ssl.gstatic.com/onebox/weather/48/rain_light.png\"}]" +
+                ",\"contact_author\":{\"email\":\"communication.with.users@gmail.com\",\"auth_note\":\"Mail me for feature requests, improvement, bug, help, ect... " +
+                "Please tell me if you want me to provide any other free easy-to-use API services\"},\"data_source\":\"https://www.google.com/search?lr=lang_en&q=weather+in+krakow\"}";
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Farming.Domain.Exceptions
 {
-    internal class InvalidPlantWarehouseDeliveryQuantityException : FarmingException
+    public class InvalidPlantWarehouseDeliveryQuantityException : FarmingException
     {
         public decimal DeliveryQuantity { get; }
 
