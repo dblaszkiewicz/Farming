@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Farming.Application.Commands.Handlers
 {
-    internal sealed class AddFertilizerWarehouseDeliveryHandler : IRequestHandler<AddFertilizerWarehouseDeliveryCommand, 
+    public sealed class AddFertilizerWarehouseDeliveryHandler : IRequestHandler<AddFertilizerWarehouseDeliveryCommand, 
         Response<AddFertilizerWarehouseDeliveryResponse>>
     {
         private readonly IFertilizerWarehouseRepository _fertilizerWarehouseRepository;
