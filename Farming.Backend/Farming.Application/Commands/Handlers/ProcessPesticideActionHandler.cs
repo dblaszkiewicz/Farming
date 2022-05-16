@@ -13,7 +13,7 @@ using MediatR;
 namespace Farming.Application.Commands.Handlers
 {
 
-    internal sealed class ProcessPesticideActionHandler : IRequestHandler<ProcessPesticideActionCommand,
+    public sealed class ProcessPesticideActionHandler : IRequestHandler<ProcessPesticideActionCommand,
         Response<ProcessPesticideActionResponse>>
     {
         private readonly IPesticideDomainService _pesticideDomainService;

@@ -12,7 +12,7 @@ using MediatR;
 
 namespace Farming.Application.Commands.Handlers
 {
-    internal sealed class ProcessFertilizerActionHandler : IRequestHandler<ProcessFertilizerActionCommand, Response<ProcessFertilizerActionResponse>>
+    public sealed class ProcessFertilizerActionHandler : IRequestHandler<ProcessFertilizerActionCommand, Response<ProcessFertilizerActionResponse>>
     {
         private readonly IFertilizerActionFactory _fertilizerActionFactory;
         private readonly IFertilizerDomainService _fertilizerDomainService;

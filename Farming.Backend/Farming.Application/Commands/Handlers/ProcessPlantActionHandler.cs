@@ -12,17 +12,17 @@ using MediatR;
 
 namespace Farming.Application.Commands.Handlers
 {
-    internal sealed class ProcessPlantActionHandler : IRequestHandler<ProcessPlantActionCommand,
+    public sealed class ProcessPlantActionHandler : IRequestHandler<ProcessPlantActionCommand,
         Response<ProcessPlantActionResponse>>
     {
         private readonly ISeasonRepository _seasonRepository;
         private readonly IPlantWarehouseRepository _plantWarehouseRepository;
         private readonly IUserReadService _userReadService;
-        private readonly IPlantActionFactory _plantActionFactory;
-        private readonly IPlantDomainService _plantDomainService;
         private readonly ILandRepository _landRepository;
         private readonly IPlantRepository _plantRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPlantActionFactory _plantActionFactory;
+        private readonly IPlantDomainService _plantDomainService;
 
         public ProcessPlantActionHandler(ISeasonRepository seasonRepository,
             IUserReadService userReadService, IUnitOfWork unitOfWork, 

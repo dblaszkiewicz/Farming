@@ -3,7 +3,6 @@ using Farming.Application.Commands.Handlers;
 using Farming.Application.Commands.Responses;
 using Farming.Application.Exceptions;
 using Farming.Application.Services;
-using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
