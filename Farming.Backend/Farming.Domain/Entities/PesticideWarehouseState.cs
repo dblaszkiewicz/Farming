@@ -51,7 +51,7 @@ namespace Farming.Domain.Entities
             return false;
         }
 
-        internal void SpendPesticide(PesticideActionQuantity quantity)
+        public void SpendPesticide(PesticideActionQuantity quantity)
         {
             var newQuantity = Quantity - quantity;
 

@@ -10,7 +10,7 @@ namespace Farming.Domain.ValueObjects.Fertilizer
         {
             if (value < 0)
             {
-                throw new InvalidFertilizerWarehouseQuantityException(value);
+                throw new InvalidFertilizerWarehouseDeliveryQuantityException(value);
             }
 
             Value = value;

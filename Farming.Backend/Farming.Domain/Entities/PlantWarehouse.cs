@@ -12,7 +12,14 @@ namespace Farming.Domain.Entities
 
         public ICollection<PlantWarehouseState> States { get; }
 
-        
+        public PlantWarehouse(PlantWarehouseName name, List<PlantWarehouseState> states)
+        {
+            Id = new PlantWarehouseId(Guid.NewGuid());
+
+            Name = name;
+            States = states;
+        }
+
         public void AddDelivery(PlantWarehouseDelivery delivery)
         {
             var state = GetStateByPlantId(delivery.PlantId);
@@ -27,7 +34,7 @@ namespace Farming.Domain.Entities
             state.AddDelivery(delivery);
         }
 
-        internal void ProcessPlantAction(PlantId plantId, PlantActionQuantity quantity)
+        public void ProcessPlantAction(PlantId plantId, PlantActionQuantity quantity)
         {
             var state = GetStateByPlantId(plantId);
             if (state is null)

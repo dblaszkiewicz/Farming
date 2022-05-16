@@ -12,6 +12,13 @@ namespace Farming.Domain.Entities
 
         public ICollection<PesticideWarehouseState> States { get; }
 
+        public PesticideWarehouse(PesticideWarehouseName name, List<PesticideWarehouseState> states)
+        {
+            Id = new PesticideWarehouseId(Guid.NewGuid());
+            Name = name;
+            States = states;
+        }
+
         public void AddDelivery(PesticideWarehouseDelivery delivery)
         {
             var state = GetStateByPesticideId(delivery.PesticideId);
@@ -26,7 +33,7 @@ namespace Farming.Domain.Entities
             state.AddDelivery(delivery);
         }
 
-        internal void ProcessPesticideAction(PesticideId pesticideId, PesticideActionQuantity quantity)
+        public void ProcessPesticideAction(PesticideId pesticideId, PesticideActionQuantity quantity)
         {
             var state = GetStateByPesticideId(pesticideId);
             if (state is null)

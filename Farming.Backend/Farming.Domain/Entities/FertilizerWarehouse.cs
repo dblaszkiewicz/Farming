@@ -12,6 +12,14 @@ namespace Farming.Domain.Entities
 
         public ICollection<FertilizerWarehouseState> States { get; }
 
+        public FertilizerWarehouse(FertilizerWarehouseName name, List<FertilizerWarehouseState> states)
+        {
+            Id = new FertilizerWarehouseId(Guid.NewGuid());
+
+            Name = name;
+            States = states;
+        }
+
         public void AddDelivery(FertilizerWarehouseDelivery delivery)
         {
             var state = GetStateByFertilizerId(delivery.FertilizerId);
@@ -26,7 +34,7 @@ namespace Farming.Domain.Entities
             state.AddDelivery(delivery);
         }
 
-        internal void ProcessFertilizerAction(FertilizerId fertilizerId, FertilizerActionQuantity quantity)
+        public void ProcessFertilizerAction(FertilizerId fertilizerId, FertilizerActionQuantity quantity)
         {
             var state = GetStateByFertilizerId(fertilizerId);
             if (state is null)

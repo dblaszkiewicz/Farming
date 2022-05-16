@@ -51,7 +51,7 @@ namespace Farming.Domain.Entities
             return false;
         }
 
-        internal void SpendFertilizer(FertilizerActionQuantity quantity)
+        public void SpendFertilizer(FertilizerActionQuantity quantity)
         {
             var newQuantity = Quantity - quantity;
 
