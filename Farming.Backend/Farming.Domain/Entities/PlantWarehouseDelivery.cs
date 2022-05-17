@@ -19,7 +19,6 @@ namespace Farming.Domain.Entities
 
         public PlantWarehouseDelivery()
         {
-            // for EF
         }
 
         public PlantWarehouseDelivery(PlantId plantId, UserId userId,

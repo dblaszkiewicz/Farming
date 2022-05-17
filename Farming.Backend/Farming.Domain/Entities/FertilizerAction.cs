@@ -18,7 +18,6 @@ namespace Farming.Domain.Entities
 
         public FertilizerAction()
         {
-            // for EF
         }
 
         public FertilizerAction(FertilizerId fertilizerId, UserId userId, FertilizerActionQuantity quantity,

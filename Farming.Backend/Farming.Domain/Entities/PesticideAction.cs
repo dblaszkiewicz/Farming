@@ -18,7 +18,6 @@ namespace Farming.Domain.Entities
 
         public PesticideAction()
         {
-            // for EF
         }
 
         public PesticideAction(PesticideId pesticideId, UserId userId, PesticideActionQuantity quantity, 

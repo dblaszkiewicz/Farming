@@ -17,7 +17,6 @@ namespace Farming.Domain.Entities
 
         public LandRealization()
         {
-            // for EF
         }
 
         public LandRealization(LandId landId)

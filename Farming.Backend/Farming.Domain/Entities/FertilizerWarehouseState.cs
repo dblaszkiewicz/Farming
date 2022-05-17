@@ -17,7 +17,6 @@ namespace Farming.Domain.Entities
 
         public FertilizerWarehouseState()
         {
-            // for EF
         }
 
         public FertilizerWarehouseState(FertilizerId fertilizerId)

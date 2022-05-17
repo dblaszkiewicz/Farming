@@ -11,7 +11,7 @@ namespace Farming.Infrastructure.EF.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://weatherdbi.herokuapp.com/data/weather2/");
+                client.BaseAddress = new Uri("https://weatherdbi.herokuapp.com/data/weather/");
 
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
