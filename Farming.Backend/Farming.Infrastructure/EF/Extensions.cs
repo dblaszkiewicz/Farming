@@ -42,12 +42,12 @@ namespace Farming.Infrastructure.EF
 
             services.AddScoped<IWeatherService, WeatherService>();
 
-            var options = configuration.GetOptions<SqlOptions>("Sql");
+            var options = configuration.GetOptions<DatabaseOptions>("PostgreSql");
             
             services.AddDbContext<ReadDbContext>(ctx =>
-                ctx.UseSqlServer(options.ConnectionString));
+                ctx.UseNpgsql(options.ConnectionString));
             services.AddDbContext<WriteDbContext>(ctx =>
-                ctx.UseSqlServer(options.ConnectionString));
+                ctx.UseNpgsql(options.ConnectionString));
 
             return services;
         }

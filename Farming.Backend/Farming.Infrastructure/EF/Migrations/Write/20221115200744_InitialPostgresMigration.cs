@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Farming.Infrastructure.EF.Migrations.Write
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialPostgresMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,10 +14,10 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "FertilizerTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,9 +28,9 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "FertilizerWarehouses",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,12 +41,12 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "Lands",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandCLass = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<LandStatusEnum>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Area = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    LandCLass = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<LandStatusEnum>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Area = table.Column<decimal>(type: "numeric", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,10 +57,10 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PesticideTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,9 +71,9 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PesticideWarehouses",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,12 +84,12 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "Plants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RequiredAmountPerHectare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Unit = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,9 +100,9 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PlantWarehouses",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,10 +113,10 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "Seasons",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    StartDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    StartDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,14 +127,14 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Login = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Active = table.Column<bool>(type: "boolean", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,12 +145,12 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "Fertilizers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RequiredAmountPerHectare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FertilizerTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,12 +167,12 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "Pesticides",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RequiredAmountPerHectare = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PesticideTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,11 +189,11 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PlantWarehouseStates",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantWarehouseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlantWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,10 +216,10 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "LandRealizations",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SeasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    LandId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SeasonId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -242,11 +242,11 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "FertilizerWarehouseStates",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerWarehouseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FertilizerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FertilizerWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,7 +258,7 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FertilizerWarehouseStates_FertilizerWarehouses_FertilizerWarehouseId",
+                        name: "FK_FertilizerWarehouseStates_FertilizerWarehouses_FertilizerWa~",
                         column: x => x.FertilizerWarehouseId,
                         principalTable: "FertilizerWarehouses",
                         principalColumn: "Id",
@@ -269,8 +269,8 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PlantFertilizers",
                 columns: table => new
                 {
-                    SuitableFertilizersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SuitablePlantsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SuitableFertilizersId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SuitablePlantsId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -293,11 +293,11 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PesticideWarehouseStates",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideWarehouseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PesticideId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PesticideWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -309,7 +309,7 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PesticideWarehouseStates_PesticideWarehouses_PesticideWarehouseId",
+                        name: "FK_PesticideWarehouseStates_PesticideWarehouses_PesticideWareh~",
                         column: x => x.PesticideWarehouseId,
                         principalTable: "PesticideWarehouses",
                         principalColumn: "Id",
@@ -320,8 +320,8 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PlantPesticides",
                 columns: table => new
                 {
-                    SuitablePesticidesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SuitablePlantsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SuitablePesticidesId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SuitablePlantsId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -344,14 +344,14 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PlantWarehouseDeliveries",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantWarehouseStateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlantWarehouseStateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -363,7 +363,7 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PlantWarehouseDeliveries_PlantWarehouseStates_PlantWarehouseStateId",
+                        name: "FK_PlantWarehouseDeliveries_PlantWarehouseStates_PlantWarehous~",
                         column: x => x.PlantWarehouseStateId,
                         principalTable: "PlantWarehouseStates",
                         principalColumn: "Id",
@@ -380,13 +380,13 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "FertilzierActions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FertilizerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    LandRealizationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -415,13 +415,13 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PesticideActions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PesticideId = table.Column<Guid>(type: "uuid", nullable: false),
+                    LandRealizationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -450,13 +450,13 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PlantActions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LandRealizationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PlantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    LandRealizationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -485,14 +485,14 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "FertilizerWarehouseDeliveries",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FertilizerWarehouseStateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FertilizerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FertilizerWarehouseStateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -504,7 +504,7 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FertilizerWarehouseDeliveries_FertilizerWarehouseStates_FertilizerWarehouseStateId",
+                        name: "FK_FertilizerWarehouseDeliveries_FertilizerWarehouseStates_Fer~",
                         column: x => x.FertilizerWarehouseStateId,
                         principalTable: "FertilizerWarehouseStates",
                         principalColumn: "Id",
@@ -521,14 +521,14 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                 name: "PesticideWarehouseDeliveries",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PesticideWarehouseStateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RealizationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PesticideId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PesticideWarehouseStateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -540,7 +540,7 @@ namespace Farming.Infrastructure.EF.Migrations.Write
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PesticideWarehouseDeliveries_PesticideWarehouseStates_PesticideWarehouseStateId",
+                        name: "FK_PesticideWarehouseDeliveries_PesticideWarehouseStates_Pesti~",
                         column: x => x.PesticideWarehouseStateId,
                         principalTable: "PesticideWarehouseStates",
                         principalColumn: "Id",

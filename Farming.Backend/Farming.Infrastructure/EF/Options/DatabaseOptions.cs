@@ -1,7 +1,7 @@
 ﻿
 namespace Farming.Infrastructure.EF.Options
 {
-    public class SqlOptions
+    public class DatabaseOptions
     {
         public string ConnectionString { get; set; }
     }
