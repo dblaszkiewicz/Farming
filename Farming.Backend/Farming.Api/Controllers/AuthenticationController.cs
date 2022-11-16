@@ -1,4 +1,5 @@
 ﻿using Farming.Api.MapsterProfiles;
+using Farming.Application.Commands.Validators;
 using Farming.Application.Queries;
 using Farming.Application.Requests;
 using MapsterMapper;
@@ -24,6 +25,15 @@ namespace Farming.Api.Controllers
         {
             var query = _mapsterMapper.From(authenticateUserDto).AdaptToType<AuthenticateUserQuery>();
             var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUserDto)
+        {
+            var command = _mapsterMapper.From(registerUserDto).AdaptToType<RegisterUserCommand>();
+            var result = await _mediator.Send(command);
 
             return Ok(result);
         }
