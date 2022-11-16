@@ -12,6 +12,10 @@ namespace Farming.Domain.Entities
 
         public ICollection<FertilizerWarehouseState> States { get; }
 
+        public FertilizerWarehouse()
+        {
+        }
+
         public FertilizerWarehouse(FertilizerWarehouseName name, List<FertilizerWarehouseState> states)
         {
             Id = new FertilizerWarehouseId(Guid.NewGuid());

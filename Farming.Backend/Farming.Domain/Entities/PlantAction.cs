@@ -16,6 +16,10 @@ namespace Farming.Domain.Entities
         public User User { get; }
         public LandRealization LandRealization { get; }
 
+        public PlantAction()
+        {
+        }
+
         public PlantAction(PlantId plantId, UserId userId, PlantActionQuantity quantity,
             PlantActionRealizationDate realizationDate)
         {
