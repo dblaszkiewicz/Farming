@@ -17,6 +17,10 @@ namespace Farming.Domain.Entities
         public FertilizerWarehouseState FertilizerWarehouseState { get; }
         public User User { get; }
 
+        public FertilizerWarehouseDelivery()
+        {
+        }
+
         public FertilizerWarehouseDelivery(FertilizerId fertilizerId, UserId userId,
             FertilizerWarehouseDeliveryQuantity quantity, FertilizerWarehouseDeliveryPrice price, 
             FertilizerWarehouseDeliveryRealizationDate realizationDate)
