@@ -17,10 +17,6 @@ namespace Farming.Domain.Entities
         public User User { get; }
         public PesticideWarehouseState PesticideWarehouseState { get; }
 
-        public PesticideWarehouseDelivery()
-        {
-        }
-
         public PesticideWarehouseDelivery(PesticideId pesticideId, UserId userId,
             PesticideWarehouseDeliveryQuantity quantity, PesticideWarehouseDeliveryPrice price,
             PesticideWarehouseDeliveryRealizationDate realizationDate)
