@@ -1,4 +1,5 @@
 ﻿using Farming.Infrastructure.EF.Models;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -6,6 +7,13 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class PlantReadConfiguration : IEntityTypeConfiguration<PlantReadModel>, IReadConfiguration
     {
+        private readonly ITenantGetter _tenantGetter;
+
+        public PlantReadConfiguration(ITenantGetter tenantGetter)
+        {
+            _tenantGetter = tenantGetter;
+        }
+
         public void Configure(EntityTypeBuilder<PlantReadModel> builder)
         {
             builder.HasKey(x => x.Id);
@@ -19,6 +27,9 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .HasMany(x => x.SuitableFertilizers)
                 .WithMany(x => x.SuitablePlants)
                 .UsingEntity(x => x.ToTable("PlantFertilizers"));
+
+            builder
+                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
 
             builder.ToTable("Plants");
         }

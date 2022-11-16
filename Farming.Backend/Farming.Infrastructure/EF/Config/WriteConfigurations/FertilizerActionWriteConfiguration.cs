@@ -1,6 +1,7 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Domain.ValueObjects.Identity;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +9,13 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class FertilizerActionWriteConfiguration : IEntityTypeConfiguration<FertilizerAction>, IWriteConfiguration
     {
+        private readonly ITenantGetter _tenantGetter;
+
+        public FertilizerActionWriteConfiguration(ITenantGetter tenantGetter)
+        {
+            _tenantGetter = tenantGetter;
+        }
+
         public void Configure(EntityTypeBuilder<FertilizerAction> builder)
         {
             builder.HasKey(x => x.Id);
@@ -50,6 +58,9 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasOne(x => x.User)
                 .WithMany(x => x.FertilizerActions)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
 
             builder.ToTable("FertilzierActions");
         }

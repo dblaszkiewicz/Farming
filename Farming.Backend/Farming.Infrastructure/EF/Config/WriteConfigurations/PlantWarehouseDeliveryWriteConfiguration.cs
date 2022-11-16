@@ -1,6 +1,7 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Plant;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +9,13 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PlantWarehouseDeliveryWriteConfiguration : IEntityTypeConfiguration<PlantWarehouseDelivery>, IWriteConfiguration
     {
+        private readonly ITenantGetter _tenantGetter;
+
+        public PlantWarehouseDeliveryWriteConfiguration(ITenantGetter tenantGetter)
+        {
+            _tenantGetter = tenantGetter;
+        }
+
         public void Configure(EntityTypeBuilder<PlantWarehouseDelivery> builder)
         {
             builder.HasKey(x => x.Id);
@@ -54,6 +62,9 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasOne(x => x.PlantWarehouseState)
                 .WithMany(x => x.PlantWarehouseDeliveries)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
 
             builder.ToTable("PlantWarehouseDeliveries");
         }

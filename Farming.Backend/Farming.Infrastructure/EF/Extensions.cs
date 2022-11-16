@@ -1,6 +1,7 @@
 ﻿using Farming.Application.Services;
 using Farming.Domain.Repositories;
 using Farming.Infrastructure.EF.Contexts;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Farming.Infrastructure.EF.Options;
 using Farming.Infrastructure.EF.Repositories;
 using Farming.Infrastructure.EF.Services;
@@ -42,6 +43,12 @@ namespace Farming.Infrastructure.EF
 
             services.AddScoped<IWeatherService, WeatherService>();
 
+            services.AddScopedAs<TenantService>(new[]
+            {
+                typeof(ITenantGetter),
+                typeof(ITenantSetter)
+            });
+
             var options = configuration.GetOptions<DatabaseOptions>("PostgreSql");
             
             services.AddDbContext<ReadDbContext>(ctx =>
@@ -63,6 +70,25 @@ namespace Farming.Infrastructure.EF
             }
 
             return app;
+        }
+
+        public static IServiceCollection AddScopedAs<T>(this IServiceCollection services, IEnumerable<Type> types)
+            where T : class
+        {
+            // register the type first
+            services.AddScoped<T>();
+
+            foreach (var type in types)
+            {
+                // register a scoped 
+                services.AddScoped(type, svc =>
+                {
+                    var rs = svc.GetRequiredService<T>();
+                    return rs;
+                });
+            }
+
+            return services;
         }
     }
 }

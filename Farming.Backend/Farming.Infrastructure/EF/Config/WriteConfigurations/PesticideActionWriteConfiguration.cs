@@ -1,6 +1,7 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Pesticide;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +9,13 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PesticideActionWriteConfiguration : IEntityTypeConfiguration<PesticideAction>, IWriteConfiguration
     {
+        private readonly ITenantGetter _tenantGetter;
+
+        public PesticideActionWriteConfiguration(ITenantGetter tenantGetter)
+        {
+            _tenantGetter = tenantGetter;
+        }
+
         public void Configure(EntityTypeBuilder<PesticideAction> builder)
         {
             builder.HasKey(x => x.Id);
@@ -50,6 +58,9 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasOne(x => x.User)
                 .WithMany(x => x.PesticideActions)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
 
             builder.ToTable("PesticideActions");
         }

@@ -4,6 +4,7 @@ namespace Farming.Shared.Abstractions.Domain
     public abstract class AggregateRoot<T>
     {
         public T Id { get; protected set; }
+        public Guid TenantId { get; set; }
         public int Version { get; protected set; }
         public IEnumerable<IDomainEvent> Events => _events;
 

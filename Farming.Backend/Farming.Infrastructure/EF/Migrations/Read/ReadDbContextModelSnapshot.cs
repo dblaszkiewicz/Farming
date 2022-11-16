@@ -40,6 +40,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("RealizationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -54,7 +57,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FertilzierActions", (string)null);
+                    b.ToTable("FertilizerActions");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerReadModel", b =>
@@ -77,6 +80,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<decimal>("RequiredAmountPerHectare")
                         .HasColumnType("numeric");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
@@ -84,7 +90,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("FertilizerTypeId");
 
-                    b.ToTable("Fertilizers", (string)null);
+                    b.ToTable("Fertilizers");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerTypeReadModel", b =>
@@ -101,12 +107,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("FertilizerTypes", (string)null);
+                    b.ToTable("FertilizerTypes");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerWarehouseDeliveryReadModel", b =>
@@ -130,6 +139,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("RealizationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -144,7 +156,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FertilizerWarehouseDeliveries", (string)null);
+                    b.ToTable("FertilizerWarehouseDeliveries");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerWarehouseReadModel", b =>
@@ -157,12 +169,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("FertilizerWarehouses", (string)null);
+                    b.ToTable("FertilizerWarehouses");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerWarehouseStateReadModel", b =>
@@ -174,22 +189,31 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("FertilizerId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("FertilizerReadModelId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("FertilizerWarehouseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("FertilizerWarehouseReadModelId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FertilizerId");
+                    b.HasIndex("FertilizerReadModelId");
 
-                    b.HasIndex("FertilizerWarehouseId");
+                    b.HasIndex("FertilizerWarehouseReadModelId");
 
-                    b.ToTable("FertilizerWarehouseStates", (string)null);
+                    b.ToTable("FertilizerWarehouseStates");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.LandReadModel", b =>
@@ -212,12 +236,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lands", (string)null);
+                    b.ToTable("Lands");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.LandRealizationReadModel", b =>
@@ -232,6 +259,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("SeasonId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
@@ -241,7 +271,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("SeasonId");
 
-                    b.ToTable("LandRealizations", (string)null);
+                    b.ToTable("LandRealizations");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PesticideActionReadModel", b =>
@@ -262,6 +292,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("RealizationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -276,7 +309,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PesticideActions", (string)null);
+                    b.ToTable("PesticideActions");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PesticideReadModel", b =>
@@ -299,6 +332,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<decimal>("RequiredAmountPerHectare")
                         .HasColumnType("numeric");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
@@ -306,7 +342,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("PesticideTypeId");
 
-                    b.ToTable("Pesticides", (string)null);
+                    b.ToTable("Pesticides");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PesticideTypeReadModel", b =>
@@ -323,12 +359,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PesticideTypes", (string)null);
+                    b.ToTable("PesticideTypes");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PesticideWarehouseDeliveryReadModel", b =>
@@ -352,6 +391,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("RealizationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -366,7 +408,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PesticideWarehouseDeliveries", (string)null);
+                    b.ToTable("PesticideWarehouseDeliveries");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PesticideWarehouseReadModel", b =>
@@ -379,12 +421,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PesticideWarehouses", (string)null);
+                    b.ToTable("PesticideWarehouses");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PesticideWarehouseStateReadModel", b =>
@@ -399,8 +444,14 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("PesticideWarehouseId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("PesticideWarehouseReadModelId")
+                        .HasColumnType("uuid");
+
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Version")
                         .HasColumnType("integer");
@@ -409,9 +460,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("PesticideId");
 
-                    b.HasIndex("PesticideWarehouseId");
+                    b.HasIndex("PesticideWarehouseReadModelId");
 
-                    b.ToTable("PesticideWarehouseStates", (string)null);
+                    b.ToTable("PesticideWarehouseStates");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantActionReadModel", b =>
@@ -432,6 +483,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("RealizationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -446,7 +500,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PlantActions", (string)null);
+                    b.ToTable("PlantActions");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantReadModel", b =>
@@ -466,6 +520,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<decimal>("RequiredAmountPerHectare")
                         .HasColumnType("numeric");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("text");
@@ -475,7 +532,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasKey("Id");
 
-                    b.ToTable("Plants", (string)null);
+                    b.ToTable("Plants");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantWarehouseDeliveryReadModel", b =>
@@ -499,6 +556,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("RealizationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -513,7 +573,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PlantWarehouseDeliveries", (string)null);
+                    b.ToTable("PlantWarehouseDeliveries");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantWarehouseReadModel", b =>
@@ -526,12 +586,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlantWarehouses", (string)null);
+                    b.ToTable("PlantWarehouses");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantWarehouseStateReadModel", b =>
@@ -543,22 +606,31 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("PlantId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("PlantReadModelId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("PlantWarehouseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("PlantWarehouseReadModelId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlantId");
+                    b.HasIndex("PlantReadModelId");
 
-                    b.HasIndex("PlantWarehouseId");
+                    b.HasIndex("PlantWarehouseReadModelId");
 
-                    b.ToTable("PlantWarehouseStates", (string)null);
+                    b.ToTable("PlantWarehouseStates");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.SeasonReadModel", b =>
@@ -573,12 +645,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<DateTimeOffset>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Seasons", (string)null);
+                    b.ToTable("Seasons");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.UserReadModel", b =>
@@ -608,12 +683,15 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Version")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("FertilizerReadModelPlantReadModel", b =>
@@ -628,7 +706,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("SuitablePlantsId");
 
-                    b.ToTable("PlantFertilizers", (string)null);
+                    b.ToTable("FertilizerReadModelPlantReadModel");
                 });
 
             modelBuilder.Entity("PesticideReadModelPlantReadModel", b =>
@@ -643,7 +721,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasIndex("SuitablePlantsId");
 
-                    b.ToTable("PlantPesticides", (string)null);
+                    b.ToTable("PesticideReadModelPlantReadModel");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerActionReadModel", b =>
@@ -651,19 +729,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.FertilizerReadModel", "Fertilizer")
                         .WithMany("FertilizerActions")
                         .HasForeignKey("FertilizerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.LandRealizationReadModel", "LandRealization")
                         .WithMany("FertilizerActions")
                         .HasForeignKey("LandRealizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany("FertilizerActions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Fertilizer");
@@ -678,7 +756,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.FertilizerTypeReadModel", "FertilizerType")
                         .WithMany("Fertilizers")
                         .HasForeignKey("FertilizerTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("FertilizerType");
@@ -689,19 +767,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.FertilizerReadModel", "Fertilizer")
                         .WithMany("FertilizerWarehouseDeliveries")
                         .HasForeignKey("FertilizerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.FertilizerWarehouseStateReadModel", "FertilizerWarehouseState")
                         .WithMany("FertilizerWarehouseDeliveries")
                         .HasForeignKey("FertilizerWarehouseStateId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany("FertilizerDeliveries")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Fertilizer");
@@ -713,21 +791,13 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.FertilizerWarehouseStateReadModel", b =>
                 {
-                    b.HasOne("Farming.Infrastructure.EF.Models.FertilizerReadModel", "Fertilizer")
+                    b.HasOne("Farming.Infrastructure.EF.Models.FertilizerReadModel", null)
                         .WithMany("FertilizerWarehouseStates")
-                        .HasForeignKey("FertilizerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("FertilizerReadModelId");
 
-                    b.HasOne("Farming.Infrastructure.EF.Models.FertilizerWarehouseReadModel", "FertilizerWarehouse")
+                    b.HasOne("Farming.Infrastructure.EF.Models.FertilizerWarehouseReadModel", null)
                         .WithMany("States")
-                        .HasForeignKey("FertilizerWarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Fertilizer");
-
-                    b.Navigation("FertilizerWarehouse");
+                        .HasForeignKey("FertilizerWarehouseReadModelId");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.LandRealizationReadModel", b =>
@@ -735,13 +805,13 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.LandReadModel", "Land")
                         .WithMany("LandRealizations")
                         .HasForeignKey("LandId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.SeasonReadModel", "Season")
                         .WithMany("LandRealizations")
                         .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Land");
@@ -754,19 +824,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.LandRealizationReadModel", "LandRealization")
                         .WithMany("PesticideActions")
                         .HasForeignKey("LandRealizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.PesticideReadModel", "Pesticide")
                         .WithMany("PesticideActions")
                         .HasForeignKey("PesticideId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany("PesticideActions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LandRealization");
@@ -781,7 +851,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.PesticideTypeReadModel", "PesticideType")
                         .WithMany("Pesticides")
                         .HasForeignKey("PesticideTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PesticideType");
@@ -792,19 +862,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.PesticideReadModel", "Pesticide")
                         .WithMany("PesticideWarehouseDeliveries")
                         .HasForeignKey("PesticideId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.PesticideWarehouseStateReadModel", "PesticideWarehouseState")
                         .WithMany("PesticideWarehouseDeliveries")
                         .HasForeignKey("PesticideWarehouseStateId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany("PesticideDeliveries")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Pesticide");
@@ -819,18 +889,14 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.PesticideReadModel", "Pesticide")
                         .WithMany("PesticideWarehouseStates")
                         .HasForeignKey("PesticideId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Farming.Infrastructure.EF.Models.PesticideWarehouseReadModel", "PesticideWarehouse")
+                    b.HasOne("Farming.Infrastructure.EF.Models.PesticideWarehouseReadModel", null)
                         .WithMany("States")
-                        .HasForeignKey("PesticideWarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("PesticideWarehouseReadModelId");
 
                     b.Navigation("Pesticide");
-
-                    b.Navigation("PesticideWarehouse");
                 });
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantActionReadModel", b =>
@@ -838,19 +904,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.LandRealizationReadModel", "LandRealization")
                         .WithMany("PlantActions")
                         .HasForeignKey("LandRealizationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.PlantReadModel", "Plant")
                         .WithMany("PlantActions")
                         .HasForeignKey("PlantId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany("PlantActions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LandRealization");
@@ -865,19 +931,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.HasOne("Farming.Infrastructure.EF.Models.PlantReadModel", "Plant")
                         .WithMany("PlantWarehouseDeliveries")
                         .HasForeignKey("PlantId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.PlantWarehouseStateReadModel", "PlantWarehouseState")
                         .WithMany("PlantWarehouseDeliveries")
                         .HasForeignKey("PlantWarehouseStateId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Farming.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany("PlantDeliveries")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Plant");
@@ -889,21 +955,13 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
             modelBuilder.Entity("Farming.Infrastructure.EF.Models.PlantWarehouseStateReadModel", b =>
                 {
-                    b.HasOne("Farming.Infrastructure.EF.Models.PlantReadModel", "Plant")
+                    b.HasOne("Farming.Infrastructure.EF.Models.PlantReadModel", null)
                         .WithMany("PlantWarehouseStates")
-                        .HasForeignKey("PlantId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("PlantReadModelId");
 
-                    b.HasOne("Farming.Infrastructure.EF.Models.PlantWarehouseReadModel", "PlantWarehouse")
+                    b.HasOne("Farming.Infrastructure.EF.Models.PlantWarehouseReadModel", null)
                         .WithMany("States")
-                        .HasForeignKey("PlantWarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Plant");
-
-                    b.Navigation("PlantWarehouse");
+                        .HasForeignKey("PlantWarehouseReadModelId");
                 });
 
             modelBuilder.Entity("FertilizerReadModelPlantReadModel", b =>

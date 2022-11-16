@@ -60,6 +60,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<MultiTenantServiceMiddleware>();
+
 app.UseMiddleware<ErrorMiddleware>();
 
 app.UseHttpsRedirection();

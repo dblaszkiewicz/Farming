@@ -1,6 +1,7 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Plant;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,6 +10,13 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PlantWriteConfiguration : IEntityTypeConfiguration<Plant>, IWriteConfiguration
     {
+        private readonly ITenantGetter _tenantGetter;
+
+        public PlantWriteConfiguration(ITenantGetter tenantGetter)
+        {
+            _tenantGetter = tenantGetter;
+        }
+
         public void Configure(EntityTypeBuilder<Plant> builder)
         {
             builder.HasKey(x => x.Id);
@@ -42,6 +50,9 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasMany(x => x.SuitableFertilizers)
                 .WithMany(x => x.SuitablePlants)
                 .UsingEntity(x => x.ToTable("PlantFertilizers"));
+
+            builder
+                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
 
             builder.ToTable("Plants");
         }
