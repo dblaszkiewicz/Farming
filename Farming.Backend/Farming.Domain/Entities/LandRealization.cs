@@ -15,10 +15,6 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerAction> FertilizerActions { get; }
         public ICollection<PesticideAction> PesticideActions { get; }
 
-        public LandRealization()
-        {
-        }
-
         public LandRealization(LandId landId)
         {
             Id = new LandRealizationId(Guid.NewGuid());

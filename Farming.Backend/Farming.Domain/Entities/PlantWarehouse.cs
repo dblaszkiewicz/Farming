@@ -12,10 +12,6 @@ namespace Farming.Domain.Entities
 
         public ICollection<PlantWarehouseState> States { get; }
 
-        public PlantWarehouse()
-        {
-        }
-
         public PlantWarehouse(PlantWarehouseName name, List<PlantWarehouseState> states)
         {
             Id = new PlantWarehouseId(Guid.NewGuid());
