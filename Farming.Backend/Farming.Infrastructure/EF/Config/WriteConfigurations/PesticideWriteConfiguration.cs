@@ -48,6 +48,8 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
             builder
                 .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
+            builder.HasIndex(x => x.TenantId);
+
             builder.ToTable("Pesticides");
         }
     }

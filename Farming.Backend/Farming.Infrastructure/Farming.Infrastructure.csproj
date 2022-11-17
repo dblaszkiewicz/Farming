@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EF\Migrations\Write\**" />
+    <Compile Remove="Weather\**" />
+    <EmbeddedResource Remove="EF\Migrations\Write\**" />
+    <EmbeddedResource Remove="Weather\**" />
+    <None Remove="EF\Migrations\Write\**" />
+    <None Remove="Weather\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -24,8 +33,6 @@
 
   <ItemGroup>
     <Folder Include="EF\Migrations\Read\" />
-    <Folder Include="EF\Migrations\Write\" />
-    <Folder Include="Weather\" />
   </ItemGroup>
 
 </Project>

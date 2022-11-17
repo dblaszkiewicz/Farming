@@ -31,6 +31,8 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
             builder
                 .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
+            builder.HasIndex(x => x.TenantId);
+
             builder.ToTable("LandRealizations");
         }
     }
