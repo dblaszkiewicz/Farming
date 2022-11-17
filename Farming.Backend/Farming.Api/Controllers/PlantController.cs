@@ -39,7 +39,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllPlantsQuery());
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getAllActions")]

@@ -47,7 +47,7 @@ namespace Farming.Api.Controllers
             var command = new GetAllFertilizerWarehouseQuery();
             var result = await _mediator.Send(command);
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getStatesByWarehouse")]

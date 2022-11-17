@@ -1,6 +1,6 @@
 ﻿using Farming.Api.Auth;
 using Farming.Application.Auth;
-using Farming.Domain.Repositories;
+using Farming.Infrastructure.EF.MultiTenancy;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -18,7 +18,7 @@ namespace Farming.Api.Middleware
             _configuration = configuration;
         }
 
-        public async Task Invoke(HttpContext context, IUserRepository userRepository)
+        public async Task Invoke(HttpContext context, ITenantSetter tenantSetter)
         {
             var token = context.Request
                 .Headers["Authorization"]
@@ -28,13 +28,13 @@ namespace Farming.Api.Middleware
 
             if (token != null)
             {
-                await AttachUserToContext(context, userRepository, token);
+                await AttachUserToContext(context, tenantSetter, token);
             }
 
             await _next(context);
         }
 
-        private async Task AttachUserToContext(HttpContext context, IUserRepository userRepository, string token)
+        private async Task AttachUserToContext(HttpContext context, ITenantSetter tenantSetter, string token)
         {
             try
             {
@@ -52,10 +52,17 @@ namespace Farming.Api.Middleware
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
-                var user = await userRepository.GetAsync(userId);
+                var tenantId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "tenantId").Value);
 
-                context.Items["User"] = user;
-                context.Items["UserId"] = user.Id.Value;
+                if (userId == Guid.Empty || tenantId == Guid.Empty)
+                {
+                    throw new Exception("XD");
+                }
+
+                context.Items["TenantId"] = tenantId;
+                context.Items["UserId"] = userId;
+
+                tenantSetter.SetTenant(tenantId);
             }
             catch (Exception ex)
             {

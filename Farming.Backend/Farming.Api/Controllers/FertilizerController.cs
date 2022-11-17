@@ -40,7 +40,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllFertilizersQuery());
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getByType")]
@@ -48,7 +48,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetFertilizersByTypeQuery(fertilizerTypeId));
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getByPlant")]
@@ -56,7 +56,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetSuitableFertilizersByPlantQuery(plantId));
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getAllActions")]

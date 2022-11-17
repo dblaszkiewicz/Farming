@@ -1,5 +1,5 @@
-﻿using Farming.Infrastructure.EF.Models;
-using Farming.Infrastructure.EF.MultiTenancy;
+﻿using Farming.Infrastructure.EF.Contexts;
+using Farming.Infrastructure.EF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -7,19 +7,19 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class UserReadConfiguration : IEntityTypeConfiguration<UserReadModel>, IReadConfiguration
     {
-        private readonly Tenant _tenant;
+        private readonly ReadDbContext _context;
 
-        public UserReadConfiguration(Tenant tenant)
+        public UserReadConfiguration(ReadDbContext context)
         {
-            _tenant = tenant;
+            _context = context;
         }
 
         public void Configure(EntityTypeBuilder<UserReadModel> builder)
         {
             builder.HasKey(x => x.Id);
 
-            //builder
-            //    .HasQueryFilter(x => x.TenantId == _tenant.Value);
+            builder
+                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
 
             builder.HasIndex(x => x.TenantId);
 

@@ -1,5 +1,6 @@
 ﻿using Farming.Domain.Repositories;
 using Farming.Infrastructure.EF.Contexts;
+using Farming.Infrastructure.EF.MultiTenancy;
 
 namespace Farming.Infrastructure.EF.Repositories
 {

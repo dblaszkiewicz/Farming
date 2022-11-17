@@ -1,21 +1,13 @@
 ﻿using Farming.Infrastructure.EF.Config.ReadConfiguration;
-using Farming.Infrastructure.EF.Config.WriteConfigurations;
 using Farming.Infrastructure.EF.Models;
 using Farming.Infrastructure.EF.MultiTenancy;
-using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace Farming.Infrastructure.EF.Contexts
 {
     internal sealed class ReadDbContext : DbContext
     {
-        private readonly ITenantGetter _tenantGetter;
-
-        public ReadDbContext(DbContextOptions<ReadDbContext> options, ITenantGetter tenantGetter) : base(options)
-        {
-            _tenantGetter = tenantGetter;
-        }
+        internal Tenant Tenant { get; }
 
         public DbSet<FertilizerReadModel> Fertilizers { get; set; }
         public DbSet<FertilizerActionReadModel> FertilizerActions { get; set; }
@@ -43,33 +35,34 @@ namespace Farming.Infrastructure.EF.Contexts
         public DbSet<SeasonReadModel> Seasons { get; set; }
         public DbSet<UserReadModel> Users { get; set; }
 
-        public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
+        public ReadDbContext(DbContextOptions<ReadDbContext> options, ITenantGetter tenantGetter) : base(options)
         {
+            Tenant = tenantGetter.Tenant;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new FertilizerActionReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerTypeReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWarehouseDeliveryReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWarehouseStateReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWarehouseReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new LandRealizationReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new LandReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideActionReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideTypeReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWarehouseDeliveryReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWarehouseStateReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWarehouseReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantActionReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWarehouseDeliveryReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWarehouseStateReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWarehouseReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new SeasonReadConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new UserReadConfiguration(_tenantGetter.Tenant));
+            modelBuilder.ApplyConfiguration(new FertilizerActionReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerTypeReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWarehouseDeliveryReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWarehouseStateReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWarehouseReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new LandRealizationReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new LandReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideActionReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideTypeReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWarehouseDeliveryReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWarehouseStateReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWarehouseReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantActionReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWarehouseDeliveryReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWarehouseStateReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWarehouseReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new SeasonReadConfiguration(this));
+            modelBuilder.ApplyConfiguration(new UserReadConfiguration(this));
         }
     }
 }

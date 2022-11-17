@@ -22,12 +22,21 @@ namespace Farming.Infrastructure.EF.Repositories
 
         public Task<User> GetAsync(UserId id)
         {
-            return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+            return _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public Task<User> GetAsync(UserId id, Guid tenantId)
+        {
+            return _dbSet
+                .IgnoreQueryFilters()
+                .SingleOrDefaultAsync(x => x.Id == id && x.TenantId == tenantId);
         }
 
         public Task<User> GetByLoginAndPasswordAsync(string login, string password)
         {
-            return _dbSet.SingleOrDefaultAsync(x => x.Login == login && x.Password == password);
+            return _dbSet
+                .IgnoreQueryFilters()
+                .SingleOrDefaultAsync(x => x.Login == login && x.Password == password);
         }
 
         public async Task UpdateAsync(User user)

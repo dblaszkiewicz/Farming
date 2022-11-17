@@ -1,10 +1,10 @@
 ﻿
 namespace Farming.Shared.Abstractions.Domain
 {
-    public abstract class AggregateRoot<T>
+    public abstract class AggregateRoot<T> : ITenant
     {
         public T Id { get; protected set; }
-        public Guid TenantId { get; set; }
+        public Guid TenantId { get; set; } = Guid.Empty;
         public int Version { get; protected set; }
         public IEnumerable<IDomainEvent> Events => _events;
 
@@ -22,8 +22,6 @@ namespace Farming.Shared.Abstractions.Domain
             _events.Add(@event);
         }
 
-        public void ClearEvents() => _events.Clear();
-
         protected void IncrementVersion()
         {
             if (_versionIncremented)
@@ -34,5 +32,19 @@ namespace Farming.Shared.Abstractions.Domain
             Version++;
             _versionIncremented = true;
         }
+
+        public void ClearEvents() => _events.Clear();
+
+        public void SetTenantId(Guid tenantId)
+        {
+            TenantId = tenantId;
+        }
+    }
+
+    public interface ITenant
+    {
+        Guid TenantId { get; set; }
+        void SetTenantId(Guid tenantId);
+
     }
 }

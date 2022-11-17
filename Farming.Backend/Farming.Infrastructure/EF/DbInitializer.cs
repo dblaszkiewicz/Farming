@@ -14,11 +14,11 @@ namespace Farming.Infrastructure.EF
             {
                 context.Database.Migrate();
 
-                using var transaction = context.Database.BeginTransaction();
+                //using var transaction = context.Database.BeginTransaction();
 
-                SeedData(context);
+                //SeedData(context);
 
-                transaction.Commit();
+                //transaction.Commit();
             }
         }
 

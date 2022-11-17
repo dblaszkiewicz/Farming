@@ -1,7 +1,7 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.User;
-using Farming.Infrastructure.EF.MultiTenancy;
+using Farming.Infrastructure.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,11 +9,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class UserWriteConfiguration : IEntityTypeConfiguration<User>, IWriteConfiguration
     {
-        private readonly Tenant _tenant;
+        private readonly WriteDbContext _context;
 
-        public UserWriteConfiguration(Tenant tenant)
+        public UserWriteConfiguration(WriteDbContext context)
         {
-            _tenant = tenant;
+            _context = context;
         }
 
         public void Configure(EntityTypeBuilder<User> builder)
@@ -48,8 +48,8 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .Property(x => x.Created)
                 .HasConversion(x => x.Value, x => new UserCreated(x));
 
-            //builder
-            //    .HasQueryFilter(x => x.TenantId == _tenant.Value);
+            builder
+                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
 
             builder.HasIndex(x => x.TenantId);
 

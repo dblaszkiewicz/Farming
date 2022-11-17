@@ -1,5 +1,5 @@
-﻿using Farming.Infrastructure.EF.Models;
-using Farming.Infrastructure.EF.MultiTenancy;
+﻿using Farming.Infrastructure.EF.Contexts;
+using Farming.Infrastructure.EF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class FertilizerWarehouseDeliveryReadConfiguration : IEntityTypeConfiguration<FertilizerWarehouseDeliveryReadModel>, IReadConfiguration
     {
-        private readonly Tenant _tenant;
+        private readonly ReadDbContext _context;
 
-        public FertilizerWarehouseDeliveryReadConfiguration(Tenant tenant)
+        public FertilizerWarehouseDeliveryReadConfiguration(ReadDbContext context)
         {
-            _tenant = tenant;
+            _context = context;
         }
 
         public void Configure(EntityTypeBuilder<FertilizerWarehouseDeliveryReadModel> builder)
@@ -34,7 +34,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenant.Value);
+                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
 
             builder.HasIndex(x => x.TenantId);
 

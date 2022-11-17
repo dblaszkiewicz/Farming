@@ -8,9 +8,10 @@ namespace Farming.Api.Auth
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = context.User();
+            var userId = context.UserId();
+            var tenantId = context.TenantId();
 
-            if (user == null)
+            if (userId == Guid.Empty || tenantId == Guid.Empty)
             {
                 context.Result = new JsonResult(new { message = "Unauthorized" })
                 {

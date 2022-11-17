@@ -1,18 +1,14 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Infrastructure.EF.Config.WriteConfigurations;
 using Farming.Infrastructure.EF.MultiTenancy;
+using Farming.Shared.Abstractions.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Farming.Infrastructure.EF.Contexts
 {
     internal sealed class WriteDbContext : DbContext
     {
-        private readonly ITenantGetter _tenantGetter;
-
-        public WriteDbContext(DbContextOptions<WriteDbContext> options, ITenantGetter tenantGetter) : base(options)
-        {
-            _tenantGetter = tenantGetter;
-        }
+        internal Tenant Tenant { get; }
 
         public DbSet<Fertilizer> Fertilizers { get; set; }
         public DbSet<FertilizerAction> FertilizerActions { get; set; }
@@ -40,33 +36,53 @@ namespace Farming.Infrastructure.EF.Contexts
         public DbSet<Season> Seasons { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
+        public WriteDbContext(DbContextOptions<WriteDbContext> options, ITenantGetter tenantGetter) : base(options)
         {
+            Tenant = tenantGetter.Tenant;
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<ITenant>().ToList())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        if (entry.Entity.TenantId == Guid.Empty)
+                        {
+                            entry.Entity.SetTenantId(Tenant);
+                        }
+                        break;
+                }
+            }
+
+            var result = await base.SaveChangesAsync(cancellationToken);
+            return result;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new FertilizerActionWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerTypeWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWarehouseDeliveryWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWarehouseStateWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWarehouseWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new FertilizerWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new LandRealizationWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new LandWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideActionWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideTypeWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWarehouseDeliveryWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWarehouseStateWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWarehouseWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PesticideWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantActionWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWarehouseDeliveryWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWarehouseStateWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWarehouseWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new PlantWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new SeasonWriteConfiguration(_tenantGetter.Tenant));
-            modelBuilder.ApplyConfiguration(new UserWriteConfiguration(_tenantGetter.Tenant));
+            modelBuilder.ApplyConfiguration(new FertilizerActionWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerTypeWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWarehouseDeliveryWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWarehouseStateWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWarehouseWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new FertilizerWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new LandRealizationWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new LandWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideActionWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideTypeWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWarehouseDeliveryWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWarehouseStateWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWarehouseWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PesticideWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantActionWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWarehouseDeliveryWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWarehouseStateWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWarehouseWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new PlantWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new SeasonWriteConfiguration(this));
+            modelBuilder.ApplyConfiguration(new UserWriteConfiguration(this));
         }
     }
 }

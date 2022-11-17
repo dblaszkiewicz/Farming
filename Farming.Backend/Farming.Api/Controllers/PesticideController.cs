@@ -39,7 +39,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllPesticidesQuery());
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getByType")]
@@ -47,7 +47,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetPesticidesByTypeQuery(pesticideTypeId));
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getByPlant")]
@@ -55,7 +55,7 @@ namespace Farming.Api.Controllers
         {
             var result = await _mediator.Send(new GetSuitablePesticidesByPlantQuery(plantId));
 
-            return result.Any() ? Ok(result) : NotFound();
+            return Ok(result);
         }
 
         [HttpGet("getAllActions")]

@@ -17,6 +17,12 @@ namespace Farming.Infrastructure.EF
     {
         public static IServiceCollection AddSql(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScopedAs<TenantService>(new[]
+            {
+                typeof(ITenantGetter),
+                typeof(ITenantSetter)
+            });
+
             services.AddScoped<IFertilizerTypeRepository, FertilizerTypeRepository>();
             services.AddScoped<IFertilizerWarehouseRepository, FertilizerWarehouseRepository>();
             services.AddScoped<ILandRepository, LandRepository>();
@@ -43,18 +49,19 @@ namespace Farming.Infrastructure.EF
 
             services.AddScoped<IWeatherService, WeatherService>();
 
-            services.AddScopedAs<TenantService>(new[]
+            var options = configuration.GetOptions<DatabaseOptions>("PostgreSql");
+
+            services.AddDbContext<ReadDbContext>(ctx =>
             {
-                typeof(ITenantGetter),
-                typeof(ITenantSetter)
+                ctx.EnableSensitiveDataLogging();
+                ctx.UseNpgsql(options.ConnectionString);
             });
 
-            var options = configuration.GetOptions<DatabaseOptions>("PostgreSql");
-            
-            services.AddDbContext<ReadDbContext>(ctx =>
-                ctx.UseNpgsql(options.ConnectionString));
             services.AddDbContext<WriteDbContext>(ctx =>
-                ctx.UseNpgsql(options.ConnectionString));
+            {
+                ctx.EnableSensitiveDataLogging();
+                ctx.UseNpgsql(options.ConnectionString);
+            });
 
             return services;
         }
@@ -75,12 +82,10 @@ namespace Farming.Infrastructure.EF
         public static IServiceCollection AddScopedAs<T>(this IServiceCollection services, IEnumerable<Type> types)
             where T : class
         {
-            // register the type first
             services.AddScoped<T>();
 
             foreach (var type in types)
             {
-                // register a scoped 
                 services.AddScoped(type, svc =>
                 {
                     var rs = svc.GetRequiredService<T>();

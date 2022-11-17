@@ -30,6 +30,7 @@ namespace Farming.Application.Auth
             {
                 Subject = new ClaimsIdentity(new[]
                 {
+                    new Claim("tenantId", user.TenantId.ToString()),
                     new Claim("id", user.Id.Value.ToString()),
                     new Claim("name", user.Name.Value),
                     new Claim("isAdmin", user.IsAdmin.Value.ToString()),

@@ -7,6 +7,7 @@ namespace Farming.Domain.Repositories
     {
         Task AddAsync(User user);
         Task<User> GetAsync(UserId id);
+        Task<User> GetAsync(UserId id, Guid tenantId);
         Task<User> GetByLoginAndPasswordAsync(string login, string password);
         Task UpdateAsync(User season);
     }

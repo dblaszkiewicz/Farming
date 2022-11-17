@@ -8,9 +8,7 @@ namespace Farming.Api.Auth
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = context.User();
-
-            if (!user.IsAdmin)
+            if (!context.IsAdmin())
             {
                 context.Result = new JsonResult(new { message = "Forbidden" })
                 {
