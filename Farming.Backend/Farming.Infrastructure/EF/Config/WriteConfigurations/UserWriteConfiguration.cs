@@ -9,11 +9,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class UserWriteConfiguration : IEntityTypeConfiguration<User>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public UserWriteConfiguration(ITenantGetter tenantGetter)
+        public UserWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<User> builder)
@@ -48,8 +48,8 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .Property(x => x.Created)
                 .HasConversion(x => x.Value, x => new UserCreated(x));
 
-            builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+            //builder
+            //    .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("Users");
         }

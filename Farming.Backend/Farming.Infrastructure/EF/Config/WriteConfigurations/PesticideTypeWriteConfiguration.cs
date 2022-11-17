@@ -9,11 +9,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PesticideTypeWriteConfiguration : IEntityTypeConfiguration<PesticideType>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PesticideTypeWriteConfiguration(ITenantGetter tenantGetter)
+        public PesticideTypeWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<PesticideType> builder)
@@ -33,7 +33,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new PesticideTypeDescription(x));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("PesticideTypes");
         }

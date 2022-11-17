@@ -9,11 +9,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class LandWriteConfiguration : IEntityTypeConfiguration<Land>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public LandWriteConfiguration(ITenantGetter tenantGetter)
+        public LandWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<Land> builder)
@@ -41,7 +41,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new LandArea(x));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("Lands");
         }

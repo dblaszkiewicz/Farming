@@ -9,11 +9,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PesticideWarehouseStateWriteConfiguration : IEntityTypeConfiguration<PesticideWarehouseState>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PesticideWarehouseStateWriteConfiguration(ITenantGetter tenantGetter)
+        public PesticideWarehouseStateWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<PesticideWarehouseState> builder)
@@ -48,7 +48,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("PesticideWarehouseStates");
         }

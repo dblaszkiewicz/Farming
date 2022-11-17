@@ -3,6 +3,6 @@ namespace Farming.Infrastructure.EF.MultiTenancy
 {
     public interface ITenantGetter
     {
-        Guid Tenant { get; }
+        Tenant Tenant { get; }
     }
 }

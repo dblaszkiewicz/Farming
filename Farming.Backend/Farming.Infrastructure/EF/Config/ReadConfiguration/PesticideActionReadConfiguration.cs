@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal class PesticideActionReadConfiguration : IEntityTypeConfiguration<PesticideActionReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PesticideActionReadConfiguration(ITenantGetter tenantGetter)
+        public PesticideActionReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<PesticideActionReadModel> builder)
@@ -34,7 +34,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("PesticideActions");
         }

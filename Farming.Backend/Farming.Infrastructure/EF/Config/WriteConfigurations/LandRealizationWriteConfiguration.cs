@@ -8,11 +8,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class LandRealizationWriteConfiguration : IEntityTypeConfiguration<LandRealization>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public LandRealizationWriteConfiguration(ITenantGetter tenantGetter)
+        public LandRealizationWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<LandRealization> builder)
@@ -42,7 +42,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("LandRealizations");
         }

@@ -9,13 +9,12 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PlantWarehouseDeliveryWriteConfiguration : IEntityTypeConfiguration<PlantWarehouseDelivery>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PlantWarehouseDeliveryWriteConfiguration(ITenantGetter tenantGetter)
+        public PlantWarehouseDeliveryWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
-
         public void Configure(EntityTypeBuilder<PlantWarehouseDelivery> builder)
         {
             builder.HasKey(x => x.Id);
@@ -64,7 +63,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("PlantWarehouseDeliveries");
         }

@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class FertilizerTypeReadConfiguration : IEntityTypeConfiguration<FertilizerTypeReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public FertilizerTypeReadConfiguration(ITenantGetter tenantGetter)
+        public FertilizerTypeReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<FertilizerTypeReadModel> builder)
@@ -19,7 +19,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
             builder.HasKey(x => x.Id);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("FertilizerTypes");
         }

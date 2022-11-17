@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class PlantReadConfiguration : IEntityTypeConfiguration<PlantReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PlantReadConfiguration(ITenantGetter tenantGetter)
+        public PlantReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<PlantReadModel> builder)
@@ -29,7 +29,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .UsingEntity(x => x.ToTable("PlantFertilizers"));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("Plants");
         }

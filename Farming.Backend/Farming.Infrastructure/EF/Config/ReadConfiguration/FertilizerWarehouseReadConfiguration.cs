@@ -7,19 +7,18 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class FertilizerWarehouseReadConfiguration : IEntityTypeConfiguration<FertilizerWarehouseReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public FertilizerWarehouseReadConfiguration(ITenantGetter tenantGetter)
+        public FertilizerWarehouseReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
-
         public void Configure(EntityTypeBuilder<FertilizerWarehouseReadModel> builder)
         {
             builder.HasKey(x => x.Id);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("FertilizerWarehouses");
         }

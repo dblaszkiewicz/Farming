@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class PesticideWarehouseDeliveryReadConfiguration : IEntityTypeConfiguration<PesticideWarehouseDeliveryReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PesticideWarehouseDeliveryReadConfiguration(ITenantGetter tenantGetter)
+        public PesticideWarehouseDeliveryReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<PesticideWarehouseDeliveryReadModel> builder)
@@ -34,7 +34,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("PesticideWarehouseDeliveries");
         }

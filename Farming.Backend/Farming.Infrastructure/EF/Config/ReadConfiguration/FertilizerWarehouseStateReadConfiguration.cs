@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal class FertilizerWarehouseStateReadConfiguration : IEntityTypeConfiguration<FertilizerWarehouseStateReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public FertilizerWarehouseStateReadConfiguration(ITenantGetter tenantGetter)
+        public FertilizerWarehouseStateReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<FertilizerWarehouseStateReadModel> builder)
@@ -29,7 +29,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("FertilizerWarehouseStates");
         }

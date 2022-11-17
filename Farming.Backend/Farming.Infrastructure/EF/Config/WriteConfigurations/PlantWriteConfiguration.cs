@@ -10,11 +10,11 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 {
     internal sealed class PlantWriteConfiguration : IEntityTypeConfiguration<Plant>, IWriteConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public PlantWriteConfiguration(ITenantGetter tenantGetter)
+        public PlantWriteConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<Plant> builder)
@@ -52,7 +52,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .UsingEntity(x => x.ToTable("PlantFertilizers"));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("Plants");
         }

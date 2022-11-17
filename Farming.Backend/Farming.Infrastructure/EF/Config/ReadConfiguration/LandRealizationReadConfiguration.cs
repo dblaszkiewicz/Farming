@@ -7,11 +7,11 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class LandRealizationReadConfiguration : IEntityTypeConfiguration<LandRealizationReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public LandRealizationReadConfiguration(ITenantGetter tenantGetter)
+        public LandRealizationReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<LandRealizationReadModel> builder)
@@ -29,7 +29,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+                .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("LandRealizations");
         }

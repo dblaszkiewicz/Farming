@@ -7,19 +7,19 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 {
     internal sealed class UserReadConfiguration : IEntityTypeConfiguration<UserReadModel>, IReadConfiguration
     {
-        private readonly ITenantGetter _tenantGetter;
+        private readonly Tenant _tenant;
 
-        public UserReadConfiguration(ITenantGetter tenantGetter)
+        public UserReadConfiguration(Tenant tenant)
         {
-            _tenantGetter = tenantGetter;
+            _tenant = tenant;
         }
 
         public void Configure(EntityTypeBuilder<UserReadModel> builder)
         {
             builder.HasKey(x => x.Id);
 
-            builder
-                .HasQueryFilter(x => x.TenantId == _tenantGetter.Tenant);
+            //builder
+            //    .HasQueryFilter(x => x.TenantId == _tenant.Value);
 
             builder.ToTable("Users");
         }
