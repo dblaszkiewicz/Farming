@@ -2,7 +2,9 @@
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
     public class PesticideWarehouseState : AggregateRoot<PesticideWarehouseStateId>
@@ -15,11 +17,7 @@ namespace Farming.Domain.Entities
         public PesticideWarehouse PesticideWarehouse { get; }
         public ICollection<PesticideWarehouseDelivery> PesticideWarehouseDeliveries { get; }
 
-        public PesticideWarehouseState()
-        {
-        }
-
-        public PesticideWarehouseState(PesticideId pesticideId)
+        internal PesticideWarehouseState(PesticideId pesticideId)
         {
             Id = new PesticideWarehouseStateId(Guid.NewGuid());
             Quantity = new PesticideWarehouseQuantity(0);
@@ -28,7 +26,7 @@ namespace Farming.Domain.Entities
             PesticideWarehouseDeliveries = new HashSet<PesticideWarehouseDelivery>();
         }
 
-        public void AddDelivery(PesticideWarehouseDelivery delivery)
+        internal void AddDelivery(PesticideWarehouseDelivery delivery)
         {
             var newQuantity = Quantity + delivery.Quantity;
 
@@ -40,17 +38,7 @@ namespace Farming.Domain.Entities
             IncrementVersion();
         }
 
-        public bool IsEnoughPesticide(PesticideWarehouseQuantity quantity)
-        {
-            if (Quantity >= quantity)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public void SpendPesticide(PesticideActionQuantity quantity)
+        internal void SpendPesticide(PesticideActionQuantity quantity)
         {
             var newQuantity = Quantity - quantity;
 

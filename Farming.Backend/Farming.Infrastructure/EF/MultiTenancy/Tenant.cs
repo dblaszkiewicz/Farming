@@ -1,19 +1,19 @@
 ﻿
 namespace Farming.Infrastructure.EF.MultiTenancy
 {
-    public record Tenant
+    public record TenantId
     {
-        public Tenant(Guid value)
+        public TenantId(Guid value)
         {
             Value = value;
         }
 
         public Guid Value { get; }
 
-        public static implicit operator Guid(Tenant tenant)
-            => tenant.Value;
+        public static implicit operator Guid(TenantId tenantId)
+            => tenantId.Value;
 
-        public static implicit operator Tenant(Guid value)
+        public static implicit operator TenantId(Guid value)
             => new(value);
     }
 }

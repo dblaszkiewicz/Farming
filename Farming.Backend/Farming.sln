@@ -22,7 +22,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farming.UnitTests", "Farming.UnitTests\Farming.UnitTests.csproj", "{1B5F59EB-B11C-4756-9979-70BC68BC1718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farming.UnitTests", "Farming.UnitTests\Farming.UnitTests.csproj", "{1B5F59EB-B11C-4756-9979-70BC68BC1718}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{30696B01-70E1-4FE9-9058-19C2F0951AA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B7182265-75F6-4C79-BA2D-A8548D4457AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +69,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B1BB65F5-0BA1-4B5F-8ACE-C2A98CA88C83} = {3FD8C880-0F52-4FF7-99C1-8D4A88B7FCF1}
 		{3AD9C936-C832-4AD8-92E6-B209FE37F4C1} = {3FD8C880-0F52-4FF7-99C1-8D4A88B7FCF1}
+		{1B5F59EB-B11C-4756-9979-70BC68BC1718} = {30696B01-70E1-4FE9-9058-19C2F0951AA4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A79A0A8-3978-4393-9686-DE14528DB8E6}

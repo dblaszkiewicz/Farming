@@ -4,8 +4,9 @@ using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class PesticideType : AggregateRoot<PesticideTypeId>
+    public class PesticideType : Tenant
     {
+        public PesticideTypeId Id { get; }
         public PesticideTypeName Name { get; }
         public PesticideTypeDescription Description { get; }
 

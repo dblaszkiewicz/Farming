@@ -29,7 +29,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .UsingEntity(x => x.ToTable("PlantFertilizers"));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
+                .HasQueryFilter(x => x.TenantId == _context.TenantId.Value);
 
             builder.HasIndex(x => x.TenantId);
 

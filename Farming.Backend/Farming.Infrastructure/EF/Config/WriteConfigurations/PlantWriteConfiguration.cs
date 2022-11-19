@@ -52,7 +52,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .UsingEntity(x => x.ToTable("PlantFertilizers"));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
+                .HasQueryFilter((System.Linq.Expressions.Expression<Func<Plant, bool>>)(x => x.TenantId == _context.TenantId.Value));
 
             builder.HasIndex(x => x.TenantId);
 

@@ -1,9 +1,8 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class BaseReadModel
+    internal abstract class BaseTenantReadModel
     {
-        public int Version { get; set; }
         public Guid TenantId { get; set; }
     }
 }

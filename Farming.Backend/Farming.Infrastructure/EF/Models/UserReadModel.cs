@@ -1,7 +1,7 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class UserReadModel : BaseReadModel
+    internal class UserReadModel : BaseTenantReadModel
     {
         public Guid Id { get; set; }
         public string Login { get; set; }
@@ -10,6 +10,7 @@ namespace Farming.Infrastructure.EF.Models
         public bool Active { get; set; }
         public bool IsAdmin { get; set; }
         public DateTimeOffset Created { get; set; }
+        public int Version { get; set; }
 
         public ICollection<FertilizerWarehouseDeliveryReadModel> FertilizerDeliveries { get; set; }
         public ICollection<PesticideWarehouseDeliveryReadModel> PesticideDeliveries { get; set;  }

@@ -1,11 +1,14 @@
 ﻿using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
-    public class FertilizerWarehouseDelivery : AggregateRoot<FertilizerWarehouseDeliveryId>
+    public class FertilizerWarehouseDelivery : Tenant
     {
+        public FertilizerWarehouseDeliveryId Id { get; }
         public FertilizerId FertilizerId { get; }
         public FertilizerWarehouseStateId FertilizerWarehouseStateId { get; private set; }
         public UserId UserId { get; }
@@ -17,11 +20,7 @@ namespace Farming.Domain.Entities
         public FertilizerWarehouseState FertilizerWarehouseState { get; }
         public User User { get; }
 
-        public FertilizerWarehouseDelivery()
-        {
-        }
-
-        public FertilizerWarehouseDelivery(FertilizerId fertilizerId, UserId userId,
+        internal FertilizerWarehouseDelivery(FertilizerId fertilizerId, UserId userId,
             FertilizerWarehouseDeliveryQuantity quantity, FertilizerWarehouseDeliveryPrice price, 
             FertilizerWarehouseDeliveryRealizationDate realizationDate)
         {

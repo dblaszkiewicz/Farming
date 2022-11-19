@@ -5,7 +5,9 @@ using Farming.Application.Exceptions;
 using Farming.Application.Services;
 using Farming.Domain.Entities;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
+using Farming.Domain.Services;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
 using NSubstitute;
@@ -20,7 +22,6 @@ namespace Farming.UnitTests.Application
 {
     public class ProcessFertilizerActionHandlerTests
     {
-
         [Fact]
         public async Task HandleAsync_Throws_FertilizerWarehouseNotFoundException_When_Warehouse_Does_Not_Exists()
         {
@@ -159,6 +160,8 @@ namespace Farming.UnitTests.Application
         private readonly IFertilizerWarehouseRepository _fertilizerWarehouseRepository;
         private readonly ILandRepository _landRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFertilizerActionFactory _fertilizerActionFactory;
+        private readonly IFertilizerDomainService _fertilizerDomainService;
 
         public ProcessFertilizerActionHandlerTests()
         {
@@ -168,9 +171,11 @@ namespace Farming.UnitTests.Application
             _fertilizerWarehouseRepository = Substitute.For<IFertilizerWarehouseRepository>();
             _unitOfWork = Substitute.For<IUnitOfWork>();
             _landRepository = Substitute.For<ILandRepository>();
+            _fertilizerActionFactory = Substitute.For<IFertilizerActionFactory>();
+            _fertilizerDomainService = Substitute.For<IFertilizerDomainService>();
 
             _handler = new ProcessFertilizerActionHandler(_userReadService, _seasonRepository, _fertilizerRepository,
-                _fertilizerWarehouseRepository, _landRepository, _unitOfWork);
+                _fertilizerWarehouseRepository, _landRepository, _unitOfWork, _fertilizerActionFactory, _fertilizerDomainService);
         }
     }
 }

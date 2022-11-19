@@ -1,11 +1,14 @@
 ﻿using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
-    public class PesticideWarehouseDelivery : AggregateRoot<PesticideWarehouseDeliveryId>
+    public class PesticideWarehouseDelivery : Tenant
     {
+        public PesticideWarehouseDeliveryId Id { get; }
         public PesticideId PesticideId { get; }
         public PesticideWarehouseStateId PesticideWarehouseStateId { get; }
         public UserId UserId { get; }
@@ -17,16 +20,11 @@ namespace Farming.Domain.Entities
         public User User { get; }
         public PesticideWarehouseState PesticideWarehouseState { get; }
 
-        public PesticideWarehouseDelivery()
-        {
-        }
-
-        public PesticideWarehouseDelivery(PesticideId pesticideId, UserId userId,
+        internal PesticideWarehouseDelivery(PesticideId pesticideId, UserId userId,
             PesticideWarehouseDeliveryQuantity quantity, PesticideWarehouseDeliveryPrice price,
             PesticideWarehouseDeliveryRealizationDate realizationDate)
         {
             Id = new PesticideWarehouseDeliveryId(Guid.NewGuid());
-
             PesticideId = pesticideId;
             UserId = userId;
             Quantity = quantity;

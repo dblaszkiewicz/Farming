@@ -10,14 +10,11 @@ using Farming.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-IConfiguration Configuration = builder.Configuration;
-
 // todo - get assembly by name?
 builder.Services.AddMediatR(typeof(IReadConfiguration));
 builder.Services.AddMediatR(typeof(GetAllPlantsQuery));
 
-builder.Services.AddInfrastructure(Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddApi();
 
@@ -53,7 +50,6 @@ builder.Host.UseNLog();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

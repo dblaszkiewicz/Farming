@@ -46,9 +46,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FertilizerId");
@@ -85,9 +82,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FertilizerTypeId");
@@ -113,9 +107,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -150,9 +141,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -207,9 +195,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -308,9 +293,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LandRealizationId");
@@ -347,9 +329,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PesticideTypeId");
@@ -375,9 +354,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -412,9 +388,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -508,9 +481,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LandRealizationId");
@@ -548,9 +518,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TenantId");
@@ -584,9 +551,6 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

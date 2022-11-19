@@ -16,9 +16,16 @@ namespace Farming.Domain.Entities
 
         public ICollection<LandRealization> LandRealizations { get; }
 
-        public bool IsStatusSuitableForPlantAction()
+        internal void ChangeStatusAfterPlantAction()
         {
-            return Status.IsSuitableForPlantAction();
+            if (!Status.IsSuitableForPlantAction())
+            {
+                throw new BadLandStatusForPlantActionException();
+            }
+
+            Status = new LandStatus(LandStatusEnum.Planted);
+            AddEvent(new LandStatusChanged(this, Status));
+            IncrementVersion();
         }
 
         public void ChangeStatusToDestroyed()
@@ -41,18 +48,6 @@ namespace Farming.Domain.Entities
             }
 
             Status = new LandStatus(LandStatusEnum.Harvested);
-            AddEvent(new LandStatusChanged(this, Status));
-            IncrementVersion();
-        }
-
-        internal void ChangeStatusAfterPlantAction()
-        {
-            if (!IsStatusSuitableForPlantAction())
-            {
-                throw new BadLandStatusForPlantActionException();
-            }
-
-            Status = new LandStatus(LandStatusEnum.Planted);
             AddEvent(new LandStatusChanged(this, Status));
             IncrementVersion();
         }

@@ -1,5 +1,8 @@
 ﻿using Farming.Domain.Entities;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Policies;
+using Farming.Domain.Services;
+using NSubstitute;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,13 @@ namespace Farming.UnitTests.Domain
 {
     public class FertilizerActionTests
     {
+        private readonly IFertilizerWarehouseStatePolicy _fertilizerWarehouseStatePolicy;
+
+        public FertilizerActionTests()
+        {
+            _fertilizerWarehouseStatePolicy = Substitute.For<IFertilizerWarehouseStatePolicy>();
+        }
+
         [Fact]
         public void ProcessAction_Throws_FertilizerActionNotEnoughQuantityException_When_Warehouse_Does_Not_Have_Enough_State_Quantity()
         {
@@ -17,7 +27,7 @@ namespace Farming.UnitTests.Domain
             var warehouse = GetWarehouseWithoutEnoughStateQuantity(fertilizerId);
 
             // Act
-            var exception = Record.Exception(() => warehouse.ProcessFertilizerAction(fertilizerId, 10));
+            var exception = Record.Exception(() => warehouse.ProcessFertilizerAction(fertilizerId, 10, _fertilizerWarehouseStatePolicy));
 
             // Assert
             exception.ShouldNotBeNull();
@@ -32,7 +42,7 @@ namespace Farming.UnitTests.Domain
             var warehouse = GetWarehouseWithoutState();
 
             // Act
-            var exception = Record.Exception(() => warehouse.ProcessFertilizerAction(fertilizerId, 10));
+            var exception = Record.Exception(() => warehouse.ProcessFertilizerAction(fertilizerId, 10, _fertilizerWarehouseStatePolicy));
 
             // Assert
             exception.ShouldNotBeNull();

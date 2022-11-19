@@ -47,7 +47,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
+                .HasQueryFilter((System.Linq.Expressions.Expression<Func<FertilizerWarehouseState, bool>>)(x => x.TenantId == _context.TenantId.Value));
 
             builder.HasIndex(x => x.TenantId);
 

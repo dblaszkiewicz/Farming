@@ -8,7 +8,7 @@ namespace Farming.Infrastructure.EF.Contexts
 {
     internal sealed class WriteDbContext : DbContext
     {
-        internal Tenant Tenant { get; }
+        internal TenantId TenantId { get; }
 
         public DbSet<Fertilizer> Fertilizers { get; set; }
         public DbSet<FertilizerAction> FertilizerActions { get; set; }
@@ -38,7 +38,7 @@ namespace Farming.Infrastructure.EF.Contexts
 
         public WriteDbContext(DbContextOptions<WriteDbContext> options, ITenantGetter tenantGetter) : base(options)
         {
-            Tenant = tenantGetter.Tenant;
+            TenantId = tenantGetter.TenantId;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -50,7 +50,7 @@ namespace Farming.Infrastructure.EF.Contexts
                     case EntityState.Added:
                         if (entry.Entity.TenantId == Guid.Empty)
                         {
-                            entry.Entity.SetTenantId(Tenant);
+                            entry.Entity.SetTenantId(TenantId);
                         }
                         break;
                 }

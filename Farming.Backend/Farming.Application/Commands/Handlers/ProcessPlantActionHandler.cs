@@ -27,7 +27,7 @@ namespace Farming.Application.Commands.Handlers
         public ProcessPlantActionHandler(ISeasonRepository seasonRepository,
             IUserReadService userReadService, IUnitOfWork unitOfWork, 
             IPlantWarehouseRepository plantWarehouseRepository, ILandRepository landRepository, 
-            IPlantRepository plantRepository)
+            IPlantRepository plantRepository, IPlantActionFactory plantActionFactory, IPlantDomainService plantDomainService)
         {
             _seasonRepository = seasonRepository;
             _userReadService = userReadService;
@@ -35,8 +35,8 @@ namespace Farming.Application.Commands.Handlers
             _plantWarehouseRepository = plantWarehouseRepository;
             _landRepository = landRepository;
             _plantRepository = plantRepository;
-            _plantActionFactory = new PlantActionFactory();
-            _plantDomainService = new PlantDomainService();
+            _plantActionFactory = plantActionFactory;
+            _plantDomainService = plantDomainService;
         }
 
         public async Task<Response<ProcessPlantActionResponse>> Handle(ProcessPlantActionCommand command,

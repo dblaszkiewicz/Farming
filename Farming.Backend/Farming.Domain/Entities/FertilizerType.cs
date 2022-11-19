@@ -4,8 +4,9 @@ using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class FertilizerType : AggregateRoot<FertilizerTypeId>
+    public class FertilizerType : Tenant
     {
+        public FertilizerTypeId Id { get; }
         public FertilizerTypeName Name { get; }
         public FertilizerTypeDescription Description { get; }
 

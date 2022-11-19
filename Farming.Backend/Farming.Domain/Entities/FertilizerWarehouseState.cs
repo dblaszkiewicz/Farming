@@ -2,7 +2,9 @@
 using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
     public class FertilizerWarehouseState : AggregateRoot<FertilizerWarehouseStateId>
@@ -15,11 +17,7 @@ namespace Farming.Domain.Entities
         public FertilizerWarehouse FertilizerWarehouse { get; }
         public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
 
-        public FertilizerWarehouseState()
-        {
-        }
-
-        public FertilizerWarehouseState(FertilizerId fertilizerId)
+        internal FertilizerWarehouseState(FertilizerId fertilizerId)
         {
             Id = new FertilizerWarehouseStateId(Guid.NewGuid());
             Quantity = new FertilizerWarehouseQuantity(0);
@@ -28,7 +26,7 @@ namespace Farming.Domain.Entities
             FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDelivery>();
         }
 
-        public void AddDelivery(FertilizerWarehouseDelivery delivery)
+        internal void AddDelivery(FertilizerWarehouseDelivery delivery)
         {
             var newQuantity = Quantity + delivery.Quantity;
 
@@ -40,17 +38,7 @@ namespace Farming.Domain.Entities
             IncrementVersion();
         }
 
-        public bool IsEnoughFertilizer(FertilizerWarehouseQuantity quantity)
-        {
-            if (Quantity >= quantity)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public void SpendFertilizer(FertilizerActionQuantity quantity)
+        internal void SpendFertilizer(FertilizerActionQuantity quantity)
         {
             var newQuantity = Quantity - quantity;
 

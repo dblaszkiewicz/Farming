@@ -25,10 +25,11 @@ namespace Farming.Application.Commands.Handlers
 
         public ProcessFertilizerActionHandler(IUserReadService userReadService, ISeasonRepository seasonRepository, 
             IFertilizerRepository fertilizerRepository, IFertilizerWarehouseRepository fertilizerWarehouseRepository, 
-            ILandRepository landRepository, IUnitOfWork unitOfWork)
+            ILandRepository landRepository, IUnitOfWork unitOfWork, IFertilizerActionFactory fertilizerActionFactory,
+            IFertilizerDomainService fertilizerDomainService)
         {
-            _fertilizerActionFactory = new FertilizerActionFactory();
-            _fertilizerDomainService = new FertilizerDomainService();
+            _fertilizerActionFactory = fertilizerActionFactory;
+            _fertilizerDomainService = fertilizerDomainService;
             _userReadService = userReadService;
             _seasonRepository = seasonRepository;
             _fertilizerRepository = fertilizerRepository;

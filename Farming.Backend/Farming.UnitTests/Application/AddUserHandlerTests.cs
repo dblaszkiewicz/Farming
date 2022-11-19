@@ -18,40 +18,6 @@ namespace Farming.UnitTests.Application
     public class AddUserHandlerTests
     {
         [Fact]
-        public async Task HandleAsync_Throws_AddUserNoPermissionException_When_Current_User_Does_Not_Have_Permission()
-        {
-            var currentUserId = Guid.NewGuid();
-            var command = new AddUserCommand("admin", "Admin", "Haslo12", "Haslo12", currentUserId);
-
-            _userReadService.IsLoginAlreadyTakenAsync(command.Login).Returns(false);
-            _userReadService.ExistsByIdAsync(command.CurrentUserId).Returns(true);
-            _userReadService.IsUserActiveByIdAsync(command.CurrentUserId).Returns(true);
-            _userReadService.IsAdminByIdAsync(command.CurrentUserId).Returns(false);
-
-            var exception = await Record.ExceptionAsync(() => _handler.Handle(command, CancellationToken.None));
-
-            exception.ShouldNotBeNull();
-            exception.ShouldBeOfType<AddUserNoPermissionException>();
-        }
-
-        [Fact]
-        public async Task HandleAsync_Throws_UserNotActiveException_When_Current_User_Is_Not_Active()
-        {
-            var currentUserId = Guid.NewGuid();
-            var command = new AddUserCommand("admin", "Admin", "Haslo12", "Haslo12", currentUserId);
-
-            _userReadService.IsLoginAlreadyTakenAsync(command.Login).Returns(false);
-            _userReadService.ExistsByIdAsync(command.CurrentUserId).Returns(true);
-            _userReadService.IsUserActiveByIdAsync(command.CurrentUserId).Returns(false);
-            _userReadService.IsAdminByIdAsync(command.CurrentUserId).Returns(true);
-
-            var exception = await Record.ExceptionAsync(() => _handler.Handle(command, CancellationToken.None));
-
-            exception.ShouldNotBeNull();
-            exception.ShouldBeOfType<UserNotActiveException>();
-        }
-
-        [Fact]
         public async Task HandleAsync_Throws_ValidateCommandException_Login_Is_Already_Taken()
         {
             var currentUserId = Guid.NewGuid();

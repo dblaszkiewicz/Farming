@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Farming.Infrastructure.EF.Migrations.Read
 {
-    public partial class InitialPostgresMigration : Migration
+    public partial class initialPostgresMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,8 +28,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +46,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     LandClass = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Area = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,7 +61,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,7 +74,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,7 +91,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Description = table.Column<string>(type: "text", nullable: false),
                     Unit = table.Column<string>(type: "text", nullable: false),
                     RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,7 +104,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +119,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     StartDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,7 +138,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -149,7 +155,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -171,7 +177,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,7 +198,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     PlantId = table.Column<Guid>(type: "uuid", nullable: false),
                     PlantWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -218,7 +225,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     LandId = table.Column<Guid>(type: "uuid", nullable: false),
                     SeasonId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -245,7 +253,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     FertilizerId = table.Column<Guid>(type: "uuid", nullable: false),
                     FertilizerWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -296,7 +304,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     PesticideId = table.Column<Guid>(type: "uuid", nullable: false),
                     PesticideWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    Version = table.Column<int>(type: "integer", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -350,7 +359,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -385,7 +394,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -420,7 +429,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -455,7 +464,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     LandRealizationId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -491,7 +500,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -527,7 +536,7 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     RealizationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -558,6 +567,16 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "FertilizerTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fertilizers_TenantId",
+                table: "Fertilizers",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FertilizerTypes_TenantId",
+                table: "FertilizerTypes",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FertilizerWarehouseDeliveries_FertilizerId",
                 table: "FertilizerWarehouseDeliveries",
                 column: "FertilizerId");
@@ -568,9 +587,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "FertilizerWarehouseStateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FertilizerWarehouseDeliveries_TenantId",
+                table: "FertilizerWarehouseDeliveries",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FertilizerWarehouseDeliveries_UserId",
                 table: "FertilizerWarehouseDeliveries",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FertilizerWarehouses_TenantId",
+                table: "FertilizerWarehouses",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FertilizerWarehouseStates_FertilizerId",
@@ -583,6 +612,11 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "FertilizerWarehouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FertilizerWarehouseStates_TenantId",
+                table: "FertilizerWarehouseStates",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FertilzierActions_FertilizerId",
                 table: "FertilzierActions",
                 column: "FertilizerId");
@@ -591,6 +625,11 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 name: "IX_FertilzierActions_LandRealizationId",
                 table: "FertilzierActions",
                 column: "LandRealizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FertilzierActions_TenantId",
+                table: "FertilzierActions",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FertilzierActions_UserId",
@@ -608,6 +647,16 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "SeasonId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LandRealizations_TenantId",
+                table: "LandRealizations",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lands_TenantId",
+                table: "Lands",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PesticideActions_LandRealizationId",
                 table: "PesticideActions",
                 column: "LandRealizationId");
@@ -616,6 +665,11 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 name: "IX_PesticideActions_PesticideId",
                 table: "PesticideActions",
                 column: "PesticideId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PesticideActions_TenantId",
+                table: "PesticideActions",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PesticideActions_UserId",
@@ -628,6 +682,16 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "PesticideTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pesticides_TenantId",
+                table: "Pesticides",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PesticideTypes_TenantId",
+                table: "PesticideTypes",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PesticideWarehouseDeliveries_PesticideId",
                 table: "PesticideWarehouseDeliveries",
                 column: "PesticideId");
@@ -638,9 +702,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "PesticideWarehouseStateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PesticideWarehouseDeliveries_TenantId",
+                table: "PesticideWarehouseDeliveries",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PesticideWarehouseDeliveries_UserId",
                 table: "PesticideWarehouseDeliveries",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PesticideWarehouses_TenantId",
+                table: "PesticideWarehouses",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PesticideWarehouseStates_PesticideId",
@@ -653,6 +727,11 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "PesticideWarehouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PesticideWarehouseStates_TenantId",
+                table: "PesticideWarehouseStates",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlantActions_LandRealizationId",
                 table: "PlantActions",
                 column: "LandRealizationId");
@@ -661,6 +740,11 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 name: "IX_PlantActions_PlantId",
                 table: "PlantActions",
                 column: "PlantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlantActions_TenantId",
+                table: "PlantActions",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlantActions_UserId",
@@ -678,6 +762,11 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "SuitablePlantsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Plants_TenantId",
+                table: "Plants",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlantWarehouseDeliveries_PlantId",
                 table: "PlantWarehouseDeliveries",
                 column: "PlantId");
@@ -688,9 +777,19 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 column: "PlantWarehouseStateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlantWarehouseDeliveries_TenantId",
+                table: "PlantWarehouseDeliveries",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlantWarehouseDeliveries_UserId",
                 table: "PlantWarehouseDeliveries",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlantWarehouses_TenantId",
+                table: "PlantWarehouses",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlantWarehouseStates_PlantId",
@@ -701,6 +800,21 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 name: "IX_PlantWarehouseStates_PlantWarehouseId",
                 table: "PlantWarehouseStates",
                 column: "PlantWarehouseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlantWarehouseStates_TenantId",
+                table: "PlantWarehouseStates",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Seasons_TenantId",
+                table: "Seasons",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_TenantId",
+                table: "Users",
+                column: "TenantId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

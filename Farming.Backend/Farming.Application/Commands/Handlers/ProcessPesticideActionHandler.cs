@@ -27,10 +27,10 @@ namespace Farming.Application.Commands.Handlers
 
         public ProcessPesticideActionHandler(IUserReadService userReadService, ISeasonRepository seasonRepository,
             ILandRepository landRepository, IPesticideRepository pesticideRepository, IPesticideWarehouseRepository pesticideWarehouseRepository, 
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork, IPesticideDomainService pesticideDomainService, IPesticideActionFactory pesticideActionFactory)
         {
-            _pesticideDomainService = new PesticideDomainService();
-            _pesticideActionFactory = new PesticideActionFactory();
+            _pesticideDomainService = pesticideDomainService;
+            _pesticideActionFactory = pesticideActionFactory;
             _userReadService = userReadService;
             _seasonRepository = seasonRepository;
             _landRepository = landRepository;

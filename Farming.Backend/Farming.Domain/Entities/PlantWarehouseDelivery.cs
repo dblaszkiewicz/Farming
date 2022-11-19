@@ -1,11 +1,14 @@
 ﻿using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Plant;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
-    public class PlantWarehouseDelivery : AggregateRoot<PlantWarehouseDeliveryId>
+    public class PlantWarehouseDelivery : Tenant
     {
+        public PlantWarehouseDeliveryId Id { get; }
         public PlantId PlantId { get; }
         public PlantWarehouseStateId PlantWarehouseStateId { get; }
         public UserId UserId { get; }
@@ -17,11 +20,7 @@ namespace Farming.Domain.Entities
         public User User { get; }
         public PlantWarehouseState PlantWarehouseState { get; }
 
-        public PlantWarehouseDelivery()
-        {
-        }
-
-        public PlantWarehouseDelivery(PlantId plantId, UserId userId,
+        internal PlantWarehouseDelivery(PlantId plantId, UserId userId,
             PlantWarehouseDeliveryQuantity quantity, PlantWarehouseDeliveryPrice price,
             PlantWarehouseDeliveryRealizationDate realizationDate)
         {

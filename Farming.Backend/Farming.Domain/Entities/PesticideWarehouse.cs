@@ -1,9 +1,12 @@
 ﻿using Farming.Domain.Events;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Policies;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Pesticide;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
     public class PesticideWarehouse : AggregateRoot<PesticideWarehouseId>
@@ -12,11 +15,12 @@ namespace Farming.Domain.Entities
 
         public ICollection<PesticideWarehouseState> States { get; }
 
-        public PesticideWarehouse()
+        private PesticideWarehouse()
         {
+
         }
 
-        public PesticideWarehouse(PesticideWarehouseName name, List<PesticideWarehouseState> states)
+        internal PesticideWarehouse(PesticideWarehouseName name, List<PesticideWarehouseState> states)
         {
             Id = new PesticideWarehouseId(Guid.NewGuid());
             Name = name;
@@ -37,7 +41,8 @@ namespace Farming.Domain.Entities
             state.AddDelivery(delivery);
         }
 
-        public void ProcessPesticideAction(PesticideId pesticideId, PesticideActionQuantity quantity)
+        public void ProcessPesticideAction(PesticideId pesticideId, PesticideActionQuantity quantity, 
+            IPesticideWarehouseStatePolicy pesticideWarehouseStatePolicy)
         {
             var state = GetStateByPesticideId(pesticideId);
             if (state is null)
@@ -45,7 +50,7 @@ namespace Farming.Domain.Entities
                 throw new PesticideWarehouseStateNotFoundException(pesticideId, Id);
             }
 
-            if (!state.IsEnoughPesticide(new PesticideWarehouseQuantity(quantity)))
+            if (!pesticideWarehouseStatePolicy.IsEnoughPesticide(state, new PesticideWarehouseQuantity(quantity)))
             {
                 throw new PesticideActionNotEnoughQuantityException(quantity);
             }

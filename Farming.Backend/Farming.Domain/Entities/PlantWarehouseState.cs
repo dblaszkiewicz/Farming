@@ -2,7 +2,9 @@
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Plant;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
     public class PlantWarehouseState : AggregateRoot<PlantWarehouseStateId>
@@ -15,7 +17,7 @@ namespace Farming.Domain.Entities
         public PlantWarehouse PlantWarehouse { get; }
         public ICollection<PlantWarehouseDelivery> PlantWarehouseDeliveries { get; }
 
-        public PlantWarehouseState(PlantId plantId)
+        internal PlantWarehouseState(PlantId plantId)
         {
             Id = new PlantWarehouseStateId(Guid.NewGuid());
             Quantity = new PlantWarehouseQuantity(0);
@@ -24,7 +26,7 @@ namespace Farming.Domain.Entities
             PlantWarehouseDeliveries = new HashSet<PlantWarehouseDelivery>();
         }
 
-        public void AddDelivery(PlantWarehouseDelivery delivery)
+        internal void AddDelivery(PlantWarehouseDelivery delivery)
         {
             var newQuantity = Quantity + delivery.Quantity;
 
@@ -36,17 +38,7 @@ namespace Farming.Domain.Entities
             IncrementVersion();
         }
 
-        public bool IsEnoughPlants(PlantWarehouseQuantity quantity)
-        {
-            if (Quantity >= quantity)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public void SpendPlants(PlantActionQuantity quantity)
+        internal void SpendPlants(PlantActionQuantity quantity)
         {
             var newQuantity = Quantity - quantity;
 

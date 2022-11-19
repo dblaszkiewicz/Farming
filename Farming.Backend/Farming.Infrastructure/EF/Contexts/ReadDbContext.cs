@@ -7,7 +7,7 @@ namespace Farming.Infrastructure.EF.Contexts
 {
     internal sealed class ReadDbContext : DbContext
     {
-        internal Tenant Tenant { get; }
+        internal TenantId TenantId { get; }
 
         public DbSet<FertilizerReadModel> Fertilizers { get; set; }
         public DbSet<FertilizerActionReadModel> FertilizerActions { get; set; }
@@ -37,7 +37,7 @@ namespace Farming.Infrastructure.EF.Contexts
 
         public ReadDbContext(DbContextOptions<ReadDbContext> options, ITenantGetter tenantGetter) : base(options)
         {
-            Tenant = tenantGetter.Tenant;
+            TenantId = tenantGetter.TenantId;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

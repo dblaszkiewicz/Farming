@@ -5,7 +5,9 @@ using Farming.Application.Exceptions;
 using Farming.Application.Services;
 using Farming.Domain.Entities;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
+using Farming.Domain.Services;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
 using NSubstitute;
@@ -155,6 +157,8 @@ namespace Farming.UnitTests.Application
         private readonly IPesticideRepository _pesticideRepository;
         private readonly IPesticideWarehouseRepository _pesticideWarehouseRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPesticideDomainService _pesticideDomainService;
+        private readonly IPesticideActionFactory _pesticideActionFactory;
 
         public ProcessPesticideActionHandlerTests()
         {
@@ -165,10 +169,12 @@ namespace Farming.UnitTests.Application
             _pesticideRepository = Substitute.For<IPesticideRepository>();
             _pesticideWarehouseRepository = Substitute.For<IPesticideWarehouseRepository>();
             _unitOfWork = Substitute.For<IUnitOfWork>();
+            _pesticideDomainService = Substitute.For<IPesticideDomainService>();
+            _pesticideActionFactory = Substitute.For<IPesticideActionFactory>();
 
             _handler = new ProcessPesticideActionHandler(_userReadService, _seasonRepository, _landRepository,
-                _pesticideRepository, _pesticideWarehouseRepository, _unitOfWork);
+                _pesticideRepository, _pesticideWarehouseRepository, _unitOfWork, _pesticideDomainService,
+                _pesticideActionFactory);
         }
-
     }
 }

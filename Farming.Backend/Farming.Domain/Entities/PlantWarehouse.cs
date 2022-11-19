@@ -1,9 +1,12 @@
 ﻿using Farming.Domain.Events;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Policies;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Domain.ValueObjects.Plant;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
     public class PlantWarehouse : AggregateRoot<PlantWarehouseId>
@@ -12,11 +15,12 @@ namespace Farming.Domain.Entities
 
         public ICollection<PlantWarehouseState> States { get; }
 
-        public PlantWarehouse()
+        private PlantWarehouse()
         {
+
         }
 
-        public PlantWarehouse(PlantWarehouseName name, List<PlantWarehouseState> states)
+        internal PlantWarehouse(PlantWarehouseName name, List<PlantWarehouseState> states)
         {
             Id = new PlantWarehouseId(Guid.NewGuid());
 
@@ -38,7 +42,8 @@ namespace Farming.Domain.Entities
             state.AddDelivery(delivery);
         }
 
-        public void ProcessPlantAction(PlantId plantId, PlantActionQuantity quantity)
+        internal void ProcessPlantAction(PlantId plantId, PlantActionQuantity quantity, 
+            IPlantWarehouseStatePolicy plantWarehouseStatePolicy)
         {
             var state = GetStateByPlantId(plantId);
             if (state is null)
@@ -46,7 +51,7 @@ namespace Farming.Domain.Entities
                 throw new PlantWarehouseStateNotFoundException(plantId, Id);
             }
 
-            if (!state.IsEnoughPlants(new PlantWarehouseQuantity(quantity)))
+            if (!plantWarehouseStatePolicy.IsEnoughPlants(state, new PlantWarehouseQuantity(quantity)))
             {
                 throw new PlantActionNotEnoughQuantityException(quantity);
             }

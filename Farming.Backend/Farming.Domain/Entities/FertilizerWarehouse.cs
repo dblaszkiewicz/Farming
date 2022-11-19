@@ -1,9 +1,12 @@
 ﻿using Farming.Domain.Events;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Policies;
 using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Domain.ValueObjects.Identity;
 using Farming.Shared.Abstractions.Domain;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Farming.UnitTests")]
 namespace Farming.Domain.Entities
 {
     public class FertilizerWarehouse : AggregateRoot<FertilizerWarehouseId>
@@ -12,11 +15,11 @@ namespace Farming.Domain.Entities
 
         public ICollection<FertilizerWarehouseState> States { get; }
 
-        public FertilizerWarehouse()
+        private FertilizerWarehouse()
         {
         }
 
-        public FertilizerWarehouse(FertilizerWarehouseName name, List<FertilizerWarehouseState> states)
+        internal FertilizerWarehouse(FertilizerWarehouseName name, List<FertilizerWarehouseState> states)
         {
             Id = new FertilizerWarehouseId(Guid.NewGuid());
 
@@ -38,7 +41,8 @@ namespace Farming.Domain.Entities
             state.AddDelivery(delivery);
         }
 
-        public void ProcessFertilizerAction(FertilizerId fertilizerId, FertilizerActionQuantity quantity)
+        internal void ProcessFertilizerAction(FertilizerId fertilizerId, FertilizerActionQuantity quantity, 
+            IFertilizerWarehouseStatePolicy fertilizerWarehouseStatePolicy)
         {
             var state = GetStateByFertilizerId(fertilizerId);
             if (state is null)
@@ -46,7 +50,7 @@ namespace Farming.Domain.Entities
                 throw new FertilizerWarehouseStateNotFoundException(fertilizerId, Id);
             }
 
-            if (!state.IsEnoughFertilizer(new FertilizerWarehouseQuantity(quantity)))
+            if (!fertilizerWarehouseStatePolicy.IsEnoughFertilizer(state, new FertilizerWarehouseQuantity(quantity)))
             {
                 throw new FertilizerActionNotEnoughQuantityException(quantity);
             }
@@ -54,7 +58,7 @@ namespace Farming.Domain.Entities
             state.SpendFertilizer(quantity);
         }
 
-        private FertilizerWarehouseState GetStateByFertilizerId(FertilizerId fertilizerId)
+        internal FertilizerWarehouseState GetStateByFertilizerId(FertilizerId fertilizerId)
         {
             return States.FirstOrDefault(x => x.FertilizerId == fertilizerId);
         }

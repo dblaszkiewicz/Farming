@@ -34,7 +34,7 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
+                .HasQueryFilter(x => x.TenantId == _context.TenantId.Value);
 
             builder.HasIndex(x => x.TenantId);
 

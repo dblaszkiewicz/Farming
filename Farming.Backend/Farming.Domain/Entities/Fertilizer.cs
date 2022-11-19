@@ -1,12 +1,12 @@
 ﻿using Farming.Domain.ValueObjects.Fertilizer;
 using Farming.Domain.ValueObjects.Identity;
-using Farming.Domain.ValueObjects.Land;
 using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class Fertilizer : AggregateRoot<FertilizerId>
+    public class Fertilizer : Tenant
     {
+        public FertilizerId Id { get; }
         public FertilizerTypeId FertilizerTypeId { get; }
         public FertilizerRequiredAmountPerHectare RequiredAmountPerHectare { get; }
         public FertilizerName Name { get; }
@@ -17,15 +17,5 @@ namespace Farming.Domain.Entities
         public ICollection<FertilizerWarehouseDelivery> FertilizerWarehouseDeliveries { get; }
         public ICollection<FertilizerWarehouseState> FertilizerWarehouseStates { get; }
         public ICollection<FertilizerAction> FertilizerActions { get; }
-
-        public bool IsEnoughFertilizerForWholeArea(LandArea area, FertilizerActionQuantity quantity)
-        {
-            if (area * RequiredAmountPerHectare >= quantity)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

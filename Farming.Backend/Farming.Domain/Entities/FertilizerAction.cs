@@ -4,8 +4,9 @@ using Farming.Shared.Abstractions.Domain;
 
 namespace Farming.Domain.Entities
 {
-    public class FertilizerAction : AggregateRoot<FertilizerActionId>
+    public class FertilizerAction : Tenant
     {
+        public FertilizerActionId Id { get; }
         public FertilizerId FertilizerId { get; }
         public LandRealizationId LandRealizationId { get; }
         public UserId UserId { get; }
@@ -16,15 +17,10 @@ namespace Farming.Domain.Entities
         public LandRealization LandRealization { get; }
         public User User { get; }
 
-        public FertilizerAction()
-        {
-        }
-
-        public FertilizerAction(FertilizerId fertilizerId, UserId userId, FertilizerActionQuantity quantity,
+        internal FertilizerAction(FertilizerId fertilizerId, UserId userId, FertilizerActionQuantity quantity,
             FertilizerActionRealizationDate realizationDate)
         {
             Id = new FertilizerActionId(Guid.NewGuid());
-
             FertilizerId = fertilizerId;
             UserId = userId;
             Quantity = quantity;

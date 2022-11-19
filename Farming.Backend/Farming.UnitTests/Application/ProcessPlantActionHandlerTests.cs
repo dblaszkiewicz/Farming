@@ -5,7 +5,9 @@ using Farming.Application.Exceptions;
 using Farming.Application.Services;
 using Farming.Domain.Entities;
 using Farming.Domain.Exceptions;
+using Farming.Domain.Factories;
 using Farming.Domain.Repositories;
+using Farming.Domain.Services;
 using Farming.Shared.Abstractions.Commands;
 using MediatR;
 using NSubstitute;
@@ -156,6 +158,8 @@ namespace Farming.UnitTests.Application
         private readonly ILandRepository _landRepository;
         private readonly IPlantRepository _plantRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPlantActionFactory _plantActionFactory;
+        private readonly IPlantDomainService _plantDomainService;
 
         public ProcessPlantActionHandlerTests()
         {
@@ -165,9 +169,11 @@ namespace Farming.UnitTests.Application
             _landRepository = Substitute.For<ILandRepository>();
             _plantRepository = Substitute.For<IPlantRepository>();
             _plantWarehouseRepository = Substitute.For<IPlantWarehouseRepository>();
+            _plantActionFactory = Substitute.For<IPlantActionFactory>();
+            _plantDomainService = Substitute.For<IPlantDomainService>();
 
             _handler = new ProcessPlantActionHandler(_seasonRepository, _userReadService, _unitOfWork, _plantWarehouseRepository,
-                _landRepository, _plantRepository);
+                _landRepository, _plantRepository, _plantActionFactory, _plantDomainService);
         }
     }
 }

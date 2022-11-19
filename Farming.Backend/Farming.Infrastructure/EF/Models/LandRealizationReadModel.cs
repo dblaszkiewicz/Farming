@@ -1,11 +1,12 @@
 ﻿
 namespace Farming.Infrastructure.EF.Models
 {
-    internal class LandRealizationReadModel : BaseReadModel
+    internal class LandRealizationReadModel : BaseTenantReadModel
     {
         public Guid Id { get; set; }
         public Guid LandId { get; set; }
         public Guid SeasonId { get; set; }
+        public int Version { get; set; }
 
         public LandReadModel Land { get; set; }
         public SeasonReadModel Season { get; set; }

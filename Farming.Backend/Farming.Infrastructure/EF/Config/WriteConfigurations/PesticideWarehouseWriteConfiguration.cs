@@ -29,7 +29,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new PesticideWarehouseName(x));
 
             builder
-                .HasQueryFilter(x => x.TenantId == _context.Tenant.Value);
+                .HasQueryFilter((System.Linq.Expressions.Expression<Func<PesticideWarehouse, bool>>)(x => x.TenantId == _context.TenantId.Value));
 
             builder.HasIndex(x => x.TenantId);
 
