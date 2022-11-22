@@ -5,6 +5,8 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ActiveGuard } from './guards/active.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './components/register/register.component';
+import { NoAuthorizeGuard } from './guards/no-authorize.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +21,11 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+  },
+  {
+    canActivate: [NoAuthorizeGuard],
+    path: 'register',
+    component: RegisterComponent,
   },
 ];
 

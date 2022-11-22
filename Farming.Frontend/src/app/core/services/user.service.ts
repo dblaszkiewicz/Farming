@@ -34,4 +34,14 @@ export class UserService {
     const url = `${AppSettings.userEndpoint}/changePassword`;
     return this.http.put<void>(url, changePassword);
   }
+
+  public register(user: AddUserDto): Observable<void> {
+    const url = `${AppSettings.authEndpoint}/register`;
+    return this.http.post<void>(url, user);
+  }
+
+  public seedSampleData(): Observable<boolean> {
+    const url = `${AppSettings.seedSampleData}`;
+    return this.http.post<boolean>(url, null);
+  }
 }

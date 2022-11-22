@@ -21,13 +21,14 @@ namespace Farming.Infrastructure.EF.Models
 
         }
 
-        internal FertilizerReadModel(string name, string description, decimal requiredAmountPerHectare, List<PlantReadModel> suitablePlants)
+        internal FertilizerReadModel(string name, string description, decimal requiredAmountPerHectare, Guid tenantId, List<PlantReadModel> suitablePlants)
         {
             Id = Guid.NewGuid();
             SuitablePlants = suitablePlants;
             Name = name;
             Description = description;
             RequiredAmountPerHectare = requiredAmountPerHectare;
+            TenantId = tenantId;
 
             FertilizerWarehouseDeliveries = new HashSet<FertilizerWarehouseDeliveryReadModel>();
             FertilizerWarehouseStates = new HashSet<FertilizerWarehouseStateReadModel>();

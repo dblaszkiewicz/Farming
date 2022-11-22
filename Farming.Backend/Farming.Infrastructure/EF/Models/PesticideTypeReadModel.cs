@@ -14,11 +14,12 @@ namespace Farming.Infrastructure.EF.Models
 
         }
 
-        internal PesticideTypeReadModel(string name, string description, List<PesticideReadModel> pesticides)
+        internal PesticideTypeReadModel(string name, string description, Guid tenantId, List<PesticideReadModel> pesticides)
         {
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
+            TenantId = tenantId;
 
             Pesticides = pesticides;
         }

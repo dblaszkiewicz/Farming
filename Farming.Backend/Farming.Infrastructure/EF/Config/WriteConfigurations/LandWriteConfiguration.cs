@@ -25,7 +25,7 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
                 .HasConversion(x => x.Value, x => new LandId(x));
 
             builder
-                .Property(x => x.LandCLass)
+                .Property(x => x.LandClass)
                 .HasConversion(x => x.Value, x => new LandClass(x));
 
             builder

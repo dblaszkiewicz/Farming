@@ -14,4 +14,5 @@ export const AppSettings = {
   weatherEndpoint: `${apiUrl}/Weather`,
   userEndpoint: `${apiUrl}/User`,
   authEndpoint: `${apiUrl}/auth`,
+  seedSampleData: `${apiUrl}/SampleDataSeed`,
 };

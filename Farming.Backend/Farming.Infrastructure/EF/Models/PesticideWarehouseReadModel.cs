@@ -9,10 +9,11 @@ namespace Farming.Infrastructure.EF.Models
 
         public ICollection<PesticideWarehouseStateReadModel> States { get; }
 
-        internal PesticideWarehouseReadModel(string name)
+        internal PesticideWarehouseReadModel(string name, Guid tenantId)
         {
             Id = Guid.NewGuid();
             Name = name;
+            TenantId = tenantId;
 
             States = new HashSet<PesticideWarehouseStateReadModel>();
         }

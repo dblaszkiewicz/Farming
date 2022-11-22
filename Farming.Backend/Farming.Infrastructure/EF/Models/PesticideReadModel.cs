@@ -20,13 +20,14 @@ namespace Farming.Infrastructure.EF.Models
 
         }
 
-        internal PesticideReadModel(string name, string description, decimal requiredAmountPerHectare, List<PlantReadModel> suitablePlants)
+        internal PesticideReadModel(string name, string description, decimal requiredAmountPerHectare, Guid tenantId, List<PlantReadModel> suitablePlants)
         {
             Id = Guid.NewGuid();
             SuitablePlants = suitablePlants;
             Name = name;
             Description = description;
             RequiredAmountPerHectare = requiredAmountPerHectare;
+            TenantId = tenantId;
 
             PesticideActions = new HashSet<PesticideActionReadModel>();
             PesticideWarehouseDeliveries = new HashSet<PesticideWarehouseDeliveryReadModel>();

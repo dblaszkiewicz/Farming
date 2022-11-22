@@ -53,6 +53,8 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 
             builder.HasIndex(x => x.TenantId);
 
+            builder.HasIndex(x => x.Login).IsUnique();
+
             builder.ToTable("Users");
         }
     }

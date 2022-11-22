@@ -15,13 +15,14 @@ namespace Farming.Infrastructure.EF.Models
         public ICollection<PlantWarehouseDeliveryReadModel> PlantWarehouseDeliveries { get; set; }
         public ICollection<PlantWarehouseStateReadModel> PlantWarehouseStates { get; set; }
 
-        internal PlantReadModel(string name, decimal requiredAmountPerHectare, string unit, string description)
+        internal PlantReadModel(string name, decimal requiredAmountPerHectare, string unit, string description, Guid tenantId)
         {
             Id = Guid.NewGuid();
             Name = name;
             RequiredAmountPerHectare = requiredAmountPerHectare;
             Description = description;
             Unit = unit;
+            TenantId = tenantId;
 
             SuitableFertilizers = new HashSet<FertilizerReadModel>();
             SuitablePesticides = new HashSet<PesticideReadModel>();

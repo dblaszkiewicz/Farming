@@ -680,6 +680,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Login")
+                        .IsUnique();
+
                     b.HasIndex("TenantId");
 
                     b.ToTable("Users", (string)null);

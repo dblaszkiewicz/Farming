@@ -13,13 +13,14 @@ namespace Farming.Infrastructure.EF.Models
 
         public ICollection<LandRealizationReadModel> LandRealizations { get; set; }
 
-        internal LandReadModel(string landClass, string name, decimal area)
+        internal LandReadModel(string landClass, string name, decimal area, Guid tenantId)
         {
             Id = Guid.NewGuid();
             Status = 2;
             LandClass = landClass;
             Name = name;
             Area = area;
+            TenantId = tenantId;
 
             LandRealizations = new HashSet<LandRealizationReadModel>();
         }

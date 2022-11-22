@@ -5,9 +5,10 @@ import { LoginComponent } from './components/login/login.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MainAppComponent } from './components/main-app/main-app.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [LoginComponent, ContactComponent, DashboardComponent, MainAppComponent],
+  declarations: [LoginComponent, ContactComponent, DashboardComponent, MainAppComponent, RegisterComponent],
   imports: [CoreRoutingModule, SharedModule],
   exports: [MainAppComponent],
 })

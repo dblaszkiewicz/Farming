@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Farming.Infrastructure.EF.Migrations.Read
 {
-    public partial class initialPostgresMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -810,6 +810,12 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 name: "IX_Seasons_TenantId",
                 table: "Seasons",
                 column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Login",
+                table: "Users",
+                column: "Login",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_TenantId",

@@ -29,7 +29,7 @@ export class WeatherComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.spinnerStore.startSpinner();
-    await this.getWeather('Kolosy');
+    await this.getWeather('Kraków');
 
     this.prepareFirstPageWeather();
     this.spinnerStore.stopSpinner();

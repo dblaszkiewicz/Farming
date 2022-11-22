@@ -23,6 +23,8 @@ namespace Farming.Infrastructure.EF.Config.ReadConfiguration
 
             builder.HasIndex(x => x.TenantId);
 
+            builder.HasIndex(x => x.Login).IsUnique();
+
             builder.ToTable("Users");
         }
     }

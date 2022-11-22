@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Farming.Infrastructure.EF.Migrations.Read
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20221119175801_initialPostgresMigration")]
-    partial class initialPostgresMigration
+    [Migration("20221122202037_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -681,6 +681,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Login")
+                        .IsUnique();
 
                     b.HasIndex("TenantId");
 

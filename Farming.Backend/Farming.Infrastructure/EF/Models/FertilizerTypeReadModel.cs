@@ -14,11 +14,12 @@ namespace Farming.Infrastructure.EF.Models
 
         }
 
-        internal FertilizerTypeReadModel(string name, string description, List<FertilizerReadModel> fertilizers)
+        internal FertilizerTypeReadModel(string name, string description, Guid tenantId, List<FertilizerReadModel> fertilizers)
         {
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
+            TenantId = tenantId;
 
             Fertilizers = fertilizers;
         }
