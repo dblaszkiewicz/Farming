@@ -1,10 +1,10 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
-    <mat-card class="text-center h3 action-header"><strong>POGODA</strong></mat-card>
+    <mat-card class="text-center h3 action-header"><strong> {{ 'Weather.Header' | translate }}</strong></mat-card>
     <div class="d-flex justify-content-between">
       <div>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Lokalizacja</mat-label>
+          <mat-label>{{ 'Weather.Localization' | translate }}</mat-label>
           <input matInput [(ngModel)]="place" />
         </mat-form-field>
       </div>
@@ -38,19 +38,19 @@
 
       <div class="d-flex justify-content-between">
         <div>
-          <p><strong>Temperatura: </strong> {{ data.currentConditions.temp.c }} &deg;C</p>
+          <p><strong>{{ 'Weather.Temperature' | translate }} </strong> {{ data.currentConditions.temp.c }} &deg;C</p>
         </div>
         <div>
-          <p><strong> Szansa opadów: </strong>{{ data.currentConditions.precip }}</p>
+          <p><strong> {{ 'Weather.Precipitation' | translate }} </strong>{{ data.currentConditions.precip }}</p>
         </div>
       </div>
 
       <div class="d-flex justify-content-between">
         <div>
-          <p><strong>Wiatr: </strong>{{ data.currentConditions.wind.km }} km/h</p>
+          <p><strong>{{ 'Weather.Wind' | translate }} </strong>{{ data.currentConditions.wind.km }} km/h</p>
         </div>
         <div>
-          <p><strong> Wilgotność: </strong> {{ data.currentConditions.humidity }}</p>
+          <p><strong> {{ 'Weather.Humidity' | translate }} </strong> {{ data.currentConditions.humidity }}</p>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
             (click)="goBack()"
           >
             <mat-icon>navigate_before</mat-icon>
-            <span>Wstecz</span>
+            <span>{{ 'Weather.Back' | translate }}</span>
           </button>
         </mat-toolbar>
       </div>
@@ -101,7 +101,7 @@
             [disabled]="!canGoNext"
           >
             <mat-icon>navigate_next</mat-icon>
-            <span>Dalej</span>
+            <span>{{ 'Weather.Next' | translate }}</span>
           </button>
         </mat-toolbar>
       </div>

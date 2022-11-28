@@ -96,5 +96,320 @@
   "Password should contain At least one special character": "Hasło powinno zawierać minimum jeden znak specjalny",
   "Password should contain At least one upper case letter": "Hasło powinno zawierac minimum jeden duży znak",
   "Your account is not active": "Twoje konto jest nieaktywne",
-  "You dont have permission to add new user": "Nie masz uprawnień na dodanie użytkownika"
+  "You dont have permission to add new user": "Nie masz uprawnień na dodanie użytkownika",
+
+  "Dashboard": {
+    "Plant": "Sianie",
+    "Fertilizer": "Nawożenie",
+    "Pesticide": "Pryskanie",
+    "Harvest": "Zbiór",
+    "Season": "Sezon",
+    "Weather": "Pogoda"
+  },
+  "Login": {
+    "Login": "Login",
+    "EnterLogin": "Wprowadź login",
+    "Password": "Hasło",
+    "EnterPassword": "Wprowadź hasło",
+    "SignIn": "Zaloguj się",
+    "Register": "Rejestracja"
+  }, 
+  "Main": {
+    "Concern": "Agriculture Solutions",
+    "Welcome": "Witaj, {{ user }}!",
+    "UserInactive": "(nieaktywny)",
+    "Title": "Farm IT",
+    "Version": "Wersja {{ version }}",
+    "Login": "Logowanie",
+    "Lands": "Działki",
+    "Plant": "Nasiona",
+    "Pesticide": "Herbicydy",
+    "Fertilizer": "Nawozy",
+    "ChangePassword": "Zmiana hasła",
+    "Users": "Użytkownicy",
+    "Logout": "Wyloguj",
+    "Seed": "Seedowanie"
+  },
+  "Register": {
+    "Login": "Login",
+    "LoginRequired": "Login jest wymagany",
+    "LoginTooShoort": "Login za krótki (min. 4)",
+    "Name": "Imię",
+    "NameRequired": "Imię jest wymagane",
+    "Password": "Hasło",
+    "PasswordRequired": "Hasło jest wymagane",
+    "PasswordTooShort": "Hasło za krótkie (min. 6)",
+    "PasswordTooSimple": "Hasło za proste",
+    "RepeatPassword": "Powtórz hasło",
+    "RepeatRequired": "Powtórzenie jest wymagane",
+    "PasswordsNotMatch": "Hasła do siebie nie pasują",
+    "Register": "Zarejestruj",
+    "BackToLogin": "Powrót do logowania"
+  },
+  "FertilizerSummary": {
+    "Header": "Nawóz",
+    "Type": "Typ nawozu",
+    "Land": "Działka",
+    "Warehouse": "Magazyn",
+    "Quantity": "Ilość"
+  },
+  "FertilizerRealization": {
+    "Header": "Realizacja nawożenia",
+    "Back": "Wstecz",
+    "Next": "Dalej",
+    "Save": "Zapisz"
+  },
+  "FertilizerAction": {
+    "SelectWarehouse": "Wybierz magazyn nawozów",
+    "SelectFertilizer": "Wybierz nawóz",
+    "FertilizerInfo": "Informacje o nawozie",
+    "Type": "Typ:",
+    "Name": "Nazwa:",
+    "RequiredPerHectare": "Wymagane na hektar:",
+    "WarehouseStock": "Stan magazynowy",
+    "Quantity": "Ilość:",
+    "AvailableFor": "Dostępne na:",
+    "QuantityRealization": "Ilość realizacji",
+    "QuantityInKg": "Ilość w kg",
+    "QuantityRequired": "Ilość jest wymagana",
+    "RequiredMin": "Wymagane minimum",
+    "NoQuantity": "Brak takiej ilości na magazynie",
+    "SelectLand": "Wybierz działkę",
+    "LandDetails": "Informacje o działce",
+    "Class": "Klasa ziemi:",
+    "Area": "Areał:",
+    "State": "Status:",
+    "PlantName": "Roślina:"
+  },
+  "HarvestSummary": {
+    "Land": "Działka",
+    "Action": "Akcja",
+    "Harvested": "Zbiór",
+    "Destroyed": "Zniszczenie"
+  },
+  "HarvestRealization": {
+    "Header": "Realizacja zbioru",
+    "Back": "Wstecz",
+    "Next": "Dalej",
+    "Save": "Zapisz"
+  },
+  "HarvestAction": {
+    "SelectLand": "Wybierz działkę",
+    "LandDetails": "Informacje o działce",
+    "Name": "Nazwa:",
+    "Class": "Klasa ziemi:",
+    "Area": "Areał:",
+    "State": "Status:",
+    "PlantName": "Roślina:",
+    "RealizationMode": "Sposób realizacji",
+    "Harvest": "Zbierz",
+    "Destroy": "Zniszcz"
+  },
+  "PesticideSummary": {
+    "Pesticide": "Oprysk",
+    "Type": "Typ oprysku",
+    "Land": "Działka",
+    "Warehouse": "Magazyn",
+    "Quantity": "Ilość"
+  },
+  "PesticideRealization": {
+    "Header": "Realizacja pryskania",
+    "Back": "Wstecz",
+    "Next": "Dalej",
+    "Save": "Zapisz"
+  },
+  "PesticideAction": {
+    "SelectLand": "Wybierz działkę",
+    "LandDetails": "Informacje o działce",
+    "Name": "Nazwa:",
+    "Class": "Klasa ziemi:",
+    "Area": "Areał:",
+    "State": "Status:",
+    "Plant": "Roślina:",
+    "SelectWarehouse": "Wybierz magazyn herbicydów",
+    "SelectPesticide": "Wybierz oprysk",
+    "PesticideInfo": "Informacje o oprysku",
+    "Type": "Typ:",
+    "RequiredPerHectare": "Wymagane na hektar:",
+    "WarehouseStock": "Stan magazynowy",
+    "Quantity": "Ilość:",
+    "AvailableFor": "Dostępne na:",
+    "QuantityRealization": "Ilość realizacji",
+    "QuantityInMl": "Ilość w ml",
+    "QuantityRequired": "Ilość jest wymagana",
+    "RequiredMin": "Wymagane minimum",
+    "NoQuantity": "Brak takiej ilości na magazynie"
+  },
+  "PlantSummary": {
+    "Plant": "Roślina",
+    "Land": "Działka",
+    "Warehouse": "Magazyn",
+    "Quantity": "Ilość"
+  },
+  "PlantRealization": {
+    "Header": "Realizacja siewu",
+    "Back": "Wstecz",
+    "Next": "Dalej",
+    "Save": "Zapisz"
+  },
+  "PlantAction": {
+    "SelectLand": "Wybierz działkę",
+    "LandDetails": "Informacje o działce",
+    "Name": "Nazwa:",
+    "Class": "Klasa ziemi:",
+    "Area": "Areał:",
+    "State": "Status:",
+    "Plant": "Roślina:",
+    "SelectWarehouse": "Wybierz magazyn nasion",
+    "SelectPlant": "Wybierz nasiono",
+    "PlantInfo": "Informacje o roślinie",
+    "RequiredPerHectare": "Wymagane na hektar:",
+    "WarehouseStock": "Stan magazynowy",
+    "Quantity": "Ilość:",
+    "AvailableFor": "Dostępne na:",
+    "QuantityRealization": "Ilość realizacji",
+    "QuantityRequired": "Ilość jest wymagana",
+    "RequiredMin": "Wymagane minimum",
+    "NoQuantity": "Brak takiej ilości na magazynie"
+  },
+  "Season": {
+    "Header": "Sezon",
+    "Season": "Sezon:",
+    "Active": "Aktywny",
+    "StartDate": "Data Rozpoczęcia",
+    "End": "Zakończ",
+    "Start": "Start",
+    "Lack": "Brak",
+    "Back": "Wstecz",
+    "Next": "Dalej"
+  },
+  "Weather": {
+    "Header": "Pogoda",
+    "Localization": "Lokalizacja",
+    "Temperature": "Temperatura:",
+    "Precipitation": "Szansa opadów:",
+    "Wind": "Wiatr:",
+    "Humidity": "Wilgotność:",
+    "Back": "Wstecz",
+    "Next": "Dalej"
+  },
+  "ActionsPreview": {
+    "Name": "Nazwa",
+    "User": "Użytkownik",
+    "RealizationDate": "Data realizacji",
+    "Quantity": "Ilość"
+  },
+  "LandsPreview": {
+    "SelectedSeason": "Wybrany sezon",
+    "Name": "Nazwa",
+    "Class": "Klasa ziemi",
+    "Area": "Obszar",
+    "Plant": "Siew",
+    "Pesticide": "Herbicydowanie",
+    "Fertilizer": "Nawożenie"
+  },
+  "ConfirmDialog": {
+    "AreYouSure": "Jesteś pewien?",
+    "Yes": "Tak",
+    "No": "Nie"
+  },
+  "AddUser": {
+    "Header": "Dodaj użytkownika",
+    "Login": "Login",
+    "LoginRequired": "Login jest wymagany",
+    "LoginTooShoort": "Login za krótki (min. 4)",
+    "Name": "Imię",
+    "NameRequired": "Imię jest wymagane",
+    "Password": "Hasło",
+    "PasswordRequired": "Hasło jest wymagane",
+    "PasswordTooShort": "Hasło za krótkie (min. 6)",
+    "PasswordTooSimple": "Hasło za proste",
+    "RepeatPassword": "Powtórz hasło",
+    "RepeatRequired": "Powtórzenie jest wymagane",
+    "PasswordsNotMatch": "Hasła do siebie nie pasują",
+    "Add": "Dodaj",
+    "Cancel": "Anuluj"
+  },
+  "ChangePassword": {
+    "ActualPassword": "Dotychczasowe hasło",
+    "ActualRequired": "Dotychczasowe hasło jest wymagane",
+    "NewPassword": "Nowe hasło",
+    "PasswordRequired": "Hasło jest wymagane",
+    "PasswordTooShort": "Hasło za krótkie (min. 6)",
+    "PasswordTooSimple": "Hasło za proste",
+    "RepeatPassword": "Powtórz hasło",
+    "RepeatRequired": "Powtórzenie jest wymagane",
+    "PasswordsNotMatch": "Hasła do siebie nie pasują",
+    "Change": "Zmień"
+  },
+  "Users": {
+    "Name": "Imię",
+    "Login": "Login",
+    "AddDate": "Data dodania",
+    "Active": "Aktywny",
+    "Admin": "Administrator"
+  },
+  "AddDelivery": {
+    "Add": "Dodaj:",
+    "Quantity": "Ilość",
+    "QuantityKg": "Ilość (kg)",
+    "QuantityMl": "Ilość (ml)",
+    "Price": "Cena (zł)",
+    "Cancel": "Anuluj",
+    "AddDelivery": "Dodaj"
+  },
+  "DisplayDeliveries": {
+    "Name": "Nazwa",
+    "User": "Użytkownik",
+    "Quantity": "Ilość",
+    "Unit": "Jednostka",
+    "Price": "Cena",
+    "PricePerTon": "Cena za tonę",
+    "PricePerLiter": "Cena za litr",
+    "Date": "Data"
+  },
+  "FertilizerDelivery": {
+    "History": "Historia dostaw nawozu: ",
+    "HistoryPerWarehouse": "Historia dostaw na magazyn: ",
+    "AveragePricePerTon": "Średnia cena za tonę: "
+  },
+  "FertilizerWarehouse": {
+    "SelectedWarehouse": "Wybrany magazyn",
+    "Fertilizer": "Nawóz",
+    "Name": "Nazwa",
+    "Type": "Typ",
+    "RequiredPerHectare": "Wymagane na hektar",
+    "Quantity": "Ilość",
+    "Available": "Dostępne",
+    "Actions": "Działania"
+  },
+  "PesticideDelivery": {
+    "History": "Historia dostaw pestycydu: ",
+    "HistoryPerWarehouse": "Historia dostaw na magazyn: ",
+    "AveragePricePerLitre": "Średnia cena za litr: "
+  },
+  "PesticideWarehouse": {
+    "SelectedWarehouse": "Wybrany magazyn",
+    "Pesticide": "Oprysk",
+    "Name": "Nazwa",
+    "Type": "Typ",
+    "RequiredPerHectare": "Wymagane na hektar",
+    "Quantity": "Ilość",
+    "Available": "Dostępne",
+    "Actions": "Działania"
+  },
+  "PlantDelivery": {
+    "History": "Historia dostaw nasion: ",
+    "HistoryPerWarehouse": "Historia dostaw na magazyn: "
+  },
+  "PlantWarehouse": {
+    "SelectedWarehouse": "Wybrany magazyn",
+    "Plant": "Nasiono",
+    "Name": "Nazwa",
+    "RequiredPerHectare": "Wymagane na hektar",
+    "Quantity": "Ilość",
+    "Unit": "Jednostka",
+    "Available": "Dostępne",
+    "Actions": "Działania"
+  }
 }

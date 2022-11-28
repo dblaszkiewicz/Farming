@@ -1,14 +1,14 @@
 <div class="text-center">
   <h2 mat-dialog-title>
-    Dodaj: <strong>{{ data.name }} </strong>
+    {{ 'AddDelivery.Add' | translate }} <strong>{{ data.name }} </strong>
   </h2>
 </div>
 
 <form [formGroup]="form">
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label *ngIf="data.objectType === objectTypeEnum.PlantWarehouse">Ilość ({{ data.unitName }})</mat-label>
-    <mat-label *ngIf="data.objectType === objectTypeEnum.FertilizerWarehouse">Ilość (kg)</mat-label>
-    <mat-label *ngIf="data.objectType === objectTypeEnum.PesticideWarehouse">Ilość (ml)</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.PlantWarehouse">{{ 'AddDelivery.Quantity' | translate }} ({{ data.unitName }})</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.FertilizerWarehouse">{{ 'AddDelivery.QuantityKg' | translate }}</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.PesticideWarehouse">{{ 'AddDelivery.QuantityMl' | translate }}</mat-label>
     <input formControlName="quantity" type="number" min="1" matInput />
   </mat-form-field>
 
@@ -17,7 +17,7 @@
     class="example-full-width price"
     appearance="fill"
   >
-    <mat-label>Cena (zł)</mat-label>
+    <mat-label>{{ 'AddDelivery.Price' | translate }}</mat-label>
     <input formControlName="price" type="number" min="1" matInput />
   </mat-form-field>
 
@@ -26,14 +26,14 @@
     class="example-full-width price"
     appearance="fill"
   >
-    <mat-label>Cena (zł)</mat-label>
+    <mat-label>{{ 'AddDelivery.Price' | translate }}</mat-label>
     <input formControlName="price" type="number" min="0" matInput />
   </mat-form-field>
 </form>
 
 <div class="actions d-flex justify-content-center" mat-dialog-actions>
   <button mat-flat-button color="add" [disabled]="form.invalid" [mat-dialog-close]="addDelivery()" cdkFocusInitial>
-    Dodaj
+    {{ 'AddDelivery.AddDelivery' | translate }} 
   </button>
-  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>Anuluj</button>
+  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>{{ 'AddDelivery.Cancel' | translate }}</button>
 </div>

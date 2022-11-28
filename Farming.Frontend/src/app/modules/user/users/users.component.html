@@ -5,22 +5,22 @@
 <div class="w-100">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Imię</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Users.Name' | translate }} </th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="login">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Users.Login' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.login }}</td>
     </ng-container>
 
     <ng-container matColumnDef="created">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data dodania</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Users.AddDate' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.created | date: 'dd.MM.yyyy HH:mm' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="active">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Aktywny</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Users.Active' | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <mat-slide-toggle
           [disabled]="element.id === currentUserId"
@@ -31,7 +31,7 @@
     </ng-container>
 
     <ng-container matColumnDef="isAdmin">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Administrator</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Users.Admin' | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <mat-slide-toggle
           [disabled]="element.id === currentUserId"

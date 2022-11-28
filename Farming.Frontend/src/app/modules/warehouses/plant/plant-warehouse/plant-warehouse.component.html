@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>Wybrany Magazyn</mat-label>
+      <mat-label>{{ 'PlantWarehouse.SelectedWarehouse' | translate }} </mat-label>
 
       <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
         <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
@@ -16,7 +16,7 @@
 
   <div>
     <mat-form-field appearance="fill" class="float-left">
-      <mat-label>Nasiono</mat-label>
+      <mat-label>{{ 'PlantWarehouse.Plant' | translate }}</mat-label>
 
       <mat-select (selectionChange)="plantChange()" [(value)]="selectedPlantId">
         <mat-option *ngFor="let plant of plants" [value]="plant.id">
@@ -33,34 +33,34 @@
 <div class="w-100">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="plantName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PlantWarehouse.Name' | translate }}</th>
       <td mat-cell matTooltip="{{ element.plantDescription }}" [matTooltipPosition]="'right'" *matCellDef="let element">
         {{ element.plantName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="requiredAmountPerHectare">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Wymagane na hektar</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PlantWarehouse.RequiredPerHectare' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.requiredAmountPerHectare.toFixed(2) }} {{ element.unit }}</td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PlantWarehouse.Quantity' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }}</td>
     </ng-container>
 
     <ng-container matColumnDef="unit">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Jednostka</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PlantWarehouse.Unit' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
     </ng-container>
 
     <ng-container matColumnDef="enoughForArea">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Dostępne</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PlantWarehouse.Available' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.enoughForArea.toFixed(2) }} ha</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th class="table-actions" mat-header-cell *matHeaderCellDef>Działania</th>
+      <th class="table-actions" mat-header-cell *matHeaderCellDef>{{ 'PlantWarehouse.Actions' | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <button mat-flat-button color="deliveries" class="m-1" (click)="goToDeliveriesByPlant(element.plantId)">
           <mat-icon>storage</mat-icon>

@@ -4,7 +4,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { TranslateService } from '@ngx-translate/core';
 import StoreConnectedComponent from 'src/app/modules/utilities/store-connected.component';
 import { ApplicationState } from 'src/app/state';
 import { Store } from '@ngrx/store';
@@ -27,14 +26,13 @@ export class MainAppComponent extends StoreConnectedComponent<ApplicationState> 
   public isActive: boolean = false;
   public isAdmin: boolean = false;
   public userName: string;
+  public version: string = "1.0";
 
   constructor(
     public authorizationService: AuthorizationService,
     private observer: BreakpointObserver,
     private router: Router,
-    private auth: AuthorizationService,
     store: Store<{ auth: AuthState }>,
-    translate: TranslateService
   ) {
     super(store);
   }

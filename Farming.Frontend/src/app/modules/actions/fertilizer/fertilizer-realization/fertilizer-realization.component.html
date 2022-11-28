@@ -1,6 +1,8 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
-    <mat-card class="text-center h3 action-header"><strong>REALIZACJA NAWOŻENIA</strong></mat-card>
+    <mat-card class="text-center h3 action-header">
+      <strong> {{ 'FertilizerRealization.Header' | translate | uppercase }} </strong>
+    </mat-card>
   </div>
 
   <div class="col-6 col-sm-3 second-row">
@@ -18,7 +20,7 @@
             (click)="goBack()"
           >
             <mat-icon>navigate_before</mat-icon>
-            <span>Wstecz</span>
+            <span> {{ 'FertilizerRealization.Back' | translate }} </span>
           </button>
         </mat-toolbar>
       </div>
@@ -34,7 +36,7 @@
             (click)="goNext()"
           >
             <mat-icon>navigate_next</mat-icon>
-            <span>Dalej</span>
+            <span>{{ 'FertilizerRealization.Next' | translate }} </span>
           </button>
 
           <button
@@ -46,7 +48,7 @@
             (click)="goNext()"
           >
             <mat-icon>save</mat-icon>
-            <span>Zapisz</span>
+            <span>{{ 'FertilizerRealization.Save' | translate }} </span>
           </button>
         </mat-toolbar>
       </div>

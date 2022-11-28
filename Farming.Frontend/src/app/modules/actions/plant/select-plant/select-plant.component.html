@@ -1,6 +1,6 @@
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Wybierz magazyn nasion</mat-label>
+    <mat-label> {{ 'PlantAction.SelectWarehouse' | translate }} </mat-label>
     <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
       <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
         {{ warehouse.name }}
@@ -12,7 +12,7 @@
 <div *ngIf="selectedWarehouse">
   <div>
     <mat-form-field class="w-100" appearance="fill">
-      <mat-label>Wybierz nasiono</mat-label>
+      <mat-label>{{ 'PlantAction.SelectPlant' | translate }} </mat-label>
       <mat-select (selectionChange)="plantChange()" [(value)]="selectedPlantId">
         <mat-option *ngFor="let plantState of plantStates" [value]="plantState.plantId">
           {{ plantState.plantName }}
@@ -24,47 +24,47 @@
 
 <div *ngIf="selectedPlant">
   <div class="section-information">
-    <h3><strong>Informacje o roślinie</strong></h3>
+    <h3><strong>{{ 'PlantAction.PlantInfo' | translate }} </strong></h3>
     <div class="section-details">
       <p>
-        <strong>Nazwa:</strong> {{ selectedPlant.plantName }}
+        <strong>{{ 'PlantAction.Name' | translate }}</strong> {{ selectedPlant.plantName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedPlant.plantDescription }}">info</mat-icon>
       </p>
       <p>
-        <strong>Wymagane na hektar:</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }}
+        <strong>{{ 'PlantAction.RequiredPerHectare' | translate }}</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }}
         {{ selectedPlant.unit }}
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Stan magazynowy</strong></h3>
+    <h3><strong>{{ 'PlantAction.WarehouseStock' | translate }}</strong></h3>
     <div class="section-details">
-      <p><strong>Ilość:</strong> {{ selectedPlant.quantity.toFixed(2) }} {{ selectedPlant.unit }}</p>
+      <p><strong>{{ 'PlantAction.Quantity' | translate }}</strong> {{ selectedPlant.quantity.toFixed(2) }} {{ selectedPlant.unit }}</p>
       <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
-        <strong>Dostępne na:</strong> {{ selectedPlant.enoughForArea.toFixed(2) }} ha
+        <strong>{{ 'PlantAction.AvailableFor' | translate }}</strong> {{ selectedPlant.enoughForArea.toFixed(2) }} ha
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Ilość realizacji</strong></h3>
+    <h3><strong>{{ 'PlantAction.QuantityRealization' | translate }}</strong></h3>
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Ilość ({{ selectedPlant.unit }})</mat-label>
+          <mat-label>{{ 'PlantAction.Quantity' | translate }} ({{ selectedPlant.unit }})</mat-label>
           <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
           <mat-hint align="end"
             >{{ quantityFormControl.value }} / {{ selectedPlant.quantity }}
             {{ selectedPlant.unit }}
           </mat-hint>
 
-          <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('required')"> <strong>{{ 'PlantAction.' | translate }}</strong> </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
-            Wymagane minimum <strong> {{ minQuantityForArea }}</strong> {{ selectedPlant.unit }}
+            {{ 'PlantAction.RequiredMin' | translate }} <strong> {{ minQuantityForArea }}</strong> {{ selectedPlant.unit }}
           </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('max')">
-            Brak takiej <strong>ilości</strong> na magazynie
+            <strong>{{ 'PlantAction.NoQuantity' | translate }} </strong> 
           </mat-error>
         </mat-form-field>
       </td>

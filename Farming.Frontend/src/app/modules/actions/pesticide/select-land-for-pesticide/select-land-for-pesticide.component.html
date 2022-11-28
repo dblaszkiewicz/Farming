@@ -1,6 +1,6 @@
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Wybierz działkę</mat-label>
+    <mat-label> {{ 'PesticideAction.SelectLand' | translate }}</mat-label>
     <mat-select (selectionChange)="landChange()" [(value)]="selectedLandId">
       <mat-option *ngFor="let land of lands" [value]="land.id">
         {{ land.name }}
@@ -10,12 +10,12 @@
 </div>
 
 <div class="section-information" *ngIf="selectedLand">
-  <h3><strong>Informacje o działce</strong></h3>
+  <h3><strong>{{ 'PesticideAction.LandDetails' | translate }}</strong></h3>
   <div class="section-details">
-    <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
-    <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
-    <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
-    <p><strong>Status:</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
-    <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
+    <p><strong>{{ 'PesticideAction.Name' | translate }}</strong> {{ selectedLand.name }}</p>
+    <p><strong>{{ 'PesticideAction.Class' | translate }}</strong> {{ selectedLand.landClass }}</p>
+    <p><strong>{{ 'PesticideAction.Area' | translate }}</strong> {{ selectedLand.area }} ha</p>
+    <p><strong>{{ 'PesticideAction.State' | translate }}</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
+    <p *ngIf="selectedLand.isPlanted"><strong>{{ 'PesticideAction.Plant' | translate }}</strong> {{ selectedLand.planted.plantName }}</p>
   </div>
 </div>

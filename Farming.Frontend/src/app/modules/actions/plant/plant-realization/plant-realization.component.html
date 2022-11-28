@@ -1,6 +1,6 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
-    <mat-card class="text-center h3 action-header"><strong>REALIZACJA SIEWU</strong></mat-card>
+    <mat-card class="text-center h3 action-header"><strong> {{ 'PlantRealization.Header' | translate | uppercase }} </strong></mat-card>
   </div>
 
   <div class="col-6 col-sm-3 second-row">
@@ -18,7 +18,7 @@
             (click)="goBack()"
           >
             <mat-icon>navigate_before</mat-icon>
-            <span>Wstecz</span>
+            <span>{{ 'PlantRealization.Back' | translate }} </span>
           </button>
         </mat-toolbar>
       </div>
@@ -34,7 +34,7 @@
             (click)="goNext()"
           >
             <mat-icon>navigate_next</mat-icon>
-            <span>Dalej</span>
+            <span>{{ 'PlantRealization.Next' | translate }} </span>
           </button>
 
           <button
@@ -46,7 +46,7 @@
             (click)="goNext()"
           >
             <mat-icon>save</mat-icon>
-            <span>Zapisz</span>
+            <span>{{ 'PlantRealization.Save' | translate }} </span>
           </button>
         </mat-toolbar>
       </div>

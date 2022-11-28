@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>Wybrany Sezon</mat-label>
+      <mat-label> {{ 'LandsPreview.SelectedSeason' | translate }} </mat-label>
 
       <mat-select (selectionChange)="seasonChange()" [(value)]="selectedSeasonId">
         <mat-option *ngFor="let season of seasons" [value]="season.id">
@@ -15,22 +15,22 @@
 <div class="w-100">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LandsPreview.Name' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="landClass">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Klasa ziemi</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LandsPreview.Class' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.landClass }}</td>
     </ng-container>
 
     <ng-container matColumnDef="area">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Obszar</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'LandsPreview.Area' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.area.toFixed(2) }} ha</td>
     </ng-container>
 
     <ng-container matColumnDef="plantActions">
-      <th class="table-actions" mat-header-cell *matHeaderCellDef>Siew</th>
+      <th class="table-actions" mat-header-cell *matHeaderCellDef>{{ 'LandsPreview.Plant' | translate }}Siew</th>
       <td mat-cell *matCellDef="let element">
         <button
           mat-flat-button
@@ -45,7 +45,7 @@
     </ng-container>
 
     <ng-container matColumnDef="pesticideActions">
-      <th class="table-actions" mat-header-cell *matHeaderCellDef>Herbicydowanie</th>
+      <th class="table-actions" mat-header-cell *matHeaderCellDef>{{ 'LandsPreview.Pesticide' | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <button
           mat-flat-button
@@ -60,7 +60,7 @@
     </ng-container>
 
     <ng-container matColumnDef="fertilizerActions">
-      <th class="table-actions" mat-header-cell *matHeaderCellDef>Nawożenie</th>
+      <th class="table-actions" mat-header-cell *matHeaderCellDef>{{ 'LandsPreview.Fertilizer' | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <button
           mat-flat-button

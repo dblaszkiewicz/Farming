@@ -4,17 +4,17 @@
   </button>
 
   <mat-card *ngIf="warehouseId && fertilizerId; else onlyWarehouse" class="w-100 mb-2">
-    Historia dostaw nawozu: <strong>{{ fertilizerName }} </strong> na magazyn: <strong> {{ warehouseName }} </strong>
+    {{ 'FertilizerDelivery.History' | translate }}  <strong>{{ fertilizerName }} </strong> na magazyn: <strong> {{ warehouseName }} </strong>
   </mat-card>
 
   <ng-template #onlyWarehouse>
     <mat-card class="w-100 mb-2">
-      Historia dostaw na magazyn: <strong> {{ warehouseName }}</strong>
+      {{ 'FertilizerDelivery.HistoryPerWarehouse' | translate }} <strong> {{ warehouseName }}</strong>
     </mat-card>
   </ng-template>
 
   <mat-card *ngIf="!warehouseMode" class="mb-2 w-50">
-    Średnia cena za tonę: <strong>{{ averagePricePerTon?.toFixed(2) }} zł </strong>
+    {{ 'FertilizerDelivery.AveragePricePerTon' | translate }} <strong>{{ averagePricePerTon?.toFixed(2) }} zł </strong>
   </mat-card>
 </div>
 

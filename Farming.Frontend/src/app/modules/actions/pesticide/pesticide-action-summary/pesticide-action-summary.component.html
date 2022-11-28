@@ -1,6 +1,6 @@
 <div class="ml-0 mr-0 mx-auto pesticide d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Oprysk</p>
+    <p class="header"> {{ 'PesticideSummary.Pesticide' | translate }} </p>
     <p class="value">{{ selectedPesticideState.pesticideName }}</p>
   </div>
 
@@ -14,7 +14,7 @@
   [ngClass]="{ 'width-mobile': !destkopMode }"
 >
   <div class="w-50">
-    <p class="header">Typ oprysku</p>
+    <p class="header"> {{ 'PesticideSummary.Type' | translate }} </p>
     <p class="value">{{ selectedPesticideState.pesticideTypeName }}</p>
   </div>
 
@@ -25,7 +25,7 @@
 
 <div class="ml-0 mr-0 mx-auto field d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Działka</p>
+    <p class="header"> {{ 'PesticideSummary.Land' | translate }} </p>
     <p class="value">{{ selectedLand.name }}</p>
   </div>
 
@@ -36,7 +36,7 @@
 
 <div class="ml-0 mr-0 mx-auto warehouse d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Magazyn</p>
+    <p class="header"> {{ 'PesticideSummary.Warehouse' | translate }} </p>
     <p class="value">{{ selectedWarehouse.name }}</p>
   </div>
 
@@ -47,7 +47,7 @@
 
 <div class="ml-0 mr-0 mx-auto quantity d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Ilość</p>
+    <p class="header"> {{ 'PesticideSummary.Quantity' | translate }} </p>
     <p class="value">{{ selectedQuantity }} ml</p>
   </div>
 

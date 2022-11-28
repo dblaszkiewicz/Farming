@@ -1,52 +1,52 @@
 <div class="w-100">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container *ngIf="warehouseMode" matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Name' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="userName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Użytkownik</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.User' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.FertilizerWarehouse" matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Quantity' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }} kg</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.PlantWarehouse" matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Quantity' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }}</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.PlantWarehouse" matColumnDef="unit">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Jednostka</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Unit' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.PesticideWarehouse" matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Quantity' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }} ml</td>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Price' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.price.toFixed(2) }} zł</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.FertilizerWarehouse" matColumnDef="pricePerTon">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena za tonę</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.PricePerTon' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.pricePerTon.toFixed(2) }} zł</td>
     </ng-container>
 
     <ng-container *ngIf="objectType === objectTypeEnum.PesticideWarehouse" matColumnDef="pricePerLiter">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cena za litr</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.PricePerLiter' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.pricePerLiter.toFixed(2) }} zł</td>
     </ng-container>
 
     <ng-container matColumnDef="realizationDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DisplayDeliveries.Date' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.realizationDate | date: 'dd.MM.yyyy HH:mm' }}</td>
     </ng-container>
 

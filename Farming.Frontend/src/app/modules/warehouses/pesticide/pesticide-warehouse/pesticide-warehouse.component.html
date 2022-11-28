@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>Wybrany Magazyn</mat-label>
+      <mat-label> {{ 'PesticideWarehouse.SelectedWarehouse' | translate }} </mat-label>
 
       <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
         <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
@@ -16,7 +16,7 @@
 
   <div>
     <mat-form-field appearance="fill" class="float-left">
-      <mat-label>Oprysk</mat-label>
+      <mat-label>{{ 'PesticideWarehouse.Pesticide' | translate }}</mat-label>
 
       <mat-select (selectionChange)="pesticideChange()" [(value)]="selectedPesticideId">
         <mat-option *ngFor="let pesticide of pesticides" [value]="pesticide.id">
@@ -33,7 +33,7 @@
 <div class="w-100">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="pesticideName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PesticideWarehouse.Name' | translate }}</th>
       <td
         mat-cell
         matTooltip="{{ element.pesticideDescription }}"
@@ -45,7 +45,7 @@
     </ng-container>
 
     <ng-container matColumnDef="pesticideTypeName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PesticideWarehouse.Type' | translate }}</th>
       <td
         mat-cell
         matTooltip="{{ element.pesticideTypeDescription }}"
@@ -57,22 +57,22 @@
     </ng-container>
 
     <ng-container matColumnDef="requiredAmountPerHectare">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Wymagane na hektar</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PesticideWarehouse.RequiredPerHectare' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.requiredAmountPerHectare.toFixed(2) }} ml</td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PesticideWarehouse.Quantity' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }} ml</td>
     </ng-container>
 
     <ng-container matColumnDef="enoughForArea">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Dostępne</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PesticideWarehouse.Available' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.enoughForArea.toFixed(2) }} ha</td>
     </ng-container>
 
     <ng-container matColumnDef="details">
-      <th class="table-actions" mat-header-cell *matHeaderCellDef>Działania</th>
+      <th class="table-actions" mat-header-cell *matHeaderCellDef>{{ 'PesticideWarehouse.Actions' | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <button mat-flat-button color="deliveries" class="m-1" (click)="goToDeliveriesByPesticide(element.pesticideId)">
           <mat-icon>storage</mat-icon>

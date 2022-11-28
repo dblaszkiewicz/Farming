@@ -1,6 +1,6 @@
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Wybierz działkę</mat-label>
+    <mat-label> {{ 'HarvestAction.SelectLand' | translate }} </mat-label>
     <mat-select (selectionChange)="landChange()" [(value)]="selectedLandId">
       <mat-option *ngFor="let land of lands" [value]="land.id">
         {{ land.name }}
@@ -11,26 +11,26 @@
 
 <div *ngIf="selectedLand">
   <div class="section-information">
-    <h3><strong>Informacje o działce</strong></h3>
+    <h3><strong> {{ 'HarvestAction.LandDetails' | translate }} </strong></h3>
     <div class="section-details">
-      <p><strong>Nazwa:</strong> {{ selectedLand.name }}</p>
-      <p><strong>Klasa ziemi:</strong> {{ selectedLand.landClass }}</p>
-      <p><strong>Areał:</strong> {{ selectedLand.area }} ha</p>
+      <p><strong> {{ 'HarvestAction.Name' | translate }} </strong> {{ selectedLand.name }}</p>
+      <p><strong>{{ 'HarvestAction.Class' | translate }} </strong> {{ selectedLand.landClass }}</p>
+      <p><strong>{{ 'HarvestAction.Area' | translate }} </strong> {{ selectedLand.area }} ha</p>
       <p [ngClass]="{ isNotPlanted: !selectedLand.isPlanted }">
-        <strong>Status:</strong>
+        <strong>{{ 'HarvestAction.State' | translate }} </strong>
         {{ landStatusHelper.getStatusName(selectedLand.status) }}
       </p>
-      <p *ngIf="selectedLand.isPlanted"><strong>Roślina:</strong> {{ selectedLand.planted.plantName }}</p>
+      <p *ngIf="selectedLand.isPlanted"><strong>{{ 'HarvestAction.PlantName' | translate }} </strong> {{ selectedLand.planted.plantName }}</p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Sposób realizacji</strong></h3>
+    <h3><strong> {{ 'HarvestAction.RealizationMode' | translate }} </strong></h3>
     <div class="section-details">
       <mat-radio-group [(ngModel)]="selectedMode" (change)="modeChange()">
-        <mat-radio-button value="{{ landStatusEnum.Harvested }}">Zbierz</mat-radio-button>
+        <mat-radio-button value="{{ landStatusEnum.Harvested }}">{{ 'HarvestAction.Harvest' | translate }} </mat-radio-button>
         <p></p>
-        <mat-radio-button value="{{ landStatusEnum.Destroyed }}">Zniszcz</mat-radio-button>
+        <mat-radio-button value="{{ landStatusEnum.Destroyed }}">{{ 'HarvestAction.Destroy' | translate }} </mat-radio-button>
       </mat-radio-group>
     </div>
   </div>

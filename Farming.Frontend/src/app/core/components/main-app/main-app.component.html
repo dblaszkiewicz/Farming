@@ -5,12 +5,12 @@
   </button>
 
   <div class="w-100 d-flex justify-content-between">
-    <div class="appHeader" *ngIf="!isAuthorized">Agriculture Solutions</div>
+    <div class="appHeader" *ngIf="!isAuthorized"> {{ 'Main.Concern' | translate }}</div>
 
     <div class="appHeader" *ngIf="isAuthorized">
-      Witaj, {{ userName }}!
+      {{ 'Main.Welcome' | translate: { user: userName} }}
       <span><mat-icon class="userAdmin" *ngIf="isAdmin">build</mat-icon></span>
-      <span class="userInactive" *ngIf="!isActive"> (nieaktywny) </span>
+      <span class="userInactive" *ngIf="!isActive"> {{ 'Main.UserInactive' | translate }} </span>
     </div>
     <img class="mini-logo mat-elevation-z8" src="assets/images/logo_new.png" routerLink="/" />
   </div>
@@ -20,56 +20,56 @@
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <img class="logo mat-elevation-z8" src="assets/images/logo_new.png" routerLink="/" />
 
-    <h4 class="name">Farm IT</h4>
-    <p class="designation">Wersja 1.0</p>
+    <h4 class="name">{{ 'Main.Title' | translate }} </h4>
+    <p class="designation"> {{ 'Main.Version' | translate: { version: version} }}</p>
     <mat-divider></mat-divider>
 
     <button *ngIf="!isAuthorized" mat-button class="menu-button" routerLink="/login">
       <mat-icon>perm_identity</mat-icon>
-      <span>Logowanie</span>
+      <span>{{ 'Main.Login' | translate }} </span>
     </button>
 
     <div *ngIf="isAuthorized">
       <button mat-button class="menu-button" routerLink="/lands">
         <mat-icon>dashboard</mat-icon>
-        <span>Działki</span>
+        <span>{{ 'Main.Lands' | translate }} </span>
       </button>
 
       <button [disabled]="!isActive" mat-button class="menu-button" routerLink="/warehouse/plant">
         <mat-icon>local_florist</mat-icon>
-        <span>Nasiona</span>
+        <span>{{ 'Main.Plant' | translate }} </span>
       </button>
       <button [disabled]="!isActive" mat-button class="menu-button" routerLink="/warehouse/pesticide">
         <mat-icon>local_drink</mat-icon>
-        <span>Herbicydy</span>
+        <span>{{ 'Main.Pesticide' | translate }} </span>
       </button>
       <button [disabled]="!isActive" mat-button class="menu-button" routerLink="/warehouse/fertilizer">
         <mat-icon>grain</mat-icon>
-        <span>Nawozy</span>
+        <span>{{ 'Main.Fertilizer' | translate }} </span>
       </button>
 
       <mat-divider></mat-divider>
 
       <button mat-button class="menu-button" routerLink="/user/change-password">
         <mat-icon>security</mat-icon>
-        <span>Zmiana hasła</span>
+        <span>{{ 'Main.ChangePassword' | translate }}</span>
       </button>
 
       <button *ngIf="isAdmin" [disabled]="!isActive" mat-button class="menu-button" routerLink="/user">
         <mat-icon>supervised_user_circle</mat-icon>
-        <span>Użytkownicy</span>
+        <span>{{ 'Main.Users' | translate }} </span>
       </button>
 
       <button mat-button class="menu-button" (click)="logout()">
         <mat-icon>build</mat-icon>
-        <span>Wyloguj</span>
+        <span> {{ 'Main.Logout' | translate }} </span>
       </button>
       <mat-divider></mat-divider>
     </div>
 
     <button mat-button class="menu-button" routerLink="/contact">
       <mat-icon>contact_support</mat-icon>
-      <span style="color: rgb(68, 0, 255) ">SEEDOWANIE</span>
+      <span style="color: rgb(68, 0, 255) "> {{ 'Main.Seed' | translate | uppercase }} </span>
     </button>
   </mat-sidenav>
   <mat-sidenav-content>

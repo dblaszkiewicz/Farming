@@ -1,6 +1,6 @@
 <div class="ml-0 mr-0 mx-auto plant d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Roślina</p>
+    <p class="header"> {{ 'PlantSummary.Plant' | translate }}</p>
     <p class="value">{{ selectedPlantState.plantName }}</p>
   </div>
 
@@ -11,7 +11,7 @@
 
 <div class="ml-0 mr-0 mx-auto field d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Działka</p>
+    <p class="header">{{ 'PlantSummary.Land' | translate }}</p>
     <p class="value">{{ selectedLand.name }}</p>
   </div>
 
@@ -22,7 +22,7 @@
 
 <div class="ml-0 mr-0 mx-auto warehouse d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Magazyn</p>
+    <p class="header">{{ 'PlantSummary.Warehouse' | translate }}</p>
     <p class="value">{{ selectedWarehouse.name }}</p>
   </div>
 
@@ -33,7 +33,7 @@
 
 <div class="ml-0 mr-0 mx-auto quantity d-flex justify-content-between" [ngClass]="{ 'width-mobile': !destkopMode }">
   <div class="w-50">
-    <p class="header">Ilość</p>
+    <p class="header">{{ 'PlantSummary.Quantity' | translate }}</p>
     <p class="value">{{ selectedQuantity }} {{ selectedPlantState.unit }}</p>
   </div>
 

@@ -1,21 +1,21 @@
-<h2 mat-dialog-title>Dodaj użytkownika</h2>
+<h2 mat-dialog-title> {{ 'AddUser.Header' | translate }}</h2>
 
 <form [formGroup]="addUserForm">
   <div class="firstRow d-flex justify-content-between">
     <div class="login">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label> Login </mat-label>
+        <mat-label> {{ 'AddUser.Login' | translate }} </mat-label>
         <input formControlName="login" type="text" matInput />
-        <mat-error *ngIf="addUserForm.get('login')?.hasError('required')"> Login jest wymagany </mat-error>
-        <mat-error *ngIf="addUserForm.get('login')?.hasError('minlength')"> Login za krótki (min. 4) </mat-error>
+        <mat-error *ngIf="addUserForm.get('login')?.hasError('required')"> {{ 'AddUser.LoginRequired' | translate }}</mat-error>
+        <mat-error *ngIf="addUserForm.get('login')?.hasError('minlength')"> {{ 'AddUser.LoginTooShoort' | translate }}</mat-error>
       </mat-form-field>
     </div>
 
     <div class="name">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label> Imię </mat-label>
+        <mat-label> {{ 'AddUser.Name' | translate }} </mat-label>
         <input formControlName="name" type="text" matInput />
-        <mat-error *ngIf="addUserForm.get('name')?.hasError('required')"> Imię jest wymagane </mat-error>
+        <mat-error *ngIf="addUserForm.get('name')?.hasError('required')"> {{ 'AddUser.NameRequired' | translate }}</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -23,23 +23,23 @@
   <div class="secondRow d-flex justify-content-between">
     <div class="password">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label> Hasło </mat-label>
+        <mat-label> {{ 'AddUser.Password' | translate }} </mat-label>
         <input formControlName="password" type="password" matInput />
-        <mat-error *ngIf="addUserForm.get('password')?.hasError('required')"> Hasło jest wymagane </mat-error>
-        <mat-error *ngIf="addUserForm.get('password')?.hasError('minlength')"> Hasło za krótkie (min. 6) </mat-error>
-        <mat-error *ngIf="addUserForm.get('password')?.hasError('tooEasy')"> Hasło za proste </mat-error>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('required')"> {{ 'AddUser.PasswordRequired' | translate }}</mat-error>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('minlength')"> {{ 'AddUser.PasswordTooShort' | translate }}</mat-error>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('tooEasy')"> {{ 'AddUser.PasswordTooSimple' | translate }}</mat-error>
       </mat-form-field>
     </div>
 
     <div class="repeatPassword">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label> Powtórz hasło </mat-label>
+        <mat-label> {{ 'AddUser.RepeatPassword' | translate }} </mat-label>
         <input formControlName="repeatPassword" type="password" matInput />
         <mat-error *ngIf="addUserForm.get('repeatPassword')?.hasError('required')">
-          Powtórzenie jest wymagane
+          {{ 'AddUser.RepeatRequired' | translate }}
         </mat-error>
         <mat-error *ngIf="addUserForm.get('repeatPassword')?.hasError('mustMatch')">
-          Hasła do siebie nie pasują
+          {{ 'AddUser.PasswordsNotMatch' | translate }}
         </mat-error>
       </mat-form-field>
     </div>
@@ -48,7 +48,7 @@
 
 <div class="actions d-flex justify-content-center" mat-dialog-actions>
   <button mat-flat-button color="add" [disabled]="addUserForm.invalid" (click)="addUser()" cdkFocusInitial>
-    Dodaj
+    {{ 'AddUser.Add' | translate }}
   </button>
-  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>Anuluj</button>
+  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>{{ 'AddUser.Cancel' | translate }}</button>
 </div>

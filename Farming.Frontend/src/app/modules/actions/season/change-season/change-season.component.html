@@ -1,27 +1,27 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
-    <mat-card class="text-center h3 action-header"><strong>SEZON</strong></mat-card>
+    <mat-card class="text-center h3 action-header"><strong> {{ 'Season.Header' | translate | uppercase }} </strong></mat-card>
   </div>
 
   <div class="col-6 col-sm-3 second-row d-flex justify-content-center">
     <div *ngIf="currentSeason">
-      <p class="text-center"><strong>Sezon:</strong> Aktywny</p>
+      <p class="text-center"><strong>{{ 'Season.Season' | translate }}</strong> {{ 'Season.Active' | translate }}</p>
       <p class="text-center">
-        <strong>Data Rozpoczęcia: </strong> {{ currentSeason.startDate | date: 'dd.MM.yyyy HH:mm' }}
+        <strong>{{ 'Season.StartDate' | translate }}</strong> {{ currentSeason.startDate | date: 'dd.MM.yyyy HH:mm' }}
       </p>
       <div class="text-center">
         <button class="center-block change-season-btn" mat-fab color="end-season" (click)="endCurrentSeason()">
-          Zakończ
+          {{ 'Season.End' | translate }}
         </button>
       </div>
     </div>
 
     <div *ngIf="!currentSeason">
-      <p class="text-center"><strong>Sezon:</strong> BRAK</p>
-      <p class="text-center"><strong>Data Rozpoczęcia:</strong> BRAK</p>
+      <p class="text-center"><strong>{{ 'Season.Season' | translate }}:</strong> {{ 'Season.Lack' | translate }}</p>
+      <p class="text-center"><strong>{{ 'Season.StartDate' | translate }}Data Rozpoczęcia:</strong> {{ 'Season.Lack' | translate }}</p>
       <div class="text-center">
         <button class="center-block change-season-btn" mat-fab color="start-season" (click)="startNewSeason()">
-          Start
+          {{ 'Season.Start' | translate }}
         </button>
       </div>
     </div>
@@ -38,7 +38,7 @@
             (click)="goToMainPanel()"
           >
             <mat-icon>navigate_before</mat-icon>
-            <span>Wstecz</span>
+            <span>{{ 'Season.Back' | translate }}</span>
           </button>
         </mat-toolbar>
       </div>
@@ -47,7 +47,7 @@
         <mat-toolbar class="toolbarNav">
           <button class="button-block btn-margin-left" mat-flat-button routerLinkActive="active-link" [disabled]="true">
             <mat-icon>navigate_next</mat-icon>
-            <span>Dalej</span>
+            <span>{{ 'Season.Next' | translate }}</span>
           </button>
         </mat-toolbar>
       </div>

@@ -2,24 +2,24 @@
   <div class="w-100">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ActionsPreview.Name' | translate }} </th>
         <td mat-cell matTooltip="{{ element.description }}" [matTooltipPosition]="'right'" *matCellDef="let element">
           {{ element.name }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="userName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Użytkownik</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'ActionsPreview.User' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="realizationDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data realizacji</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'ActionsPreview.RealizationDate' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.realizationDate | date: 'dd.MM.yyyy HH:mm' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'ActionsPreview.Quantity' | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.quantity.toFixed(2) }} kg</td>
       </ng-container>
 

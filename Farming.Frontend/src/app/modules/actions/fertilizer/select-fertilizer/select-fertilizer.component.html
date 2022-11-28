@@ -1,6 +1,6 @@
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Wybierz magazyn nawozów</mat-label>
+    <mat-label>{{ 'FertilizerAction.SelectWarehouse' | translate }} </mat-label>
     <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
       <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
         {{ warehouse.name }}
@@ -12,7 +12,7 @@
 <div *ngIf="selectedWarehouse">
   <div>
     <mat-form-field class="w-100" appearance="fill">
-      <mat-label>Wybierz nawóz</mat-label>
+      <mat-label>{{ 'FertilizerAction.SelectFertilizer' | translate }} </mat-label>
       <mat-select (selectionChange)="fertilizerChange()" [(value)]="selectedFertilizerId">
         <mat-option *ngFor="let fertilizerState of fertilizerStates" [value]="fertilizerState.fertilizerId">
           {{ fertilizerState.fertilizerName }}
@@ -24,48 +24,48 @@
 
 <div *ngIf="selectedFertilizer">
   <div class="section-information">
-    <h3><strong>Informacje o nawozie</strong></h3>
+    <h3><strong>{{ 'FertilizerAction.FertilizerInfo' | translate }} </strong></h3>
     <div class="section-details">
       <p>
-        <strong>Typ:</strong> {{ selectedFertilizer.fertilizerTypeName }}
+        <strong>{{ 'FertilizerAction.Type' | translate }} </strong> {{ selectedFertilizer.fertilizerTypeName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedFertilizer.fertilizerTypeDescription }}"
           >info</mat-icon
         >
       </p>
       <p>
-        <strong>Nazwa:</strong> {{ selectedFertilizer.fertilizerName }}
+        <strong>{{ 'FertilizerAction.Name' | translate }} </strong> {{ selectedFertilizer.fertilizerName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedFertilizer.fertilizerDescription }}">info</mat-icon>
       </p>
 
-      <p><strong>Wymagane na hektar:</strong> {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
+      <p><strong>{{ 'FertilizerAction.RequiredPerHectare' | translate }} </strong> {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Stan magazynowy</strong></h3>
+    <h3><strong>{{ 'FertilizerAction.WarehouseStock' | translate }}</strong></h3>
     <div class="section-details">
-      <p><strong>Ilość:</strong> {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
+      <p><strong>{{ 'FertilizerAction.Quantity' | translate }} </strong> {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
       <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
-        <strong>Dostępne na:</strong> {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha
+        <strong>{{ 'FertilizerAction.AvailableFor' | translate }} </strong> {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Ilość realizacji</strong></h3>
+    <h3><strong>{{ 'FertilizerAction.QuantityRealization' | translate }} </strong></h3>
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Ilość w kg</mat-label>
+          <mat-label>{{ 'FertilizerAction.QuantityInKg' | translate }} </mat-label>
           <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
           <mat-hint align="end">{{ quantityFormControl.value }} kg / {{ selectedFertilizer.quantity }} kg </mat-hint>
 
-          <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('required')"> <strong>{{ 'FertilizerAction.QuantityRequired' | translate }}</strong> </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
-            Wymagane minimum <strong> {{ minQuantityForArea }}</strong> kg
+            {{ 'FertilizerAction.RequiredMin' | translate }} <strong> {{ minQuantityForArea }}</strong> kg
           </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('max')">
-            Brak takiej <strong>ilości</strong> na magazynie
+            <strong> {{ 'FertilizerAction.NoQuantity' | translate }} </strong>
           </mat-error>
         </mat-form-field>
       </td>

@@ -1,6 +1,6 @@
 <div>
   <mat-form-field class="w-100" appearance="fill">
-    <mat-label>Wybierz magazyn herbicydów</mat-label>
+    <mat-label> {{ 'PesticideAction.SelectWarehouse' | translate }}</mat-label>
     <mat-select (selectionChange)="warehouseChange()" [(value)]="selectedWarehouseId">
       <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
         {{ warehouse.name }}
@@ -12,7 +12,7 @@
 <div *ngIf="selectedWarehouse">
   <div>
     <mat-form-field class="w-100" appearance="fill">
-      <mat-label>Wybierz oprysk</mat-label>
+      <mat-label>{{ 'PesticideAction.SelectPesticide' | translate }}</mat-label>
       <mat-select (selectionChange)="pesticideChange()" [(value)]="selectedPesticideId">
         <mat-option *ngFor="let pesticideState of pesticideStates" [value]="pesticideState.pesticideId">
           {{ pesticideState.pesticideName }}
@@ -24,45 +24,45 @@
 
 <div *ngIf="selectedPesticide">
   <div class="section-information">
-    <h3><strong>Informacje o oprysku</strong></h3>
+    <h3><strong>{{ 'PesticideAction.PesticideInfo' | translate }}</strong></h3>
     <div class="section-details">
       <p>
-        <strong>Typ:</strong> {{ selectedPesticide.pesticideTypeName }}
+        <strong>{{ 'PesticideAction.Type' | translate }}</strong> {{ selectedPesticide.pesticideTypeName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedPesticide.pesticideTypeDescription }}">info</mat-icon>
       </p>
       <p>
-        <strong>Nazwa:</strong> {{ selectedPesticide.pesticideName }}
+        <strong>{{ 'PesticideAction.Name' | translate }}</strong> {{ selectedPesticide.pesticideName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedPesticide.pesticideDescription }}">info</mat-icon>
       </p>
-      <p><strong>Wymagane na hektar:</strong> {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml</p>
+      <p><strong>{{ 'PesticideAction.RequiredPerHectare' | translate }}</strong> {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml</p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Stan magazynowy</strong></h3>
+    <h3><strong>{{ 'PesticideAction.WarehouseStock' | translate }}</strong></h3>
     <div class="section-details">
-      <p><strong>Ilość:</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml</p>
+      <p><strong>{{ 'PesticideAction.Quantity' | translate }}</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml</p>
       <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
-        <strong>Dostępne na:</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha
+        <strong>{{ 'PesticideAction.AvailableFor' | translate }}</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>Ilość realizacji</strong></h3>
+    <h3><strong>{{ 'PesticideAction.QuantityRealization' | translate }}</strong></h3>
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Ilość w ml</mat-label>
+          <mat-label>{{ 'PesticideAction.QuantityInMl' | translate }}</mat-label>
           <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
           <mat-hint align="end">{{ quantityFormControl.value }} ml / {{ selectedPesticide.quantity }} ml </mat-hint>
 
-          <mat-error *ngIf="quantityFormControl.hasError('required')"> Ilość jest <strong>wymagana</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('required')"><strong>{{ 'PesticideAction.QuantityRequired' | translate }}</strong> </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
-            Wymagane minimum <strong> {{ minQuantityForArea }}</strong> ml
+            {{ 'PesticideAction.RequiredMin' | translate }}<strong> {{ minQuantityForArea }}</strong> ml
           </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('max')">
-            Brak takiej <strong>ilości</strong> na magazynie
+            <strong> {{ 'PesticideAction.NoQuantity' | translate }} </strong> 
           </mat-error>
         </mat-form-field>
       </td>
