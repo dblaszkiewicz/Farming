@@ -55,6 +55,8 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 
             builder.HasIndex(x => x.Login).IsUnique();
 
+            builder.Property(x => x.Version).IsConcurrencyToken();
+
             builder.ToTable("Users");
         }
     }

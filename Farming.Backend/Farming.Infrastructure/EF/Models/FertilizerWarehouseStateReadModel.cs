@@ -7,9 +7,11 @@ namespace Farming.Infrastructure.EF.Models
         public Guid FertilizerId { get; set; }
         public Guid FertilizerWarehouseId { get; set; }
         public decimal Quantity { get; set; }
+        public int Version { get; set; }
 
         public FertilizerReadModel Fertilizer { get; }
         public FertilizerWarehouseReadModel FertilizerWarehouse { get; }
+
         public ICollection<FertilizerWarehouseDeliveryReadModel> FertilizerWarehouseDeliveries { get; }
     }
 }

@@ -4,8 +4,8 @@ namespace Farming.Infrastructure.EF.Models
     internal class FertilizerWarehouseReadModel : BaseTenantReadModel
     {
         public Guid Id { get; set; }
-        public int Version { get; set; }
         public string Name { get; set; }
+        public int Version { get; set; }
 
         public ICollection<FertilizerWarehouseStateReadModel> States { get; set; }
 

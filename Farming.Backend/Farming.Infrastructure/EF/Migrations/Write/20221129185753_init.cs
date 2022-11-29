@@ -1,11 +1,12 @@
 ﻿using System;
+using Farming.Domain.Consts;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Farming.Infrastructure.EF.Migrations.Read
+namespace Farming.Infrastructure.EF.Migrations.Write
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +29,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,12 +43,12 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
                     LandClass = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<LandStatusEnum>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Area = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,8 +75,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,9 +89,9 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
+                    RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Unit = table.Column<string>(type: "text", nullable: false),
-                    RequiredAmountPerHectare = table.Column<decimal>(type: "numeric", nullable: false),
                     TenantId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -104,8 +105,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,8 +120,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     StartDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,8 +139,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Active = table.Column<bool>(type: "boolean", nullable: false),
                     IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,8 +199,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     PlantId = table.Column<Guid>(type: "uuid", nullable: false),
                     PlantWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,8 +226,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     LandId = table.Column<Guid>(type: "uuid", nullable: false),
                     SeasonId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,7 +254,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     FertilizerId = table.Column<Guid>(type: "uuid", nullable: false),
                     FertilizerWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -304,8 +306,8 @@ namespace Farming.Infrastructure.EF.Migrations.Read
                     PesticideId = table.Column<Guid>(type: "uuid", nullable: false),
                     PesticideWarehouseId = table.Column<Guid>(type: "uuid", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
-                    Version = table.Column<int>(type: "integer", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Version = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="EF\Migrations\Write\**" />
     <Compile Remove="Weather\**" />
-    <EmbeddedResource Remove="EF\Migrations\Write\**" />
     <EmbeddedResource Remove="Weather\**" />
-    <None Remove="EF\Migrations\Write\**" />
     <None Remove="Weather\**" />
   </ItemGroup>
 
@@ -32,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EF\Migrations\Write\" />
     <Folder Include="EF\Migrations\Read\" />
   </ItemGroup>
 

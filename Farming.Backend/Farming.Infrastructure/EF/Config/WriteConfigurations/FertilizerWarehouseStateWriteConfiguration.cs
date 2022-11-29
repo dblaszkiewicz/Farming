@@ -51,6 +51,8 @@ namespace Farming.Infrastructure.EF.Config.WriteConfigurations
 
             builder.HasIndex(x => x.TenantId);
 
+            builder.Property(x => x.Version).IsConcurrencyToken();
+
             builder.ToTable("FertilizerWarehouseStates");
         }
     }
