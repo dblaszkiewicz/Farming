@@ -5,10 +5,10 @@
   </button>
 
   <div class="w-100 d-flex justify-content-between">
-    <div class="appHeader" *ngIf="!isAuthorized"> {{ 'Main.Concern' | translate }}</div>
+    <div class="appHeader" *ngIf="!isAuthorized">{{ 'Main.Concern' | translate }}</div>
 
     <div class="appHeader" *ngIf="isAuthorized">
-      {{ 'Main.Welcome' | translate: { user: userName} }}
+      {{ 'Main.Welcome' | translate: { user: userName } }}
       <span><mat-icon class="userAdmin" *ngIf="isAdmin">build</mat-icon></span>
       <span class="userInactive" *ngIf="!isActive"> {{ 'Main.UserInactive' | translate }} </span>
     </div>
@@ -20,8 +20,8 @@
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <img class="logo mat-elevation-z8" src="assets/images/logo_new.png" routerLink="/" />
 
-    <h4 class="name">{{ 'Main.Title' | translate }} </h4>
-    <p class="designation"> {{ 'Main.Version' | translate: { version: version} }}</p>
+    <h4 class="name">{{ 'Main.Title' | translate }}</h4>
+    <p class="designation">{{ 'Main.Version' | translate: { version: version } }}</p>
     <mat-divider></mat-divider>
 
     <button *ngIf="!isAuthorized" mat-button class="menu-button" routerLink="/login">
@@ -69,7 +69,7 @@
 
     <button mat-button class="menu-button" routerLink="/contact">
       <mat-icon>contact_support</mat-icon>
-      <span style="color: rgb(68, 0, 255) "> {{ 'Main.Seed' | translate | uppercase }} </span>
+      <span style="color: rgb(68, 0, 255)"> {{ 'Main.Seed' | translate | uppercase }} </span>
     </button>
   </mat-sidenav>
   <mat-sidenav-content>

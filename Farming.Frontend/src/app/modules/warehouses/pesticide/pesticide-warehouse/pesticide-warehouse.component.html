@@ -57,7 +57,9 @@
     </ng-container>
 
     <ng-container matColumnDef="requiredAmountPerHectare">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PesticideWarehouse.RequiredPerHectare' | translate }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ 'PesticideWarehouse.RequiredPerHectare' | translate }}
+      </th>
       <td mat-cell *matCellDef="let element">{{ element.requiredAmountPerHectare.toFixed(2) }} ml</td>
     </ng-container>
 

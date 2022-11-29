@@ -4,12 +4,13 @@
   </button>
 
   <mat-card *ngIf="warehouseId && plantId; else onlyWarehouse" class="w-100 mb-2">
-    {{ 'PlantDelivery.History' | translate }} <strong>{{ plantName }} </strong> na magazyn: <strong> {{ warehouseName }} </strong>
+    {{ 'PlantDelivery.History' | translate }} <strong>{{ plantName }} </strong> na magazyn:
+    <strong> {{ warehouseName }} </strong>
   </mat-card>
 
   <ng-template #onlyWarehouse>
     <mat-card class="w-100 mb-2">
-     {{ 'PlantDelivery.HistoryPerWarehouse' | translate }} <strong> {{ warehouseName }}</strong>
+      {{ 'PlantDelivery.HistoryPerWarehouse' | translate }} <strong> {{ warehouseName }}</strong>
     </mat-card>
   </ng-template>
 </div>

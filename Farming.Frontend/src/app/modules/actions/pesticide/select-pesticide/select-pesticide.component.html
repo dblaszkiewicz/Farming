@@ -24,7 +24,9 @@
 
 <div *ngIf="selectedPesticide">
   <div class="section-information">
-    <h3><strong>{{ 'PesticideAction.PesticideInfo' | translate }}</strong></h3>
+    <h3>
+      <strong>{{ 'PesticideAction.PesticideInfo' | translate }}</strong>
+    </h3>
     <div class="section-details">
       <p>
         <strong>{{ 'PesticideAction.Type' | translate }}</strong> {{ selectedPesticide.pesticideTypeName }}
@@ -34,22 +36,32 @@
         <strong>{{ 'PesticideAction.Name' | translate }}</strong> {{ selectedPesticide.pesticideName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedPesticide.pesticideDescription }}">info</mat-icon>
       </p>
-      <p><strong>{{ 'PesticideAction.RequiredPerHectare' | translate }}</strong> {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml</p>
-    </div>
-  </div>
-  <br />
-  <div class="section-information">
-    <h3><strong>{{ 'PesticideAction.WarehouseStock' | translate }}</strong></h3>
-    <div class="section-details">
-      <p><strong>{{ 'PesticideAction.Quantity' | translate }}</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml</p>
-      <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
-        <strong>{{ 'PesticideAction.AvailableFor' | translate }}</strong> {{ selectedPesticide.enoughForArea.toFixed(2) }} ha
+      <p>
+        <strong>{{ 'PesticideAction.RequiredPerHectare' | translate }}</strong>
+        {{ selectedPesticide.requiredAmountPerHectare.toFixed(2) }} ml
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>{{ 'PesticideAction.QuantityRealization' | translate }}</strong></h3>
+    <h3>
+      <strong>{{ 'PesticideAction.WarehouseStock' | translate }}</strong>
+    </h3>
+    <div class="section-details">
+      <p>
+        <strong>{{ 'PesticideAction.Quantity' | translate }}</strong> {{ selectedPesticide.quantity.toFixed(2) }} ml
+      </p>
+      <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
+        <strong>{{ 'PesticideAction.AvailableFor' | translate }}</strong>
+        {{ selectedPesticide.enoughForArea.toFixed(2) }} ha
+      </p>
+    </div>
+  </div>
+  <br />
+  <div class="section-information">
+    <h3>
+      <strong>{{ 'PesticideAction.QuantityRealization' | translate }}</strong>
+    </h3>
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -57,12 +69,14 @@
           <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
           <mat-hint align="end">{{ quantityFormControl.value }} ml / {{ selectedPesticide.quantity }} ml </mat-hint>
 
-          <mat-error *ngIf="quantityFormControl.hasError('required')"><strong>{{ 'PesticideAction.QuantityRequired' | translate }}</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('required')"
+            ><strong>{{ 'PesticideAction.QuantityRequired' | translate }}</strong>
+          </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
             {{ 'PesticideAction.RequiredMin' | translate }}<strong> {{ minQuantityForArea }}</strong> ml
           </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('max')">
-            <strong> {{ 'PesticideAction.NoQuantity' | translate }} </strong> 
+            <strong> {{ 'PesticideAction.NoQuantity' | translate }} </strong>
           </mat-error>
         </mat-form-field>
       </td>

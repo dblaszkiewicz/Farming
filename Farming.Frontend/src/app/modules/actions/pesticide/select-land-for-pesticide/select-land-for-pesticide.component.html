@@ -10,12 +10,25 @@
 </div>
 
 <div class="section-information" *ngIf="selectedLand">
-  <h3><strong>{{ 'PesticideAction.LandDetails' | translate }}</strong></h3>
+  <h3>
+    <strong>{{ 'PesticideAction.LandDetails' | translate }}</strong>
+  </h3>
   <div class="section-details">
-    <p><strong>{{ 'PesticideAction.Name' | translate }}</strong> {{ selectedLand.name }}</p>
-    <p><strong>{{ 'PesticideAction.Class' | translate }}</strong> {{ selectedLand.landClass }}</p>
-    <p><strong>{{ 'PesticideAction.Area' | translate }}</strong> {{ selectedLand.area }} ha</p>
-    <p><strong>{{ 'PesticideAction.State' | translate }}</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}</p>
-    <p *ngIf="selectedLand.isPlanted"><strong>{{ 'PesticideAction.Plant' | translate }}</strong> {{ selectedLand.planted.plantName }}</p>
+    <p>
+      <strong>{{ 'PesticideAction.Name' | translate }}</strong> {{ selectedLand.name }}
+    </p>
+    <p>
+      <strong>{{ 'PesticideAction.Class' | translate }}</strong> {{ selectedLand.landClass }}
+    </p>
+    <p>
+      <strong>{{ 'PesticideAction.Area' | translate }}</strong> {{ selectedLand.area }} ha
+    </p>
+    <p>
+      <strong>{{ 'PesticideAction.State' | translate }}</strong>
+      {{ landStatusHelper.getStatusName(selectedLand.status) }}
+    </p>
+    <p *ngIf="selectedLand.isPlanted">
+      <strong>{{ 'PesticideAction.Plant' | translate }}</strong> {{ selectedLand.planted.plantName }}
+    </p>
   </div>
 </div>

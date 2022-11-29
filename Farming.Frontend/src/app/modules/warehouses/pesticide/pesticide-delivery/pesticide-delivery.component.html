@@ -4,7 +4,8 @@
   </button>
 
   <mat-card *ngIf="warehouseId && pesticideId; else onlyWarehouse" class="w-100 mb-2">
-    {{ 'PesticideDelivery.History' | translate }}  <strong>{{ pesticideName }} </strong> na magazyn: <strong> {{ warehouseName }} </strong>
+    {{ 'PesticideDelivery.History' | translate }} <strong>{{ pesticideName }} </strong> na magazyn:
+    <strong> {{ warehouseName }} </strong>
   </mat-card>
 
   <ng-template #onlyWarehouse>

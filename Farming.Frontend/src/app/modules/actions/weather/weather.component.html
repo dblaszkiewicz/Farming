@@ -1,6 +1,8 @@
 <div class="row h-100 w-100">
   <div class="col-6 col-sm-3 first-row">
-    <mat-card class="text-center h3 action-header"><strong> {{ 'Weather.Header' | translate }}</strong></mat-card>
+    <mat-card class="text-center h3 action-header"
+      ><strong> {{ 'Weather.Header' | translate }}</strong></mat-card
+    >
     <div class="d-flex justify-content-between">
       <div>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -38,19 +40,27 @@
 
       <div class="d-flex justify-content-between">
         <div>
-          <p><strong>{{ 'Weather.Temperature' | translate }} </strong> {{ data.currentConditions.temp.c }} &deg;C</p>
+          <p>
+            <strong>{{ 'Weather.Temperature' | translate }} </strong> {{ data.currentConditions.temp.c }} &deg;C
+          </p>
         </div>
         <div>
-          <p><strong> {{ 'Weather.Precipitation' | translate }} </strong>{{ data.currentConditions.precip }}</p>
+          <p>
+            <strong> {{ 'Weather.Precipitation' | translate }} </strong>{{ data.currentConditions.precip }}
+          </p>
         </div>
       </div>
 
       <div class="d-flex justify-content-between">
         <div>
-          <p><strong>{{ 'Weather.Wind' | translate }} </strong>{{ data.currentConditions.wind.km }} km/h</p>
+          <p>
+            <strong>{{ 'Weather.Wind' | translate }} </strong>{{ data.currentConditions.wind.km }} km/h
+          </p>
         </div>
         <div>
-          <p><strong> {{ 'Weather.Humidity' | translate }} </strong> {{ data.currentConditions.humidity }}</p>
+          <p>
+            <strong> {{ 'Weather.Humidity' | translate }} </strong> {{ data.currentConditions.humidity }}
+          </p>
         </div>
       </div>
     </div>

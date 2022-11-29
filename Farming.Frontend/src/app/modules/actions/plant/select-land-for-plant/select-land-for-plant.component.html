@@ -10,14 +10,24 @@
 </div>
 
 <div class="section-information" *ngIf="selectedLand">
-  <h3><strong>{{ 'PlantAction.LandDetails' | translate }}</strong></h3>
+  <h3>
+    <strong>{{ 'PlantAction.LandDetails' | translate }}</strong>
+  </h3>
   <div class="section-details">
-    <p><strong>{{ 'PlantAction.Name' | translate }}</strong> {{ selectedLand.name }}</p>
-    <p><strong>{{ 'PlantAction.Class' | translate }}</strong> {{ selectedLand.landClass }}</p>
-    <p><strong>{{ 'PlantAction.Area' | translate }}</strong> {{ selectedLand.area }} ha</p>
+    <p>
+      <strong>{{ 'PlantAction.Name' | translate }}</strong> {{ selectedLand.name }}
+    </p>
+    <p>
+      <strong>{{ 'PlantAction.Class' | translate }}</strong> {{ selectedLand.landClass }}
+    </p>
+    <p>
+      <strong>{{ 'PlantAction.Area' | translate }}</strong> {{ selectedLand.area }} ha
+    </p>
     <p [ngClass]="{ isPlanted: selectedLand.isPlanted }">
       <strong>{{ 'PlantAction.State' | translate }}</strong> {{ landStatusHelper.getStatusName(selectedLand.status) }}
     </p>
-    <p *ngIf="selectedLand.isPlanted"><strong>{{ 'PlantAction.Plant' | translate }}</strong> {{ selectedLand.planted.plantName }}</p>
+    <p *ngIf="selectedLand.isPlanted">
+      <strong>{{ 'PlantAction.Plant' | translate }}</strong> {{ selectedLand.planted.plantName }}
+    </p>
   </div>
 </div>

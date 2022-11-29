@@ -17,7 +17,7 @@
             <mat-label> {{ 'Login.Password' | translate }} </mat-label>
             <input formControlName="password" type="password" matInput />
             <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
-             {{ 'Login.EnterPassword' | translate }}
+              {{ 'Login.EnterPassword' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -30,9 +30,9 @@
           (click)="logIn()"
           cdkFocusInitial
         >
-         {{ 'Login.SignIn' | translate }}
+          {{ 'Login.SignIn' | translate }}
         </button>
-        <button class="mt-3" routerLink="/register"> {{ 'Login.Register' | translate | uppercase }} </button>
+        <button class="mt-3" routerLink="/register">{{ 'Login.Register' | translate | uppercase }}</button>
       </mat-card>
     </div>
   </form>

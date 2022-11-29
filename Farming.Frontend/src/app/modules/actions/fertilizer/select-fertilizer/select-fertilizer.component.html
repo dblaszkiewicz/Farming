@@ -24,7 +24,9 @@
 
 <div *ngIf="selectedFertilizer">
   <div class="section-information">
-    <h3><strong>{{ 'FertilizerAction.FertilizerInfo' | translate }} </strong></h3>
+    <h3>
+      <strong>{{ 'FertilizerAction.FertilizerInfo' | translate }} </strong>
+    </h3>
     <div class="section-details">
       <p>
         <strong>{{ 'FertilizerAction.Type' | translate }} </strong> {{ selectedFertilizer.fertilizerTypeName }}
@@ -37,22 +39,32 @@
         <mat-icon class="description-icon" matTooltip="{{ selectedFertilizer.fertilizerDescription }}">info</mat-icon>
       </p>
 
-      <p><strong>{{ 'FertilizerAction.RequiredPerHectare' | translate }} </strong> {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg</p>
-    </div>
-  </div>
-  <br />
-  <div class="section-information">
-    <h3><strong>{{ 'FertilizerAction.WarehouseStock' | translate }}</strong></h3>
-    <div class="section-details">
-      <p><strong>{{ 'FertilizerAction.Quantity' | translate }} </strong> {{ selectedFertilizer.quantity.toFixed(2) }} kg</p>
-      <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
-        <strong>{{ 'FertilizerAction.AvailableFor' | translate }} </strong> {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha
+      <p>
+        <strong>{{ 'FertilizerAction.RequiredPerHectare' | translate }} </strong>
+        {{ selectedFertilizer.requiredAmountPerHectare.toFixed(2) }} kg
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>{{ 'FertilizerAction.QuantityRealization' | translate }} </strong></h3>
+    <h3>
+      <strong>{{ 'FertilizerAction.WarehouseStock' | translate }}</strong>
+    </h3>
+    <div class="section-details">
+      <p>
+        <strong>{{ 'FertilizerAction.Quantity' | translate }} </strong> {{ selectedFertilizer.quantity.toFixed(2) }} kg
+      </p>
+      <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
+        <strong>{{ 'FertilizerAction.AvailableFor' | translate }} </strong>
+        {{ selectedFertilizer.enoughForArea.toFixed(2) }} ha
+      </p>
+    </div>
+  </div>
+  <br />
+  <div class="section-information">
+    <h3>
+      <strong>{{ 'FertilizerAction.QuantityRealization' | translate }} </strong>
+    </h3>
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -60,7 +72,9 @@
           <input matInput #postalCode maxlength="5" [formControl]="quantityFormControl" />
           <mat-hint align="end">{{ quantityFormControl.value }} kg / {{ selectedFertilizer.quantity }} kg </mat-hint>
 
-          <mat-error *ngIf="quantityFormControl.hasError('required')"> <strong>{{ 'FertilizerAction.QuantityRequired' | translate }}</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('required')">
+            <strong>{{ 'FertilizerAction.QuantityRequired' | translate }}</strong>
+          </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
             {{ 'FertilizerAction.RequiredMin' | translate }} <strong> {{ minQuantityForArea }}</strong> kg
           </mat-error>

@@ -113,7 +113,7 @@
     "EnterPassword": "Wprowadź hasło",
     "SignIn": "Zaloguj się",
     "Register": "Rejestracja"
-  }, 
+  },
   "Main": {
     "Concern": "Agriculture Solutions",
     "Welcome": "Witaj, {{ user }}!",

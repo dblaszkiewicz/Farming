@@ -1,9 +1,13 @@
 <div class="confirm">
-  <h1 mat-dialog-title class="text-center"> {{ 'ConfirmDialog.AreYouSure' | translate }}</h1>
+  <h1 mat-dialog-title class="text-center">{{ 'ConfirmDialog.AreYouSure' | translate }}</h1>
 
   <div mat-dialog-actions class="actions d-flex justify-content-between">
-    <button mat-flat-button color="yes" [mat-dialog-close]="true" cdkFocusInitial>{{ 'ConfirmDialog.Yes' | translate }}</button>
+    <button mat-flat-button color="yes" [mat-dialog-close]="true" cdkFocusInitial>
+      {{ 'ConfirmDialog.Yes' | translate }}
+    </button>
 
-    <button mat-flat-button color="no" [mat-dialog-close]="false" cdkFocusInitial>{{ 'ConfirmDialog.No' | translate }}</button>
+    <button mat-flat-button color="no" [mat-dialog-close]="false" cdkFocusInitial>
+      {{ 'ConfirmDialog.No' | translate }}
+    </button>
   </div>
 </div>

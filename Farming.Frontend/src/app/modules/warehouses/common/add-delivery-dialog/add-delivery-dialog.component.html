@@ -6,9 +6,15 @@
 
 <form [formGroup]="form">
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label *ngIf="data.objectType === objectTypeEnum.PlantWarehouse">{{ 'AddDelivery.Quantity' | translate }} ({{ data.unitName }})</mat-label>
-    <mat-label *ngIf="data.objectType === objectTypeEnum.FertilizerWarehouse">{{ 'AddDelivery.QuantityKg' | translate }}</mat-label>
-    <mat-label *ngIf="data.objectType === objectTypeEnum.PesticideWarehouse">{{ 'AddDelivery.QuantityMl' | translate }}</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.PlantWarehouse"
+      >{{ 'AddDelivery.Quantity' | translate }} ({{ data.unitName }})</mat-label
+    >
+    <mat-label *ngIf="data.objectType === objectTypeEnum.FertilizerWarehouse">{{
+      'AddDelivery.QuantityKg' | translate
+    }}</mat-label>
+    <mat-label *ngIf="data.objectType === objectTypeEnum.PesticideWarehouse">{{
+      'AddDelivery.QuantityMl' | translate
+    }}</mat-label>
     <input formControlName="quantity" type="number" min="1" matInput />
   </mat-form-field>
 
@@ -33,7 +39,9 @@
 
 <div class="actions d-flex justify-content-center" mat-dialog-actions>
   <button mat-flat-button color="add" [disabled]="form.invalid" [mat-dialog-close]="addDelivery()" cdkFocusInitial>
-    {{ 'AddDelivery.AddDelivery' | translate }} 
+    {{ 'AddDelivery.AddDelivery' | translate }}
   </button>
-  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>{{ 'AddDelivery.Cancel' | translate }}</button>
+  <button mat-flat-button color="cancel" [mat-dialog-close] cdkFocusInitial>
+    {{ 'AddDelivery.Cancel' | translate }}
+  </button>
 </div>

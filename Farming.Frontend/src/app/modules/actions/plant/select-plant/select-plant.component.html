@@ -24,23 +24,31 @@
 
 <div *ngIf="selectedPlant">
   <div class="section-information">
-    <h3><strong>{{ 'PlantAction.PlantInfo' | translate }} </strong></h3>
+    <h3>
+      <strong>{{ 'PlantAction.PlantInfo' | translate }} </strong>
+    </h3>
     <div class="section-details">
       <p>
         <strong>{{ 'PlantAction.Name' | translate }}</strong> {{ selectedPlant.plantName }}
         <mat-icon class="description-icon" matTooltip="{{ selectedPlant.plantDescription }}">info</mat-icon>
       </p>
       <p>
-        <strong>{{ 'PlantAction.RequiredPerHectare' | translate }}</strong> {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }}
+        <strong>{{ 'PlantAction.RequiredPerHectare' | translate }}</strong>
+        {{ selectedPlant.requiredAmountPerHectare.toFixed(2) }}
         {{ selectedPlant.unit }}
       </p>
     </div>
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>{{ 'PlantAction.WarehouseStock' | translate }}</strong></h3>
+    <h3>
+      <strong>{{ 'PlantAction.WarehouseStock' | translate }}</strong>
+    </h3>
     <div class="section-details">
-      <p><strong>{{ 'PlantAction.Quantity' | translate }}</strong> {{ selectedPlant.quantity.toFixed(2) }} {{ selectedPlant.unit }}</p>
+      <p>
+        <strong>{{ 'PlantAction.Quantity' | translate }}</strong> {{ selectedPlant.quantity.toFixed(2) }}
+        {{ selectedPlant.unit }}
+      </p>
       <p [ngClass]="{ 'invalid-quantity': !isEnoughQuantity }">
         <strong>{{ 'PlantAction.AvailableFor' | translate }}</strong> {{ selectedPlant.enoughForArea.toFixed(2) }} ha
       </p>
@@ -48,7 +56,9 @@
   </div>
   <br />
   <div class="section-information">
-    <h3><strong>{{ 'PlantAction.QuantityRealization' | translate }}</strong></h3>
+    <h3>
+      <strong>{{ 'PlantAction.QuantityRealization' | translate }}</strong>
+    </h3>
     <div class="section-details">
       <td>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -59,12 +69,15 @@
             {{ selectedPlant.unit }}
           </mat-hint>
 
-          <mat-error *ngIf="quantityFormControl.hasError('required')"> <strong>{{ 'PlantAction.' | translate }}</strong> </mat-error>
+          <mat-error *ngIf="quantityFormControl.hasError('required')">
+            <strong>{{ 'PlantAction.' | translate }}</strong>
+          </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('min')">
-            {{ 'PlantAction.RequiredMin' | translate }} <strong> {{ minQuantityForArea }}</strong> {{ selectedPlant.unit }}
+            {{ 'PlantAction.RequiredMin' | translate }} <strong> {{ minQuantityForArea }}</strong>
+            {{ selectedPlant.unit }}
           </mat-error>
           <mat-error *ngIf="quantityFormControl.hasError('max')">
-            <strong>{{ 'PlantAction.NoQuantity' | translate }} </strong> 
+            <strong>{{ 'PlantAction.NoQuantity' | translate }} </strong>
           </mat-error>
         </mat-form-field>
       </td>

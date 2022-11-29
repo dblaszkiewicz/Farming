@@ -5,7 +5,7 @@
 <div class="w-100">
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Users.Name' | translate }} </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Users.Name' | translate }}</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 

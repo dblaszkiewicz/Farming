@@ -1,4 +1,4 @@
-<h2 mat-dialog-title> {{ 'AddUser.Header' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'AddUser.Header' | translate }}</h2>
 
 <form [formGroup]="addUserForm">
   <div class="firstRow d-flex justify-content-between">
@@ -6,8 +6,12 @@
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label> {{ 'AddUser.Login' | translate }} </mat-label>
         <input formControlName="login" type="text" matInput />
-        <mat-error *ngIf="addUserForm.get('login')?.hasError('required')"> {{ 'AddUser.LoginRequired' | translate }}</mat-error>
-        <mat-error *ngIf="addUserForm.get('login')?.hasError('minlength')"> {{ 'AddUser.LoginTooShoort' | translate }}</mat-error>
+        <mat-error *ngIf="addUserForm.get('login')?.hasError('required')">
+          {{ 'AddUser.LoginRequired' | translate }}</mat-error
+        >
+        <mat-error *ngIf="addUserForm.get('login')?.hasError('minlength')">
+          {{ 'AddUser.LoginTooShoort' | translate }}</mat-error
+        >
       </mat-form-field>
     </div>
 
@@ -15,7 +19,9 @@
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label> {{ 'AddUser.Name' | translate }} </mat-label>
         <input formControlName="name" type="text" matInput />
-        <mat-error *ngIf="addUserForm.get('name')?.hasError('required')"> {{ 'AddUser.NameRequired' | translate }}</mat-error>
+        <mat-error *ngIf="addUserForm.get('name')?.hasError('required')">
+          {{ 'AddUser.NameRequired' | translate }}</mat-error
+        >
       </mat-form-field>
     </div>
   </div>
@@ -25,9 +31,15 @@
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label> {{ 'AddUser.Password' | translate }} </mat-label>
         <input formControlName="password" type="password" matInput />
-        <mat-error *ngIf="addUserForm.get('password')?.hasError('required')"> {{ 'AddUser.PasswordRequired' | translate }}</mat-error>
-        <mat-error *ngIf="addUserForm.get('password')?.hasError('minlength')"> {{ 'AddUser.PasswordTooShort' | translate }}</mat-error>
-        <mat-error *ngIf="addUserForm.get('password')?.hasError('tooEasy')"> {{ 'AddUser.PasswordTooSimple' | translate }}</mat-error>
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('required')">
+          {{ 'AddUser.PasswordRequired' | translate }}</mat-error
+        >
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('minlength')">
+          {{ 'AddUser.PasswordTooShort' | translate }}</mat-error
+        >
+        <mat-error *ngIf="addUserForm.get('password')?.hasError('tooEasy')">
+          {{ 'AddUser.PasswordTooSimple' | translate }}</mat-error
+        >
       </mat-form-field>
     </div>
 
