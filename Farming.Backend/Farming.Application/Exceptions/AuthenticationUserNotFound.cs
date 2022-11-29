@@ -2,9 +2,9 @@
 
 namespace Farming.Application.Exceptions
 {
-    public class AuthenticationUserNotFound : FarmingException
+    public class AuthenticationUserNotFoundException : FarmingException
     {
-        public AuthenticationUserNotFound() : base("User with provided credentials do not exist")
+        public AuthenticationUserNotFoundException() : base("User with provided credentials do not exist")
         {
         }
     }

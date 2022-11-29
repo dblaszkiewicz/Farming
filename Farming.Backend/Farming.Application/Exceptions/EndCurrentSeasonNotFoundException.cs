@@ -2,9 +2,9 @@
 
 namespace Farming.Application.Exceptions
 {
-    public class EndCurrentSeasonNotFoundException : FarmingException
+    public class CurrentSeasonNotFoundException : FarmingException
     {
-        public EndCurrentSeasonNotFoundException() : base("Season cannot be ended, there is no active season")
+        public CurrentSeasonNotFoundException() : base("Season cannot be ended, there is no active season")
         {
         }
     }

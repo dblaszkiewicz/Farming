@@ -23,8 +23,13 @@ export class SnackbarService {
     this.openSnackBar(translatedMessage, 'fail-snackbar');
   }
 
-  public async showFailApi(message: string) {
-    const translatedMessage = await this.translateMessage(message);
+  public async showFailValidationMessage(message: string) {
+    const translatedMessage = await this.translateMessage(`ValidationMessageError.${message}`);
+    this.openSnackBar(translatedMessage, 'fail-snackbar');
+  }
+
+  public async showFailErrorName(message: string) {
+    const translatedMessage = await this.translateMessage(`Error.${message}`);
     this.openSnackBar(translatedMessage, 'fail-snackbar');
   }
 

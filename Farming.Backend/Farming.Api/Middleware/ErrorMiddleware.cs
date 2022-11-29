@@ -1,5 +1,7 @@
 ﻿using Farming.Api.Auth;
+using Farming.Application.Exceptions;
 using Farming.Shared.Abstractions.Exceptions;
+using FluentValidation;
 using Newtonsoft.Json;
 using NLog;
 using System.Net;
@@ -45,10 +47,18 @@ namespace Farming.Api.Middleware
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 }
 
+                var commandValidationException = false;
+
+                if (farmingException is ValidateCommandException)
+                {
+                    commandValidationException = true;
+                }
+
                 return context.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
                     message = farmingException.Message,
-                    name = farmingException.GetType().Name
+                    name = farmingException.GetType().Name,
+                    commandValidationException = commandValidationException
                 }));
             }
             else
@@ -59,7 +69,7 @@ namespace Farming.Api.Middleware
                 return context.Response.WriteAsync(JsonConvert.SerializeObject(new
                 {
                     message = exception.Message,
-                    exception = exception.GetType().Name
+                    exception = exception.GetType().Name,
                 }));
             }
         }

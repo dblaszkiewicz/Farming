@@ -31,7 +31,7 @@ namespace Farming.Application.Commands.Handlers
 
             if (currentSeason is null)
             {
-                throw new EndCurrentSeasonNotFoundException();
+                throw new CurrentSeasonNotFoundException();
             }
 
             currentSeason.EndSeason();

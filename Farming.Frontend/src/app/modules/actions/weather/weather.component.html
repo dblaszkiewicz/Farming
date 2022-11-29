@@ -24,7 +24,9 @@
       <div class="d-flex">
         <div class="main-left">
           <p>
-            <strong> {{ data.currentConditions.day | translate }}, {{ data.currentConditions.hour }} </strong>
+            <strong>
+              {{ 'Weather.' + data.currentConditions.day | translate }}, {{ data.currentConditions.hour }}
+            </strong>
           </p>
         </div>
         <div class="main-center">
@@ -32,11 +34,11 @@
         </div>
         <div class="main-right">
           <p>
-            <strong>{{ data.location }}, {{ data.region | translate }}</strong>
+            <strong>{{ data.region }}</strong>
           </p>
         </div>
       </div>
-      <p class="text-center">{{ data.currentConditions.comment | translate }}</p>
+      <p class="text-center">{{ 'Weather.' + data.currentConditions.comment | translate }}</p>
 
       <div class="d-flex justify-content-between">
         <div>
@@ -70,7 +72,7 @@
     <div class="row h-100">
       <div class="col-6 col-sm-3 next-day" *ngFor="let weather of nextDays">
         <p class="text-center">
-          <strong>{{ weather.day | translate }}</strong>
+          <strong>{{ 'Weather.' + weather.day | translate }}</strong>
         </p>
         <div class="text-center">
           <img [src]="weather.iconURL" />
@@ -80,7 +82,7 @@
           <span class="minTemp">&nbsp;{{ weather.min_temp.c }} &deg;C&nbsp;</span>
         </p>
 
-        <p class="text-center">{{ weather.comment | translate }}</p>
+        <p class="text-center">{{ 'Weather.' + weather.comment | translate }}</p>
       </div>
     </div>
   </div>

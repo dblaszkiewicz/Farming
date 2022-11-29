@@ -47,7 +47,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.spinnerStore.stopSpinner();
 
         if (error.status === 400) {
-          this.snackbarService.showFailApi(error.error.message);
+          if (error.error.commandValidationException) {
+            this.snackbarService.showFailValidationMessage(error.error.name);
+          } else {
+            this.snackbarService.showFailErrorName(error.error.name);
+          }
           return throwError(() => error.error.name);
         } else {
           if (error.status === HttpStatusCode.Unauthorized) {

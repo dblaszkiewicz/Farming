@@ -32,7 +32,7 @@ namespace Farming.Application.Queries.Auth
 
             if (user is null)
             {
-                throw new AuthenticationUserNotFound();
+                throw new AuthenticationUserNotFoundException();
             }
 
             var token = this._authenticateService.Authenticate(user);
