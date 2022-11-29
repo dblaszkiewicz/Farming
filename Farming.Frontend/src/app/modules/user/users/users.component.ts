@@ -58,8 +58,8 @@ export class UsersComponent implements OnInit {
   public async changeActiveMode(userId: string) {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.userService.changeActive(userId))
-      .then(() => {
-        this.snackbarService.showSuccess('Zmieniono aktywność');
+      .then(async () => {
+        await this.snackbarService.showSuccess('Users.ChangeActivity');
       })
       .catch(async () => {
         this.spinnerStore.startSpinner();
@@ -72,8 +72,8 @@ export class UsersComponent implements OnInit {
   public async changeAdminMode(userId: string) {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.userService.changeRole(userId))
-      .then(() => {
-        this.snackbarService.showSuccess('Zmieniono uprawnienia');
+      .then(async () => {
+        await this.snackbarService.showSuccess('Users.ChangeRole');
       })
       .catch(async () => {
         this.spinnerStore.startSpinner();

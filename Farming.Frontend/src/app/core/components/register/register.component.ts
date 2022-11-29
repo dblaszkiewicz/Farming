@@ -14,7 +14,7 @@ import { SpinnerStore } from '../../stores/spinner.store';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
@@ -26,8 +26,7 @@ export class RegisterComponent implements OnInit {
     private observer: BreakpointObserver,
     private userService: UserService,
     private snackbarService: SnackbarService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.setForm();
@@ -57,7 +56,7 @@ export class RegisterComponent implements OnInit {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.userService.register(userToAdd));
     this.spinnerStore.stopSpinner();
-    this.snackbarService.showSuccess('Zarejestrowano pomyślnie');
+    await this.snackbarService.showSuccess('Register.Success');
 
     this.router.navigateByUrl('');
   }
@@ -78,5 +77,4 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
 }

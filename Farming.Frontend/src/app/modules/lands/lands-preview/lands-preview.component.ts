@@ -72,7 +72,7 @@ export class LandsPreviewComponent implements OnInit {
         data: actions,
       });
     } else {
-      this.snackbarService.showInfo('Brak wpisów');
+      await this.snackbarService.showInfo('LandsPreview.NoActions');
     }
   }
 
@@ -86,7 +86,7 @@ export class LandsPreviewComponent implements OnInit {
         data: actions,
       });
     } else {
-      this.snackbarService.showInfo('Brak wpisów');
+      await this.snackbarService.showInfo('LandsPreview.NoActions');
     }
   }
 
@@ -100,7 +100,7 @@ export class LandsPreviewComponent implements OnInit {
         data: actions,
       });
     } else {
-      this.snackbarService.showInfo('Brak wpisów');
+      await this.snackbarService.showInfo('LandsPreview.NoActions');
     }
   }
 

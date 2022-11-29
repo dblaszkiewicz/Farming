@@ -85,7 +85,7 @@ export class HarvestActionService {
     } else if (this.selectedNewLandStatus == LandStatusEnum.Destroyed) {
       await lastValueFrom(this.landService.destroy(this.selectedLand?.id!));
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      await this.snackbarService.showFail('General.Error');
     }
     this.spinnerStore.stopSpinner();
   }

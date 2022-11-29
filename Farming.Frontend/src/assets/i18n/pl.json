@@ -144,7 +144,8 @@
     "RepeatRequired": "Powtórzenie jest wymagane",
     "PasswordsNotMatch": "Hasła do siebie nie pasują",
     "Register": "Zarejestruj",
-    "BackToLogin": "Powrót do logowania"
+    "BackToLogin": "Powrót do logowania",
+    "Success": "Zarejestrowano pomyślnie"
   },
   "FertilizerSummary": {
     "Header": "Nawóz",
@@ -157,7 +158,8 @@
     "Header": "Realizacja nawożenia",
     "Back": "Wstecz",
     "Next": "Dalej",
-    "Save": "Zapisz"
+    "Save": "Zapisz",
+    "Success": "Dodano pomyślnie"
   },
   "FertilizerAction": {
     "SelectWarehouse": "Wybierz magazyn nawozów",
@@ -191,7 +193,8 @@
     "Header": "Realizacja zbioru",
     "Back": "Wstecz",
     "Next": "Dalej",
-    "Save": "Zapisz"
+    "Save": "Zapisz",
+    "Success": "Dodano pomyślnie"
   },
   "HarvestAction": {
     "SelectLand": "Wybierz działkę",
@@ -216,7 +219,8 @@
     "Header": "Realizacja pryskania",
     "Back": "Wstecz",
     "Next": "Dalej",
-    "Save": "Zapisz"
+    "Save": "Zapisz",
+    "Success": "Dodano pomyślnie"
   },
   "PesticideAction": {
     "SelectLand": "Wybierz działkę",
@@ -250,7 +254,8 @@
     "Header": "Realizacja siewu",
     "Back": "Wstecz",
     "Next": "Dalej",
-    "Save": "Zapisz"
+    "Save": "Zapisz",
+    "Success": "Dodano pomyślnie"
   },
   "PlantAction": {
     "SelectLand": "Wybierz działkę",
@@ -328,7 +333,8 @@
     "RepeatRequired": "Powtórzenie jest wymagane",
     "PasswordsNotMatch": "Hasła do siebie nie pasują",
     "Add": "Dodaj",
-    "Cancel": "Anuluj"
+    "Cancel": "Anuluj",
+    "Success": "Dodano użytkownika pomyślnie"
   },
   "ChangePassword": {
     "ActualPassword": "Dotychczasowe hasło",
@@ -340,14 +346,17 @@
     "RepeatPassword": "Powtórz hasło",
     "RepeatRequired": "Powtórzenie jest wymagane",
     "PasswordsNotMatch": "Hasła do siebie nie pasują",
-    "Change": "Zmień"
+    "Change": "Zmień",
+    "Success": "Hasło zmienione pomyślnie"
   },
   "Users": {
     "Name": "Imię",
     "Login": "Login",
     "AddDate": "Data dodania",
     "Active": "Aktywny",
-    "Admin": "Administrator"
+    "Admin": "Administrator",
+    "ChangeActivity": "Zmieniono aktywność",
+    "ChangeRole": "Zmieniono uprawnienia"
   },
   "AddDelivery": {
     "Add": "Dodaj:",
@@ -371,7 +380,8 @@
   "FertilizerDelivery": {
     "History": "Historia dostaw nawozu: ",
     "HistoryPerWarehouse": "Historia dostaw na magazyn: ",
-    "AveragePricePerTon": "Średnia cena za tonę: "
+    "AveragePricePerTon": "Średnia cena za tonę: ",
+    "DeliveryAdded": "Pomyślnie dodano dostawę"
   },
   "FertilizerWarehouse": {
     "SelectedWarehouse": "Wybrany magazyn",
@@ -386,7 +396,8 @@
   "PesticideDelivery": {
     "History": "Historia dostaw pestycydu: ",
     "HistoryPerWarehouse": "Historia dostaw na magazyn: ",
-    "AveragePricePerLitre": "Średnia cena za litr: "
+    "AveragePricePerLitre": "Średnia cena za litr: ",
+    "DeliveryAdded": "Pomyślnie dodano dostawę"
   },
   "PesticideWarehouse": {
     "SelectedWarehouse": "Wybrany magazyn",
@@ -400,7 +411,8 @@
   },
   "PlantDelivery": {
     "History": "Historia dostaw nasion: ",
-    "HistoryPerWarehouse": "Historia dostaw na magazyn: "
+    "HistoryPerWarehouse": "Historia dostaw na magazyn: ",
+    "DeliveryAdded": "Pomyślnie dodano dostawę"
   },
   "PlantWarehouse": {
     "SelectedWarehouse": "Wybrany magazyn",
@@ -411,5 +423,9 @@
     "Unit": "Jednostka",
     "Available": "Dostępne",
     "Actions": "Działania"
+  },
+  "Seed": {
+    "Success": "Pomyślnie zaseedowano dane",
+    "Fail": "Dane były już zaseedowane"
   }
 }

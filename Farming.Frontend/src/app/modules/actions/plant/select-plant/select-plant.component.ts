@@ -111,7 +111,7 @@ export class SelectPlantComponent implements RealizationComponentInterface, OnIn
       this.isEnoughQuantity = true;
     } else {
       this.isEnoughQuantity = false;
-      this.snackbarService.showInfo('Brak wystarczającej ilości');
+      this.snackbarService.showInfo('PlantAction.NoEnoughQuantity');
     }
 
     this.quantityFormControl.clearValidators();

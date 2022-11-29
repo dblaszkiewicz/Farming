@@ -55,7 +55,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.userService.changePassword(changePasswordDto));
     this.spinnerStore.stopSpinner();
-    this.snackbarService.showSuccess('Hasło zmienione pomyślnie');
+    await this.snackbarService.showSuccess('ChangePassword.Success');
     this.formDirective.resetForm();
   }
 

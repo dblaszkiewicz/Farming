@@ -61,7 +61,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
     } else if (this.currentPanel === 3) {
       this.submitAction();
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -76,7 +76,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
       this.currentPanel--;
       this.saveButton = false;
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -86,7 +86,7 @@ export class PlantRealizationComponent implements OnInit, AfterViewInit {
     }
 
     await this.plantActionService.processAction();
-    this.snackbarService.showSuccess('Dodano pomyślnie');
+    await this.snackbarService.showSuccess('PlantRealization.Success');
     this.router.navigateByUrl(`/`);
   }
 

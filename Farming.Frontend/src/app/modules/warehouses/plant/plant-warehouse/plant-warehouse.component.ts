@@ -125,7 +125,7 @@ export class PlantWarehouseComponent implements OnInit {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.plantWarehouseService.addDelivery(addDeliveryDto));
     await this.getWarehouseStates();
-    this.snackbarService.showSuccess('Pomyślnie dodano dostawę');
+    await this.snackbarService.showSuccess('PlantDelivery.DeliveryAdded');
     this.spinnerStore.stopSpinner();
   }
 

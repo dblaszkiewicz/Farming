@@ -32,7 +32,7 @@ export class SelectLandForPlantComponent implements RealizationComponentInterfac
 
       if (land.isPlanted) {
         this.plantActionService.setCanGoNext(false);
-        this.snackbarService.showInfo('Działka jest już zasiana');
+        this.snackbarService.showInfo('PlantAction.AlreadyPlanted');
       } else {
         this.plantActionService.setCanGoNext(true);
       }

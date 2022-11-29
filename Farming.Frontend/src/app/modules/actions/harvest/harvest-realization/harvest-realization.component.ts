@@ -56,7 +56,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
     } else if (this.currentPanel === 2) {
       this.submitAction();
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -68,7 +68,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
       this.currentPanel--;
       this.saveButton = false;
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -78,7 +78,7 @@ export class HarvestRealizationComponent implements OnInit, AfterViewInit {
     }
 
     await this.harvestActionService.processAction();
-    this.snackbarService.showSuccess('Dodano pomyślnie');
+    await this.snackbarService.showSuccess('HarvestRealization.Success');
     this.router.navigateByUrl(`/`);
   }
 

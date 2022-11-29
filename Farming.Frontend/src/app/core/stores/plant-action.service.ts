@@ -74,7 +74,7 @@ export class PlantActionService {
       this.canGoToNextPanel.next(false);
     } else if (land.isPlanted) {
       this.canGoToNextPanel.next(false);
-      this.snackbarService.showInfo('Działka jest już zasiana');
+      this.snackbarService.showInfo('PlantAction.AlreadyPlanted');
     } else {
       this.canGoToNextPanel.next(true);
     }
@@ -129,7 +129,7 @@ export class PlantActionService {
     );
 
     if (this.plantStates.length === 0) {
-      this.snackbarService.showInfo('Brak nasion');
+      this.snackbarService.showInfo('PlantAction.NoPlant');
     }
 
     this.spinnerStore.stopSpinner();

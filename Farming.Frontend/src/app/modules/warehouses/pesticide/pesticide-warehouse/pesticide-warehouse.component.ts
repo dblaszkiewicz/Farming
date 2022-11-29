@@ -119,7 +119,7 @@ export class PesticideWarehouseComponent implements OnInit {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.pesticideWarehouseService.addDelivery(addDeliveryDto));
     await this.getWarehouseStates();
-    this.snackbarService.showSuccess('Pomyślnie dodano dostawę');
+    await this.snackbarService.showSuccess('PesticideDelivery.DeliveryAdded');
     this.spinnerStore.stopSpinner();
   }
 

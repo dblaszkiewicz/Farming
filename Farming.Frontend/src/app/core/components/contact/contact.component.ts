@@ -7,14 +7,16 @@ import { SpinnerStore } from '../../stores/spinner.store';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private snackbarService: SnackbarService,
+    private spinnerStore: SpinnerStore
+  ) {}
 
-  constructor(private userService: UserService, private snackbarService: SnackbarService, private spinnerStore: SpinnerStore) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public async seed() {
     this.spinnerStore.startSpinner();
@@ -22,9 +24,9 @@ export class ContactComponent implements OnInit {
     this.spinnerStore.stopSpinner();
 
     if (res) {
-      this.snackbarService.showSuccess("Pomyślnie zaseedowano dane");
+      await this.snackbarService.showSuccess('Seed.Success');
     } else {
-      this.snackbarService.showFail("Dane były już zaseedowane")
+      await this.snackbarService.showFail('Seed.Fail');
     }
   }
 }

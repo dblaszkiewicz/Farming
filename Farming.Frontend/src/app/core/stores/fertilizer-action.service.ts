@@ -136,7 +136,7 @@ export class FertilizerActionService {
     }
 
     if (this.fertilizerStates.length === 0) {
-      this.snackbarService.showInfo('Brak nawozów');
+      await this.snackbarService.showInfo('FertilizerAction.NoFertilizer');
     }
 
     this.spinnerStore.stopSpinner();

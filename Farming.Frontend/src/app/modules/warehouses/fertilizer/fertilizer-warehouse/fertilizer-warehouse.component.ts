@@ -119,7 +119,7 @@ export class FertilizerWarehouseComponent implements OnInit {
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.fertilizerWarehouseService.addDelivery(addDeliveryDto));
     await this.getWarehouseStates();
-    this.snackbarService.showSuccess('Pomyślnie dodano dostawę');
+    await this.snackbarService.showSuccess('FertilizerDelivery.DeliveryAdded');
     this.spinnerStore.stopSpinner();
   }
 

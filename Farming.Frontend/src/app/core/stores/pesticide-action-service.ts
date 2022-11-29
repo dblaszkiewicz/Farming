@@ -135,7 +135,7 @@ export class PesticideActionService {
     }
 
     if (this.pesticideStates.length === 0) {
-      this.snackbarService.showInfo('Brak oprysków');
+      await this.snackbarService.showInfo('PesticideAction.NoPesticide');
     }
 
     this.spinnerStore.stopSpinner();

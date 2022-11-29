@@ -64,7 +64,7 @@ export class WeatherComponent implements OnInit {
     this.canDisplay = true;
 
     if (this.data.isEmergency) {
-      this.snackbarService.showInfo('Nie znaleziono takiej lokalizacji');
+      this.snackbarService.showInfo('Weather.NoLocalization');
     }
 
     this.place = '';

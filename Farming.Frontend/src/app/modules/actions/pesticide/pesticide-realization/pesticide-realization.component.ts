@@ -62,7 +62,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
     } else if (this.currentPanel === 3) {
       this.submitAction();
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -77,7 +77,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
       this.currentPanel--;
       this.saveButton = false;
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -87,7 +87,7 @@ export class PesticideRealizationComponent implements OnInit, OnDestroy, AfterVi
     }
 
     await this.pesticideActionService.processAction();
-    this.snackbarService.showSuccess('Dodano pomyślnie');
+    await this.snackbarService.showSuccess('PesticideRealization.Success');
     this.router.navigateByUrl(`/`);
   }
 

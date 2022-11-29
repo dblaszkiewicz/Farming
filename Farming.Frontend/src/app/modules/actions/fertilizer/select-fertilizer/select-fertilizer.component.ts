@@ -111,7 +111,7 @@ export class SelectFertilizerComponent implements RealizationComponentInterface,
       this.isEnoughQuantity = true;
     } else {
       this.isEnoughQuantity = false;
-      this.snackbarService.showInfo('Brak wystarczającej ilości');
+      this.snackbarService.showInfo('FertilizerAction.NoEnoughQuantity');
     }
 
     this.quantityFormControl.clearValidators();

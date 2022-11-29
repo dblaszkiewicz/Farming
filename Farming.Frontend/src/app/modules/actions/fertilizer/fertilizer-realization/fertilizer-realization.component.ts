@@ -64,7 +64,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     } else if (this.currentPanel === 3) {
       this.submitAction();
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -79,7 +79,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
       this.currentPanel--;
       this.saveButton = false;
     } else {
-      this.snackbarService.showFail('BŁĄD');
+      this.snackbarService.showFail('General.Error');
     }
   }
 
@@ -89,7 +89,7 @@ export class FertilizerRealizationComponent implements OnInit, OnDestroy, AfterV
     }
 
     await this.fertilizerActionService.processAction();
-    this.snackbarService.showSuccess('Dodano pomyślnie');
+    await this.snackbarService.showSuccess('FertilizerRealization.Success');
     this.router.navigateByUrl(`/`);
   }
 

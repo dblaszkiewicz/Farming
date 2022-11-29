@@ -35,7 +35,7 @@ export class AddUserDialogComponent {
 
     this.spinnerStore.startSpinner();
     await lastValueFrom(this.userService.addUser(userToAdd));
-    this.snackbarService.showSuccess('Dodano użytkownika');
+    await this.snackbarService.showSuccess('AddUser.Success');
     this.spinnerStore.stopSpinner();
 
     this.dialogRef.close(true);
