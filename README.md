@@ -17,12 +17,6 @@ Zarządzanie magazynami nasion z możliwością dodania nowej dostawy oraz przeg
 Przegląd historycznych wpisów dostaw dla wybranego magazynu\
 ![image](https://user-images.githubusercontent.com/70887324/204630323-9af80af8-35e1-4ffb-af78-3f412fc152f0.png)
 
-Zarządzanie magazynami pestycydów z możliwością dodania nowej dostawy oraz przeglądu historycznych wpisów\
-![image](https://user-images.githubusercontent.com/70887324/204629633-590f0816-e9f0-4f0a-8395-649ee1616afd.png)
-
-Zarządzanie magazynami nawozów z możliwością dodania nowej dostawy oraz przeglądu historycznych wpisów\
-![image](https://user-images.githubusercontent.com/70887324/204629674-6b71173b-cbd6-4ef2-9520-e4fef9c4efc5.png)
-
 Dashboard części aplikacji przeznaczonej do urządzeń mobilnych\
 ![image](https://user-images.githubusercontent.com/70887324/204629746-cfef9641-5325-4dee-83ae-f77637322927.png)
 
