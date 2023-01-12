@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres
+    shm_size: '4gb'
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: Password12!
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  
+  back:
+    image: farming-backend:v1
+    container_name: farming-backend
+    build:
+      context: ./Farming.Backend
+      dockerfile: Dockerfile
+    depends_on: 
+      - postgres
+    ports:
+      - 7001:80
+    restart: unless-stopped
+
+  front:
+    image: farming-frontend:v1
+    container_name: farming-frontend
+    build:
+      context: ./Farming.Frontend
+      dockerfile: Dockerfile
+    ports: 
+      - 7000:80
+    restart: unless-stopped
+
+volumes:
+  postgres:
+    driver: local

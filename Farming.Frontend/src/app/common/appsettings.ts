@@ -1,4 +1,5 @@
-const apiUrl = 'https://localhost:55000/api';
+const apiUrl = 'https://localhost:7001/api';
+// TODO: zrobic production.json i development.json -> w app.module zrobic inicjalizacje serwisu w ktorym ustawiam apiUrl
 
 export const AppSettings = {
   apiUrl: apiUrl,
