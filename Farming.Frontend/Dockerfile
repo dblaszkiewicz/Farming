@@ -19,4 +19,7 @@ RUN rm -rf ./*
 # Copy static assets from node stage
 COPY --from=node /app/dist/farming.frontend .
 COPY ./nginx-front.conf /etc/nginx/conf.d/default.conf
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+COPY start.sh /
+RUN chmod +x /start.sh &&\
+    sed -i 's/\r$//' /start.sh
+ENTRYPOINT ["sh", "/start.sh"]

@@ -7,11 +7,6 @@ using Farming.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration
-    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
-        optional: true, reloadOnChange: true)
-    .AddEnvironmentVariables();
-
 builder.Services.AddMediatR(typeof(IMediatRApplicationMarker));
 builder.Services.AddMediatR(typeof(IMediatRInfrastructureMarker));
 

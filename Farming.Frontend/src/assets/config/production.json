@@ -1,3 +1,3 @@
 {
-  "apiUrl": "https://localhost:55000/api/"
+  "apiUrl": "localhost"
 }
