@@ -1,7 +1,6 @@
 ﻿using Farming.Api.Auth;
 using Farming.Application.Exceptions;
 using Farming.Shared.Abstractions.Exceptions;
-using FluentValidation;
 using Newtonsoft.Json;
 using NLog;
 using System.Net;

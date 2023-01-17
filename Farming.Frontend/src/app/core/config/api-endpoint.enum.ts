@@ -1,0 +1,15 @@
+export const ApiEndpointEnum = {
+  fertilizer: `Fertilizer`,
+  fertilizerWarehouse: `FertilizerWarehouse`,
+  pesticide: `Pesticide`,
+  pesticideWarehouse: `PesticideWarehouse`,
+  plant: `Plant`,
+  plantWarehouse: `PlantWarehouse`,
+  season: `Season`,
+  seed: `Seed`,
+  land: `Land`,
+  weather: `Weather`,
+  user: `User`,
+  auth: `auth`,
+  seedSampleData: `SampleDataSeed`,
+};

@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable, of, tap } from 'rxjs';
 import { AuthActions } from 'src/app/state/auth/auth.actions';
 import { AuthState } from 'src/app/state/auth/auth.reducer';
-import { AppSettings } from 'src/app/common/appsettings';
+import { ApiEndpointEnum } from 'src/app/core/config/api-endpoint.enum';
 import { ApiResponse, TokenResponse } from '../models/basic';
 import { LogInDto } from '../models/login';
+import { APP_CONFIG } from '../config/app-config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class AuthenticationService {
       password: password,
     };
 
-    const url = `${AppSettings.authEndpoint}`;
+    const url = `${APP_CONFIG.apiUrl}${ApiEndpointEnum.auth}`;
 
     return this.http.post<ApiResponse<TokenResponse>>(url, request).pipe(
       tap(tokenResponse => {

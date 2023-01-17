@@ -48,7 +48,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         if (error.status === 400) {
           if (error.error.commandValidationException) {
-            this.snackbarService.showFailValidationMessage(error.error.name);
+            this.snackbarService.showFailValidationMessage(error.error.message);
           } else {
             this.snackbarService.showFailErrorName(error.error.name);
           }

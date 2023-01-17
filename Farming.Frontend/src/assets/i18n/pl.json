@@ -77,7 +77,8 @@
     "User first name cannot be empty": "Imie użytkownika nie może być puste",
     "User ID cannot be empty": "UserId nie może być puste",
     "User login cannot be empty": "Login nie może być pusty",
-    "User password cannot be empty": "Hasło nie może być puste"
+    "User password cannot be empty": "Hasło nie może być puste",
+    "Invalid data": "Nieprawidłowe dane"
   },
   "General": {
     "Error": "Błąd"

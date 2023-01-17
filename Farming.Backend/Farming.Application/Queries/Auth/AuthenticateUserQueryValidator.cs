@@ -8,21 +8,21 @@ namespace Farming.Application.Queries.Auth
         {
             RuleFor(q => q.Login)
                 .NotEmpty()
-                .WithMessage("Login jest wymagany")
-                .MinimumLength(4).WithMessage("Nieprawidłowe dane");
+                .WithMessage("Login is required")
+                .MinimumLength(4).WithMessage("Invalid data");
             RuleFor(q => q.Password)
                 .NotEmpty()
-                .WithMessage("Hasło jest wymagane")
+                .WithMessage("Password is required")
                 .MinimumLength(6)
-                .WithMessage("Nieprawidłowe dane")
+                .WithMessage("Invalid data")
                 .MaximumLength(15)
-                .WithMessage("Nieprawidłowe dane")
+                .WithMessage("Invalid data")
                 .Matches("[A-Z]")
-                .WithMessage("Nieprawidłowe dane")
+                .WithMessage("Invalid data")
                 .Matches("[a-z]")
-                .WithMessage("Nieprawidłowe dane")
+                .WithMessage("Invalid data")
                 .Matches("[0-9]")
-                .WithMessage("Nieprawidłowe dane");
+                .WithMessage("Invalid data");
         }
     }
 }
