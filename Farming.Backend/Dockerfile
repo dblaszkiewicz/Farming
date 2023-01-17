@@ -1,7 +1,7 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 WORKDIR /src
 COPY ["Farming.Api/Farming.Api.csproj", "Farming.Api/"]
 COPY ["Farming.Infrastructure/Farming.Infrastructure.csproj", "Farming.Infrastructure/"]
