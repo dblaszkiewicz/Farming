@@ -4,11 +4,12 @@ using Farming.Api.Middleware;
 using NLog.Web;
 using Farming.Application;
 using Farming.Api;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMediatR(typeof(IMediatRApplicationMarker));
-builder.Services.AddMediatR(typeof(IMediatRInfrastructureMarker));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(IMediatRApplicationMarker).GetTypeInfo().Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(IMediatRInfrastructureMarker).GetTypeInfo().Assembly));
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
